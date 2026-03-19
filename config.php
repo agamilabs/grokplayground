@@ -1,35 +1,60 @@
 <?php
 /**
  * Central Configuration File
- * Update these values with your actual credentials
+ * Loads DB credentials from .env and other settings from Database
  */
 
-// Database
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'u164367160_grokplayground');
-define('DB_USER', 'u164367160_grokplayground');
-define('DB_PASS', 'Am~>DYOwRg4');
+// Simple .env loader
+if (file_exists(__DIR__ . '/.env')) {
+    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0)
+            continue;
+        list($name, $value) = explode('=', $line, 2);
+        $_ENV[trim($name)] = trim($value);
+        putenv(trim($line));
+    }
+}
 
-// xAI Grok Imagine API
-define('XAI_API_KEY', 'xai-m3FP6IAfQo9l2VhjDfUv6V4vvhG6gLNQkKI4lucJSaxdWyEPnQRgmJe5SPV1Ln4QxUjVygpuxZ9janSK');
-define('XAI_BASE_URL', 'https://api.x.ai/v1');
+// Database Credentials from .env
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_NAME', getenv('DB_NAME') ?: '');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') ?: '');
 
-// Firebase (for server-side token verification)
-define('FIREBASE_PROJECT_ID', 'coursepool-488520');
+/**
+ * Fetch a setting from the admin_settings table
+ */
+function get_setting($key, $default = null)
+{
+    static $settings = null;
+    if ($settings === null) {
+        try {
+            $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $pdo->query("SELECT setting_key, setting_value FROM admin_settings");
+            $settings = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        } catch (Exception $e) {
+            $settings = []; // Fail gracefully if DB not ready
+        }
+    }
+    return $settings[$key] ?? $default;
+}
 
-// bKash Checkout (URL-based)
-define('BKASH_APP_KEY', 'YOUR_BKASH_APP_KEY');
-define('BKASH_APP_SECRET', 'YOUR_BKASH_APP_SECRET');
-define('BKASH_USERNAME', 'YOUR_BKASH_USERNAME');
-define('BKASH_PASSWORD', 'YOUR_BKASH_PASSWORD');
-// Sandbox: https://tokenized.sandbox.bka.sh/v1.2.0-beta
-// Live:    https://tokenized.pay.bka.sh/v1.2.0-beta
-define('BKASH_BASE_URL', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta');
+// Define Constants from Database
+define('XAI_API_KEY', get_setting('xai_api_key', ''));
+define('XAI_BASE_URL', get_setting('xai_base_url', 'https://api.x.ai/v1'));
+define('FIREBASE_PROJECT_ID', get_setting('firebase_project_id', ''));
+define('SITE_URL', get_setting('site_url', 'http://localhost/groksubscription'));
 
-// Site URL (used for bKash callbacks)
-define('SITE_URL', 'https://goldenrod-dugong-228551.hostingersite.com');
+// bKash Credentials
+define('BKASH_APP_KEY', get_setting('bkash_app_key', ''));
+define('BKASH_APP_SECRET', get_setting('bkash_app_secret', ''));
+define('BKASH_USERNAME', get_setting('bkash_username', ''));
+define('BKASH_PASSWORD', get_setting('bkash_password', ''));
+define('BKASH_BASE_URL', get_setting('bkash_base_url', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta'));
 
-// CORS
+// CORS Headers
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
