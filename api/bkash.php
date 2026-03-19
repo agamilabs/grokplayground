@@ -11,6 +11,15 @@ require_once __DIR__ . '/../db.php';
 
 function bkashGrantToken()
 {
+    // Try to get cached token
+    $cachedToken = getSetting('bkash_id_token');
+    $cachedTime = (int) getSetting('bkash_token_created_at', 0);
+
+    // If token exists and is less than 50 minutes old (3000 seconds), reuse it
+    if ($cachedToken && (time() - $cachedTime) < 3000) {
+        return ['id_token' => $cachedToken, 'cached' => true];
+    }
+
     $url = BKASH_BASE_URL . '/tokenized/checkout/token/grant';
 
     $payload = [
@@ -35,7 +44,15 @@ function bkashGrantToken()
     $response = curl_exec($ch);
     curl_close($ch);
 
-    return json_decode($response, true);
+    $result = json_decode($response, true);
+
+    // Cache the new token if successful
+    if (isset($result['id_token'])) {
+        setSetting('bkash_id_token', $result['id_token']);
+        setSetting('bkash_token_created_at', time());
+    }
+
+    return $result;
 }
 
 // ─── Create Payment ────────────────────────────────────────

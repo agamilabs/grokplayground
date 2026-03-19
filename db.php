@@ -33,6 +33,19 @@ function getSetting($key, $default = null)
 }
 
 /**
+ * Update or insert an admin setting
+ */
+function setSetting($key, $value)
+{
+    $db = getDB();
+    $stmt = $db->prepare(
+        "INSERT INTO admin_settings (setting_key, setting_value) VALUES (?, ?) 
+         ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)"
+    );
+    $stmt->execute([$key, (string) $value]);
+}
+
+/**
  * Get all admin settings as an associative array
  */
 function getAllSettings()

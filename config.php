@@ -54,12 +54,16 @@ define('BKASH_USERNAME', get_setting('bkash_username', ''));
 define('BKASH_PASSWORD', get_setting('bkash_password', ''));
 define('BKASH_BASE_URL', get_setting('bkash_base_url', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta'));
 
+// Error Reporting (Disable for production to avoid JSON corruption)
+error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+ini_set('display_errors', 0);
+
 // CORS Headers
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }

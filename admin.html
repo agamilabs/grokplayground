@@ -444,6 +444,7 @@
                     }
                 }
             } catch (err) {
+                console.error('Settings load error:', err);
                 showToast('Failed to load settings', 'error');
             }
         }
