@@ -16,4 +16,6 @@ jobs:
     steps:
       - name: Trigger Hostinger Webhook
         run: |
-          curl -X POST "https://webhooks.hostinger.com/deploy/f7bac487274233f0237f793eb99cfab3"
+          curl -X POST "https://webhooks.hostinger.com/deploy/f7bac487274233f0237f793eb99cfab3" \
+               -H "Content-Type: application/x-www-form-urlencoded" \
+               -d ""
