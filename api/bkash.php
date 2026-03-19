@@ -68,7 +68,7 @@ function bkashCreatePayment($idToken, $amount, $invoiceNumber)
 
     $payload = [
         'mode' => '0011',
-        'payerReference' => $invoiceNumber,
+        'payerReference' => ' ', // Often requires a space if no valid phone number
         'callbackURL' => SITE_URL . '/api/bkash.php?action=callback',
         'amount' => number_format((float) $amount, 2, '.', ''),
         'currency' => 'BDT',
@@ -188,7 +188,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
 
     if (!$bkashURL || !$paymentID) {
         http_response_code(500);
-        echo json_encode(['error' => 'Failed to create bKash payment', 'details' => $paymentResponse]);
+        echo json_encode([
+            'error' => 'Failed to create bKash payment',
+            'details' => $paymentResponse,
+            'debug_payload' => [
+                'payerReference' => ' ',
+                'callbackURL' => SITE_URL . '/api/bkash.php?action=callback',
+                'amount' => number_format((float) $amount, 2, '.', '')
+            ]
+        ]);
         exit;
     }
 
