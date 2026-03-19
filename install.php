@@ -72,6 +72,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $step = 'database';
             }
         }
+    } elseif ($step === 'import_schema') {
+        // Just import schema using existing config
+        if ($dbConnected && file_exists($schemaFile)) {
+            try {
+                $sql = file_get_contents($schemaFile);
+                $pdo->exec($sql);
+                $success = 'Schema imported successfully!';
+                $tablesExist = true;
+                $isInstalled = true;
+                $step = 'done';
+            } catch (Exception $e) {
+                $error = 'Import error: ' . $e->getMessage();
+                $step = 'check';
+            }
+        } else {
+            $error = 'Database not connected or schema file missing.';
+            $step = 'check';
+        }
     } elseif ($step === 'config') {
         $db = $_SESSION['install_db'] ?? [];
         $xaiKey = trim($_POST['xai_key'] ?? '');
@@ -367,8 +385,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php else: ?>
                     <form method="POST">
                         <input type="hidden" name="step" value="database">
-                        <button type="submit" class="btn btn-primary" style="width:100%;">Start Installation</button>
+                        <button type="submit" class="btn btn-primary" style="width:100%;margin-bottom:12px;">Start Full
+                            Installation</button>
                     </form>
+                    <?php if ($dbConnected && !$tablesExist): ?>
+                        <form method="POST">
+                            <input type="hidden" name="step" value="import_schema">
+                            <button type="submit" class="btn btn-ghost" style="width:100%;">Import Schema Only (to existing
+                                DB)</button>
+                        </form>
+                    <?php endif; ?>
                 <?php endif; ?>
 
             <?php elseif ($step === 'database'): ?>

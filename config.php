@@ -27,7 +27,7 @@ define('BKASH_PASSWORD', 'YOUR_BKASH_PASSWORD');
 define('BKASH_BASE_URL', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta');
 
 // Site URL (used for bKash callbacks)
-define('SITE_URL', 'http://localhost/groksubscription');
+define('SITE_URL', 'https://goldenrod-dugong-228551.hostingersite.com');
 
 // CORS
 header('Access-Control-Allow-Origin: *');

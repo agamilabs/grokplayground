@@ -34,11 +34,11 @@ CREATE TABLE IF NOT EXISTS transactions (
     INDEX idx_type (type)
 ) ENGINE=InnoDB;
 
--- Generations table
+-- generations table
 CREATE TABLE IF NOT EXISTS generations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    type ENUM('text_to_image', 'image_to_video', 'text_to_video') NOT NULL,
+    type ENUM('text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio') NOT NULL,
     prompt TEXT,
     input_url VARCHAR(1024) DEFAULT NULL,
     output_url VARCHAR(1024) DEFAULT NULL,
@@ -75,9 +75,11 @@ CREATE TABLE IF NOT EXISTS bkash_payments (
 
 -- Default admin settings
 INSERT INTO admin_settings (setting_key, setting_value) VALUES
-    ('text_to_image_cost', '5'),
-    ('image_to_video_cost', '20'),
-    ('text_to_video_cost', '25'),
+    ('bdt_per_usd', '120'),
     ('bdt_per_credit', '1'),
+    ('text_to_image_cost', '0.02'),
+    ('image_pro_cost', '0.07'),
+    ('video_per_sec_cost', '0.05'),
+    ('audio_per_1k_chars_cost', '4.20'),
     ('site_name', 'Grok Imagine Playground')
 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value);
