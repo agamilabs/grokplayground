@@ -68,7 +68,7 @@ function bkashCreatePayment($idToken, $amount, $invoiceNumber)
 
     $payload = [
         'mode' => '0011',
-        'payerReference' => ' ', // Often requires a space if no valid phone number
+        'payerReference' => $invoiceNumber,
         'callbackURL' => SITE_URL . '/api/bkash.php?action=callback',
         'amount' => number_format((float) $amount, 2, '.', ''),
         'currency' => 'BDT',
@@ -80,7 +80,7 @@ function bkashCreatePayment($idToken, $amount, $invoiceNumber)
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode($payload),
+        CURLOPT_POSTFIELDS => json_encode($payload, JSON_UNESCAPED_SLASHES),
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
             'Accept: application/json',
