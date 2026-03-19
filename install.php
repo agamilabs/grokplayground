@@ -78,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Run schema
                 if (file_exists($schemaFile)) {
                     $sql = file_get_contents($schemaFile);
+                    $sql = str_replace('{{DB_NAME}}', $dbName, $sql);
                     $pdo->exec($sql);
                 }
 
@@ -93,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($dbConnected && file_exists($schemaFile)) {
             try {
                 $sql = file_get_contents($schemaFile);
+                $sql = str_replace('{{DB_NAME}}', getenv('DB_NAME'), $sql);
                 $pdo->exec($sql);
                 $success = 'Schema imported successfully!';
                 $tablesExist = true;

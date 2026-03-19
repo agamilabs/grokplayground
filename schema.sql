@@ -1,8 +1,8 @@
 -- Grok Imagine AI Playground - Database Schema
 -- Run this file to set up the database
 
-CREATE DATABASE IF NOT EXISTS grok_playground CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE grok_playground;
+CREATE DATABASE IF NOT EXISTS `{{DB_NAME}}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `{{DB_NAME}}`;
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
