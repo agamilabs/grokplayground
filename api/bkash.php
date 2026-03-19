@@ -84,7 +84,7 @@ function bkashCreatePayment($idToken, $amount, $invoiceNumber)
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
             'Accept: application/json',
-            'Authorization: ' . $idToken,
+            "Authorization:$idToken",
             'X-APP-Key: ' . BKASH_APP_KEY,
         ],
         CURLOPT_TIMEOUT => 30,
@@ -112,7 +112,7 @@ function bkashExecutePayment($idToken, $paymentID)
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
             'Accept: application/json',
-            'Authorization: ' . $idToken,
+            "Authorization:$idToken",
             'X-APP-Key: ' . BKASH_APP_KEY,
         ],
         CURLOPT_TIMEOUT => 30,
