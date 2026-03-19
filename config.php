@@ -17,10 +17,10 @@ if (file_exists(__DIR__ . '/.env')) {
 }
 
 // Database Credentials from .env
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_NAME', getenv('DB_NAME') ?: '');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
+define('DB_HOST', $_ENV['DB_HOST'] ?? getenv('DB_HOST') ?: 'localhost');
+define('DB_NAME', $_ENV['DB_NAME'] ?? getenv('DB_NAME') ?: '');
+define('DB_USER', $_ENV['DB_USER'] ?? getenv('DB_USER') ?: 'root');
+define('DB_PASS', $_ENV['DB_PASS'] ?? getenv('DB_PASS') ?: '');
 
 /**
  * Fetch a setting from the admin_settings table
@@ -35,6 +35,7 @@ function get_setting($key, $default = null)
             $stmt = $pdo->query("SELECT setting_key, setting_value FROM admin_settings");
             $settings = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
         } catch (Exception $e) {
+            error_log("get_setting DB Error: " . $e->getMessage() . " (DB: " . DB_NAME . ")");
             $settings = []; // Fail gracefully if DB not ready
         }
     }

@@ -28,9 +28,15 @@ if ($envExists) {
 }
 
 if ($envExists) {
-    if (getenv('DB_HOST') && getenv('DB_NAME') && getenv('DB_USER')) {
+    // Try $_ENV first, then getenv
+    $dbHost = $_ENV['DB_HOST'] ?? getenv('DB_HOST');
+    $dbName = $_ENV['DB_NAME'] ?? getenv('DB_NAME');
+    $dbUser = $_ENV['DB_USER'] ?? getenv('DB_USER');
+    $dbPass = $_ENV['DB_PASS'] ?? getenv('DB_PASS');
+
+    if ($dbHost && $dbName && $dbUser) {
         try {
-            $pdo = new PDO("mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASS'));
+            $pdo = new PDO("mysql:host=" . $dbHost . ";dbname=" . $dbName, $dbUser, $dbPass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dbConnected = true;
             // Check if our tables exist
@@ -125,7 +131,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Store in Database instead of config.php
             try {
-                $pdo = new PDO("mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASS'));
+                $dbHost = $_ENV['DB_HOST'] ?? getenv('DB_HOST') ?: 'localhost';
+                $dbName = $_ENV['DB_NAME'] ?? getenv('DB_NAME') ?: '';
+                $dbUser = $_ENV['DB_USER'] ?? getenv('DB_USER') ?: 'root';
+                $dbPass = $_ENV['DB_PASS'] ?? getenv('DB_PASS') ?: '';
+
+                $pdo = new PDO("mysql:host=" . $dbHost . ";dbname=" . $dbName, $dbUser, $dbPass);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $settings = [
