@@ -450,12 +450,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 style="color:var(--accent-3);">console.x.ai</a></div>
                     </div>
                     <div class="field">
-                        <label>Firebase Project ID</label>
-                        <input type="text" name="firebase_project_id" placeholder="my-project-12345">
+                        <label>Firebase Project ID *</label>
+                        <input type="text" name="firebase_project_id" placeholder="my-project-123" required>
                     </div>
                     <div class="field">
-                        <label>Site URL</label>
-                        <input type="text" name="site_url" placeholder="http://localhost/groksubscription"
+                        <label>Site URL *</label>
+                        <input type="text" name="site_url" placeholder="https://domain.com" required
                             value="<?= 'http://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . dirname($_SERVER['SCRIPT_NAME']) ?>">
                     </div>
                     <hr style="border-color:var(--border);margin:20px 0;">
@@ -469,14 +469,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label>bKash App Secret</label>
                         <input type="text" name="bkash_app_secret" placeholder="Optional">
                     </div>
-                    <div class="field">
-                        <label>bKash Username</label>
-                        <input type="text" name="bkash_username" placeholder="Optional">
-                    </div>
-                    <div class="field">
-                        <label>bKash Password</label>
-                        <input type="password" name="bkash_password" placeholder="Optional">
-                    </div>
+
                     <div class="field">
                         <label>bKash Username</label>
                         <input type="text" name="bkash_username" placeholder="Required for token grant">

@@ -68,7 +68,7 @@ function bkashCreatePayment($idToken, $amount, $invoiceNumber)
         'mode' => '0011',
         'payerReference' => $invoiceNumber,
         'callbackURL' => SITE_URL . '/api/bkash.php?action=callback',
-        'amount' => (string) $amount,
+        'amount' => number_format((float) $amount, 2, '.', ''),
         'currency' => 'BDT',
         'intent' => 'sale',
         'merchantInvoiceNumber' => $invoiceNumber,
