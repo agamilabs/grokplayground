@@ -83,19 +83,32 @@ function getOrCreateUser($tokenData)
  */
 function authenticateRequest()
 {
-    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+    // Try to get Authorization header from various sources
+    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+
+    if (empty($authHeader) && function_exists('getallheaders')) {
+        $headers = getallheaders();
+        $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+    }
+
     if (preg_match('/Bearer\s+(.+)$/i', $authHeader, $matches)) {
         $idToken = $matches[1];
     } else {
         http_response_code(401);
-        echo json_encode(['error' => 'No authorization token provided']);
+        echo json_encode(['error' => 'No authorization token provided', 'debug_header' => substr($authHeader, 0, 10)]);
+        exit;
+    }
+
+    if (!defined('FIREBASE_PROJECT_ID') || empty(FIREBASE_PROJECT_ID)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Firebase Project ID not configured in database']);
         exit;
     }
 
     $tokenData = verifyFirebaseToken($idToken);
     if (!$tokenData || !$tokenData['uid']) {
         http_response_code(401);
-        echo json_encode(['error' => 'Invalid or expired token']);
+        echo json_encode(['error' => 'Invalid or expired token', 'project_id' => FIREBASE_PROJECT_ID]);
         exit;
     }
 
