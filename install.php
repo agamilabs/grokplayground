@@ -134,8 +134,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'site_url' => $siteUrl ?: 'http://localhost/groksubscription',
                     'bkash_app_key' => $bkashAppKey,
                     'bkash_app_secret' => $bkashAppSecret,
-                    'bkash_username' => $bkashUsername,
-                    'bkash_password' => $bkashPassword,
+                    'bkash_username' => trim($_POST['bkash_username'] ?? ''),
+                    'bkash_password' => trim($_POST['bkash_password'] ?? ''),
                     'bkash_base_url' => $bkashBaseUrl,
                 ];
 
@@ -476,6 +476,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="field">
                         <label>bKash Password</label>
                         <input type="password" name="bkash_password" placeholder="Optional">
+                    </div>
+                    <div class="field">
+                        <label>bKash Username</label>
+                        <input type="text" name="bkash_username" placeholder="Required for token grant">
+                    </div>
+                    <div class="field">
+                        <label>bKash Password</label>
+                        <input type="password" name="bkash_password" placeholder="Required for token grant">
                     </div>
                     <div class="field">
                         <label>bKash Base URL</label>

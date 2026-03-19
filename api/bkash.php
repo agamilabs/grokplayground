@@ -50,6 +50,9 @@ function bkashGrantToken()
     if (isset($result['id_token'])) {
         setSetting('bkash_id_token', $result['id_token']);
         setSetting('bkash_token_created_at', time());
+    } else {
+        // Log error details for debugging (Internal JSON error response will catch this)
+        error_log("bKash Token Grant Failed: " . $response);
     }
 
     return $result;
@@ -145,6 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     if ($amount < 1) {
         http_response_code(400);
         echo json_encode(['error' => 'Amount too low']);
+        exit;
+    }
+
+    // Check for credentials
+    if (empty(BKASH_APP_KEY) || empty(BKASH_APP_SECRET) || empty(BKASH_USERNAME) || empty(BKASH_PASSWORD)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'bKash credentials not configured in database']);
         exit;
     }
 
