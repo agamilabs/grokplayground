@@ -317,6 +317,7 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
     <script src="js/firebase-config.js"></script>
     <script>
         let idToken = null;
@@ -341,7 +342,7 @@
             const type = document.getElementById('adminFilterType').value;
             const search = document.getElementById('adminSearch').value;
 
-            let url = `/groksubscription/api/admin-history.php?page=${page}&limit=20`;
+            let url = `api/admin-history.php?page=${page}&limit=20`;
             if (userId) url += `&user_id=${userId}`;
             if (type) url += `&type=${type}`;
             if (search) url += `&search=${encodeURIComponent(search)}`;
@@ -423,7 +424,7 @@
 
         async function loadSettings() {
             try {
-                const res = await fetch('/groksubscription/api/admin.php', {
+                const res = await fetch('api/admin.php', {
                     headers: { 'Authorization': `Bearer ${idToken}` }
                 });
                 const data = await res.json();
@@ -457,7 +458,7 @@
             });
 
             try {
-                const res = await fetch('/groksubscription/api/admin.php', {
+                const res = await fetch('api/admin.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
