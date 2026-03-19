@@ -6,9 +6,9 @@
 
 // Database
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'grok_playground');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_NAME', 'u164367160_grokplayground');
+define('DB_USER', 'u164367160_grokplayground');
+define('DB_PASS', 'Am~>DYOwRg4');
 
 // xAI Grok Imagine API
 define('XAI_API_KEY', 'xai-m3FP6IAfQo9l2VhjDfUv6V4vvhG6gLNQkKI4lucJSaxdWyEPnQRgmJe5SPV1Ln4QxUjVygpuxZ9janSK');
