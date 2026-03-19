@@ -1,0 +1,19 @@
+name: Deploy to Hostinger (Webhook)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Hostinger Webhook
+        run: |
+          curl -X POST "https://webhooks.hostinger.com/deploy/f7bac487274233f0237f793eb99cfab3"
