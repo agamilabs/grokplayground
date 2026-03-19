@@ -9,15 +9,17 @@ require_once __DIR__ . '/../db.php';
 
 // ─── bKash Token Grant ─────────────────────────────────────
 
-function bkashGrantToken()
+function bkashGrantToken($forceRefresh = false)
 {
-    // Try to get cached token
-    $cachedToken = getSetting('bkash_id_token');
-    $cachedTime = (int) getSetting('bkash_token_created_at', 0);
+    if (!$forceRefresh) {
+        // Try to get cached token
+        $cachedToken = getSetting('bkash_id_token');
+        $cachedTime = (int) getSetting('bkash_token_created_at', 0);
 
-    // If token exists and is less than 50 minutes old (3000 seconds), reuse it
-    if ($cachedToken && (time() - $cachedTime) < 3000) {
-        return ['id_token' => $cachedToken, 'cached' => true];
+        // If token exists and is less than 50 minutes old (3000 seconds), reuse it
+        if ($cachedToken && (time() - $cachedTime) < 3000) {
+            return ['id_token' => $cachedToken, 'cached' => true];
+        }
     }
 
     $url = BKASH_BASE_URL . '/tokenized/checkout/token/grant';
@@ -172,6 +174,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     $invoiceNumber = 'GRK' . time() . rand(100, 999);
     $paymentResponse = bkashCreatePayment($bkashIdToken, $amount, $invoiceNumber);
 
+    // If Unauthorized, token might be expired. Refresh and try once more.
+    if (isset($paymentResponse['message']) && strtolower($paymentResponse['message']) === 'unauthorized') {
+        $tokenResponse = bkashGrantToken(true);
+        $bkashIdToken = $tokenResponse['id_token'] ?? null;
+        if ($bkashIdToken) {
+            $paymentResponse = bkashCreatePayment($bkashIdToken, $amount, $invoiceNumber);
+        }
+    }
+
     $bkashURL = $paymentResponse['bkashURL'] ?? null;
     $paymentID = $paymentResponse['paymentID'] ?? null;
 
@@ -221,6 +232,15 @@ if ($action === 'callback') {
 
         if ($bkashIdToken) {
             $execResult = bkashExecutePayment($bkashIdToken, $paymentID);
+
+            // If Unauthorized, token might be expired. Force refresh and try once more.
+            if (isset($execResult['message']) && strtolower($execResult['message']) === 'unauthorized') {
+                $tokenResponse = bkashGrantToken(true);
+                $bkashIdToken = $tokenResponse['id_token'] ?? null;
+                if ($bkashIdToken) {
+                    $execResult = bkashExecutePayment($bkashIdToken, $paymentID);
+                }
+            }
 
             if (($execResult['statusCode'] ?? '') === '0000' || ($execResult['transactionStatus'] ?? '') === 'Completed') {
                 $trxID = $execResult['trxID'] ?? '';
