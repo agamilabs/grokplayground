@@ -25,15 +25,11 @@ function getDB()
 }
 
 /**
- * Get an admin setting value
+ * Get an admin setting value (Wrapper for get_setting in config.php)
  */
 function getSetting($key, $default = null)
 {
-    $db = getDB();
-    $stmt = $db->prepare("SELECT setting_value FROM admin_settings WHERE setting_key = ?");
-    $stmt->execute([$key]);
-    $row = $stmt->fetch();
-    return $row ? $row['setting_value'] : $default;
+    return get_setting($key, $default);
 }
 
 /**
@@ -43,11 +39,7 @@ function getAllSettings()
 {
     $db = getDB();
     $stmt = $db->query("SELECT setting_key, setting_value FROM admin_settings");
-    $settings = [];
-    while ($row = $stmt->fetch()) {
-        $settings[$row['setting_key']] = $row['setting_value'];
-    }
-    return $settings;
+    return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
 }
 
 /**
@@ -59,9 +51,16 @@ function getCreditCost($type)
         'text_to_image' => 'text_to_image_cost',
         'image_to_video' => 'image_to_video_cost',
         'text_to_video' => 'text_to_video_cost',
+        'text_to_audio' => 'audio_per_1k_chars_cost',
     ];
     $key = $map[$type] ?? null;
     if (!$key)
         return 0;
-    return (int) getSetting($key, 5);
+
+    $cost = getSetting($key, 0.05);
+    // Convert USD cost to Credits? 
+    // Actually, in our current system, we seem to be treating cost as credits or doing a conversion elsewhere.
+    // Based on previous discussions, BDT is credit, and we have USD rates.
+    // Let's check how generate.php uses it.
+    return (float) $cost;
 }

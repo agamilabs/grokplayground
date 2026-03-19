@@ -36,6 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'audio_per_1k_chars_cost',
         'bdt_per_credit',
         'site_name',
+        'xai_api_key',
+        'xai_base_url',
+        'firebase_project_id',
+        'site_url',
+        'bkash_app_key',
+        'bkash_app_secret',
+        'bkash_username',
+        'bkash_password',
+        'bkash_base_url',
     ];
 
     $updated = 0;
