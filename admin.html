@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Grok Imagine Playground</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-container {
+            max-width: 600px;
+            margin: 100px auto 40px;
+            padding: 0 24px;
+        }
+
+        .admin-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+        }
+
+        .admin-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .admin-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .setting-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .setting-input {
+            width: 120px;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-family: var(--font);
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .setting-input:focus {
+            outline: none;
+            border-color: var(--border-focus);
+        }
+
+        .admin-actions {
+            margin-top: 24px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .admin-notice {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--error);
+            text-align: center;
+        }
+
+        .admin-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: color var(--transition);
+        }
+
+        .admin-back:hover {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-container">
+        <a href="/" class="admin-back">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5" />
+                <polyline points="12 19 5 12 12 5" />
+            </svg>
+            Back to Playground
+        </a>
+
+        <div id="adminNotice" class="admin-notice" style="display:none;">
+            You must be an admin to access this page.
+        </div>
+
+        <div class="admin-card" id="adminPanel" style="display:none;">
+            <h1 class="admin-title">Admin Settings</h1>
+            <p class="admin-desc">Configure credit costs and pricing</p>
+
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">USD to BDT Rate</div>
+                    <div class="setting-hint">Used to calculate costs from USD pricing</div>
+                </div>
+                <input type="number" class="setting-input" id="set-bdt_per_usd" min="1" value="120">
+            </div>
+
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Standard Image Cost ($)</div>
+                    <div class="setting-hint">Current: $0.02</div>
+                </div>
+                <input type="number" class="setting-input" id="set-text_to_image_cost" step="0.01" value="0.02">
+            </div>
+
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Pro Image Cost ($)</div>
+                    <div class="setting-hint">Current: $0.07</div>
+                </div>
+                <input type="number" class="setting-input" id="set-image_pro_cost" step="0.01" value="0.07">
+            </div>
+
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Video Cost ($ per sec)</div>
+                    <div class="setting-hint">Current: $0.05</div>
+                </div>
+                <input type="number" class="setting-input" id="set-video_per_sec_cost" step="0.01" value="0.05">
+            </div>
+
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Audio Cost ($ per 1M chars)</div>
+                    <div class="setting-hint">Current: $4.20</div>
+                </div>
+                <input type="number" class="setting-input" id="set-audio_per_1k_chars_cost" step="0.01" value="4.20">
+            </div>
+
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">BDT per Credit</div>
+                    <div class="setting-hint">Price in BDT for each credit (usually 1)</div>
+                </div>
+                <input type="number" class="setting-input" id="set-bdt_per_credit" min="0.1" step="0.1" value="1">
+            </div>
+
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Site Name</div>
+                    <div class="setting-hint">Displayed in the header</div>
+                </div>
+                <input type="text" class="setting-input" id="set-site_name" value="Grok Imagine Playground"
+                    style="width:200px;">
+            </div>
+
+            <div class="admin-actions">
+                <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                <button class="btn btn-ghost" onclick="loadSettings()">Reset</button>
+            </div>
+        </div>
+
+        <div class="admin-card" id="adminHistory" style="display:none; margin-top: 24px;">
+            <h1 class="admin-title">Generation History</h1>
+            <p class="admin-desc">View and filter generations from all users</p>
+
+            <div class="filters-bar"
+                style="margin-bottom: 20px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: var(--radius-md); border: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px;">
+                <div class="filter-group" style="flex:1; min-width: 150px;">
+                    <label class="filter-label"
+                        style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">User</label>
+                    <select class="option-select" id="adminFilterUser" onchange="loadAdminHistory(1)"
+                        style="width:100%;">
+                        <option value="">All Users</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="flex:1; min-width: 120px;">
+                    <label class="filter-label"
+                        style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Type</label>
+                    <select class="option-select" id="adminFilterType" onchange="loadAdminHistory(1)"
+                        style="width:100%;">
+                        <option value="">All Types</option>
+                        <option value="text_to_image">Text to Image</option>
+                        <option value="image_to_video">Image to Video</option>
+                        <option value="text_to_video">Text to Video</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="flex:2; min-width: 200px;">
+                    <label class="filter-label"
+                        style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Search</label>
+                    <input type="text" class="option-select" id="adminSearch" placeholder="Email or prompt..."
+                        oninput="loadAdminHistory(1)" style="width:100%;">
+                </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <thead>
+                        <tr style="text-align: left; border-bottom: 1px solid var(--border);">
+                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">User</th>
+                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Type</th>
+                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Prompt</th>
+                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Status</th>
+                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminHistoryBody">
+                        <!-- History rows will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="adminHistoryPagination" class="history-pagination" style="margin-top: 16px;"></div>
+        </div>
+
+        <div id="adminLoading" style="text-align:center;padding:60px 0;color:var(--text-muted);">
+            Loading...
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script>
+        let idToken = null;
+
+        auth.onAuthStateChanged(async (user) => {
+            document.getElementById('adminLoading').style.display = 'none';
+
+            if (!user) {
+                document.getElementById('adminNotice').style.display = 'block';
+                document.getElementById('adminNotice').textContent = 'Please sign in first.';
+                return;
+            }
+
+            idToken = await user.getIdToken();
+            // Try to load settings — if 403, not admin
+            loadSettings();
+            loadAdminHistory();
+        });
+
+        async function loadAdminHistory(page = 1) {
+            const userId = document.getElementById('adminFilterUser').value;
+            const type = document.getElementById('adminFilterType').value;
+            const search = document.getElementById('adminSearch').value;
+
+            let url = `/groksubscription/api/admin-history.php?page=${page}&limit=20`;
+            if (userId) url += `&user_id=${userId}`;
+            if (type) url += `&type=${type}`;
+            if (search) url += `&search=${encodeURIComponent(search)}`;
+
+            try {
+                const res = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${idToken}` }
+                });
+                const data = await res.json();
+
+                if (res.status === 403) return;
+
+                // Populate user filter if first load
+                const userFilter = document.getElementById('adminFilterUser');
+                if (userFilter.options.length === 1 && data.users) {
+                    data.users.forEach(u => {
+                        const opt = document.createElement('option');
+                        opt.value = u.id;
+                        opt.textContent = u.email;
+                        userFilter.appendChild(opt);
+                    });
+                }
+
+                document.getElementById('adminHistory').style.display = 'block';
+                const tbody = document.getElementById('adminHistoryBody');
+
+                if (!data.generations || data.generations.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">No generations found.</td></tr>';
+                    document.getElementById('adminHistoryPagination').innerHTML = '';
+                    return;
+                }
+
+                tbody.innerHTML = data.generations.map(gen => {
+                    const date = new Date(gen.created_at).toLocaleString();
+                    const statusClass = gen.status === 'completed' ? 'color: var(--success)' : (gen.status === 'failed' ? 'color: var(--error)' : 'color: var(--warning)');
+                    return `
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 12px 8px;">
+                                <div style="font-weight: 500;">${gen.display_name || 'User'}</div>
+                                <div style="font-size: 11px; color: var(--text-muted);">${gen.email}</div>
+                            </td>
+                            <td style="padding: 12px 8px; text-transform: capitalize;">${gen.type.replace(/_/g, ' ')}</td>
+                            <td style="padding: 12px 8px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${escapeHtml(gen.prompt)}">${escapeHtml(gen.prompt)}</td>
+                            <td style="padding: 12px 8px; font-weight: 500; ${statusClass}">${gen.status}</td>
+                            <td style="padding: 12px 8px; color: var(--text-muted);">${date}</td>
+                        </tr>
+                    `;
+                }).join('');
+
+                renderAdminPagination(data.page, data.pages);
+            } catch (err) {
+                console.error('Load admin history error:', err);
+            }
+        }
+
+        function renderAdminPagination(page, totalPages) {
+            const container = document.getElementById('adminHistoryPagination');
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = `<button class="page-btn" onclick="loadAdminHistory(${page - 1})" ${page <= 1 ? 'disabled' : ''}>&laquo;</button>`;
+            const start = Math.max(1, page - 2);
+            const end = Math.min(totalPages, start + 4);
+            for (let i = start; i <= end; i++) {
+                html += `<button class="page-btn ${i === page ? 'active' : ''}" onclick="loadAdminHistory(${i})">${i}</button>`;
+            }
+            html += `<button class="page-btn" onclick="loadAdminHistory(${page + 1})" ${page >= totalPages ? 'disabled' : ''}>&raquo;</button>`;
+            html += `<span class="page-info">${page} / ${totalPages}</span>`;
+            container.innerHTML = html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        }
+
+        async function loadSettings() {
+            try {
+                const res = await fetch('/groksubscription/api/admin.php', {
+                    headers: { 'Authorization': `Bearer ${idToken}` }
+                });
+                const data = await res.json();
+
+                if (res.status === 403) {
+                    document.getElementById('adminNotice').style.display = 'block';
+                    document.getElementById('adminPanel').style.display = 'none';
+                    return;
+                }
+
+                if (data.settings) {
+                    document.getElementById('adminPanel').style.display = 'block';
+                    document.getElementById('adminNotice').style.display = 'none';
+
+                    for (const [key, value] of Object.entries(data.settings)) {
+                        const input = document.getElementById(`set-${key}`);
+                        if (input) input.value = value;
+                    }
+                }
+            } catch (err) {
+                showToast('Failed to load settings', 'error');
+            }
+        }
+
+        async function saveSettings() {
+            const settings = {};
+            document.querySelectorAll('.setting-input').forEach(input => {
+                const key = input.id.replace('set-', '');
+                settings[key] = input.value;
+            });
+
+            try {
+                const res = await fetch('/groksubscription/api/admin.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${idToken}`
+                    },
+                    body: JSON.stringify({ settings })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    showToast('Settings saved!', 'success');
+                } else {
+                    throw new Error(data.error || 'Save failed');
+                }
+            } catch (err) {
+                showToast(err.message || 'Save failed', 'error');
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(40px)';
+                toast.style.transition = '0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+    </script>
+</body>
+
+</html>

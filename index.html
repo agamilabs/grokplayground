@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grok Imagine Playground — AI Image & Video Generator</title>
+    <meta name="description"
+        content="Generate stunning images and videos with AI using Grok Imagine. Text to Image, Image to Video, and Text to Video — all in one place.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- ─── Header ───────────────────────────────────────── -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5" />
+                    <path d="M2 12l10 5 10-5" />
+                </svg>
+                <span>Grok Imagine</span>
+            </a>
+            <nav class="header-nav">
+                <div id="creditsDisplay" class="credits-badge" style="display:none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v12" />
+                        <path d="M6 12h12" />
+                    </svg>
+                    <span id="creditsCount">0</span> Credits
+                </div>
+                <button id="buyCreditsBtn" class="btn btn-accent btn-sm" style="display:none;"
+                    onclick="openBuyModal()">Buy Credits</button>
+                <button id="authBtn" class="btn btn-ghost btn-sm" onclick="handleAuth()">
+                    <span id="authBtnText">Sign In</span>
+                </button>
+                <div id="userAvatar" class="user-avatar" style="display:none;">
+                    <img id="userPhoto" src="" alt="User" />
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ─── Main Content ────────────────────────────────── -->
+    <main class="main">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-glow"></div>
+            <h1 class="hero-title">Create with <span class="gradient-text">Grok Imagine</span></h1>
+            <p class="hero-sub">Generate stunning images and videos using state-of-the-art AI</p>
+        </section>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <div class="tabs" role="tablist">
+                <button class="tab active" data-tab="text_to_image" role="tab" aria-selected="true" id="tab-t2i">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15l-5-5L5 21" />
+                    </svg>
+                    Text to Image
+                </button>
+                <button class="tab" data-tab="image_to_video" role="tab" aria-selected="false" id="tab-i2v">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" />
+                        <path d="M10 8l6 4-6 4V8z" />
+                    </svg>
+                    Image to Video
+                </button>
+                <button class="tab" data-tab="text_to_video" role="tab" aria-selected="false" id="tab-t2v">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="23 7 16 12 23 17 23 7" />
+                        <rect x="1" y="5" width="15" height="14" rx="2" />
+                    </svg>
+                    Text to Video
+                </button>
+                <button class="tab" data-tab="text_to_audio" role="tab" aria-selected="false" id="tab-t2a">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                    Text to Audio
+                </button>
+            </div>
+            <div class="tab-indicator" id="tabIndicator"></div>
+        </div>
+
+        <!-- Generation Form Area -->
+        <div class="gen-container">
+            <!-- Text to Image Panel -->
+            <div class="gen-panel active" id="panel-text_to_image">
+                <div class="gen-form">
+                    <label class="gen-label">Describe your image</label>
+                    <textarea class="gen-textarea" id="prompt-t2i"
+                        placeholder="A futuristic cityscape at sunset with flying cars and neon lights..."
+                        rows="3"></textarea>
+                    <div class="gen-options">
+                        <div class="gen-option">
+                            <label class="option-label">Model</label>
+                            <select class="option-select" id="opt-t2i-model"
+                                onchange="updateCalculatedCost('text_to_image')">
+                                <option value="grok-imagine-image" selected>Grok Imagine (Standard)</option>
+                                <option value="grok-imagine-image-pro">Grok Imagine Pro</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Aspect Ratio</label>
+                            <select class="option-select" id="opt-t2i-ratio">
+                                <option value="1:1">1:1 Square</option>
+                                <option value="16:9" selected>16:9 Wide</option>
+                                <option value="9:16">9:16 Portrait</option>
+                                <option value="4:3">4:3</option>
+                                <option value="3:4">3:4</option>
+                                <option value="3:2">3:2</option>
+                                <option value="2:3">2:3</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Quality</label>
+                            <select class="option-select" id="opt-t2i-quality">
+                                <option value="2k" selected>2K (High)</option>
+                                <option value="1k">1K (Standard)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="gen-footer">
+                        <div class="gen-meta">
+                            <span class="gen-cost" id="cost-t2i">Cost: <strong>...</strong> credits</span>
+                            <span class="gen-balance" id="balance-t2i" style="display:none;">Available:
+                                <strong>...</strong></span>
+                        </div>
+                        <button class="btn btn-primary" id="genBtn-t2i" onclick="handleGenerate('text_to_image')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M6.34 6.34L3.51 3.51" />
+                            </svg>
+                            Generate
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image to Video Panel -->
+            <div class="gen-panel" id="panel-image_to_video">
+                <div class="gen-form">
+                    <label class="gen-label">Upload an image to animate</label>
+                    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imageUpload').click()">
+                        <input type="file" id="imageUpload" accept="image/*" style="display:none"
+                            onchange="handleImageUpload(this)">
+                        <div class="upload-placeholder" id="uploadPlaceholder">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
+                            <span>Click or drag to upload</span>
+                        </div>
+                        <img id="uploadPreview" class="upload-preview" style="display:none" />
+                    </div>
+                    <label class="gen-label" style="margin-top:16px;">Describe the motion</label>
+                    <textarea class="gen-textarea" id="prompt-i2v"
+                        placeholder="Camera slowly zooms in while particles float upward..." rows="2"></textarea>
+                    <div class="gen-options">
+                        <div class="gen-option">
+                            <label class="option-label">Model</label>
+                            <select class="option-select" id="opt-i2v-model">
+                                <option value="grok-imagine-video" selected>Grok Imagine Video</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Aspect Ratio</label>
+                            <select class="option-select" id="opt-i2v-ratio">
+                                <option value="16:9" selected>16:9 Wide</option>
+                                <option value="9:16">9:16 Portrait</option>
+                                <option value="1:1">1:1 Square</option>
+                                <option value="4:3">4:3</option>
+                                <option value="3:4">3:4</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Resolution</label>
+                            <select class="option-select" id="opt-i2v-resolution">
+                                <option value="720p" selected>720p</option>
+                                <option value="480p">480p</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Duration</label>
+                            <select class="option-select" id="opt-i2v-duration"
+                                onchange="updateCalculatedCost('image_to_video')">
+                                <option value="5" selected>5 seconds</option>
+                                <option value="10">10 seconds</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="gen-footer">
+                        <div class="gen-meta">
+                            <span class="gen-cost" id="cost-i2v">Cost: <strong>...</strong> credits</span>
+                            <span class="gen-balance" id="balance-i2v" style="display:none;">Available:
+                                <strong>...</strong></span>
+                        </div>
+                        <button class="btn btn-primary" id="genBtn-i2v" onclick="handleGenerate('image_to_video')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M6.34 6.34L3.51 3.51" />
+                            </svg>
+                            Generate
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text to Video Panel -->
+            <div class="gen-panel" id="panel-text_to_video">
+                <div class="gen-form">
+                    <label class="gen-label">Describe your video</label>
+                    <textarea class="gen-textarea" id="prompt-t2v"
+                        placeholder="A majestic eagle soaring over snow-capped mountains at golden hour..."
+                        rows="3"></textarea>
+                    <div class="gen-options">
+                        <div class="gen-option">
+                            <label class="option-label">Model</label>
+                            <select class="option-select" id="opt-t2v-model"
+                                onchange="updateCalculatedCost('text_to_video')">
+                                <option value="grok-imagine-video" selected>Grok Imagine Video</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Aspect Ratio</label>
+                            <select class="option-select" id="opt-t2v-ratio">
+                                <option value="16:9" selected>16:9 Wide</option>
+                                <option value="9:16">9:16 Portrait</option>
+                                <option value="1:1">1:1 Square</option>
+                                <option value="4:3">4:3</option>
+                                <option value="3:4">3:4</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Resolution</label>
+                            <select class="option-select" id="opt-t2v-resolution">
+                                <option value="720p" selected>720p</option>
+                                <option value="480p">480p</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Duration</label>
+                            <select class="option-select" id="opt-t2v-duration"
+                                onchange="updateCalculatedCost('text_to_video')">
+                                <option value="5" selected>5 seconds</option>
+                                <option value="10">10 seconds</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="gen-footer">
+                        <div class="gen-meta">
+                            <span class="gen-cost" id="cost-t2v">Cost: <strong>...</strong> credits</span>
+                            <span class="gen-balance" id="balance-t2v" style="display:none;">Available:
+                                <strong>...</strong></span>
+                        </div>
+                        <button class="btn btn-primary" id="genBtn-t2v" onclick="handleGenerate('text_to_video')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M6.34 6.34L3.51 3.51" />
+                            </svg>
+                            Generate
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text to Audio Panel -->
+            <div class="gen-panel" id="panel-text_to_audio">
+                <div class="gen-form">
+                    <label class="gen-label">Enter text to speak</label>
+                    <textarea class="gen-textarea" id="prompt-t2a"
+                        placeholder="Hello, welcome to Grok AI Playground. This is a text to speech demonstration."
+                        rows="4" oninput="updateCalculatedCost('text_to_audio')"></textarea>
+                    <div class="gen-options">
+                        <div class="gen-option">
+                            <label class="option-label">Model</label>
+                            <select class="option-select" id="opt-t2a-model">
+                                <option value="grok-tts-1" selected>Grok TTS Standard</option>
+                            </select>
+                        </div>
+                        <div class="gen-option">
+                            <label class="option-label">Voice</label>
+                            <select class="option-select" id="opt-t2a-voice">
+                                <option value="alloy" selected>Alloy (Neutral)</option>
+                                <option value="echo">Echo (Male)</option>
+                                <option value="fable">Fable (Narrative)</option>
+                                <option value="onyx">Onyx (Deep)</option>
+                                <option value="nova">Nova (Bright)</option>
+                                <option value="shimmer">Shimmer (Clear)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="gen-footer">
+                        <div class="gen-meta">
+                            <span class="gen-cost" id="cost-t2a">Cost: <strong>...</strong> credits</span>
+                            <span class="gen-balance" id="balance-t2a" style="display:none;">Available:
+                                <strong>...</strong></span>
+                        </div>
+                        <button class="btn btn-primary" id="genBtn-t2a" onclick="handleGenerate('text_to_audio')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+                            </svg>
+                            Generate Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Area -->
+            <div class="output-area" id="outputArea" style="display:none;">
+                <div class="output-header">
+                    <h3>Result</h3>
+                    <button class="btn btn-ghost btn-sm" onclick="downloadOutput()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Download
+                    </button>
+                </div>
+                <div class="output-content" id="outputContent">
+                    <!-- Generated image or video will appear here -->
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-area" id="loadingArea" style="display:none;">
+                <div class="loading-spinner"></div>
+                <p class="loading-text" id="loadingText">Generating your creation...</p>
+                <p class="loading-sub" id="loadingSub">This may take a moment</p>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <section class="history-section" id="historySection" style="display:none;">
+            <div class="history-header">
+                <h2>Your Creations</h2>
+            </div>
+            <div class="history-filters">
+                <select class="option-select" id="historyFilterType" onchange="loadHistory()">
+                    <option value="">All Types</option>
+                    <option value="text_to_image">Text to Image</option>
+                    <option value="image_to_video">Image to Video</option>
+                    <option value="text_to_video">Text to Video</option>
+                    <option value="text_to_audio">Text to Audio</option>
+                </select>
+                <input type="date" class="option-select" id="historyFilterFrom" onchange="loadHistory()"
+                    style="width:auto;">
+                <input type="date" class="option-select" id="historyFilterTo" onchange="loadHistory()"
+                    style="width:auto;">
+            </div>
+            <div class="history-grid" id="historyGrid"></div>
+            <div class="history-pagination" id="historyPagination"></div>
+        </section>
+    </main>
+
+    <!-- ─── Sign In Modal ───────────────────────────────── -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('authModal')">&times;</button>
+            <div class="modal-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="url(#grad1)" stroke-width="1.5">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#6366f1" />
+                            <stop offset="100%" style="stop-color:#8b5cf6" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            </div>
+            <h3 class="modal-title">Sign in to continue</h3>
+            <p class="modal-desc">Sign in with your Google account to start generating AI content</p>
+            <button class="btn btn-google" onclick="signInWithGoogle()">
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                    <path
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                        fill="#4285F4" />
+                    <path
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                        fill="#34A853" />
+                    <path
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                        fill="#FBBC05" />
+                    <path
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                        fill="#EA4335" />
+                </svg>
+                Continue with Google
+            </button>
+        </div>
+    </div>
+
+    <!-- ─── Buy Credits Modal ───────────────────────────── -->
+    <div class="modal-overlay" id="buyModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('buyModal')">&times;</button>
+            <h3 class="modal-title">Buy AI Credits</h3>
+            <p class="modal-desc">Choose how many credits you'd like to purchase</p>
+            <div class="slider-container">
+                <input type="range" id="creditSlider" class="credit-slider" min="20" max="5000" value="100" step="10"
+                    oninput="updateSlider()">
+                <div class="slider-labels">
+                    <span>20</span>
+                    <span class="slider-value" id="sliderValue">100 Credits</span>
+                    <span>5000</span>
+                </div>
+            </div>
+            <div class="price-display" id="priceDisplay">
+                <span class="price-amount" id="priceAmount">৳100</span>
+                <span class="price-label">BDT via bKash</span>
+            </div>
+            <button class="btn btn-bkash" onclick="buyCredits()">
+                <span>Pay with bKash</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ─── Gift Credits Modal ──────────────────────────── -->
+    <div class="modal-overlay" id="giftModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('giftModal')">&times;</button>
+            <h3 class="modal-title">Gift Credits</h3>
+            <p class="modal-desc">Send AI credits to another user</p>
+            <div class="form-group">
+                <label>Recipient Email</label>
+                <input type="email" id="giftEmail" class="form-input" placeholder="friend@example.com">
+            </div>
+            <div class="form-group">
+                <label>Amount</label>
+                <input type="number" id="giftAmount" class="form-input" placeholder="50" min="1">
+            </div>
+            <button class="btn btn-primary" style="width:100%;margin-top:12px;" onclick="giftCredits()">Send
+                Gift</button>
+        </div>
+    </div>
+
+    <!-- ─── Toast Container ─────────────────────────────── -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ─── Footer ──────────────────────────────────────── -->
+    <footer class="footer">
+        <p>&copy; 2026 Grok Imagine Playground. Powered by xAI.</p>
+        <div class="footer-links">
+            <a href="#" onclick="event.preventDefault(); openGiftModal()">Gift Credits</a>
+            <a href="admin.html">Admin</a>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

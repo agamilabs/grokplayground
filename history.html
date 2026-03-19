@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Creations — Grok Imagine Playground</title>
+    <meta name="description" content="Browse your AI-generated images and videos from Grok Imagine.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .history-page {
+            max-width: 1000px;
+            margin: 80px auto 40px;
+            padding: 0 24px;
+        }
+
+        .history-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .history-top h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .history-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color var(--transition);
+        }
+
+        .history-back:hover {
+            color: var(--text-primary);
+        }
+
+        /* Filters */
+        .filters-bar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 24px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .filter-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .filter-select,
+        .filter-date {
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-family: var(--font);
+            font-size: 13px;
+            transition: border-color var(--transition);
+        }
+
+        .filter-select:focus,
+        .filter-date:focus {
+            outline: none;
+            border-color: var(--border-focus);
+        }
+
+        .filter-select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .filter-date::-webkit-calendar-picker-indicator {
+            filter: invert(0.7);
+        }
+
+        .filter-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+            align-self: flex-end;
+        }
+
+        /* Grid */
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .history-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+
+        .history-item:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .history-item img,
+        .history-item video {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .history-item-info {
+            padding: 12px 14px;
+        }
+
+        .history-item-type {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-3);
+            font-weight: 600;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .history-item-prompt {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .history-item-date {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .history-item-placeholder {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .history-item-status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .history-item-status.failed {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        .history-item-status.processing {
+            background: rgba(234, 179, 8, 0.1);
+            color: var(--warning);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+            padding: 16px 0;
+        }
+
+        .page-btn {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-family: var(--font);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .page-btn:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+        .page-btn.active {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.3);
+            color: var(--accent-3);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 0 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+        }
+
+        .empty-state svg {
+            opacity: 0.3;
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 900px;
+            width: 100%;
+            max-height: 80vh;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .lightbox-content img,
+        .lightbox-content video {
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity var(--transition);
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        .not-signed-in {
+            text-align: center;
+            padding: 80px 24px;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .history-page {
+                margin-top: 70px;
+                padding: 0 16px;
+            }
+
+            .history-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .history-item img,
+            .history-item video,
+            .history-item-placeholder {
+                height: 140px;
+            }
+
+            .filters-bar {
+                flex-direction: column;
+            }
+
+            .filter-actions {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .filter-actions .btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5" />
+                    <path d="M2 12l10 5 10-5" />
+                </svg>
+                <span>Grok Imagine</span>
+            </a>
+            <nav class="header-nav">
+                <div id="creditsDisplay" class="credits-badge" style="display:none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v12" />
+                        <path d="M6 12h12" />
+                    </svg>
+                    <span id="creditsCount">0</span> Credits
+                </div>
+                <a href="/" class="btn btn-accent btn-sm">Create</a>
+                <button id="authBtn" class="btn btn-ghost btn-sm" onclick="handleAuth()">
+                    <span id="authBtnText">Sign In</span>
+                </button>
+                <div id="userAvatar" class="user-avatar" style="display:none;">
+                    <img id="userPhoto" src="" alt="User" />
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="history-page">
+        <div class="history-top">
+            <div>
+                <a href="/" class="history-back">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5" />
+                        <polyline points="12 19 5 12 12 5" />
+                    </svg>
+                    Back to Playground
+                </a>
+                <h1>My Creations</h1>
+            </div>
+            <div id="totalCount" class="page-info" style="font-size:14px;"></div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-bar" id="filtersBar" style="display:none;">
+            <div class="filter-group">
+                <span class="filter-label">Type</span>
+                <select class="filter-select" id="filterType">
+                    <option value="">All Types</option>
+                    <option value="text_to_image">Text to Image</option>
+                    <option value="image_to_video">Image to Video</option>
+                    <option value="text_to_video">Text to Video</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">From</span>
+                <input type="date" class="filter-date" id="filterFrom">
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">To</span>
+                <input type="date" class="filter-date" id="filterTo">
+            </div>
+            <div class="filter-actions">
+                <button class="btn btn-primary btn-sm" onclick="applyFilters()">Apply</button>
+                <button class="btn btn-ghost btn-sm" onclick="clearFilters()">Clear</button>
+            </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="history-grid" id="historyGrid"></div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination" style="display:none;"></div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5L5 21" />
+            </svg>
+            <h3>No creations yet</h3>
+            <p>Start generating images and videos to see them here</p>
+            <a href="/" class="btn btn-primary" style="margin-top:16px;">Start Creating</a>
+        </div>
+
+        <!-- Not signed in -->
+        <div class="not-signed-in" id="notSignedIn" style="display:none;">
+            <p>Please sign in to view your creations</p>
+            <button class="btn btn-primary" style="margin-top:16px;" onclick="handleAuth()">Sign In</button>
+        </div>
+
+        <!-- Loading -->
+        <div id="loadingState" style="text-align:center;padding:60px 0;color:var(--text-muted);">Loading...</div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-content" id="lightboxContent"></div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script>
+        let idToken = null;
+        let currentUser = null;
+        let currentPage = 1;
+        const perPage = 18;
+
+        auth.onAuthStateChanged(async (user) => {
+            document.getElementById('loadingState').style.display = 'none';
+
+            if (user) {
+                currentUser = user;
+                idToken = await user.getIdToken();
+                document.getElementById('authBtnText').textContent = 'Sign Out';
+                document.getElementById('userAvatar').style.display = 'block';
+                document.getElementById('userPhoto').src = user.photoURL || '';
+                document.getElementById('creditsDisplay').style.display = 'flex';
+                document.getElementById('filtersBar').style.display = 'flex';
+                document.getElementById('notSignedIn').style.display = 'none';
+
+                // load credits
+                try {
+                    const res = await apiCall('/api/credits.php', 'GET');
+                    document.getElementById('creditsCount').textContent = res.credits;
+                } catch (e) { }
+
+                loadHistory();
+            } else {
+                currentUser = null;
+                idToken = null;
+                document.getElementById('authBtnText').textContent = 'Sign In';
+                document.getElementById('userAvatar').style.display = 'none';
+                document.getElementById('creditsDisplay').style.display = 'none';
+                document.getElementById('filtersBar').style.display = 'none';
+                document.getElementById('notSignedIn').style.display = 'block';
+            }
+        });
+
+        function handleAuth() {
+            if (currentUser) {
+                auth.signOut();
+                showToast('Signed out', 'info');
+            } else {
+                auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() => {
+                    showToast('Signed in!', 'success');
+                }).catch(err => showToast('Sign in failed', 'error'));
+            }
+        }
+
+        async function loadHistory() {
+            const type = document.getElementById('filterType').value;
+            const dateFrom = document.getElementById('filterFrom').value;
+            const dateTo = document.getElementById('filterTo').value;
+
+            let url = `/api/history.php?page=${currentPage}&limit=${perPage}`;
+            if (type) url += `&type=${type}`;
+            if (dateFrom) url += `&date_from=${dateFrom}`;
+            if (dateTo) url += `&date_to=${dateTo}`;
+
+            try {
+                const res = await apiCall(url, 'GET');
+                const grid = document.getElementById('historyGrid');
+
+                document.getElementById('totalCount').textContent = `${res.total} creation${res.total !== 1 ? 's' : ''}`;
+
+                if (!res.generations || res.generations.length === 0) {
+                    grid.innerHTML = '';
+                    document.getElementById('emptyState').style.display = 'block';
+                    document.getElementById('pagination').style.display = 'none';
+                    return;
+                }
+
+                document.getElementById('emptyState').style.display = 'none';
+
+                grid.innerHTML = res.generations.map(gen => {
+                    const typeLabel = gen.type.replace(/_/g, ' ');
+                    const isVideo = gen.type !== 'text_to_image';
+                    const date = new Date(gen.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                    if (gen.status === 'completed' && gen.output_url) {
+                        const media = isVideo
+                            ? `<video src="${gen.output_url}" muted preload="metadata"></video>`
+                            : `<img src="${gen.output_url}" alt="${escapeHtml(gen.prompt)}" loading="lazy" />`;
+                        return `
+                            <div class="history-item" onclick="openLightbox('${gen.output_url}', ${isVideo})">
+                                ${media}
+                                <div class="history-item-info">
+                                    <span class="history-item-type">${typeLabel}</span>
+                                    <div class="history-item-prompt">${escapeHtml(gen.prompt)}</div>
+                                    <div class="history-item-date">${date} · ${gen.credits_used} credits</div>
+                                </div>
+                            </div>`;
+                    } else {
+                        const statusClass = gen.status === 'failed' ? 'failed' : 'processing';
+                        const statusLabel = gen.status === 'failed' ? 'Failed' : 'Processing';
+                        return `
+                            <div class="history-item">
+                                <div class="history-item-placeholder">
+                                    <span class="history-item-status ${statusClass}">${statusLabel}</span>
+                                </div>
+                                <div class="history-item-info">
+                                    <span class="history-item-type">${typeLabel}</span>
+                                    <div class="history-item-prompt">${escapeHtml(gen.prompt)}</div>
+                                    <div class="history-item-date">${date}</div>
+                                </div>
+                            </div>`;
+                    }
+                }).join('');
+
+                // Render pagination
+                renderPagination(res.page, res.pages, res.total);
+
+            } catch (err) {
+                showToast('Failed to load history', 'error');
+            }
+        }
+
+        function renderPagination(page, totalPages, total) {
+            const container = document.getElementById('pagination');
+            if (totalPages <= 1) {
+                container.style.display = 'none';
+                return;
+            }
+            container.style.display = 'flex';
+
+            let html = `<button class="page-btn" onclick="goToPage(${page - 1})" ${page <= 1 ? 'disabled' : ''}>&laquo; Prev</button>`;
+
+            // Show page numbers (max 5 visible)
+            const start = Math.max(1, page - 2);
+            const end = Math.min(totalPages, start + 4);
+            for (let i = start; i <= end; i++) {
+                html += `<button class="page-btn ${i === page ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+
+            html += `<button class="page-btn" onclick="goToPage(${page + 1})" ${page >= totalPages ? 'disabled' : ''}>Next &raquo;</button>`;
+            html += `<span class="page-info">Page ${page} of ${totalPages}</span>`;
+
+            container.innerHTML = html;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            loadHistory();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function applyFilters() {
+            currentPage = 1;
+            loadHistory();
+        }
+
+        function clearFilters() {
+            document.getElementById('filterType').value = '';
+            document.getElementById('filterFrom').value = '';
+            document.getElementById('filterTo').value = '';
+            currentPage = 1;
+            loadHistory();
+        }
+
+        // Lightbox
+        function openLightbox(url, isVideo) {
+            const content = document.getElementById('lightboxContent');
+            if (isVideo) {
+                content.innerHTML = `<video src="${url}" controls autoplay style="width:100%;"></video>`;
+            } else {
+                content.innerHTML = `<img src="${url}" alt="Generated content" style="width:100%;" />`;
+            }
+            document.getElementById('lightbox').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
+            document.getElementById('lightbox').classList.remove('show');
+            document.body.style.overflow = '';
+            document.getElementById('lightboxContent').innerHTML = '';
+        }
+
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+        // API helper
+        async function apiCall(endpoint, method = 'GET', body = null) {
+            const headers = { 'Content-Type': 'application/json' };
+            if (idToken) headers['Authorization'] = `Bearer ${idToken}`;
+            const options = { method, headers };
+            if (body && method === 'POST') options.body = JSON.stringify(body);
+            const response = await fetch(endpoint, options);
+            return await response.json();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(40px)';
+                toast.style.transition = '0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+    </script>
+</body>
+
+</html>
