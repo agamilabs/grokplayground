@@ -81,5 +81,14 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('image_pro_cost', '0.07'),
     ('video_per_sec_cost', '0.05'),
     ('audio_per_1k_chars_cost', '4.20'),
-    ('site_name', 'Grok Imagine Playground')
+    ('site_name', 'Grok Imagine Playground'),
+    ('xai_api_key', ''),
+    ('xai_base_url', 'https://api.x.ai/v1'),
+    ('firebase_project_id', ''),
+    ('site_url', 'http://localhost/groksubscription'),
+    ('bkash_app_key', ''),
+    ('bkash_app_secret', ''),
+    ('bkash_username', ''),
+    ('bkash_password', ''),
+    ('bkash_base_url', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta')
 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value);
