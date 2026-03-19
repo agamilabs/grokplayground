@@ -731,14 +731,18 @@ body {
 /* ─── Modals ──────────────────────────────────────────── */
 .modal-overlay {
     position: fixed;
-    z-index: 200;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
     display: none;
     align-items: center;
     justify-content: center;
     padding: 24px;
-    animation: fadeIn 0.2s ease;
+    animation: fadeIn 0.15s ease-out;
 }
 
 .modal-overlay.show {
