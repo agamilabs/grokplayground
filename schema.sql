@@ -75,13 +75,13 @@ CREATE TABLE IF NOT EXISTS bkash_payments (
 
 -- Default admin settings
 INSERT INTO admin_settings (setting_key, setting_value) VALUES
-    ('bdt_per_usd', '120'),
-    ('bdt_per_credit', '1'),
-    ('text_to_image_cost', '0.02'),
-    ('image_pro_cost', '0.07'),
-    ('video_per_sec_cost', '0.05'),
-    ('audio_per_1k_chars_cost', '4.20'),
-    ('site_name', 'Grok Imagine Playground'),
+    ('bdt_per_usd', '145'),
+    ('bdt_per_credit', '2'),
+    ('text_to_image_cost', '0.04'),
+    ('image_pro_cost', '0.14'),
+    ('video_per_sec_cost', '0.1'),
+    ('audio_per_1k_chars_cost', '8.40'),
+    ('site_name', 'Grok Playground'),
     ('xai_api_key', ''),
     ('xai_base_url', 'https://api.x.ai/v1'),
     ('firebase_project_id', ''),

@@ -46,7 +46,7 @@ if ($type === 'image_to_video' && empty($imageData)) {
 }
 
 // Check credits
-$creditCost = getCreditCost($type);
+$creditCost = getCreditCost($type, $duration, strlen($prompt), $model);
 if ($user['credits'] < $creditCost) {
     http_response_code(402);
     echo json_encode([

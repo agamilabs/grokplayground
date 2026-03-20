@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Allowlisted keys
     $allowedKeys = [
         'bdt_per_usd',
+        'text_to_image_cost',
         'image_pro_cost',
         'video_per_sec_cost',
         'audio_per_1k_chars_cost',

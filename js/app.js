@@ -343,6 +343,7 @@ async function fetchAdminSettings() {
             adminSettings = res.settings;
             tabNames.forEach(t => updateCalculatedCost(t));
             updateSlider(); // Update UI with latest bdtPerCredit value
+            switchTab(activeTab); // Ensure selected tab blur is rendered on load
         }
     } catch (err) { }
 }
@@ -365,7 +366,7 @@ function updateCalculatedCost(type) {
         costElId = type === 'image_to_video' ? 'cost-i2v' : 'cost-t2v';
     } else if (type === 'text_to_audio') {
         const text = document.getElementById('prompt-t2a')?.value || '';
-        costUsd = (text.length / 1000000) * parseFloat(settings.audio_per_1k_chars_cost || 4.20);
+        costUsd = (text.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 4.20);
         if (text.length > 0 && costUsd < 0.01) costUsd = 0.01;
         costElId = 'cost-t2a';
     }

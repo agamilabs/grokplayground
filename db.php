@@ -56,24 +56,26 @@ function getAllSettings()
 }
 
 /**
- * Get credit cost for a generation type
+ * Get credit cost for a generation type matching frontend formula
  */
-function getCreditCost($type)
+function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-imagine-image')
 {
-    $map = [
-        'text_to_image' => 'text_to_image_cost',
-        'image_to_video' => 'image_to_video_cost',
-        'text_to_video' => 'text_to_video_cost',
-        'text_to_audio' => 'audio_per_1k_chars_cost',
-    ];
-    $key = $map[$type] ?? null;
-    if (!$key)
-        return 0;
+    $settings = getAllSettings();
+    $bdtPerUsd = (float) ($settings['bdt_per_usd'] ?? 120);
+    $bdtPerCredit = (float) ($settings['bdt_per_credit'] ?? 1);
 
-    $cost = getSetting($key, 0.05);
-    // Convert USD cost to Credits? 
-    // Actually, in our current system, we seem to be treating cost as credits or doing a conversion elsewhere.
-    // Based on previous discussions, BDT is credit, and we have USD rates.
-    // Let's check how generate.php uses it.
-    return (float) $cost;
+    $costUsd = 0;
+
+    if ($type === 'text_to_image') {
+        $costUsd = $model === 'grok-imagine-image-pro' ? (float) ($settings['image_pro_cost'] ?? 0.07) : (float) ($settings['text_to_image_cost'] ?? 0.02);
+    } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
+        $costUsd = $duration * (float) ($settings['video_per_sec_cost'] ?? 0.05);
+    } elseif ($type === 'text_to_audio') {
+        $costUsd = ($textLength / 1000) * (float) ($settings['audio_per_1k_chars_cost'] ?? 4.20);
+        if ($textLength > 0 && $costUsd < 0.01)
+            $costUsd = 0.01;
+    }
+
+    $credits = ceil(($costUsd * $bdtPerUsd) / $bdtPerCredit);
+    return (int) $credits;
 }
