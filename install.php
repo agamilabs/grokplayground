@@ -20,9 +20,10 @@ $envExists = file_exists($envFile);
 if ($envExists) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0)
+        if (strpos(trim($line), '#') === 0 || strpos(trim($line), '=') === false)
             continue;
         list($name, $value) = explode('=', $line, 2);
+        $_ENV[trim($name)] = trim($value);
         putenv(trim($line));
     }
 }
@@ -53,13 +54,31 @@ $step = $_POST['step'] ?? ($_GET['step'] ?? 'check');
 $error = '';
 $success = '';
 
+// Security: Require password if INSTALL_PASSWORD is set in .env
+$installPassword = $_ENV['INSTALL_PASSWORD'] ?? getenv('INSTALL_PASSWORD');
+$isUnlocked = !empty($_SESSION['installer_unlocked']);
+
+if ($installPassword && !$isUnlocked && $step !== 'unlock') {
+    $step = 'unlock';
+}
+
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($step === 'database') {
+    if ($step === 'unlock') {
+        $provided = $_POST['installer_password'] ?? '';
+        if ($provided && password_verify($provided, $installPassword)) {
+            $_SESSION['installer_unlocked'] = true;
+            $step = 'check';
+        } else {
+            $error = 'Invalid installer password.';
+            $step = 'unlock';
+        }
+    } elseif ($step === 'database') {
         $dbHost = trim($_POST['db_host'] ?? 'localhost');
         $dbName = trim($_POST['db_name'] ?? '');
         $dbUser = trim($_POST['db_user'] ?? 'root');
         $dbPass = $_POST['db_pass'] ?? '';
+        $newInstallPassword = trim($_POST['installer_password'] ?? '');
 
         if (empty($dbName)) {
             $error = 'Database name is required.';
@@ -79,6 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $envContent .= "DB_NAME=$dbName\n";
                 $envContent .= "DB_USER=$dbUser\n";
                 $envContent .= "DB_PASS=$dbPass\n";
+                if (!empty($newInstallPassword)) {
+                    $hashedPassword = password_hash($newInstallPassword, PASSWORD_DEFAULT);
+                    $envContent .= "INSTALL_PASSWORD=$hashedPassword\n";
+                } elseif (!empty($installPassword)) {
+                    $envContent .= "INSTALL_PASSWORD=$installPassword\n";
+                }
                 file_put_contents($envFile, $envContent);
 
                 // Run schema
@@ -348,7 +373,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             <?php endif; ?>
 
-            <?php if ($step === 'check'): ?>
+            <?php if ($step === 'unlock'): ?>
+                <h1 class="install-title">Unlock Installer</h1>
+                <p class="install-desc">This installation is protected. Please enter the installer password to proceed.</p>
+
+                <form method="POST">
+                    <input type="hidden" name="step" value="unlock">
+                    <div class="field">
+                        <label>Installer Password</label>
+                        <input type="password" name="installer_password" required autofocus>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Unlock</button>
+                </form>
+
+            <?php elseif ($step === 'check'): ?>
                 <h1 class="install-title">Grok Imagine Setup</h1>
                 <p class="install-desc">Check your system status and install or reinstall the application.</p>
 
@@ -445,6 +483,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label>Database Password</label>
                         <input type="password" name="db_pass" value="">
                     </div>
+
+                    <div class="field">
+                        <label>Installer Password (for future re-installs)</label>
+                        <input type="password" name="installer_password"
+                            placeholder="<?= $installPassword ? 'Keep empty to stay same' : 'Recommended for security' ?>">
+                    </div>
+
                     <button type="submit" class="btn btn-primary" style="width:100%;">Set Up Database →</button>
                 </form>
 
