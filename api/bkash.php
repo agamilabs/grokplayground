@@ -35,11 +35,15 @@ function bkashGrantToken($forceRefresh = false)
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => json_encode($payload),
         CURLOPT_HTTPHEADER => [
-            'Content-Type: application/json',
-            'Accept: application/json',
-            'username: ' . BKASH_USERNAME,
-            'password: ' . BKASH_PASSWORD,
+            'Content-Type:application/json',
+            'Accept:application/json',
+            'username:' . BKASH_USERNAME,
+            'password:' . BKASH_PASSWORD,
         ],
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_TIMEOUT => 30,
     ]);
 
@@ -80,13 +84,17 @@ function bkashCreatePayment($idToken, $amount, $invoiceNumber)
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode($payload, JSON_UNESCAPED_SLASHES),
+        CURLOPT_POSTFIELDS => json_encode($payload),
         CURLOPT_HTTPHEADER => [
-            'Content-Type: application/json',
-            'Accept: application/json',
-            "Authorization:$idToken",
-            'X-APP-Key: ' . BKASH_APP_KEY,
+            'Content-Type:application/json',
+            'Accept:application/json',
+            'Authorization:' . trim($idToken),
+            'X-APP-Key:' . trim(BKASH_APP_KEY),
         ],
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_TIMEOUT => 30,
     ]);
 
@@ -110,11 +118,15 @@ function bkashExecutePayment($idToken, $paymentID)
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => json_encode($payload),
         CURLOPT_HTTPHEADER => [
-            'Content-Type: application/json',
-            'Accept: application/json',
-            "Authorization:$idToken",
-            'X-APP-Key: ' . BKASH_APP_KEY,
+            'Content-Type:application/json',
+            'Accept:application/json',
+            'Authorization:' . trim($idToken),
+            'X-APP-Key:' . trim(BKASH_APP_KEY),
         ],
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_TIMEOUT => 30,
     ]);
 
