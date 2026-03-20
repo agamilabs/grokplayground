@@ -67,7 +67,7 @@ function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-ima
     $costUsd = 0;
 
     if ($type === 'text_to_image') {
-        $costUsd = $model === 'grok-imagine-image-pro' ? (float) ($settings['image_pro_cost'] ?? 0.14) : (float) ($settings['text_to_image_cost'] ?? 0.04);
+        $costUsd = ($model === 'grok-imagine-image-pro') ? (float) ($settings['image_pro_cost'] ?? 0.14) : (float) ($settings['text_to_image_cost'] ?? 0.04);
     } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
         $costUsd = $duration * (float) ($settings['video_per_sec_cost'] ?? 0.1);
     } elseif ($type === 'text_to_audio') {
