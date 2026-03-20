@@ -28,14 +28,15 @@ if ($envExists) {
     }
 }
 
-if ($envExists) {
-    // Try $_ENV first, then getenv
-    $dbHost = $_ENV['DB_HOST'] ?? getenv('DB_HOST');
-    $dbName = $_ENV['DB_NAME'] ?? getenv('DB_NAME');
-    $dbUser = $_ENV['DB_USER'] ?? getenv('DB_USER');
-    $dbPass = $_ENV['DB_PASS'] ?? getenv('DB_PASS');
+// Even if .env doesn't exist, try to detect database connection from system environment
+// (Useful for Docker or hosting panels providing env vars)
+// Try $_ENV first, then getenv
+$dbHost = $_ENV['DB_HOST'] ?? getenv('DB_HOST');
+$dbName = $_ENV['DB_NAME'] ?? getenv('DB_NAME');
+$dbUser = $_ENV['DB_USER'] ?? getenv('DB_USER');
+$dbPass = $_ENV['DB_PASS'] ?? getenv('DB_PASS');
 
-    if ($dbHost && $dbName && $dbUser) {
+if ($dbHost && $dbName && $dbUser) {
         try {
             $pdo = new PDO("mysql:host=" . $dbHost . ";dbname=" . $dbName, $dbUser, $dbPass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -47,7 +48,6 @@ if ($envExists) {
         } catch (Exception $e) {
             // Connection failed
         }
-    }
 }
 
 $step = $_POST['step'] ?? ($_GET['step'] ?? 'check');
