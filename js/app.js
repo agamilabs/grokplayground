@@ -240,7 +240,10 @@ async function handleGenerate(type) {
 
         const res = await apiCall('/api/generate.php', 'POST', body);
 
-        if (res.error) throw new Error(res.error);
+        if (res.error) {
+            const msg = typeof res.error === 'object' ? (res.error.message || 'Generation failed') : res.error;
+            throw new Error(msg);
+        }
 
         await loadCredits();
 
@@ -493,7 +496,10 @@ async function apiCall(endpoint, method = 'GET', body = null) {
     if (idToken) headers['Authorization'] = `Bearer ${idToken}`;
     const res = await fetch(endpoint, { method, headers, body: body ? JSON.stringify(body) : null });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'API Error');
+    if (!res.ok) {
+        const msg = typeof data.error === 'object' ? (data.error.message || 'API Error') : (data.error || 'API Error');
+        throw new Error(msg);
+    }
     return data;
 }
 

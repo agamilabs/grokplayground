@@ -236,7 +236,18 @@ function xaiRequest($method, $endpoint, $payload = null)
 
     $decoded = json_decode($response, true);
     if ($httpCode >= 400) {
-        return ['error' => ['message' => $decoded['error']['message'] ?? "API error (HTTP $httpCode)"]];
+        $errorMessage = $decoded['error']['message'] ?? "API error (HTTP $httpCode)";
+
+        // Add more context for 403/401 errors which are common configuration/permission issues
+        if ($httpCode === 403 || $httpCode === 401) {
+            if (isset($decoded['detail'])) {
+                $errorMessage .= ": " . $decoded['detail'];
+            } elseif (!$decoded) {
+                $errorMessage .= " (Check if XAI_BASE_URL is correct and has /v1 if needed)";
+            }
+        }
+
+        return ['error' => ['message' => $errorMessage, 'http_code' => $httpCode, 'raw_response' => substr($response, 0, 500)]];
     }
 
     return $decoded ?: ['error' => ['message' => 'Empty API response']];
