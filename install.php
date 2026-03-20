@@ -60,6 +60,7 @@ $installPassword = $_ENV['INSTALL_PASSWORD'] ?? getenv('INSTALL_PASSWORD');
 $isUnlocked = !empty($_SESSION['installer_unlocked']);
 
 if ($installPassword && !$isUnlocked && $step !== 'unlock') {
+    $_SESSION['target_step'] = $step;
     $step = 'unlock';
 }
 
@@ -69,7 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $provided = $_POST['installer_password'] ?? '';
         if ($provided && password_verify($provided, $installPassword)) {
             $_SESSION['installer_unlocked'] = true;
-            $step = 'check';
+            $step = $_SESSION['target_step'] ?? 'check';
+            unset($_SESSION['target_step']);
         } else {
             $error = 'Invalid installer password.';
             $step = 'unlock';
@@ -164,6 +166,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $pdo = new PDO("mysql:host=" . $dbHost . ";dbname=" . $dbName, $dbUser, $dbPass);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                // Update .env if a new password was provided in this step
+                $newInstallPassword = trim($_POST['installer_password'] ?? '');
+                if (!empty($newInstallPassword)) {
+                    $hashedPassword = password_hash($newInstallPassword, PASSWORD_DEFAULT);
+                    $envLines = file($envFile, FILE_IGNORE_NEW_LINES);
+                    $newEnvLines = [];
+                    foreach ($envLines as $line) {
+                        if (strpos($line, 'INSTALL_PASSWORD=') === 0)
+                            continue;
+                        $newEnvLines[] = $line;
+                    }
+                    $newEnvLines[] = "INSTALL_PASSWORD=$hashedPassword";
+                    file_put_contents($envFile, implode("\n", $newEnvLines));
+                }
 
                 $settings = [
                     'xai_api_key' => $xaiKey,
@@ -539,6 +556,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label>bKash Base URL</label>
                         <input type="text" name="bkash_base_url" value="https://tokenized.sandbox.bka.sh/v1.2.0-beta">
                     </div>
+
+                    <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--border);">
+                        <div class="field">
+                            <label>Installer Password (update security)</label>
+                            <input type="password" name="installer_password"
+                                placeholder="<?= $installPassword ? 'Keep empty to stay same' : 'Set password for future re-installs' ?>">
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary" style="width:100%;">Save Configuration →</button>
                 </form>
 
