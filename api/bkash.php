@@ -35,10 +35,10 @@ function bkashGrantToken($forceRefresh = false)
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => json_encode($payload),
         CURLOPT_HTTPHEADER => [
-            'Content-Type:application/json',
-            'Accept:application/json',
-            'username:' . BKASH_USERNAME,
-            'password:' . BKASH_PASSWORD,
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'username: ' . BKASH_USERNAME,
+            'password: ' . BKASH_PASSWORD,
         ],
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
@@ -72,7 +72,7 @@ function bkashCreatePayment($idToken, $amount, $invoiceNumber)
 
     $payload = [
         'mode' => '0011',
-        'payerReference' => $invoiceNumber,
+        'payerReference' => '1',
         'callbackURL' => SITE_URL . '/api/bkash.php?action=callback',
         'amount' => (string) $amount,
         'currency' => 'BDT',
