@@ -15,6 +15,7 @@ $isInstalled = false;
 $dbConnected = false;
 $tablesExist = false;
 $envExists = file_exists($envFile);
+$configExists = file_exists($configFile);
 
 // Load .env if it exists
 if ($envExists) {
@@ -37,17 +38,17 @@ $dbUser = $_ENV['DB_USER'] ?? getenv('DB_USER');
 $dbPass = $_ENV['DB_PASS'] ?? getenv('DB_PASS');
 
 if ($dbHost && $dbName && $dbUser) {
-        try {
-            $pdo = new PDO("mysql:host=" . $dbHost . ";dbname=" . $dbName, $dbUser, $dbPass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $dbConnected = true;
-            // Check if our tables exist
-            $stmt = $pdo->query("SHOW TABLES LIKE 'users'");
-            $tablesExist = $stmt->rowCount() > 0;
-            $isInstalled = $tablesExist;
-        } catch (Exception $e) {
-            // Connection failed
-        }
+    try {
+        $pdo = new PDO("mysql:host=" . $dbHost . ";dbname=" . $dbName, $dbUser, $dbPass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbConnected = true;
+        // Check if our tables exist
+        $stmt = $pdo->query("SHOW TABLES LIKE 'users'");
+        $tablesExist = $stmt->rowCount() > 0;
+        $isInstalled = $tablesExist;
+    } catch (Exception $e) {
+        // Connection failed
+    }
 }
 
 $step = $_POST['step'] ?? ($_GET['step'] ?? 'check');
