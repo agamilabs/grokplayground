@@ -338,12 +338,17 @@ async function loadCredits() {
 
 async function fetchAdminSettings() {
     try {
-        const res = await apiCall('/api/admin.php', 'GET');
+        const res = await apiCall('/api/settings.php', 'GET');
         if (res.settings) {
             adminSettings = res.settings;
             tabNames.forEach(t => updateCalculatedCost(t));
             updateSlider(); // Update UI with latest bdtPerCredit value
             switchTab(activeTab); // Ensure selected tab blur is rendered on load
+
+            // Sync site name if available
+            if (res.settings.site_name) {
+                document.title = `${res.settings.site_name} — AI Image & Video Generator`;
+            }
         }
     } catch (err) { }
 }
