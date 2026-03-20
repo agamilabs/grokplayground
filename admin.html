@@ -132,7 +132,7 @@
                     <div class="setting-label">USD to BDT Rate</div>
                     <div class="setting-hint">Used to calculate costs from USD pricing</div>
                 </div>
-                <input type="number" class="setting-input" id="set-bdt_per_usd" min="1" value="120">
+                <input type="number" class="setting-input" id="set-bdt_per_usd" step="0.01" value="145">
             </div>
 
             <div class="setting-row">
@@ -151,165 +151,143 @@
                 <input type="number" class="setting-input" id="set-image_pro_cost" step="0.01" value="0.07">
             </div>
 
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">Video Cost ($ per sec)</div>
-                    <div class="setting-hint">Current: $0.05</div>
-                </div>
-                <input type="number" class="setting-input" id="set-video_per_sec_cost" step="0.01" value="0.05">
-            </div>
+            <div class="setting-hint">Price in BDT for each credit (usually 1)</div>
+        </div>
+        <input type="number" class="setting-input" id="set-bdt_per_credit" min="0.1" step="0.1" value="1">
+    </div>
 
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">Audio Cost ($ per 1M chars)</div>
-                    <div class="setting-hint">Current: $4.20</div>
-                </div>
-                <input type="number" class="setting-input" id="set-audio_per_1k_chars_cost" step="0.01" value="4.20">
-            </div>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">Site Name</div>
+            <div class="setting-hint">Displayed in the header</div>
+        </div>
+        <input type="text" class="setting-input" id="set-site_name" value="Grok Imagine Playground"
+            style="width:200px;">
+    </div>
 
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">BDT per Credit</div>
-                    <div class="setting-hint">Price in BDT for each credit (usually 1)</div>
-                </div>
-                <input type="number" class="setting-input" id="set-bdt_per_credit" min="0.1" step="0.1" value="1">
-            </div>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">Site URL</div>
+            <div class="setting-hint">Full URL including http/https</div>
+        </div>
+        <input type="text" class="setting-input" id="set-site_url" placeholder="http://domain.com" style="width:200px;">
+    </div>
 
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">Site Name</div>
-                    <div class="setting-hint">Displayed in the header</div>
-                </div>
-                <input type="text" class="setting-input" id="set-site_name" value="Grok Imagine Playground"
-                    style="width:200px;">
-            </div>
+    <h2 class="admin-title" style="margin-top:24px; font-size: 18px;">xAI Settings</h2>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">xAI API Key</div>
+            <div class="setting-hint">From x.ai console</div>
+        </div>
+        <input type="password" class="setting-input" id="set-xai_api_key" style="width:200px;">
+    </div>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">xAI Base URL</div>
+        </div>
+        <input type="text" class="setting-input" id="set-xai_base_url" style="width:200px;">
+    </div>
 
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">Site URL</div>
-                    <div class="setting-hint">Full URL including http/https</div>
-                </div>
-                <input type="text" class="setting-input" id="set-site_url" placeholder="http://domain.com"
-                    style="width:200px;">
-            </div>
+    <h2 class="admin-title" style="margin-top:24px; font-size: 18px;">Firebase Settings</h2>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">Firebase Project ID</div>
+        </div>
+        <input type="text" class="setting-input" id="set-firebase_project_id" style="width:200px;">
+    </div>
 
-            <h2 class="admin-title" style="margin-top:24px; font-size: 18px;">xAI Settings</h2>
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">xAI API Key</div>
-                    <div class="setting-hint">From x.ai console</div>
-                </div>
-                <input type="password" class="setting-input" id="set-xai_api_key" style="width:200px;">
-            </div>
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">xAI Base URL</div>
-                </div>
-                <input type="text" class="setting-input" id="set-xai_base_url" style="width:200px;">
-            </div>
+    <h2 class="admin-title" style="margin-top:24px; font-size: 18px;">bKash Settings</h2>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">bKash App Key</div>
+        </div>
+        <input type="password" class="setting-input" id="set-bkash_app_key" style="width:200px;">
+    </div>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">bKash App Secret</div>
+        </div>
+        <input type="password" class="setting-input" id="set-bkash_app_secret" style="width:200px;">
+    </div>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">bKash Username</div>
+        </div>
+        <input type="text" class="setting-input" id="set-bkash_username" style="width:200px;">
+    </div>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">bKash Password</div>
+        </div>
+        <input type="password" class="setting-input" id="set-bkash_password" style="width:200px;">
+    </div>
+    <div class="setting-row">
+        <div>
+            <div class="setting-label">bKash Base URL</div>
+        </div>
+        <input type="text" class="setting-input" id="set-bkash_base_url" style="width:200px;">
+    </div>
 
-            <h2 class="admin-title" style="margin-top:24px; font-size: 18px;">Firebase Settings</h2>
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">Firebase Project ID</div>
-                </div>
-                <input type="text" class="setting-input" id="set-firebase_project_id" style="width:200px;">
-            </div>
+    <div class="admin-actions">
+        <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+        <button class="btn btn-ghost" onclick="loadSettings()">Reset</button>
+    </div>
+    </div>
 
-            <h2 class="admin-title" style="margin-top:24px; font-size: 18px;">bKash Settings</h2>
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">bKash App Key</div>
-                </div>
-                <input type="password" class="setting-input" id="set-bkash_app_key" style="width:200px;">
-            </div>
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">bKash App Secret</div>
-                </div>
-                <input type="password" class="setting-input" id="set-bkash_app_secret" style="width:200px;">
-            </div>
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">bKash Username</div>
-                </div>
-                <input type="text" class="setting-input" id="set-bkash_username" style="width:200px;">
-            </div>
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">bKash Password</div>
-                </div>
-                <input type="password" class="setting-input" id="set-bkash_password" style="width:200px;">
-            </div>
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">bKash Base URL</div>
-                </div>
-                <input type="text" class="setting-input" id="set-bkash_base_url" style="width:200px;">
-            </div>
+    <div class="admin-card" id="adminHistory" style="display:none; margin-top: 24px;">
+        <h1 class="admin-title">Generation History</h1>
+        <p class="admin-desc">View and filter generations from all users</p>
 
-            <div class="admin-actions">
-                <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
-                <button class="btn btn-ghost" onclick="loadSettings()">Reset</button>
+        <div class="filters-bar"
+            style="margin-bottom: 20px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: var(--radius-md); border: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px;">
+            <div class="filter-group" style="flex:1; min-width: 150px;">
+                <label class="filter-label"
+                    style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">User</label>
+                <select class="option-select" id="adminFilterUser" onchange="loadAdminHistory(1)" style="width:100%;">
+                    <option value="">All Users</option>
+                </select>
+            </div>
+            <div class="filter-group" style="flex:1; min-width: 120px;">
+                <label class="filter-label"
+                    style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Type</label>
+                <select class="option-select" id="adminFilterType" onchange="loadAdminHistory(1)" style="width:100%;">
+                    <option value="">All Types</option>
+                    <option value="text_to_image">Text to Image</option>
+                    <option value="image_to_video">Image to Video</option>
+                    <option value="text_to_video">Text to Video</option>
+                </select>
+            </div>
+            <div class="filter-group" style="flex:2; min-width: 200px;">
+                <label class="filter-label"
+                    style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Search</label>
+                <input type="text" class="option-select" id="adminSearch" placeholder="Email or prompt..."
+                    oninput="loadAdminHistory(1)" style="width:100%;">
             </div>
         </div>
 
-        <div class="admin-card" id="adminHistory" style="display:none; margin-top: 24px;">
-            <h1 class="admin-title">Generation History</h1>
-            <p class="admin-desc">View and filter generations from all users</p>
-
-            <div class="filters-bar"
-                style="margin-bottom: 20px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: var(--radius-md); border: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px;">
-                <div class="filter-group" style="flex:1; min-width: 150px;">
-                    <label class="filter-label"
-                        style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">User</label>
-                    <select class="option-select" id="adminFilterUser" onchange="loadAdminHistory(1)"
-                        style="width:100%;">
-                        <option value="">All Users</option>
-                    </select>
-                </div>
-                <div class="filter-group" style="flex:1; min-width: 120px;">
-                    <label class="filter-label"
-                        style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Type</label>
-                    <select class="option-select" id="adminFilterType" onchange="loadAdminHistory(1)"
-                        style="width:100%;">
-                        <option value="">All Types</option>
-                        <option value="text_to_image">Text to Image</option>
-                        <option value="image_to_video">Image to Video</option>
-                        <option value="text_to_video">Text to Video</option>
-                    </select>
-                </div>
-                <div class="filter-group" style="flex:2; min-width: 200px;">
-                    <label class="filter-label"
-                        style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Search</label>
-                    <input type="text" class="option-select" id="adminSearch" placeholder="Email or prompt..."
-                        oninput="loadAdminHistory(1)" style="width:100%;">
-                </div>
-            </div>
-
-            <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-                    <thead>
-                        <tr style="text-align: left; border-bottom: 1px solid var(--border);">
-                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">User</th>
-                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Type</th>
-                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Prompt</th>
-                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Status</th>
-                            <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminHistoryBody">
-                        <!-- History rows will be loaded here -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="adminHistoryPagination" class="history-pagination" style="margin-top: 16px;"></div>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <thead>
+                    <tr style="text-align: left; border-bottom: 1px solid var(--border);">
+                        <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">User</th>
+                        <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Type</th>
+                        <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Prompt</th>
+                        <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Status</th>
+                        <th style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Date</th>
+                    </tr>
+                </thead>
+                <tbody id="adminHistoryBody">
+                    <!-- History rows will be loaded here -->
+                </tbody>
+            </table>
         </div>
 
-        <div id="adminLoading" style="text-align:center;padding:60px 0;color:var(--text-muted);">
-            Loading...
-        </div>
+        <div id="adminHistoryPagination" class="history-pagination" style="margin-top: 16px;"></div>
+    </div>
+
+    <div id="adminLoading" style="text-align:center;padding:60px 0;color:var(--text-muted);">
+        Loading...
+    </div>
     </div>
 
     <div class="toast-container" id="toastContainer"></div>

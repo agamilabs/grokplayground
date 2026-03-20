@@ -8,7 +8,7 @@ let idToken = null;
 let activeTab = 'text_to_image';
 let uploadedImageBase64 = null;
 let creditCosts = { text_to_image: 5, image_to_video: 20, text_to_video: 25, text_to_audio: 10 };
-let bdtPerCredit = 1;
+let bdtPerCredit = 2;
 let pollingInterval = null;
 const tabNames = ['text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio'];
 let adminSettings = null;
@@ -350,23 +350,23 @@ async function fetchAdminSettings() {
 
 function updateCalculatedCost(type) {
     const settings = adminSettings || {};
-    const bdtPerUsd = parseFloat(settings.bdt_per_usd || 120);
-    bdtPerCredit = parseFloat(settings.bdt_per_credit || 1); // Update global variable directly
+    const bdtPerUsd = parseFloat(settings.bdt_per_usd || 145);
+    bdtPerCredit = parseFloat(settings.bdt_per_credit || 2); // Update global variable directly
     let costUsd = 0;
     let costElId = '';
 
     if (type === 'text_to_image') {
         const model = document.getElementById('opt-t2i-model')?.value || 'grok-imagine-image';
-        costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.07) : parseFloat(settings.text_to_image_cost || 0.02);
+        costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
         costElId = 'cost-t2i';
     } else if (type === 'image_to_video' || type === 'text_to_video') {
         const el = document.getElementById(type === 'image_to_video' ? 'opt-i2v-duration' : 'opt-t2v-duration');
         const duration = el ? parseInt(el.value) : 5;
-        costUsd = duration * parseFloat(settings.video_per_sec_cost || 0.05);
+        costUsd = duration * parseFloat(settings.video_per_sec_cost || 0.1);
         costElId = type === 'image_to_video' ? 'cost-i2v' : 'cost-t2v';
     } else if (type === 'text_to_audio') {
         const text = document.getElementById('prompt-t2a')?.value || '';
-        costUsd = (text.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 4.20);
+        costUsd = (text.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 8.40);
         if (text.length > 0 && costUsd < 0.01) costUsd = 0.01;
         costElId = 'cost-t2a';
     }

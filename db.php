@@ -61,17 +61,17 @@ function getAllSettings()
 function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-imagine-image')
 {
     $settings = getAllSettings();
-    $bdtPerUsd = (float) ($settings['bdt_per_usd'] ?? 120);
-    $bdtPerCredit = (float) ($settings['bdt_per_credit'] ?? 1);
+    $bdtPerUsd = (float) ($settings['bdt_per_usd'] ?? 145);
+    $bdtPerCredit = (float) ($settings['bdt_per_credit'] ?? 2);
 
     $costUsd = 0;
 
     if ($type === 'text_to_image') {
-        $costUsd = $model === 'grok-imagine-image-pro' ? (float) ($settings['image_pro_cost'] ?? 0.07) : (float) ($settings['text_to_image_cost'] ?? 0.02);
+        $costUsd = $model === 'grok-imagine-image-pro' ? (float) ($settings['image_pro_cost'] ?? 0.14) : (float) ($settings['text_to_image_cost'] ?? 0.04);
     } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
-        $costUsd = $duration * (float) ($settings['video_per_sec_cost'] ?? 0.05);
+        $costUsd = $duration * (float) ($settings['video_per_sec_cost'] ?? 0.1);
     } elseif ($type === 'text_to_audio') {
-        $costUsd = ($textLength / 1000) * (float) ($settings['audio_per_1k_chars_cost'] ?? 4.20);
+        $costUsd = ($textLength / 1000) * (float) ($settings['audio_per_1k_chars_cost'] ?? 8.40);
         if ($textLength > 0 && $costUsd < 0.01)
             $costUsd = 0.01;
     }
