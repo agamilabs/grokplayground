@@ -374,8 +374,6 @@ function updateCalculatedCost(type) {
     const credits = Math.ceil((costUsd * bdtPerUsd) / bdtPerCredit);
     const el = document.getElementById(costElId);
     if (el) el.innerHTML = `Cost: <strong>${credits}</strong> credits`;
-
-    if (!adminSettings) fetchAdminSettings();
 }
 
 // ─── Modals ─────────────────────────────────────────────
@@ -524,3 +522,9 @@ document.addEventListener('keydown', (e) => {
         document.querySelectorAll('.modal-overlay.show').forEach(m => closeModal(m.id));
     }
 });
+
+// ─── Initialization ───────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    fetchAdminSettings();
+});
+
