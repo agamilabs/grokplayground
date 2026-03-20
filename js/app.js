@@ -342,6 +342,7 @@ async function fetchAdminSettings() {
         if (res.settings) {
             adminSettings = res.settings;
             tabNames.forEach(t => updateCalculatedCost(t));
+            updateSlider(); // Update UI with latest bdtPerCredit value
         }
     } catch (err) { }
 }
@@ -349,7 +350,7 @@ async function fetchAdminSettings() {
 function updateCalculatedCost(type) {
     const settings = adminSettings || {};
     const bdtPerUsd = parseFloat(settings.bdt_per_usd || 120);
-    const bdtPerCredit = parseFloat(settings.bdt_per_credit || 1);
+    bdtPerCredit = parseFloat(settings.bdt_per_credit || 1); // Update global variable directly
     let costUsd = 0;
     let costElId = '';
 
