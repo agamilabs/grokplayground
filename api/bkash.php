@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'create') {
     }
 
     // Create payment
-    $invoiceNumber = 'GRK' . time() . rand(100, 999);
+    $invoiceNumber = 'Inv_' . rand(100000, 999999);
     $paymentResponse = bkashCreatePayment($bkashIdToken, $amount, $invoiceNumber);
 
     // If Unauthorized, token might be expired. Refresh and try once more.
