@@ -404,11 +404,26 @@ function updateSlider() {
 
 async function buyCredits() {
     const credits = parseInt(document.getElementById('creditSlider').value);
+    const btn = document.getElementById('btn-buy-bkash');
+    const oldHtml = btn.innerHTML;
+
     try {
+        // Show loading state
+        btn.disabled = true;
+        btn.innerHTML = '<span class="btn-loading"></span> Processing...';
+
         const res = await apiCall('/api/bkash.php?action=create', 'POST', { credits });
-        if (res.bkashURL) window.location.href = res.bkashURL;
-        else throw new Error(res.error || 'Payment failed');
-    } catch (err) { showToast(err.message, 'error'); }
+        if (res.bkashURL) {
+            window.location.href = res.bkashURL;
+        } else {
+            throw new Error(res.error || 'Payment failed');
+        }
+    } catch (err) {
+        showToast(err.message, 'error');
+        // Revert button state on error
+        btn.disabled = false;
+        btn.innerHTML = oldHtml;
+    }
 }
 
 function openGiftModal() {
