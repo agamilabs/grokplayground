@@ -71,10 +71,8 @@ if ($httpCode >= 400) {
     exit;
 }
 
-$apiStatus = $data['status'] ?? 'processing';
-
-if ($apiStatus === 'completed' || $apiStatus === 'succeeded') {
-    $videoUrl = $data['url'] ?? $data['video_url'] ?? $data['output']['url'] ?? null;
+if ($apiStatus === 'completed' || $apiStatus === 'succeeded' || $apiStatus === 'done') {
+    $videoUrl = $data['video']['url'] ?? $data['url'] ?? $data['video_url'] ?? $data['output']['url'] ?? null;
 
     if ($videoUrl) {
         // Update generation record

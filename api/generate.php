@@ -184,31 +184,48 @@ function callVideoGeneration($type, $prompt, $imageData = null, $aspectRatio = n
 
     $response = xaiRequest('POST', '/videos/generations', $payload);
 
-    if (isset($response['id'])) {
-        return ['request_id' => $response['id']];
+    if (isset($response['request_id'])) {
+        return ['request_id' => $response['request_id']];
     }
 
     return ['error' => $response['error']['message'] ?? 'Video generation failed'];
 }
 
 
-function callAudioGeneration($prompt, $model = null, $voice = 'alloy')
+function callAudioGeneration($prompt, $model = null, $voice = 'eve')
 {
     $payload = [
-        'model' => $model ?: 'grok-tts-1',
-        'input' => $prompt,
-        'voice' => $voice,
+        'text' => $prompt,
+        'voice_id' => $voice,
+        'language' => 'en',
     ];
 
-    // Assuming xAI returns a direct URL or binary for audio
-    // If it's binary, we'd need to save it to Firebase and return the URL
-    $response = xaiRequest('POST', '/audio/speech', $payload);
+    $response = xaiRequest('POST', '/tts', $payload);
 
-    if (isset($response['url'])) {
-        return ['url' => $response['url']];
+    if (isset($response['error'])) {
+        return $response;
     }
 
-    return ['error' => $response['error']['message'] ?? 'Audio generation failed'];
+    // Binary response handling
+    if (is_string($response)) {
+        $dir = __DIR__ . '/../uploads';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+        $filename = 'audio_' . time() . '_' . uniqid() . '.mp3';
+        file_put_contents($dir . '/' . $filename, $response);
+
+        // Build absolute URL for the output
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+        $host = $_SERVER['HTTP_HOST'];
+        $scriptPath = dirname($_SERVER['SCRIPT_NAME']); // e.g., /groksubscription/api
+        $baseDir = dirname($scriptPath); // e.g., /groksubscription
+        $baseUrl = $protocol . $host . $baseDir;
+
+        return ['url' => rtrim($baseUrl, '/') . '/uploads/' . $filename];
+    }
+
+    return ['error' => 'Unexpected API response format'];
 }
 
 function xaiRequest($method, $endpoint, $payload = null)
@@ -232,23 +249,28 @@ function xaiRequest($method, $endpoint, $payload = null)
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
     curl_close($ch);
 
-    $decoded = json_decode($response, true);
     if ($httpCode >= 400) {
+        $decoded = json_decode($response, true);
         $errorMessage = $decoded['error']['message'] ?? "API error (HTTP $httpCode)";
 
-        // Add more context for 403/401 errors which are common configuration/permission issues
+        // Add more context for 403/401 errors
         if ($httpCode === 403 || $httpCode === 401) {
             if (isset($decoded['detail'])) {
                 $errorMessage .= ": " . $decoded['detail'];
             } elseif (!$decoded) {
-                $errorMessage .= " (Check if XAI_BASE_URL is correct and has /v1 if needed)";
+                $errorMessage .= " (Verify API key and restricted endpoints)";
             }
         }
 
         return ['error' => ['message' => $errorMessage, 'http_code' => $httpCode, 'raw_response' => substr($response, 0, 500)]];
     }
 
-    return $decoded ?: ['error' => ['message' => 'Empty API response']];
+    if (strpos($contentType, 'application/json') !== false) {
+        return json_decode($response, true) ?: ['error' => ['message' => 'Empty API response']];
+    }
+
+    return $response; // Return raw data (for audio)
 }

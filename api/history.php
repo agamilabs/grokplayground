@@ -32,7 +32,7 @@ $params = [$user['id']];
 
 // Type filter
 $type = $_GET['type'] ?? '';
-$validTypes = ['text_to_image', 'image_to_video', 'text_to_video'];
+$validTypes = ['text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio'];
 if ($type && in_array($type, $validTypes)) {
     $conditions[] = "type = ?";
     $params[] = $type;
