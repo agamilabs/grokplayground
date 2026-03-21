@@ -282,6 +282,10 @@ function xaiRequest($method, $endpoint, $payload = null)
             }
         }
 
+        // Log error for debugging
+        $logEntry = date('Y-m-d H:i:s') . " - URL: $url - HTTP: $httpCode - Response: $response\n";
+        file_put_contents(__DIR__ . '/../uploads/api_error.log', $logEntry, FILE_APPEND);
+
         return ['error' => ['message' => $errorMessage, 'http_code' => $httpCode, 'raw_response' => substr($response, 0, 500)]];
     }
 

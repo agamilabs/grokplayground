@@ -137,7 +137,13 @@
             <!-- Text to Image Panel -->
             <div class="gen-panel active" id="panel-text_to_image">
                 <div class="gen-form">
-                    <label class="gen-label">Describe your image</label>
+                    <div class="label-with-hint">
+                        <label class="gen-label" style="margin-bottom:0;">Describe your image</label>
+                        <div class="tooltip">
+                            <span class="hint-icon">?</span>
+                            <span class="tooltip-text">Be descriptive! Mention style (e.g., "digital art", "oil painting"), lighting, and composition for better results.</span>
+                        </div>
+                    </div>
                     <textarea class="gen-textarea" id="prompt-t2i"
                         placeholder="A futuristic cityscape at sunset with flying cars and neon lights..."
                         rows="3"></textarea>
@@ -206,7 +212,13 @@
                         </div>
                         <img id="uploadPreview" class="upload-preview" style="display:none" />
                     </div>
-                    <label class="gen-label" style="margin-top:16px;">Describe the motion</label>
+                    <div class="label-with-hint" style="margin-top:16px;">
+                        <label class="gen-label" style="margin-bottom:0;">Describe the motion</label>
+                        <div class="tooltip">
+                            <span class="hint-icon">?</span>
+                            <span class="tooltip-text">Describe how you want the image to move (e.g., "gentle zoom in", "camera pans right", "wind blowing through hair").</span>
+                        </div>
+                    </div>
                     <textarea class="gen-textarea" id="prompt-i2v"
                         placeholder="Camera slowly zooms in while particles float upward..." rows="2"></textarea>
                     <div class="gen-options">
@@ -263,7 +275,13 @@
             <!-- Text to Video Panel -->
             <div class="gen-panel" id="panel-text_to_video">
                 <div class="gen-form">
-                    <label class="gen-label">Describe your video</label>
+                    <div class="label-with-hint">
+                        <label class="gen-label" style="margin-bottom:0;">Describe your video</label>
+                        <div class="tooltip">
+                            <span class="hint-icon">?</span>
+                            <span class="tooltip-text">Define the setting, characters, and action. Mention atmosphere details like weather or time of day.</span>
+                        </div>
+                    </div>
                     <textarea class="gen-textarea" id="prompt-t2v"
                         placeholder="A majestic eagle soaring over snow-capped mountains at golden hour..."
                         rows="3"></textarea>
@@ -322,7 +340,13 @@
             <!-- Text to Audio Panel -->
             <div class="gen-panel" id="panel-text_to_audio">
                 <div class="gen-form">
-                    <label class="gen-label">Enter text to speak</label>
+                    <div class="label-with-hint">
+                        <label class="gen-label" style="margin-bottom:0;">Enter text to speak</label>
+                        <div class="tooltip">
+                            <span class="hint-icon">?</span>
+                            <span class="tooltip-text">Use natural punctuation (commas, periods, ?) to guide pacing and intonation. Break long text into paragraphs.</span>
+                        </div>
+                    </div>
                     <textarea class="gen-textarea" id="prompt-t2a"
                         placeholder="Hello, welcome to Grok AI Playground. This is a text to speech demonstration."
                         rows="4" oninput="updateCalculatedCost('text_to_audio')"></textarea>

@@ -43,8 +43,8 @@ function get_setting($key, $default = null)
 }
 
 // Define Constants from Database
-define('XAI_API_KEY', get_setting('xai_api_key', ''));
-define('XAI_BASE_URL', get_setting('xai_base_url', 'https://api.x.ai/v1'));
+define('XAI_API_KEY', trim(get_setting('xai_api_key', '')));
+define('XAI_BASE_URL', rtrim(trim(get_setting('xai_base_url', 'https://api.x.ai/v1')), '/'));
 define('FIREBASE_PROJECT_ID', get_setting('firebase_project_id', ''));
 define('SITE_URL', rtrim(get_setting('site_url', 'http://localhost/groksubscription'), '/'));
 
