@@ -234,8 +234,13 @@ async function handleGenerate(type) {
             body.resolution = document.getElementById('opt-t2v-resolution').value;
             body.duration = parseInt(document.getElementById('opt-t2v-duration').value);
         } else if (type === 'text_to_audio') {
+            if (prompt.length > 15000) {
+                showToast('Text is too long. Please keep it under 15,000 characters.', 'error');
+                return;
+            }
             body.model = document.getElementById('opt-t2a-model').value;
             body.voice = document.getElementById('opt-t2a-voice').value;
+            body.quality = document.getElementById('opt-t2a-quality').value;
         }
 
         const res = await apiCall('/api/generate.php', 'POST', body);

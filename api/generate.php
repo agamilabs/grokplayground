@@ -23,7 +23,8 @@ $aspectRatio = $input['aspect_ratio'] ?? null;
 $resolution = $input['resolution'] ?? null;
 $duration = isset($input['duration']) ? (int) $input['duration'] : 5;
 $model = $input['model'] ?? null;
-$voice = $input['voice'] ?? 'alloy';
+$voice = $input['voice'] ?? 'eve';
+$quality = $input['quality'] ?? 'standard';
 
 // Validate type
 $validTypes = ['text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio'];
@@ -62,7 +63,7 @@ try {
     if ($type === 'text_to_image') {
         $result = callImageGeneration($prompt, $aspectRatio, $resolution, $model);
     } elseif ($type === 'text_to_audio') {
-        $result = callAudioGeneration($prompt, $model, $voice);
+        $result = callAudioGeneration($prompt, $model, $voice, $quality);
     } else {
         $result = callVideoGeneration($type, $prompt, $imageData, $aspectRatio, $resolution, $duration, $model);
     }
@@ -192,13 +193,42 @@ function callVideoGeneration($type, $prompt, $imageData = null, $aspectRatio = n
 }
 
 
-function callAudioGeneration($prompt, $model = null, $voice = 'eve')
+function callAudioGeneration($prompt, $model = null, $voice = 'eve', $quality = 'standard')
 {
+    $dir = __DIR__ . '/../uploads';
+    if (!is_dir($dir)) {
+        mkdir($dir, 0777, true);
+    }
+
+    // Caching logic: check if this exact audio already exists
+    $cacheKey = md5($prompt . '|' . $voice . '|' . $quality);
+    $cacheFile = $dir . '/cache_' . $cacheKey . '.mp3';
+
+    // Build base URL for the output
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'];
+    $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+    $baseDir = dirname($scriptPath);
+    $baseUrl = rtrim($protocol . $host . $baseDir, '/');
+
+    if (file_exists($cacheFile)) {
+        return ['url' => $baseUrl . '/uploads/' . basename($cacheFile), 'cached' => true];
+    }
+
     $payload = [
         'text' => $prompt,
         'voice_id' => $voice,
         'language' => 'en',
     ];
+
+    // High Quality settings (44.1kHz / 192kbps)
+    if ($quality === 'high') {
+        $payload['output_format'] = [
+            'codec' => 'mp3',
+            'sample_rate' => 44100,
+            'bit_rate' => 192000
+        ];
+    }
 
     $response = xaiRequest('POST', '/tts', $payload);
 
@@ -208,21 +238,8 @@ function callAudioGeneration($prompt, $model = null, $voice = 'eve')
 
     // Binary response handling
     if (is_string($response)) {
-        $dir = __DIR__ . '/../uploads';
-        if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
-        }
-        $filename = 'audio_' . time() . '_' . uniqid() . '.mp3';
-        file_put_contents($dir . '/' . $filename, $response);
-
-        // Build absolute URL for the output
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
-        $host = $_SERVER['HTTP_HOST'];
-        $scriptPath = dirname($_SERVER['SCRIPT_NAME']); // e.g., /groksubscription/api
-        $baseDir = dirname($scriptPath); // e.g., /groksubscription
-        $baseUrl = $protocol . $host . $baseDir;
-
-        return ['url' => rtrim($baseUrl, '/') . '/uploads/' . $filename];
+        file_put_contents($cacheFile, $response);
+        return ['url' => $baseUrl . '/uploads/' . basename($cacheFile)];
     }
 
     return ['error' => 'Unexpected API response format'];
