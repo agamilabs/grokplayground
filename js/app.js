@@ -379,7 +379,7 @@ function updateCalculatedCost(type) {
         costElId = type === 'image_to_video' ? 'cost-i2v' : 'cost-t2v';
     } else if (type === 'text_to_audio') {
         const text = document.getElementById('prompt-t2a')?.value || '';
-        costUsd = (text.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 8.40);
+        costUsd = (text.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 0.0084);
         if (text.length > 0 && costUsd < 0.01) costUsd = 0.01;
         costElId = 'cost-t2a';
     }

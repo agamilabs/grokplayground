@@ -71,7 +71,7 @@ function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-ima
     } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
         $costUsd = $duration * (float) ($settings['video_per_sec_cost'] ?? 0.1);
     } elseif ($type === 'text_to_audio') {
-        $costUsd = ($textLength / 1000) * (float) ($settings['audio_per_1k_chars_cost'] ?? 8.40);
+        $costUsd = ($textLength / 1000) * (float) ($settings['audio_per_1k_chars_cost'] ?? 0.0084);
         if ($textLength > 0 && $costUsd < 0.01)
             $costUsd = 0.01;
     }

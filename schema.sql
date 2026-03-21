@@ -80,7 +80,7 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('text_to_image_cost', '0.04'),
     ('image_pro_cost', '0.14'),
     ('video_per_sec_cost', '0.1'),
-    ('audio_per_1k_chars_cost', '8.40'),
+    ('audio_per_1k_chars_cost', '0.0084'),
     ('site_name', 'Grok Playground'),
     ('xai_api_key', ''),
     ('xai_base_url', 'https://api.x.ai/v1'),
