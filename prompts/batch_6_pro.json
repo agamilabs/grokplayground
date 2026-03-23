@@ -1,0 +1,182 @@
+[
+  {
+    "title": "Bioluminescent Deep Sea Explorer",
+    "type": "text_to_image",
+    "prompt": "Concept art of a rugged deep-sea submersible exploring an alien trench. Bioluminescent flora illuminating the dark water, majestic glowing jellyfish floating past, cinematic lighting, 8k resolution, Unreal Engine 5 render style, highly detailed textures, underwater photography.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A stunning, atmospheric underwater scene highlighting volumetric lighting and alien ecosystem design.",
+    "category_id": 6
+  },
+  {
+    "title": "Minimalist Sneaker Landing Page",
+    "type": "text_to_image",
+    "prompt": "UI/UX design for a minimalist e-commerce shoe store landing page. Centered hero image of a futuristic floating sneaker, sleek typography, off-white background with subtle orange accents, clean navigation bar, high conversion design, Dribbble style.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Clean and modern UI reference for e-commerce Web design.",
+    "category_id": 10
+  },
+  {
+    "title": "Gothic Vampire Aristocrat",
+    "type": "text_to_image",
+    "prompt": "A character portrait of a regal vampire aristocrat holding a silver goblet filled with crimson liquid. Dressed in intricate velvet Victorian attire, pale ethereal skin, piercing red eyes, dimly lit gothic castle interior, soft candlelight, hyper-detailed fantasy illustration.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Intricate character design perfect for RPGs or fantasy novels.",
+    "category_id": 2
+  },
+  {
+    "title": "Seamless Moroccan Tile Pattern",
+    "type": "text_to_image",
+    "prompt": "A completely seamless repeating pattern of intricate Moroccan ceramic tiles. Vibrant cobalt blue, gold, and white geometric floral designs, highly symmetrical, crisp resolution, perfectly tileable texture map.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Useful for generating high-quality game textures or background patterns.",
+    "category_id": 7
+  },
+  {
+    "title": "Cybernetic Fox Logo",
+    "type": "text_to_image",
+    "prompt": "A sleek, modern esports mascot logo featuring a glowing neon cybernetic fox head. Geometric vector style, vivid orange and electric blue colors, dark background, sharp edges, high contrast, professional branding.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Edgy and modern vector logo design for gaming or tech brands.",
+    "category_id": 9
+  },
+  {
+    "title": "Cozy Autumn Library",
+    "type": "text_to_image",
+    "prompt": "An isometric 3D render of a cozy autumn-themed library interior. Tall wooden bookshelves filled with colorful books, a large arched window showing falling amber leaves, a comfortable leather reading chair, warm golden lighting, cute stylized art, highly detailed.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Lovely isometric diorama perfect for casual game assets or cozy illustrations.",
+    "category_id": 11
+  },
+  {
+    "title": "High-Fashion Editorial - Paris",
+    "type": "text_to_image",
+    "prompt": "A striking high-fashion editorial photograph of a model walking down a cobblestone Paris street in the rain. She is wearing a flowing avant-garde crimson dress, holding a clear umbrella. Dramatic lighting, reflections on wet pavement, Vogue magazine aesthetic, shot on 35mm lens, photorealistic.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Demonstrates the model's capability for photorealistic, dramatic human photography.",
+    "category_id": 4
+  },
+  {
+    "title": "Lofi Chill Anime Room",
+    "type": "text_to_image",
+    "prompt": "A cozy anime-style bedroom at sunset, filled with plants, posters, and a glowing computer setup. A girl with headphones studying at the desk, city skyline visible through the window, warm orange and purple hues, Studio Ghibli inspired, highly detailed background.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "The quintessential lofi aesthetic, excellent for relaxing backdrops or music streams.",
+    "category_id": 5
+  },
+  {
+    "title": "Glass Perfume Bottle Mockup",
+    "type": "text_to_image",
+    "prompt": "A luxurious product photography mockup of an elegant angular glass perfume bottle resting on a marble pedestal. Soft studio lighting, subtle gold accents on the cap, pink liquid inside, clean white background, 8k, ultra-realistic.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A pristine template for high-end product showcasing.",
+    "category_id": 8
+  },
+  {
+    "title": "Apocalyptic overgrown Cityscape",
+    "type": "text_to_image",
+    "prompt": "A cinematic wide shot of a post-apocalyptic crumbling city skyline entirely reclaimed by lush green overgrowth and giant vines. Sunlight piercing through the clouds, ruined skyscrapers, birds flying in the distance, highly detailed concept art, majestic and haunting.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A classic sci-fi/fantasy environment exploring nature reclaiming civilization.",
+    "category_id": 3
+  },
+  {
+    "title": "Neon Synthwave DeLorean",
+    "type": "text_to_image",
+    "prompt": "A retro-futuristic synthwave scene featuring a classic DeLorean speeding down a digital grid highway. Huge neon pink glowing sun in the background, purple starry sky, 1980s outrun aesthetic, low angle shot, highly stylized 3d render.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Vibrant 80s retro-futurism for nostalgic, high-energy visuals.",
+    "category_id": 12
+  },
+  {
+    "title": "Elegant Botanical Coffee Packaging",
+    "type": "text_to_image",
+    "prompt": "A clean, modern packaging design for a premium artisan coffee bag. Matte black bag adorned with elegant, minimalist gold foil botanical illustrations. Product mockup style, soft lighting, resting on a rustic wooden table top.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A sophisticated packaging mockup that blends nature with premium branding.",
+    "category_id": 8
+  },
+  {
+    "title": "Steampunk Airship Corsair",
+    "type": "text_to_image",
+    "prompt": "A detailed character concept design of a daring steampunk airship captain. Wearing a tailored leather coat with brass gears, aviator goggles, holding a complex clockwork pistol. Highly detailed, fantasy illustration, rugged and charismatic.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A very character-focused prompt combining historical fashion with mechanical fantasy.",
+    "category_id": 2
+  },
+  {
+    "title": "Abstract Liquid Gold",
+    "type": "text_to_image",
+    "prompt": "Macro photography of abstract swirling liquid gold mixed with deep emerald green ink. Beautiful organic flow lines, metallic reflections, high contrast, smooth, elegant, 8k resolution.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A gorgeous, fluid abstract visual perfect for high-end digital art.",
+    "category_id": 1
+  },
+  {
+    "title": "Crypto FinTech App UI",
+    "type": "text_to_image",
+    "prompt": "A highly polished UI design for a mobile cryptocurrency trading app. Neumorphism design trend, dark glassmorphism cards showing beautiful neon gradient price charts, floating layout, clean modern sans-serif typography.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Modern app design focusing on data visualization and tech-forward aesthetics.",
+    "category_id": 10
+  },
+  {
+    "title": "Cute Fantasy Mushroom House",
+    "type": "text_to_image",
+    "prompt": "A 3D render of an incredibly cute, tiny cottage built into a giant glowing red mushroom in a magical forest. Fairy lights strung around the cap, a tiny wooden door, fireflies, soft pastel aesthetic, Pixar animation style.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Adorable and stylized, wonderful for children's illustration concepts or game art.",
+    "category_id": 11
+  },
+  {
+    "title": "Cinematic Cyber-Samurai Duel",
+    "type": "text_to_image",
+    "prompt": "An intense cinematic anime still of two cybernetically enhanced samurais clashing glowing plasma katanas. Sparks flying, rain pouring, dynamic action pose, vivid contrasting colors of electric blue and crimson red, ufotable studio style animation.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Tests the AI's ability to render dynamic action and vivid lighting in anime style.",
+    "category_id": 5
+  },
+  {
+    "title": "Minimalist Organic Architecture",
+    "type": "text_to_image",
+    "prompt": "Architectural photography of a stunning modern house built with white concrete curves and natural wood, integrated seamlessly into a rocky coastline at sunset. Large curved glass windows, minimalist luxury, photorealistic depth of field.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A masterclass in modern architectural visualization and material rendering.",
+    "category_id": 3
+  },
+  {
+    "title": "Elegant Monogram Logo",
+    "type": "text_to_image",
+    "prompt": "A highly refined, minimalist luxury monogram logo featuring intertwining letters 'A' and 'V'. Sleek gold foil texture pressed into premium dark navy textured paper, elegant serif typography, corporate identity design.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Provides an excellent example of luxury corporate branding.",
+    "category_id": 9
+  },
+  {
+    "title": "Holographic Cyberpunk Tech UI",
+    "type": "text_to_image",
+    "prompt": "A glowing, complex holographic HUD interface hovering in mid-air inside a dark spaceship bridge. Intricate data rings, glowing cyan and magenta wireframe models, futuristic typography, sci-fi concept art, high-tech.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Ideal for sci-fi interface design and complex data visualization art.",
+    "category_id": 1
+  }
+]
