@@ -1,0 +1,182 @@
+[
+  {
+    "title": "Isometric 16-bit Cyberpunk Tavern",
+    "type": "text_to_image",
+    "prompt": "Highly detailed 16-bit pixel art of an isometric cyberpunk tavern interior. Neon vending machines, patrons drinking glowing green beverages at the bar, holographic signs, highly constrained color palette, retro arcade aesthetic, perfectly clean pixel-perfect rendering.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A perfect prompt for generating authentic, crisp retro game assets.",
+    "category_id": 11
+  },
+  {
+    "title": "Hyper-realistic Wagyu Steak",
+    "type": "text_to_image",
+    "prompt": "Commercial food photography of a perfectly seared A5 Wagyu steak resting on a rustic black slate board. Sprinkled with coarse sea salt and fresh rosemary sprigs. Steam rising gently, dark moody studio lighting, macro lens, mouth-watering detail.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Tests the model's ability to render appetizing, highly textured culinary subjects.",
+    "category_id": 8
+  },
+  {
+    "title": "Typography Poster - 'ELEVATE'",
+    "type": "text_to_image",
+    "prompt": "A modern graphic design poster featuring the word 'ELEVATE' in a bold, metallic sans-serif font. The letters are intertwined with flowing liquid chrome shapes against a matte black background. Swiss design style, high contrast, clean vectors.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A showcase of dynamic 3D typography and clean graphic design.",
+    "category_id": 9
+  },
+  {
+    "title": "Micro Diorama - Coffee Cup Swamp",
+    "type": "text_to_image",
+    "prompt": "A hyper-detailed miniature diorama of a murky Louisiana swamp perfectly contained inside a standard white ceramic coffee mug. Tiny cypress trees, a highly detailed miniature alligator, murky resin water, moss hanging over the rim, tilt-shift photography, magical realism.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A clever, whimsical concept relying on extreme scale and surrealistic containment.",
+    "category_id": 11
+  },
+  {
+    "title": "Futuristic Carbon-Fiber Hypercar",
+    "type": "text_to_image",
+    "prompt": "Automotive photography of an aggressive, futuristic hypercar made fully of exposed carbon fiber and glowing red LED strips. Parked in a sleek, minimalist concrete hangar. Dramatic overhead spotlight, rim lighting, 8k resolution, photorealistic.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Perfect for testing industrial design and rigid metallic/composite materials.",
+    "category_id": 8
+  },
+  {
+    "title": "Gothic Cathedral Interior",
+    "type": "text_to_image",
+    "prompt": "A breathtaking wide-angle interior shot of a towering Gothic cathedral in ruins. Shafts of volumetric golden sunlight piercing through a massive shattered stained-glass rose window. Dust motes floating in the air, overgrown with ivy, cinematic lighting.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Showcases immense scale, classical architecture, and volumetric lighting.",
+    "category_id": 3
+  },
+  {
+    "title": "Origami Papercraft Dragon",
+    "type": "text_to_image",
+    "prompt": "A macro shot of a complex origami dragon intricately folded from gold foil and crimson paper. The paper dragon is perched on a small piece of driftwood. Shallow depth of field, soft natural light, highly visible paper textures and crisp folds.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A great test of precise geometry, material texture, and shadow casting.",
+    "category_id": 12
+  },
+  {
+    "title": "Cinematic Great White Shark",
+    "type": "text_to_image",
+    "prompt": "A terrifying, hyper-realistic underwater photograph of a massive Great White Shark emerging from the dark blue oceanic abyss. Shafts of sunlight cutting through the water, bubbles trailing from its gills, National Geographic style wildlife photography.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Incredible animal action shot highlighting subsurface scattering and water dynamics.",
+    "category_id": 4
+  },
+  {
+    "title": "Cosmic Nebula Birth",
+    "type": "text_to_image",
+    "prompt": "A stunning Hubble telescope style image of a cosmic nebula birthing new stars. Swirling clouds of iridescent purple, gold, and cyan stardust, intensely bright newborn stars, deep outer space, highly detailed astronomical render.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A magnificent space exploration visual, perfect for epic backgrounds.",
+    "category_id": 6
+  },
+  {
+    "title": "Watercolor Portrait of an Old Sailor",
+    "type": "text_to_image",
+    "prompt": "A deeply expressive watercolor painting of a weather-beaten old sailor smoking a pipe. Loose, fluid brushstrokes, visible paper texture, sepia and indigo color palette, dripping paint effects, masterfully balanced composition.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Tests the model's ability to simulate traditional wet media and emotive portraiture.",
+    "category_id": 2
+  },
+  {
+    "title": "Financial Dashboard Dark Mode",
+    "type": "text_to_image",
+    "prompt": "A modern web dashboard UI for a stock trading platform. Dark mode layout, displaying complex data charts with neon green and glowing red line graphs, beautiful data visualization, sleek transparent sidebar, Dribbble aesthetic, professional.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A fantastic reference for highly dense, data-heavy web UI designs.",
+    "category_id": 10
+  },
+  {
+    "title": "Abstract Zen Stones",
+    "type": "text_to_image",
+    "prompt": "A minimalist, abstract 3D render of impossibly smooth black and white zen stones perfectly balanced on top of each other. Resting on a mirror-like surface of still water, pure white minimalist background, peaceful, highly meditative composition.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Pure geometry and reflection, excellent for wellness and spa branding.",
+    "category_id": 1
+  },
+  {
+    "title": "Synthwave Anime Racer",
+    "type": "text_to_image",
+    "prompt": "A retro 80s anime-style portrait of a futuristic street racer leaning against a hovering motorcycle. Wearing a bright pink and teal racing jacket, neon visor, glowing city lights reflecting in her helmet, Akira inspired aesthetic.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Nostalgic, high-energy anime vehicle and character design.",
+    "category_id": 5
+  },
+  {
+    "title": "Vintage Spaceship Blueprint",
+    "type": "text_to_image",
+    "prompt": "A highly authentic vintage architectural blueprint of a science fiction spaceship engine. Chalk-white technical drawings, schematic lines, measurements, and annotations on faded, wrinkled cyan blueprint paper. Industrial design, retro-futurism.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A very unique stylistic prompt imitating authentic technical drawings.",
+    "category_id": 7
+  },
+  {
+    "title": "Stop-Motion Claymation Monster",
+    "type": "text_to_image",
+    "prompt": "A 3D render mimicking a stop-motion claymation style film. A cute, slightly goofy, many-eyed monster made of textured colorful modeling clay, standing in a small handmade cardboard forest set. Visible fingerprints in the clay, studio miniature lighting.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Tests the model's ability to render unique material imperfections like fingerprints.",
+    "category_id": 12
+  },
+  {
+    "title": "Gilded Mechanical Owl",
+    "type": "text_to_image",
+    "prompt": "A stunning, hyper-detailed mechanical owl constructed entirely from intricate gold filigree, ivory, and sapphire gemstones. The owl is perched on a velvet-lined stand. High-end jewelry photography, pure black background, sharply focused.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Jewelry-style aesthetic combined with complex animal mechanics.",
+    "category_id": 2
+  },
+  {
+    "title": "Aesthetic Glass Music App",
+    "type": "text_to_image",
+    "prompt": "A UI design mockup for an aesthetic music player app on a modern smartphone. The UI features heavy glassmorphism, blurred album art backgrounds, frosted glass controls, sleek minimal typography, elegant layout, iOS design guidelines.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Beautiful app interface focusing on translucency and modern layout.",
+    "category_id": 10
+  },
+  {
+    "title": "Eerie Abandoned Amusement Park",
+    "type": "text_to_image",
+    "prompt": "A haunting photograph of a rusted, overgrown Ferris wheel in an abandoned amusement park on a foggy, overcast morning. Desaturated colors, melancholy mood, tall grass, peeling paint, hyper-realistic, chilling atmosphere.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A masterful exercise in mood, fog volumetrics, and decay.",
+    "category_id": 3
+  },
+  {
+    "title": "Geometric Fox Logo Variant",
+    "type": "text_to_image",
+    "prompt": "A modern minimalist logo consisting solely of overlapping transparent colored geometric shapes (circles and triangles) that form the silhouette of a leaping fox. Clean white background, corporate identity, crisp vectors, Bauhaus style.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A completely different, elegant take on logo design using pure shape construction.",
+    "category_id": 9
+  },
+  {
+    "title": "Macro Dewdrop Refraction",
+    "type": "text_to_image",
+    "prompt": "An extreme macro photograph of a single dewdrop hanging from a blade of grass. Perfectly refracting an entire vibrant sunrise landscape inside the tiny droplet. Sparkling light, soft bokeh background, incredibly sharp focus on the droplet, award-winning nature photography.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Phenomenal test of optical physics, refraction, and macro lens rendering.",
+    "category_id": 4
+  }
+]
