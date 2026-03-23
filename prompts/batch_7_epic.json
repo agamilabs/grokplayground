@@ -1,0 +1,182 @@
+[
+  {
+    "title": "Neon Jellyfish Cloud City",
+    "type": "text_to_image",
+    "prompt": "Concept art of a futuristic cloud city where giant bioluminescent jellyfish float among glass skyscrapers. Twilight sky, neon pink and cyan lights, cyberpunk meets fantasy, octane render, 8k resolution, highly detailed, surreal atmosphere.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A surreal blend of sci-fi cityscape with fantastical marine biology.",
+    "category_id": 6
+  },
+  {
+    "title": "Minimalist Ceramic Coffee Cup",
+    "type": "text_to_image",
+    "prompt": "Product photography of a beautifully handcrafted minimalist white ceramic coffee cup sitting on an organic wooden slab. Soft morning sunlight filtering through a nearby window, sharp focus, serene aesthetic, Kinfolk magazine style, 35mm lens.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Pristine product photography ideal for lifestyle brands.",
+    "category_id": 8
+  },
+  {
+    "title": "Cyber-Geisha Assassin",
+    "type": "text_to_image",
+    "prompt": "A character portrait of a cybernetically enhanced geisha assassin. Intricate metallic kimono with neon wire-inlays, glowing crimson eyes, holding a monomolecular fan. Dark rainy cyberpunk alleyway background, hyper-realistic, photorealistic textures.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "High-detail character concept blending traditional aesthetics with futuristic cyberware.",
+    "category_id": 2
+  },
+  {
+    "title": "Seamless Art Deco Pattern",
+    "type": "text_to_image",
+    "prompt": "A completely seamless repeating pattern in classic 1920s Art Deco style. Geometric gold lines over a deep emerald green background, intricate symmetry, luxurious vintage aesthetic, flat vector style, crisp resolution.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Useful for generating high-quality luxury backgrounds and textures.",
+    "category_id": 7
+  },
+  {
+    "title": "Astra Coffee Roasters Logo",
+    "type": "text_to_image",
+    "prompt": "A modern, trendy logo design for an artisanal coffee roaster named 'Astra'. The logo features a minimalist geometric coffee bean merged with a subtle star shape. Monoline vector style, warm earthy brown and gold colors, clean white background.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A sharp, highly usable logo graphic for cafes and modern branding.",
+    "category_id": 9
+  },
+  {
+    "title": "Isometric Retro Arcade",
+    "type": "text_to_image",
+    "prompt": "An isometric 3D render of an 80s retro arcade room. Glowing neon carpets, detailed arcade cabinets like Pac-Man and Street Fighter, a change machine, dim atmospheric lighting with vibrant neon accents, highly detailed, tilt-shift lens effect.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A highly nostalgic and detailed environment, great for game level design concepts.",
+    "category_id": 11
+  },
+  {
+    "title": "Golden Hour Desert Fashion",
+    "type": "text_to_image",
+    "prompt": "High-fashion editorial photography of a striking model standing on a sweeping sand dune during golden hour. Wearing a flowing, avant-garde silk gown that catches the wind. Warm sun flares, dramatic shadows, shot on medium format film, extremely detailed.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Demonstrates the model's ability to render dramatic lighting and fabric simulation.",
+    "category_id": 4
+  },
+  {
+    "title": "Vintage Ghibli Train Station",
+    "type": "text_to_image",
+    "prompt": "A beautiful anime-style illustration of an old wooden train station surrounded by blooming cherry blossoms. A retro green train arriving, golden afternoon sunlight, soft fluffy clouds, highly detailed background art, Studio Ghibli masterpiece aesthetic.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A comforting, nostalgic piece focusing on anime environment rendering.",
+    "category_id": 5
+  },
+  {
+    "title": "Matte Black Headphones Mockup",
+    "type": "text_to_image",
+    "prompt": "Studio product photography mockup of premium over-ear matte black wireless headphones resting on a dark slate stone. Subtle dramatic rim lighting, immaculate detail on the ear cup texture, high-end commercial aesthetic, 8k.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Pristine template for consumer electronics and industrial design.",
+    "category_id": 8
+  },
+  {
+    "title": "Solarpunk Floating Village",
+    "type": "text_to_image",
+    "prompt": "A breathtaking wide shot of a peaceful solarpunk village built on giant floating lily pads on a crystal clear lake. Wind turbines, glass greenhouses, harmonious integration of technology and nature. Bright sunny day, vibrant green and blue hues, masterpiece concept art.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A beautiful exploration of the optimistic solarpunk architectural genre.",
+    "category_id": 3
+  },
+  {
+    "title": "Vaporwave Roman Bust",
+    "type": "text_to_image",
+    "prompt": "A classic vaporwave aesthetic featuring a flawless marble Roman bust with a glitch art effect. Grid floor, wireframe mountains in the background, neon pink and purple gradients, classical statue mixed with 90s digital artifacts.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "The quintessential vaporwave motif, perfect for music album art or social media visuals.",
+    "category_id": 12
+  },
+  {
+    "title": "Artisan Soap Packaging",
+    "type": "text_to_image",
+    "prompt": "A clean, modern packaging design for organic artisan soap bars. Wrapped in textured recycled paper with elegant pastel watercolor floral labels. Product mockup style, sitting on a pristine white marble vanity with a sprig of dried lavender.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Showcases soft textures and premium organic branding.",
+    "category_id": 8
+  },
+  {
+    "title": "Dwarven Forge Master",
+    "type": "text_to_image",
+    "prompt": "A detailed character concept design of a grizzled fantasy dwarven blacksmith striking a glowing white-hot sword on an anvil. Flying sparks, soot-stained face, intricate braided beard, heavy iron armor, dynamic pose, Dungeons and Dragons style illustration.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Dynamic action and highly detailed fantasy armor rendering.",
+    "category_id": 2
+  },
+  {
+    "title": "Abstract Iridescent Glass",
+    "type": "text_to_image",
+    "prompt": "Macro photography of abstract morphing shapes made of iridescent frosted glass. Pastel gradients shifting inside the material, caustic light refractions, smooth organic curves, elegant, 8k resolution, minimalist luxury.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A gorgeous, fluid abstract visual perfect for high-end digital art and wallpapers.",
+    "category_id": 1
+  },
+  {
+    "title": "Modern Health Tracking App UI",
+    "type": "text_to_image",
+    "prompt": "A highly polished UI design for a modern fitness and health tracking mobile app. Clean white background, vibrant gradient data rings tracking steps and calories, sleek sans-serif typography, soft drop shadows, clean modern aesthetics.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "High-fidelity app design focusing on readable data visualization.",
+    "category_id": 10
+  },
+  {
+    "title": "Miniature Terrarium World",
+    "type": "text_to_image",
+    "prompt": "A hyper-realistic 3D render of an entire miniature fantasy mountain range with tiny waterfalls and a castle, fully contained inside a beautiful geometric glass terrarium. Sitting on a wooden desk, bokeh background, magical, octane render.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A delightful and surreal miniature composition playing with scale and glass.",
+    "category_id": 11
+  },
+  {
+    "title": "Mecha Anime Space Battle",
+    "type": "text_to_image",
+    "prompt": "An intense cinematic anime still of a giant white and gold mecha firing a massive beam weapon in orbit above Earth. Lasers filling the frame, dynamic perspective, high-octane action, 1990s cel-shaded anime aesthetic, highly detailed mechanical design.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Tests the AI's ability to render complex mechanical structures and beam effects.",
+    "category_id": 5
+  },
+  {
+    "title": "Brutalist Concrete Museum",
+    "type": "text_to_image",
+    "prompt": "Architectural photography of an imposing brutalist museum made of raw, deeply textured concrete. Sharp geometric angles intersecting, dramatic light and shadow play under a clear blue sky, minimalist, oppressive yet beautiful structure, 8k realism.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Focuses on lighting, shadow, and stark architectural materials.",
+    "category_id": 3
+  },
+  {
+    "title": "Dynamic Esports Team Logo",
+    "type": "text_to_image",
+    "prompt": "A fierce, dynamic esports logo of a roaring mythical griffin. Sharp vector graphic style, heavy outlines, aggressive posture, purple and electric green color palette, dark background, professional team branding.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A great example of the highly precise vector style needed for gaming logos.",
+    "category_id": 9
+  },
+  {
+    "title": "Intricate Clockwork Heart",
+    "type": "text_to_image",
+    "prompt": "An extreme close up macro shot of a complex mechanical heart made entirely of tiny brass, copper, and silver clockwork gears and springs. Highly realistic metal textures, soft golden lighting, steampunk aesthetic, photorealistic visualization.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Ideal for testing highly complex, overlapping mechanical detail rendering.",
+    "category_id": 1
+  }
+]
