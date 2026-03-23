@@ -9,6 +9,7 @@ $baseDir = __DIR__;
 $configFile = $baseDir . '/config.php';
 $envFile = $baseDir . '/.env';
 $schemaFile = $baseDir . '/schema.sql';
+$showcaseFile = $baseDir . '/showcasing-seeds.sql';
 
 // Check existing installation
 $isInstalled = false;
@@ -116,6 +117,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $pdo->exec($sql);
                 }
 
+                // Import showcase seeds if requested
+                if (!empty($_POST['import_seeds']) && file_exists($showcaseFile)) {
+                    $sql = file_get_contents($showcaseFile);
+                    $pdo->exec($sql);
+                }
+
                 $_SESSION['install_db'] = compact('dbHost', 'dbName', 'dbUser', 'dbPass');
                 $step = 'config';
             } catch (Exception $e) {
@@ -128,8 +135,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($dbConnected && file_exists($schemaFile)) {
             try {
                 $sql = file_get_contents($schemaFile);
-                $sql = str_replace('{{DB_NAME}}', getenv('DB_NAME'), $sql);
+                $sql = str_replace('{{DB_NAME}}', getenv('DB_NAME') ?: $dbName, $sql);
                 $pdo->exec($sql);
+                
+                // Import seeds if requested
+                if (!empty($_POST['import_seeds']) && file_exists($showcaseFile)) {
+                    $sql = file_get_contents($showcaseFile);
+                    $pdo->exec($sql);
+                }
                 $success = 'Schema imported successfully!';
                 $tablesExist = true;
                 $isInstalled = true;
@@ -469,6 +482,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php if ($dbConnected && !$tablesExist): ?>
                         <form method="POST">
                             <input type="hidden" name="step" value="import_schema">
+                            <div class="field" style="margin-top:12px;">
+                                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                                    <input type="checkbox" name="import_seeds" value="1" checked style="width:16px;">
+                                    <span>Import Showcase Seeds (150+ items)</span>
+                                </label>
+                            </div>
                             <button type="submit" class="btn btn-ghost" style="width:100%;">Import Schema Only (to existing
                                 DB)</button>
                         </form>
@@ -506,6 +525,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label>Installer Password (for future re-installs)</label>
                         <input type="password" name="installer_password"
                             placeholder="<?= $installPassword ? 'Keep empty to stay same' : 'Recommended for security' ?>">
+                    </div>
+
+                    <div class="field">
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                            <input type="checkbox" name="import_seeds" value="1" checked style="width:16px;">
+                            <span>Import Showcase Seeds (150+ gems for gallery)</span>
+                        </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width:100%;">Set Up Database →</button>

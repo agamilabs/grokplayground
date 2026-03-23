@@ -92,3 +92,42 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('bkash_password', ''),
     ('bkash_base_url', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta')
 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value);
+
+-- Showcase categories table
+CREATE TABLE IF NOT EXISTS showcase_categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    slug VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Showcase items table
+CREATE TABLE IF NOT EXISTS showcase_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT DEFAULT NULL,
+    title VARCHAR(255) NOT NULL,
+    prompt TEXT NOT NULL,
+    description TEXT,
+    type ENUM('text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio') NOT NULL,
+    model_used VARCHAR(100),
+    settings_json TEXT,
+    output_url TEXT,
+    votes INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES showcase_categories(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+-- Showcase votes table
+CREATE TABLE IF NOT EXISTS showcase_votes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    item_id INT NOT NULL,
+    vote TINYINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY (user_id, item_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES showcase_items(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+

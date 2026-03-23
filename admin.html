@@ -405,6 +405,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                 Transactions
             </button>
+            <button class="nav-item" onclick="switchView('gallery', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M9 10a2 2 0 100-4 2 2 0 000 4z"/><path d="M21 15l-5-5L5 21"/></svg>
+                Gallery
+            </button>
             <button class="nav-item" onclick="switchView('settings', this)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 Hub Settings
@@ -596,6 +600,35 @@
             </div>
         </section>
 
+        <!-- Gallery Management View -->
+        <section id="view-gallery" class="view-section">
+            <div class="section-header">
+                <h1 class="section-title">Gallery Management</h1>
+                <p class="section-desc">Manage public gallery items</p>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <button class="btn btn-primary" onclick="showAddGalleryItem()">+ Add to Gallery</button>
+            </div>
+            <div class="card">
+                <div class="table-container">
+                    <table id="galleryTable">
+                        <thead>
+                            <tr>
+                                <th>Preview</th>
+                                <th>Title/Prompt</th>
+                                <th>Type</th>
+                                <th>Votes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="galleryList">
+                            <!-- Loaded via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
         <!-- Settings View -->
         <section id="view-settings" class="view-section">
             <div class="section-header">
@@ -725,6 +758,48 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="galleryModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <h2 class="install-title" id="galleryModalTitle">Add Gallery Item</h2>
+            <form id="galleryForm" onsubmit="saveGalleryItem(event)">
+                <input type="hidden" id="galleryId">
+                <div class="field">
+                    <label>Title</label>
+                    <input type="text" id="gTitle" required>
+                </div>
+                <div class="field">
+                    <label>Category</label>
+                    <select id="gCategory" class="option-select">
+                        <option value="">No Category</option>
+                        <!-- Categories loaded via JS -->
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Prompt</label>
+                    <textarea id="gPrompt" class="gen-textarea" required></textarea>
+                </div>
+                <div class="gen-options">
+                    <div class="gen-option">
+                        <label class="option-label">Modality</label>
+                        <select id="gType" class="option-select">
+                            <option value="text_to_image">Image</option>
+                            <option value="image_to_video">Video</option>
+                            <option value="text_to_audio">Audio</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field" style="margin-top:10px;">
+                    <label>Output Media URL</label>
+                    <input type="text" id="gUrl" required>
+                </div>
+                <div class="install-actions">
+                    <button type="submit" class="btn btn-primary">Save Gem</button>
+                    <button type="button" class="btn btn-ghost" onclick="closeGalleryModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- Firebase SDK -->
@@ -773,6 +848,7 @@
             if (viewId === 'users') loadUsers();
             if (viewId === 'generations') loadAdminHistory();
             if (viewId === 'transactions') loadTransactions();
+            if (viewId === 'gallery') loadAdminGallery();
             if (viewId === 'settings') loadSettings();
         }
 
@@ -1032,7 +1108,135 @@
             div.textContent = text || '';
             return div.innerHTML;
         }
+        // ─── Gallery Management ────────────────────────────────────
+        async function loadAdminGallery() {
+            const list = document.getElementById('galleryList');
+            list.innerHTML = '<tr><td colspan="5" align="center">Loading gallery...</td></tr>';
+            try {
+                const res = await fetch('api/showcase.php?limit=100');
+                const data = await res.json();
+                if (data.success) {
+                    list.innerHTML = data.items.map(item => `
+                        <tr>
+                            <td><img src="${item.output_url}" style="width:50px;height:50px;object-fit:cover;border-radius:4px;"></td>
+                            <td>
+                                <strong>${item.title}</strong>
+                                <div style="font-size:11px;color:var(--text-muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.prompt}</div>
+                                ${item.category_name ? `<span style="font-size:9px;color:var(--accent-2);font-weight:700;">${item.category_name.toUpperCase()}</span>` : ''}
+                            </td>
+                            <td>${item.type}</td>
+                            <td>${item.votes}</td>
+                            <td>
+                                <button class="btn btn-ghost btn-sm" onclick="editGalleryItem(${escapeHtml(JSON.stringify(item))})">Edit</button>
+                                <button class="btn btn-ghost btn-sm" onclick="deleteGalleryItem(${item.id})" style="color:var(--error)">Delete</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (err) {
+                list.innerHTML = '<tr><td colspan="5" align="center" style="color:var(--error)">Failed to load gallery</td></tr>';
+            }
+        }
+
+        function showAddGalleryItem() {
+            loadAdminCategories(); // Refresh list
+            document.getElementById('galleryModalTitle').textContent = 'Add Gallery Item';
+            document.getElementById('galleryId').value = '';
+            document.getElementById('galleryForm').reset();
+            document.getElementById('galleryModal').style.display = 'flex';
+        }
+
+        async function loadAdminCategories() {
+            const res = await fetch('api/categories.php');
+            const data = await res.json();
+            if (data.success) {
+                const select = document.getElementById('gCategory');
+                const currentValue = select.value;
+                select.innerHTML = '<option value="">No Category</option>' + 
+                    data.categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+                select.value = currentValue;
+            }
+        }
+
+        function closeGalleryModal() {
+            document.getElementById('galleryModal').style.display = 'none';
+        }
+
+        function editGalleryItem(item) {
+            loadAdminCategories().then(() => {
+                document.getElementById('galleryModalTitle').textContent = 'Edit Gallery Item';
+                document.getElementById('galleryId').value = item.id;
+                document.getElementById('gTitle').value = item.title;
+                document.getElementById('gCategory').value = item.category_id || '';
+                document.getElementById('gPrompt').value = item.prompt;
+                document.getElementById('gType').value = item.type;
+                document.getElementById('gUrl').value = item.output_url;
+                document.getElementById('galleryModal').style.display = 'flex';
+            });
+        }
+
+        async function saveGalleryItem(e) {
+            e.preventDefault();
+            const id = document.getElementById('galleryId').value;
+            const data = {
+                action: id ? 'update' : 'create',
+                id: id,
+                title: document.getElementById('gTitle').value,
+                category_id: document.getElementById('gCategory').value,
+                prompt: document.getElementById('gPrompt').value,
+                type: document.getElementById('gType').value,
+                output_url: document.getElementById('gUrl').value
+            };
+
+            // Assuming 'currentUser' is available globally or can be retrieved
+            // If not, you might need to get it from 'auth.currentUser'
+            const currentUser = auth.currentUser; 
+            if (!currentUser) {
+                showToast('User not authenticated', 'error');
+                return;
+            }
+
+            const idToken = await currentUser.getIdToken();
+            const res = await fetch('api/admin-showcase.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + idToken },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            if (result.success) {
+                showToast(id ? 'Item updated' : 'Item added to gallery', 'success');
+                closeGalleryModal();
+                loadAdminGallery();
+            } else {
+                showToast(result.error || 'Operation failed', 'error');
+            }
+        }
+
+        async function deleteGalleryItem(id) {
+            if (!confirm('Are you sure you want to remove this item from the gallery?')) return;
+            
+            // Assuming 'currentUser' is available globally or can be retrieved
+            // If not, you might need to get it from 'auth.currentUser'
+            const currentUser = auth.currentUser;
+            if (!currentUser) {
+                showToast('User not authenticated', 'error');
+                return;
+            }
+
+            const idToken = await currentUser.getIdToken();
+            const res = await fetch('api/admin-showcase.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + idToken },
+                body: JSON.stringify({ action: 'delete', id: id })
+            });
+            const result = await res.json();
+            if (result.success) {
+                showToast('Item deleted', 'success');
+                loadAdminGallery();
+            } else {
+                showToast(result.error || 'Operation failed', 'error');
+            }
+        }
     </script>
 </body>
-
 </html>
