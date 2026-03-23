@@ -271,14 +271,26 @@ async function handleGenerate(type) {
 function startPolling(requestId, generationId, type) {
     if (pollingInterval) clearInterval(pollingInterval);
     let attempts = 0;
-    pollingInterval = setInterval(async () => {
+    let delay = 5000; // Start with 5s
+    
+    const poll = async () => {
         attempts++;
-        if (attempts >= 60) {
+        if (attempts >= 40) { // Approx 5-6 mins total with backoff
             clearInterval(pollingInterval);
             document.getElementById('loadingArea').style.display = 'none';
-            showToast('Generation timed out', 'error');
+            showToast('Generation taking longer than expected. Check "Your Creations" later.', 'warning');
             return;
         }
+
+        // Gradually increase delay to avoid overwhelming API
+        if (attempts > 10 && delay < 10000) {
+            delay = 8000;
+            updatePollingInterval();
+        } else if (attempts > 20 && delay < 15000) {
+            delay = 12000;
+            updatePollingInterval();
+        }
+
         try {
             const res = await apiCall(`/api/poll.php?request_id=${encodeURIComponent(requestId)}&generation_id=${encodeURIComponent(generationId)}`, 'GET');
             if (res.status === 'completed' && res.output_url) {
@@ -290,7 +302,14 @@ function startPolling(requestId, generationId, type) {
                 showToast('Generation failed', 'error');
             }
         } catch (err) { }
-    }, 5000);
+    };
+
+    function updatePollingInterval() {
+        clearInterval(pollingInterval);
+        pollingInterval = setInterval(poll, delay);
+    }
+
+    pollingInterval = setInterval(poll, delay);
 }
 
 // ─── Output Display ─────────────────────────────────────
@@ -298,32 +317,75 @@ function showOutput(url, type) {
     document.getElementById('loadingArea').style.display = 'none';
     const outputArea = document.getElementById('outputArea');
     const outputContent = document.getElementById('outputContent');
+    
+    // Smooth transition
+    outputArea.style.opacity = '0';
     outputArea.style.display = 'block';
-
+    
+    let html = '';
     if (type === 'text_to_image') {
-        outputContent.innerHTML = `<img src="${url}" alt="Generated image" id="outputMedia" />`;
+        html = `<div class="output-wrapper">
+                    <img src="${url}" alt="Generated image" id="outputMedia" class="reveal-anim" />
+                </div>`;
     } else if (type === 'text_to_audio') {
-        outputContent.innerHTML = `<audio src="${url}" controls autoplay id="outputMedia"></audio>`;
+        html = `<div class="output-wrapper audio-player">
+                    <audio src="${url}" controls autoplay id="outputMedia"></audio>
+                </div>`;
     } else {
-        outputContent.innerHTML = `<video src="${url}" controls autoplay id="outputMedia"></video>`;
+        html = `<div class="output-wrapper">
+                    <video src="${url}" controls autoplay loop playsinline id="outputMedia" class="reveal-anim"></video>
+                </div>`;
     }
+
+    outputContent.innerHTML = html;
+    
+    // Add Share button if not present
+    const header = document.querySelector('.output-header');
+    if (!document.getElementById('shareBtn')) {
+        const shareBtn = document.createElement('button');
+        shareBtn.id = 'shareBtn';
+        shareBtn.className = 'btn btn-ghost btn-sm';
+        shareBtn.style.marginLeft = '8px';
+        shareBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg> Share`;
+        shareBtn.onclick = () => {
+            navigator.clipboard.writeText(url);
+            showToast('Link copied to clipboard!', 'success');
+        };
+        header.appendChild(shareBtn);
+    }
+
+    setTimeout(() => {
+        outputArea.style.transition = 'opacity 0.5s ease';
+        outputArea.style.opacity = '1';
+    }, 50);
 
     outputArea.dataset.url = url;
     outputArea.dataset.type = type;
     showToast('Generation complete!', 'success');
-    loadHistory();
+    loadHistory(1);
 }
 
 function downloadOutput() {
     const url = document.getElementById('outputArea').dataset.url;
     if (!url) return;
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `grok-${Date.now()}`;
-    a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    
+    // For cloud storage URLs, we might need to fetch and blob to force download
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = `grok-${Date.now()}.${document.getElementById('outputArea').dataset.type === 'text_to_image' ? 'png' : 'mp4'}`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+        })
+        .catch(() => {
+            // Fallback to simple link
+            window.open(url, '_blank');
+        });
 }
 
 // ─── Credits & Pricing ──────────────────────────────────
