@@ -1627,3 +1627,848 @@ Information Capacity: Horizontal layout can accommodate more text and icons, avo
 }', 'A template and a specific example prompt demonstrating how to use Nano Banana Pro\'s professional camera controls (angle, focal length, depth of field) and lighting specifications to create a focused, tech-noir image of an AI engineer.', 'text_to_image', 'grok-imagine-image-pro', '', 'https://cms-assets.youmind.com/media/1765509738525_mo51lx_G7y6_kVaMAIOiZc.jpg', 0),
 (NULL, 'Persona-Style Status Screen Generation', 'A Persona-style status screen using nano banana pro. I instructed it to randomly generate the level and stats, but they tend to be high.', 'A prompt used to generate a status screen in the style of the Persona video game series, instructing the AI to randomly generate high values for the level and stats.', 'text_to_image', 'grok-imagine-image-pro', '', 'https://cms-assets.youmind.com/media/1765509789832_tol646_G7yeg6AakAASOvR.jpg', 0),
 (NULL, 'Hand-Drawn Urban Planning Map from 3D View', 'hand-drawn urban planning map', 'A two-step process prompt for transforming a Google Maps 3D oblique view into a stylized, hand-drawn urban planning map, useful for creating artistic or simplified city layouts.', 'text_to_image', 'grok-imagine-image-pro', '', 'https://cms-assets.youmind.com/media/1765440052650_vqu88b_G7vtu4daMAEn7F0.jpg', 0);
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Wide quote card with portrait and Chinese/English customization', 'text_to_image', 'A wide quote card featuring a famous person, with a brown background and a light-gold serif font for the quote: “{argument name=\"famous_quote\" default=\"Stay Hungry, Stay Foolish\"}” and smaller text: “—{argument name=\"author\" default=\"Steve Jobs\"}.” There is a large, subtle quotation mark before the text. The portrait of the person is on the left, the text on the right. The text occupies two-thirds of the image and the portrait one-third, with a slight gradient transition effect on the portrait.', 'https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg', 'grok-imagine-image-pro', 'A prompt for generating a wide quote card featuring a famous person’s portrait, with a brown background, light-gold serif quote text, and layout where text occupies two-thirds and the person one-third. The quote text and author are parameterized for reuse.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Premium liquid glass Bento grid product infographic with 8 modules', 'text_to_image', 'Input Variable: [insert product name]
+Language: [insert language]
+
+System Instruction:
+Create an image of premium liquid glass Bento grid product infographic with 8 modules (card 2 to 8 show text titles only).
+1) Product Analysis:
+→ Identify product\'s dominant natural color → \"hero color\"
+→ Identify category: FOOD / MEDICINE / TECH
+2) Color Palette (derived from hero):
+→ Product + accents: full saturation hero color
+→ Icons, borders: muted hero (30-40% saturation, never black)
+3) Visual Style:
+→ Hero product: real photography (authentic, premium), 3D Glass version [choose one]
+→ Cards: Apple liquid glass (85-90% transparent) with Whisper-thin borders and Subtle drop shadow for floating depth and reflecting the background color
+→ Background stays behind cards and high blur where cards are [choose one]:
+  - Ethereal: product essence, light caustics, abstract glow
+  - Macro: product texture close-up, heavily blurred
+  - Pattern: product repeated softly at 10-15% opacity
+  - Context: relevant environment, blurred + desaturated
+→ Add subtle motion effect
+→ Asymmetric Bento grid, 16:9 landscape
+→ Hero card: 28-30% | Info modules: 70-72%
+4) Module Content (8 Cards):
+M1 — Hero: Product displayed as real photo / 3D glass / stylized interpretation (choose one)in beautiful form + product name label
+M2 — Core Benefits: 4 unique benefits + hero-color icons
+M3 — How to Use: 4 usage methods + icons
+M4 — Key Metrics: 5 EXACT data points
+Format: [icon] [Label] [Bold Value] [Unit]
+FOOD: Calories: [X] kcal/100g, Carbs: [X]g (fiber [X]g, sugar [X]g), Protein: [X]g, [Key Vitamin]: [X]mg ([X]% DV), [Key Mineral]: [X]mg ([X]% DV)
+MEDICINE:Active: [name], Strength: [X] mg, Onset: [X] min, Duration: [X] hrs, Half-life: [X] hrs 
+TECH:Chip: [model], Battery: [X] hrs, Weight: [X]g,[Key spec]: [value], Connectivity: [protocols]
+M5 — Who It\'s For: 4 recommended groups with green checkmark icons | 3 caution groups with amber warning icons
+M6 — Important Notes: 4 precautions + warning icons
+M7 — Quick Reference:
+→ FOOD: Glycemic Index + dietary tags with icons
+→ MEDICINE: Side effects + severity with icons
+→ TECH: Compatibility + certifications with icons
+M8 — Did You Know: 3 facts (origin, science, global stat) + icons
+Output: 1 image, 16:9 landscape, ultra-premium liquid glass infographic.', 'https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png', 'grok-imagine-image-pro', 'Create an Infographics with bento grid 8 module layout, user can specify any product name in Food, Medicine, tech etc category, choose language, Background style, Hero grid style', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Hand-drawn style header image prompt from photo', 'text_to_image', 'Completely recreate the uploaded person.
+Make it a header image for a note article where that person introduces “Nano Banana Pro”.
+Aspect ratio: horizontal 16:9.
+Style and colors: simple, hand-drawn style, italic, with a blue and green gradient.
+Title text: “In-depth explanation of Google’s new AI ‘Nano Banana Pro’”.', 'https://cms-assets.youmind.com/media/1763885651870_4szbai_G6VZiROagAAqsIh.jpg', 'grok-imagine-image-pro', 'Prompt for a hand-drawn style header image of a person introducing Nano Banana Pro', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Watercolor map of Germany with labeled states', 'text_to_image', 'Generate a map of Germany in watercolor style, on which all federal states are labeled in ballpoint pen.', 'https://cms-assets.youmind.com/media/1763886061720_fzgqaq_G6RIeSZXgAA7cOf.jpg', 'grok-imagine-image-pro', 'A German prompt to generate a watercolor-style map of Germany where all federal states are labeled in ballpoint pen, useful for educational or infographic-style maps.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('New Year', 'text_to_image', '[Key: Maintain precise facial features, retain original face structure, the character in the image must be completely consistent with the uploaded reference image] High-end photo studio 2x2 grid photo. Top-left panel (Navy Blue background): The character wears a navy blue uniform-style dress, decorated with gold buttons, vintage curls with a blue beret and pearl earrings. She holds up a huge puzzle piece (top-left piece, with the number \"20\" on it) with both hands, moving it towards the center of the frame. Her eyes are focused on the central puzzle area, her expression is serious, with a slight smile. The background features navy stripes, an anchor, and the text \"Set Sail for the New Year\". Top-right panel (Cherry Blossom Pink background): The same woman wears a pink lace dress, a pearl necklace, a princess hairstyle with a pink rose hairpin and crystal earrings. She holds up the top-right puzzle piece (with the number \"26\" on it) with both hands, moving it towards the center to connect with the top-left piece. Her eyes look at the puzzle seam, her expression is focused and expectant, and her body leans forward. The background features pink cherry blossoms, the text \"Beautiful Encounter\", butterflies, and petals. Bottom-left panel (Mint Green background): The same woman wears a mint green cotton and linen dress, in an artistic style, with natural long hair, a green hairband, and wooden earrings. She holds up the bottom-left puzzle piece (with the text \"New Year\'s Day\" on it) with both hands, moving it upwards to connect with the top-left piece. Her eyes look at the puzzle, her expression is serious, and her mouth is slightly pursed. The background features green plants, the text \"Hope Grows\", new sprouts, and leaves. Bottom-right panel (Lemon Yellow background): The same woman wears a yellow dress with a sunflower pattern, pigtails with yellow bows. She pushes in the last bottom-right puzzle piece (with the text \"Happy\" on it) to complete the puzzle. The four pieces perfectly form the complete pattern \"2026 New Year\'s Day Happy\" in the center of the frame. She tilts her head back, looking at the completed puzzle, her face beaming with a successful, joyful smile. The center of the frame bursts with golden light and confetti. The background features a yellow sun, the text \"Complete Success\", smiley faces, and sunflowers. The puzzle pieces converge from the four corners to the center to form a complete picture. Clear makeup, bright ring light, 85mm lens, f/1.8 aperture, four-panel composition with puzzle interaction, fashion magazine style.', 'https://cms-assets.youmind.com/media/1767455034932_ivuvu0_G9V-MszakAEAIBw.jpg', 'grok-imagine-image-pro', 'A detailed multi-panel prompt for Nano Banana Pro, creating a 2x2 grid photo collage where a single female character, in four different outfits and settings, pieces together a puzzle that spells \'2026 New Year\'s Day Happy\' in the center. The prompt specifies precise facial feature retention, clothing details, background elements, and photographic parameters for a fashion magazine style.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Vintage Patent Document for an Invention', 'text_to_image', 'A vintage patent document for {argument name=\"invention\" default=\"INVENTION\"}, styled after late 1800s United States Patent Office filings. The page features precise technical drawings with numbered callouts (Fig. 1, Fig. 2, Fig. 3) showing front, side, and exploded views. Handwritten annotations in fountain-pen ink describe mechanisms. The paper is aged ivory with foxing stains and soft fold creases. An official embossed seal and red wax stamp appear in the corner. A hand-signed inventor\'s name and date appear at the bottom. The entire image feels like a recovered archival document—authoritative, historic, and slightly mysterious.', 'https://cms-assets.youmind.com/media/1766940094520_1mg5pd_G8_m2ZVWEAAMG7y.jpg', 'grok-imagine-image-pro', 'A prompt designed to generate an image of a vintage United States patent document from the late 1800s. It specifies details like precise technical drawings, handwritten annotations, aged paper texture, foxing stains, an embossed seal, and a wax stamp, making it ideal for historical or archival aesthetics.', 7);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Chalkboard-style AI news summary', 'text_to_image', 'Using the following content, summarize the news in a chalkboard-style, hand‑written look, and break it down with diagrams and easy‑to‑understand expressions as if a teacher had written it.
+—-
+Search results from Grok', 'https://cms-assets.youmind.com/media/1763885620059_vzaj75_G6WfVvIbAAEgvYg.jpg', 'grok-imagine-image-pro', 'A Japanese prompt for turning AI news content into a hand-drawn, teacher-style chalkboard diagram with explanations.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Detailed mirror-selfie otaku room scene', 'text_to_image', '### Scene
+Mirror selfie in an otaku-style computer corner, blue color tone.
+
+### Subject
+* Gender expression: female
+* Age: around 25
+* Ethnicity: East Asian
+* Body type: slim, with a defined waist; natural body proportions
+* Skin tone: light neutral tone
+* Hairstyle:
+    * Length: waist-length hair
+    * Style: straight with slightly curled ends
+    * Color: medium brown
+* Pose:
+    * Stance: standing in a slight contrapposto pose
+    * Right hand: holding a smartphone in front of her face (identity hidden)
+    * Left arm: naturally hanging down alongside the torso
+    * Torso: body leaning slightly back; waist and abdomen exposed
+* Clothing:
+    * Top: light blue cropped knit cardigan, top two buttons fastened; a blue French-style bra faintly visible
+    * Bottom: denim ultra-short shorts, with a blue satin ribbon bow on each side of the hips
+    * Socks: blue and white horizontal striped over-the-knee socks
+    * Accessory: a blue cute mascot phone case
+
+### Environment
+* Description: bedroom computer corner seen through a wall-mounted mirror
+* Furnishings:
+    * White desk
+    * Single monitor showing a soft blue wallpaper (no readable text)
+    * Mechanical keyboard with white keycaps on a blue desk mat
+    * Mouse on a small blue mouse pad
+    * PC tower on the right side with blue case lighting
+    * Three anime figures on or near the PC tower
+    * A poster of a pagoda on the wall
+    * Cat-shaped desk lamp with blue accents
+    * A transparent glass of water
+    * A tall green leafy plant by the window (on the left side of the frame)
+* Color replacement: replace all originally pink elements (clothes and room decor) with blue tones (baby blue to sky blue/periwinkle blue).
+
+### Lighting
+* Light source: daylight coming from a large window on the left side of the camera, through sheer curtains
+* Light quality: soft, diffused light
+* White balance (K): 5200
+
+### Camera
+* Mode: smartphone rear camera shooting via the mirror (no portrait/bokeh mode)
+* Equivalent focal length (mm): 26
+* Distances (m):
+    * Subject to mirror: 0.6
+    * Camera to mirror: 0.5
+* Exposure:
+    * Aperture (f): 1.8
+    * ISO: 100
+    * Shutter speed (s): 0.01
+    * Exposure compensation (EV): -0.3
+* Focus: focus on the torso and shorts in the mirror image
+* Depth of field: natural smartphone deep depth of field; background clearly visible with no artificial blur
+* Composition:
+    * Aspect ratio: 1:1
+    * Crop: from the top of the head to mid-thigh; include the desk, monitor, PC tower, and plant in the frame
+    * Angle: slightly high angle from the mirror’s point of view
+    * Composition note: keep the subject centered; to avoid wide-angle edge distortion, have her stand a bit further away and crop to a square later.
+
+### Negative prompts
+* Any appearance of pink/magenta anywhere
+* Beauty filters/over-smoothed skin; poreless skin look
+* Exaggerated or distorted anatomy
+* NSFW, see-through fabrics, wardrobe malfunctions
+* Logos, brand names, or readable user interface text
+* Fake portrait-mode blur, CGI/illustration feel', 'https://cms-assets.youmind.com/media/1763889946850_689z0h_G23i3sJW0AASGUw.jpg', 'grok-imagine-image-pro', 'A very detailed Nano Banana prompt describing a female mirror selfie in a blue-toned otaku computer corner, with full specifications for character, environment, lighting, camera, and negative prompts.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Edo-period Ukiyo-e reinterpretation of a modern scene', 'text_to_image', 'A Japanese Edo-period Ukiyo-e woodblock print. The overall feeling is a surreal collaboration between masters like Hokusai and Hiroshige, reimagining modern technology through an ancient lens.
+
+**The scene:** {argument name=\"modern scene\" default=\"a busy Shibuya scramble crossing\"}
+
+**Edo transformation logic:**
+Characters wear Edo-era kimono but perform modern actions. All technology is transformed into surreal Edo equivalents:
+* Smartphones are glowing, illustrated paper scrolls being read intently.
+* Metro stations and trains are giant articulated wooden centipede carriages shuffling through crowds.
+* Skyscrapers are reimagined as endless, towering wooden pagodas reaching into dramatic clouds.
+* Robots and mecha appear as giant, armored woodblock golems.
+
+The composition uses a flattened perspective with large, bold, hand-carved ink outlines. The background features heavily stylized Ukiyo-e wave patterns and dramatic, swirling clouds, with a distant Mt. Fuji visible on the horizon.
+
+The image must look like a physical print, not a digital painting.
+* Texture: strong visible wood grain texture and rough paper fibers throughout the piece.
+* Printing imperfections: pigment bleeding is evident. Simulate hand-pressed plates with slight color misalignment for authenticity.
+* Color palette: strictly limited to traditional mineral pigments, with dominant use of Prussian blue, vermilion red, and muted yellow ochre.
+* Lighting: soft, flat, shadow-free lighting with no digital gradients.
+
+Aspect ratio is 3:4 vertical poster. Include vertical Japanese calligraphy describing the scene and a traditional red artist seal stamp in a corner.', 'https://cms-assets.youmind.com/media/1764915832381_renotr_G7FuPlzbYAAsuo2.jpg', 'grok-imagine-image-pro', 'A highly-structured image prompt to depict a modern-day scene reimagined as an Edo-period Japanese Ukiyo-e woodblock print, with detailed guidance on anachronistic tech, composition, texture, and color.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Ana de Armas Summer Watermelon Selfie', 'text_to_image', '{
+\"photo_type\": \"outdoor summer selfie, candid lifestyle\",
+\"subject\": {
+\"count\": 1,
+\"use_reference_face\": true,
+\"preserve_identity\": true,
+\"appearance\": \"{argument name=\"subject appearance\" default=\"Ana de Armas, wet hair, natural skin, minimal makeup, Use uploaded reference image, keep identity exact\"}\"
+},
+\"pose\": {
+\"description\": \"holding a slice of watermelon close to mouth, lips touching fruit, one eye slightly closed\",
+\"expression\": \"playful, relaxed, sun-kissed mood\"
+},
+\"camera\": {
+\"device\": \"front camera smartphone selfie\",
+\"perspective\": \"handheld close-up\",
+\"angle\": \"slightly low and very close to face\",
+\"tilt\": \"subtle upward tilt\",
+\"distance\": \"arm-length, tight framing\",
+\"framing\": \"face fills most of frame, hand and watermelon in foreground\",
+\"lens\": \"wide smartphone lens (24-28mm equivalent)\",
+\"focus\": \"sharp on face and fruit\"
+},
+\"composition\": {
+\"subject_position\": \"center\",
+\"foreground\": \"hand holding watermelon partially blocking lower face\",
+\"background\": \"palm trees, sky, beach blur\"
+},
+\"lighting\": {
+\"type\": \"direct harsh sunlight\",
+\"direction\": \"from above and slightly behind\",
+\"effect\": [
+\"strong highlights on forehead, nose, cheeks\",
+\"deep natural shadows under chin and hair\",
+\"sun glow around hair edges\",
+\"slight overexposure on highlights\"
+]
+},
+\"color_grading\": {
+\"style\": \"warm summer tones\",
+\"temperature\": \"slightly warm\",
+\"contrast\": \"medium-high\",
+\"saturation\": \"natural with boosted reds and greens\"
+},
+\"details\": {
+\"skin_texture\": \"real, slightly glossy from sunlight\",
+\"hair\": \"wet strands, natural messiness\",
+\"finish\": \"raw iPhone look, no heavy editing\"
+},
+\"rules\": {
+\"lock_camera_angle\": true,
+\"avoid\": [
+\"studio lighting\",
+\"perfect symmetry\",
+\"over-smooth skin\",
+\"wide distance shots\"
+]
+}
+}', 'https://cms-assets.youmind.com/media/1774248313556_kkh2gw_HEBmNUvaEAA84lL.jpg', 'grok-imagine-image-pro', 'A structured JSON prompt designed to generate an outdoor, candid summer selfie featuring Ana de Armas holding a slice of watermelon close to her mouth, utilizing harsh direct sunlight and a raw smartphone camera aesthetic.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Outdoor Summer Watermelon Selfie (Detailed JSON)', 'text_to_image', '{   \"photo_type\": \"outdoor summer selfie, candid lifestyle\",    \"subject\": {     \"count\": 1,     \"use_reference_face\": true,     \"preserve_identity\": true,     \"appearance\": \"{argument name=\"subject appearance\" default=\"wet hair, natural skin, minimal makeup\"}\"   },    \"pose\": {     \"description\": \"holding a slice of watermelon close to mouth, lips touching fruit, one eye slightly closed\",     \"expression\": \"playful, relaxed, sun-kissed mood\"   },    \"camera\": {     \"device\": \"front camera smartphone selfie\",     \"perspective\": \"handheld close-up\",     \"angle\": \"slightly low and very close to face\",     \"tilt\": \"subtle upward tilt\",     \"distance\": \"arm-length, tight framing\",     \"framing\": \"face fills most of frame, hand and watermelon in foreground\",     \"lens\": \"wide smartphone lens (24-28mm equivalent)\",     \"focus\": \"sharp on face and fruit\"   },    \"composition\": {     \"subject_position\": \"center\",     \"foreground\": \"hand holding watermelon partially blocking lower face\",     \"background\": \"palm trees, sky, beach blur\"   },    \"lighting\": {     \"type\": \"direct harsh sunlight\",     \"direction\": \"from above and slightly behind\",     \"effect\": [       \"strong highlights on forehead, nose, cheeks\",       \"deep natural shadows under chin and hair\",       \"sun glow around hair edges\",       \"slight overexposure on highlights\"     ]   },    \"color_grading\": {     \"style\": \"warm summer tones\",     \"temperature\": \"slightly warm\",     \"contrast\": \"medium-high\",     \"saturation\": \"natural with boosted reds and greens\"   },    \"details\": {     \"skin_texture\": \"real, slightly glossy from sunlight\",     \"hair\": \"wet strands, natural messiness\",     \"finish\": \"raw iPhone look, no heavy editing\"   },    \"rules\": {     \"lock_camera_angle\": true,     \"avoid\": [       \"studio lighting\",       \"perfect symmetry\",       \"over-smooth skin\",       \"wide distance shots\"     ]   } }', 'https://cms-assets.youmind.com/media/1774248315058_uq2rqy_HEBiUV1boAAomLI.jpg', 'grok-imagine-image-pro', 'A structured JSON prompt for generating an outdoor, candid summer selfie. The prompt specifies holding a slice of watermelon close to the mouth, using direct harsh sunlight, and aiming for a raw smartphone camera aesthetic with warm summer tones.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Late Night Apartment Portrait (iPhone Realism)', 'text_to_image', '{
+  \"meta\": {
+    \"aspect_ratio\": \"9:16 vertical\",
+    \"camera\": \"iPhone 17 Pro Max (rear camera)\",
+    \"lens_simulation\": \"24mm wide\",
+    \"quality\": \"ultra-photorealistic, natural iPhone HDR\",
+    \"time_of_day\": \"11:38 PM\",
+    \"lighting_temperature\": \"warm tungsten 3200K\",
+    \"style\": \"raw iphone realism, subtle handheld micro-tilt, authentic skin texture, slight shadow grain\"
+  },
+  \"scene\": {
+    \"location\": \"modern high-rise apartment living room\",
+    \"background_elements\": [
+      \"floor-to-ceiling city skyline windows at night\",
+      \"soft amber lamp glow on textured wall\",
+      \"neutral beige sectional sofa with real fabric compression\",
+      \"subtle reflections on polished wood floor\"
+    ],
+    \"atmosphere\": \"late-night intimate quiet energy\"
+  },
+  \"subject\": {
+    \"identity_lock\": \"exact facial structure and body proportions preserved\",
+    \"pose\": {
+      \"position\": \"kneeling sideways on sofa cushion\",
+      \"hips\": \"angled back slightly\",
+      \"torso\": \"twisted toward camera emphasizing waist curve\",
+      \"arms\": \"one hand resting behind her on cushion, other lightly touching collarbone\",
+      \"head\": \"slightly tilted down, eyes looking up through lashes\"
+    },
+    \"expression\": \"calm, magnetic, soft parted lips\",
+    \"hair\": \"light blonde, straight, natural fall with loose face-framing strands\",
+    \"outfit\": {
+      \"top\": \"thin champagne satin bralette, tight tension across bust, no bra lines\",
+      \"bottom\": \"micro lounge shorts, soft grey cotton, subtle fabric stretch at hips\"
+    }
+  },
+  \"lighting\": {
+    \"primary\": \"warm lamp spill from camera-right\",
+    \"secondary\": \"cool city glow rim light\",
+    \"effect\": \"soft highlight rolloff on thighs and collarbones, realistic shadow falloff\"
+  },
+  \"photography\": {
+    \"depth_of_field\": \"moderate natural smartphone depth\",
+    \"handheld_realism\": \"slight framing imperfection\",
+    \"color_science\": \"true-to-life warm skin tones, restrained HDR\"
+  }
+}', 'https://cms-assets.youmind.com/media/1774248318334_yjwym1_HCfJXWIX0AAgTy3.jpg', 'grok-imagine-image-pro', 'A highly detailed Nano Banana 2 prompt for generating an ultra-photorealistic vertical image of a woman kneeling on a sofa in a high-rise apartment at night, emphasizing iPhone realism, specific clothing details, and complex lighting interaction between warm interior lamps and cool city skyline glow.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Photo Restoration and Upscaling Prompt', 'text_to_image', '\"Restore this old photo into professional portrait of DLSR - quality colour and detail, using an advanced upscaling algorithm comparable to the results from canon EOS R6 II. Ensure the restored the image looks natural, retains exact facial features, has great clarity.......\"', 'https://cms-assets.youmind.com/media/1774248305917_urdq3q_HD_ehHzX0AACrGP.jpg', 'grok-imagine-image-pro', 'A prompt for Nano Banana 2 designed to restore and upscale an old, faded film photo into a high-definition, professional portrait with DSLR quality, ensuring facial features and clarity are retained.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - iPhone Pro Environmental Portrait on Terrace', 'text_to_image', '(9:16) Raw high-fidelity photo, eye-level, medium-wide environmental portrait, iPhone 17 Pro sim, 35mm, f/2.8, natural bokeh, authentic grain.
+
+Framing: Subject ~60% frame height, camera ~2m, outdoor terrace, wide horizon sky (top ~40%), glass railings, minimal foreground clutter.
+
+Identity Lock: Preserve ALL facial features (structure, skin, hair, marks).
+Enhancement: Natural skin clarity (pores visible), even tone, soft glow, subtle light-based contour, refined highlights (eyes/lips/cheekbones), natural lashes/brows/teeth, salon hair.
+Bio-Fidelity: Micro-pores, fine vellus hair, natural skin hydration.
+Expression: Warm/confident, soft closed-lip smile, direct eye contact over right shoulder, head turned ~80° back.
+
+Hair: Same color/texture, long, sleek, straight, down back framing right shoulder, soft daylight highlights.
+Makeup: Natural daytime (soft base, subtle eyes, neutral matte lip).
+
+Accessories: None.
+
+Outfit: White rib-knit cropped sweater (tight fit) + high-waisted pleated plaid micro-skirt (brown/beige/white), sharp pleats, realistic fabric tension, defined S-curve.
+
+Pose: Torso facing away (~90°), head turned back (~80°), right hand lightly lifting skirt hem, realistic finger/textile interaction.
+
+Mood/Color: Warm, confident travel aesthetic; palette (white, coffee-brown, beige, sky blue), 5500K daylight, medium-high contrast.
+
+Environment: Outdoor terrace, diffused sunlight (upper-right), glass railings + metal posts, distant hills + urban skyline, bright sky w/ soft clouds, stone/concrete detail, background softly blurred (f/2.8).', 'https://cms-assets.youmind.com/media/1774161437787_4r45os_HD9Mu9LaIAAr0gV.jpg', 'grok-imagine-image-pro', 'A highly detailed, structured prompt for generating a photorealistic environmental portrait on an outdoor terrace, simulating an iPhone 17 Pro camera. The prompt includes specific technical specs (35mm, f/2.8), framing instructions, identity lock requirements, and detailed descriptions of the subject\'s attire, pose, and the environment.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Arcade Bubblegum Selfie with Harsh Flash', 'text_to_image', '{
+  \"photo_type\": \"Direct smartphone selfie, casual snapshot\",
+  \"subject\": {
+    \"age\": \"early 20s\",
+    \"description\": \"young woman of mixed heritage, olive skin, slim athletic build, playful close-up pulling pink bubblegum from mouth\",
+    \"expression\": \"playful confident smile, direct eye contact\",
+    \"hair\": \"long messy-wavy brown, center-parted, natural volume with flyaways over shoulders\"
+  },
+  \"clothing\": {
+    \"top\": \"pink multi-strap crop top with thin criss-cross details, fitted comfortable fabric\"
+  },
+  \"face\": {
+    \"description\": \"preserve uploaded reference 100%\",
+    \"eyebrows\": \"thick dark well-defined arches\",
+    \"eyes\": \"almond-shaped, winged black eyeliner, pink eyeshadow\",
+    \"lips\": \"soft glossy lips, pink bubblegum stretched between teeth\",
+    \"makeup\": \"heavy pink eyeshadow, sharp cat-eye liner, rosy blush, high-shine gloss\"
+  },
+  \"skin_texture\": \"natural with visible pores, minor T-zone oil, fine vellus hair on jawline\",
+  \"pose\": {
+    \"action\": \"holding stretched pink gum strand between thumb & forefinger, head tilted, shoulders relaxed\"
+  },
+  \"accessories\": {
+    \"jewelry\": \"thin black velvet choker necklace\",
+    \"prop\": \"pink bubblegum\"
+  },
+  \"background\": {
+    \"setting\": \"dimly lit arcade/game room with neon written \'Keor Games\' in backdrop\",
+    \"elements\": [\"black arcade cabinet\", \"pink dripping paint graphic\", \"dark reflective panels\"],
+    \"atmosphere\": \"casual late-night edgy indoor vibe\"
+  },
+  \"lighting\": \"direct on-camera smartphone flash, harsh flat highlights & sharp shadows\",
+  \"camera\": {
+    \"device\": \"iPhone 16 Pro front camera\",
+    \"lens\": \"wide-angle\",
+    \"settings\": \"f/11 deep focus, 1/100s, ISO 400, Smart HDR, Deep Fusion\",
+    \"shot_type\": \"close-up selfie, 9:16\",
+    \"imperfections\": \"lens smudges, minor noise in shadows, flyaways, raw unedited phone look\"
+  },
+  \"style\": \"amateur handheld realism, deep focus everywhere sharp, vibrant color with neon pink pop & warm skin tones\",
+  \"vibe\": \"playful confident late-night casual mood\"
+}', 'https://cms-assets.youmind.com/media/1774161439211_hn7v2c_HD8DeG6XcAAnWy3.jpg', 'grok-imagine-image-pro', 'A structured JSON prompt for generating an amateur handheld realism selfie in a dimly lit arcade setting. The prompt focuses on a playful expression, pulling pink bubblegum, and specifies harsh on-camera smartphone flash lighting and technical details like deep focus and minor noise for an unedited phone look.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Cyberpunk Portrait with Neon Lighting', 'text_to_image', 'Ultra-realistic cinematic portrait of a thoughtful man wearing round glasses, side profile close-up, dramatic neon lighting with contrasting blue and magenta/purple tones, soft gradient background blending colors, moody atmosphere, sharp facial details with natural skin texture, subtle shadows, shallow depth of field, studio lighting, cyberpunk aesthetic, high contrast, 8K, editorial photography style.', 'https://cms-assets.youmind.com/media/1774161427198_11tl5z_HD5cvaOXMAAEWh-.jpg', 'grok-imagine-image-pro', 'A prompt for generating an ultra-realistic cinematic portrait of a thoughtful man in round glasses, emphasizing dramatic neon lighting (blue and magenta/purple tones) and a cyberpunk aesthetic. The prompt specifies a side profile close-up, sharp facial details, natural skin texture, and an editorial photography style.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Realistic Elevator Mirror Selfie Prompt for Nano Banana Pro', 'text_to_image', '{ \"photo_type\": \"Elevator mirror selfie (real iPhone capture, indoor neutral lighting)\",
+\"subjects\": { \"count\": 2,
+\"faces\": {
+  \"description\": \"Use 2 uploaded reference images, keep identity exact, no smoothing, no reshaping, no facial edits, preserve exact facial structure, skin tone, eyes, lips\"
+},
+
+\"pose_description\": \"two friends standing close in elevator mirror, right subject holding phone taking selfie, left subject slightly leaning with one leg bent upward and one arm raised\",
+
+\"expressions\": [
+  \"right: excited open smile, candid energy\",
+  \"left: playful pout expression\"
+],
+
+\"body_language\": [
+  \"relaxed posture\",
+  \"casual friendly closeness\",
+  \"slight asymmetry\",
+  \"not perfectly posed\"
+]
+},
+\"clothing\": { \"details\": [ \"left: red puffer jacket, grey sweatpants, sneakers, shoulder bag\", \"right: light cropped top, grey joggers, hoodie layer, handbag\", \"natural fabric folds and creases\", \"realistic outfit texture\" ] },
+\"lighting\": { \"type\": \"elevator indoor lighting\",
+\"setup\": [
+  \"top ceiling lights\",
+  \"metal wall reflections\",
+  \"slight uneven brightness across faces\"
+],
+
+\"effects\": [
+  \"soft highlights on forehead and cheeks\",
+  \"shadow under chin\",
+  \"slight dull metallic reflection\",
+  \"not perfectly balanced light\"
+],
+
+\"color_temperature\": \"neutral 3800K to 4200K\"
+},
+\"phone_capture\": { \"details\": [ \"visible iPhone in hand\", \"mirror reflection framing\", \"slight wide lens distortion\", \"handheld imperfect angle\" ] },
+\"camera\": { \"type\": \"smartphone camera\",
+\"lens\": \"26mm wide\",
+
+\"settings\": {
+  \"aperture\": \"f/1.8\",
+
+\"iso\": \"ISO 200-600\",
+
+\"shutter_speed\": \"1/40s\"
+},
+
+\"focus\": \"slightly imperfect focus\",
+
+\"sensor_behavior\": [
+  \"minor grain\",
+  \"shadow noise\",
+  \"slight softness\"
+]
+},
+\"skin_realism\": { \"details\": [ \"visible pores\", \"natural shine\", \"uneven texture\", \"no airbrushing\" ] },
+\"hair\": { \"details\": [ \"natural loose strands\", \"slight frizz\", \"not perfectly styled\" ] },
+\"background\": { \"setting\": \"elevator interior\",
+\"details\": [
+  \"metal reflective walls\",
+  \"panel lines visible\",
+  \"subtle scratches or texture\",
+  \"real depth from reflection\"
+]
+},
+\"color_grading\": { \"style\": \"raw phone photo\",
+\"rules\": [
+  \"no heavy filters\",
+  \"neutral tone\",
+  \"natural contrast\",
+  \"not cinematic\"
+]
+},
+\"imperfections\": [ \"grain\", \"lighting imbalance\", \"minor blur\", \"lens distortion\" ],
+\"composition\": { \"camera_angle\": \"mirror selfie angle\", \"framing\": \"tight mid-body framing\", \"depth\": \"both subjects clear, slight background softness\" },
+\"resolution_and_aspect_ratio\": \"4K, 4:5\",
+\"vibe\": \"casual friends moment, fun, unfiltered, spontaneous\",
+\"strict_rules\": { \"must_have\": [ \"mirror selfie look\", \"phone visible\", \"reference faces unchanged\", \"real skin texture\", \"imperfect lighting\" ],
+\"avoid\": [
+  \"studio lighting\",
+  \"perfect symmetry\",
+  \"over editing\",
+  \"plastic skin\",
+  \"cinematic \"}', 'https://cms-assets.youmind.com/media/1774074512669_xjsfxd_HD4wMtZboAAkUg0.jpg', 'grok-imagine-image-pro', 'A highly structured JSON prompt for Nano Banana Pro designed to generate an ultra-realistic, imperfect elevator mirror selfie featuring two friends. The prompt focuses heavily on preserving the exact identity of reference faces, simulating smartphone camera flaws (grain, slight blur, lens distortion), and maintaining a casual, unfiltered aesthetic.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Low-Light Kitchen Portrait (Persian/Middle Eastern)', 'text_to_image', '{
+  \"meta\": {
+    \"camera\": \"iPhone 17 Pro\",
+    \"lens\": \"35mm\",
+    \"aspect_ratio\": \"9:16\",
+    \"time_of_day\": \"11:38 PM\",
+    \"lighting_temperature\": \"warm tungsten 3400K with subtle neon spill\",
+    \"style\": \"low-light iPhone realism, natural HDR, slight handheld motion, authentic skin texture, shallow depth of field\"
+  },
+
+  \"scene\": {
+    \"location\": \"modern penthouse kitchen\",
+    \"atmosphere\": \"late-night alone energy, city lights outside floor-to-ceiling windows\",
+    \"background\": [
+      \"dark marble kitchen island\",
+      \"dim pendant lights glowing warm\",
+      \"blurred skyline bokeh through glass\"
+    ]
+  },
+
+  \"subject\": {
+    \"age\": \"late 20s (clearly adult)\",
+    \"ethnicity\": \"Persian / Middle Eastern\",
+    \"body_type\": \"curvy hourglass, heavy chest, tiny waist, round hips\",
+    \"hair\": \"dark brown, loose messy waves\",
+    \"pose\": {
+      \"position\": \"leaning back against marble island\",
+      \"hips\": \"subtly pressed to counter\",
+      \"shoulders\": \"slightly rolled back\",
+      \"one_hand\": \"resting on countertop edge\",
+      \"expression\": \"slow eyes, lips softly parted, confident calm\"
+    }
+  },
+
+  \"outfit\": {
+    \"top\": \"thin satin champagne-colored slip top, braless, natural drape tension\",
+    \"bottom\": \"high-cut black lounge shorts, hugging hips\"
+  },
+
+  \"camera_details\": {
+    \"angle\": \"slightly below chest level\",
+    \"distance\": \"medium shot\",
+    \"focus\": \"sharp on face and collarbones, background softly blurred\",
+    \"imperfections\": \"tiny highlight bloom from pendant lights\"
+  }
+}', 'https://cms-assets.youmind.com/media/1774074519386_87c1xe_HCfIZJDXEAEyggu.jpg', 'grok-imagine-image-pro', 'A detailed JSON prompt for Nano Banana 2 to generate a low-light, intimate iPhone-style portrait of a curvy Persian/Middle Eastern woman leaning against a kitchen island, wearing a champagne satin slip top and black shorts, emphasizing warm tungsten lighting, natural skin texture, and a shallow depth of field with city skyline bokeh.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Gym Mirror Selfie with Post-Workout Glow (iPhone Style)', 'text_to_image', '{
+  \"meta\": {
+    \"camera\": \"iPhone 17 Pro\",
+    \"lens\": \"24mm wide\",
+    \"aspect_ratio\": \"9:16\",
+    \"time_of_day\": \"8:12 PM\",
+    \"lighting_temperature\": \"cool 4800K indoor LEDs\",
+    \"style\": \"real iphone gym mirror shot, natural skin texture, subtle grain, mobile HDR\"
+  },
+
+  \"scene\": {
+    \"location\": \"modern gym locker room mirror\",
+    \"environment_details\": [
+      \"matte black lockers\",
+      \"soft overhead LED panels\",
+      \"slightly fogged mirror edges\",
+      \"neutral concrete flooring\"
+    ],
+    \"atmosphere\": \"post-workout heat, confident, private\"
+  },
+
+  \"subject\": {
+    \"age\": \"clearly adult (late 20s)\",
+    \"ethnicity\": \"Asian (Korean/Japanese mix)\",
+    \"body_type\": \"slim thick, tight waist, round hips, toned thighs\",
+    \"pose\": {
+      \"position\": \"mirror selfie, hip slightly popped\",
+      \"one_hand\": \"holding phone low\",
+      \"other_hand\": \"adjusting high ponytail\",
+      \"expression\": \"cocky teasing smirk, direct eye contact\"
+    },
+    \"hair\": {
+      \"color\": \"jet black\",
+      \"style\": \"high ponytail with loose strands\"
+    },
+    \"outfit\": {
+      \"top\": \"ultra tight charcoal sports bra, stretch tension visible\",
+      \"bottom\": \"high-cut seamless gym shorts, sculpting fit\"
+    },
+    \"skin_details\": \"tiny sweat glow on collarbones, realistic pores\"
+  },
+
+  \"lighting\": {
+    \"main\": \"overhead LED gym lighting\",
+    \"effect\": \"defined shadows under abs and thighs, subtle highlight on shoulders\"
+  },
+
+  \"camera_details\": {
+    \"depth_of_field\": \"deep focus typical of iphone wide lens\",
+    \"imperfections\": \"slight tilt, mirror smudge realism\"
+  }
+}', 'https://cms-assets.youmind.com/media/1774074527706_kkap8r_HCfIInJagAArOZ5.jpg', 'grok-imagine-image-pro', 'A highly detailed prompt for generating a mirror selfie in a modern gym locker room, styled as an authentic iPhone wide-angle shot (24mm lens). It specifies the subject\'s Asian ethnicity, \'slim thick\' body type, post-workout glow, and a cocky expression, focusing on realistic details like sweat and mirror smudges.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Hyper-Photorealistic Bathroom Mirror Scene', 'text_to_image', '{
+  \"aspect_ratio\": \"9:16\",
+  \"prompt\": \"Photorealistic bathroom mirror scene of the same woman (exact face reference from uploaded photo, preserve every facial feature, skin texture, pores, natural imperfections, no beautification or smoothing) standing in front of a large rectangular bathroom mirror, brushing her teeth with a white electric toothbrush in her right hand. Framed to show her full face and upper shoulders clearly in the mirror reflection, looking straight at her reflection in the mirror with a neutral/relaxed expression, slight foam at the corners of mouth from toothpaste. Mouth slightly open during brushing motion, toothbrush angled naturally against teeth. Shot from the viewer\'s perspective as if standing behind her looking into the mirror (mirror reflection composition), eye-level framing. Bright even bathroom lighting from overhead LED fixtures (cool-white 4000-5000K) plus soft warm vanity lights around the mirror edges, creating realistic skin highlights, subtle shadows under chin, natural eye catchlights, authentic wet-look shine on lips/teeth from toothpaste/foam. Medium-length chestnut brown hair loosely tied back in a messy low ponytail or bun, a few loose strands framing face. Wearing a simple light gray cotton t-shirt or basic crew-neck top, fully clothed, modest coverage. Delicate fine-line tattoo visible on right forearm if present in reference. Foreground details: modern white porcelain sink with chrome faucet/tap running slightly (small stream of water visible), toothbrush charger on counter, tube of white toothpaste open nearby, marble or white tiled countertop with minor water spots for realism. Background softly blurred: tiled bathroom wall in light neutral tones, shower curtain or glass door faintly visible behind. Ultra-sharp focus on face/reflection, hyper-photorealistic skin details (visible pores, subtle redness, natural texture, light oil sheen on forehead), candid everyday smartphone or point-and-shoot photo aesthetic, natural color grading, high dynamic range, no artificial glow, no over-sharpening, believable depth of field with creamy bokeh on background.\",
+  \"negative_prompt\": \"blurry, deformed face, changed facial features, plastic skin, beauty filter, airbrushed, doll-like, heavy makeup, exaggerated symmetry, bad hands, extra fingers, warped mirror reflection, text, watermark, logo, oversaturated, cartoonish, 3D render, low quality, jpeg artifacts, noise, night time, dim lighting, suggestive pose, exposed skin beyond normal casual, no selfie hand/phone visible\",
+  \"style\": \"hyper-photorealistic, candid bathroom mirror everyday moment\",
+  \"quality\": \"high-resolution, ultra-detailed skin pores/hair/texture/foam details\"
+}', 'https://cms-assets.youmind.com/media/1774074520354_gzxf1n_HD2dP3Ka4AAkSH-.jpg', 'grok-imagine-image-pro', 'A detailed prompt for generating a hyper-photorealistic image of a woman brushing her teeth in front of a bathroom mirror, focusing on preserving exact facial features from a reference photo and achieving realistic lighting and skin texture. The prompt is structured with positive and negative constraints.', 7);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Intimate Nighttime Bedroom Portrait (iPhone Style)', 'text_to_image', '{
+  \"meta\": {
+    \"camera\": \"iPhone 17 Pro\",
+    \"lens\": \"48mm\",
+    \"aspect_ratio\": \"4:5\",
+    \"time_of_day\": \"11:37 PM\",
+    \"lighting_temperature\": \"warm 3000K bedside lamp\",
+    \"style\": \"intimate iphone night shot, natural grain, authentic color science, soft HDR\"
+  },
+
+  \"scene\": {
+    \"location\": \"modern bedroom with neutral bedding\",
+    \"environment_details\": [
+      \"soft beige sheets slightly wrinkled\",
+      \"single bedside lamp glow\",
+      \"dark background falloff\",
+      \"quiet night atmosphere\"
+    ],
+    \"atmosphere\": \"intimate, slow, controlled\"
+  },
+
+  \"subject\": {
+    \"age\": \"early 20s (clearly adult)\",
+    \"ethnicity\": \"European brunette\",
+    \"body_type\": \"curvy hourglass, full chest, tiny waist, round hips\",
+    \"pose\": {
+      \"position\": \"sitting on edge of bed\",
+      \"legs\": \"one leg folded slightly inward\",
+      \"arms\": \"one hand resting lightly on thigh\",
+      \"expression\": \"soft dreamy gaze toward camera\",
+      \"energy\": \"relaxed confidence, subtle invitation\"
+    },
+    \"hair\": {
+      \"color\": \"dark brown\",
+      \"style\": \"messy loose waves\"
+    },
+    \"outfit\": {
+      \"top\": \"oversized off-shoulder white shirt, slightly translucent under warm light\",
+      \"bottom\": \"minimal neutral lounge shorts\"
+    }
+  },
+
+  \"lighting\": {
+    \"primary\": \"warm bedside lamp from right side\",
+    \"secondary\": \"very soft shadow fill\",
+    \"effect\": \"gentle highlight on cheek and collarbone, natural falloff into shadow\"
+  },
+
+  \"camera_details\": {
+    \"depth_of_field\": \"moderate portrait depth from 48mm lens\",
+    \"imperfections\": \"slight handheld softness, realistic night grain\"
+  }
+}', 'https://cms-assets.youmind.com/media/1774074523777_8p7doi_HCfH_VoXgAArwnZ.jpg', 'grok-imagine-image-pro', 'A highly detailed prompt for generating an intimate, warm-toned portrait of a woman sitting on a bed in a modern bedroom, styled to look like an authentic iPhone night shot (iPhone 17 Pro, 48mm lens) with specific warm lighting (3000K bedside lamp) and focus on realistic body type and pose.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Realistic Gym Mirror Selfie with Exaggerated Proportions', 'text_to_image', '{
+  \"aspect_ratio\": \"3:4\",
+  \"photo_style\": \"casual everyday smartphone photo\",
+  \"subject\": \"A young woman with long, straight black hair and light skin with visible freckles, wearing a white long-sleeved tight-fitting athletic top and dark grey high-waisted yoga shorts.\",
+  \"environment\": \"A modern, brightly lit public restroom or gym locker room with white vertical rectangular wall tiles, an orange horizontal accent stripe near the ceiling, and a grey stone-textured countertop.\",
+  \"scene_structure\": \"Subject in the midground taking a mirror selfie; a large mirror reflects the scene including a wall-mounted soap dispenser and a black bag on the counter in the background.\",
+  \"composition\": \"Medium shot, mirror selfie, subject positioned slightly off-center, back turned toward the mirror with head rotated over the shoulder to face the camera lens.\",
+  \"pose_structure\": \"V7 Pose Clone: Body angled 45 degrees away from the mirror, deep lower back arch (anterior pelvic tilt), left arm extended holding a smartphone, right arm resting at the side with hand on the thigh, head turned 90 degrees toward the shoulder looking at the phone screen.\",
+  \"camera\": {
+    \"device\": \"smartphone camera\",
+    \"angle\": \"eye-level, slight side-angle perspective via mirror reflection\",
+    \"height\": \"chest height\",
+    \"distance\": \"medium-close\",
+    \"perspective\": \"mirror reflection, wide-angle smartphone lens\",
+    \"depth_of_field\": \"deep focus\"
+  },
+  \"lighting\": {
+    \"type\": \"natural light\",
+    \"source\": \"overhead fluorescent or LED panel lighting\",
+    \"direction\": \"top-down and frontal from the mirror\'s perspective\",
+    \"shadow_softness\": \"soft natural shadows\",
+    \"exposure\": \"balanced smartphone exposure\"
+  },
+  \"color_science\": {
+    \"style\": \"natural smartphone colors\",
+    \"white_balance\": \"neutral\",
+    \"contrast\": \"normal\",
+    \"saturation\": \"natural slightly vibrant\"
+  },
+  \"body_proportions\": \"Slender waist, prominent and wide-set hips, significant gluteal volume, toned legs, slim upper torso and arms; exact preservation of the exaggerated lower-body silhouette and curvature.\",
+  \"facial_details\": \"Natural makeup, focused gaze toward the phone, subtle pout, visible freckles on cheeks and nose bridge.\",
+  \"materials_and_textures\": \"Ribbed texture on the white top, matte stretch fabric of the grey shorts, glossy wall tiles, polished stone counter, realistic skin texture with slight natural sheen.\",
+  \"atmosphere\": \"Casual, routine, fitness-oriented lifestyle snapshot.\",
+  \"generation_prompt\": \"A casual 3:4 smartphone mirror selfie of a woman with long black hair and freckles. She is wearing a tight white long-sleeve top and charcoal grey gym shorts. She is posed with her back to the mirror, arched back, looking over her shoulder at the phone. The body silhouette features a very slim waist and wide, voluminous hips and glutes. The setting is a bright restroom with white vertical tiles and an orange t', 'https://cms-assets.youmind.com/media/1774074525905_bjrgus_HD1KMiBboAIq2q8.jpg', 'grok-imagine-image-pro', 'A highly specific prompt for generating a casual smartphone mirror selfie in a gym restroom. It details the subject\'s appearance, attire (athletic top, yoga shorts), environment (tiled restroom), and pose (V7 Pose Clone, arched back). Crucially, it mandates the preservation of an exaggerated body silhouette (slim waist, wide hips, voluminous glutes).', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Cinematic Portrait Prompt for Google Nano Banana Pro', 'text_to_image', 'Ultra-realistic cinematic portrait of a stylish man in a black suit, captured from behind with his head turned over his shoulder, giving a sharp, intense look toward the camera. Short textured hair with subtle highlights, well-groomed beard. Dramatic spotlight from above creating a warm golden halo effect on his hair and face, fading into a dark background. Strong chiaroscuro lighting with deep shadows and soft highlights.', 'https://cms-assets.youmind.com/media/1774074507050_l7a8ti_HD0BCw4bAAAdfQF.jpg', 'grok-imagine-image-pro', 'A prompt for Google Nano Banana Pro to generate an ultra-realistic cinematic portrait of a stylish man. The focus is on dramatic lighting (chiaroscuro, spotlight) creating a golden halo effect, and a sharp, intense look towards the camera.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Tzuyu Maid Cosplay Mirror Selfie', 'text_to_image', '{
+  \"subject\": {
+    \"name\": \"{argument name=\"subject name\" default=\"Tzuyu (Chou Tzuyu) from TWICE\"}\",
+    \"description\": \"Young adult woman, Tzuyu from TWICE, in a cute emerald-green-and-white maid cosplay taking a mirror selfie\",
+    \"expression\": \"Shy yet playful, elegant gaze, eyes mostly hidden by phone and long dark bangs\",
+    \"face\": \"Exact face of Tzuyu, large almond eyes, symmetrical features, soft feminine makeup, subtle eyeliner, clean skin\"
+  },
+  \"hair\": {
+    \"color\": \"Dark espresso brown\",
+    \"style\": \"Long straight espresso hair, glossy, ends tucked inward\"
+  },
+  \"body\": {
+    \"frame\": \"Tall and slender, athletic yet feminine frame, defined waist, emphasized by leaning posture\",
+    \"skin\": \"Fair porcelain tone, smooth velvety texture, visible shoulders, chest, arms, and thighs\",
+    \"legs\": \"Long-looking in dark green fishnet stockings\"
+  },
+  \"pose\": {
+    \"position\": \"Standing in front of full-length mirror, arching back slightly while leaning toward the glass\",
+    \"hands\": \"One holding phone leaving the entire face clearly visible, other gently touching the mirror surface\",
+    \"overall\": \"Elegant yet playful forward-weighted candid lean\"
+  },
+  \"clothing\": {
+    \"top\": \"Frilly white maid top with emerald green trim, ruffled straps & neckline, small green ribbons\",
+    \"bottom\": \"Short frilled emerald-green-and-white maid skirt, green fishnet stockings\",
+    \"details\": \"Matching wrist cuffs, strong emerald-white contrast\"
+  },
+  \"accessories\": {
+    \"headwear\": \"Emerald green ruffled maid headband\",
+    \"jewelry\": \"Delicate silver necklace with pendant\",
+    \"device\": \"Smartphone with glittery green bow case\"
+  },
+  \"photography\": {
+    \"style\": \"Smartphone mirror selfie, social media realism, vertical 9:16\",
+    \"angle\": \"Eye-level to slightly high, leaning into lens\",
+    \"focus\": \"Moderately deep, subject sharp, background softly dim\",
+    \"lighting\": \"Cool bluish-green ambient + soft warm skin reflection, low-light cozy\"
+  },
+  \"background\": {
+    \"setting\": \"Dim private room, neutral walls, full-length mirror\",
+    \"elements\": \"Bed, dark corners, subtle clutter, faint LED glow, neon \'Alice\' sign on wall\",
+    \"atmosphere\": \"Late-night, lived-in, quietly theatrical\"
+  },
+  \"aspect_ratio\": \"9:16\"
+}', 'https://cms-assets.youmind.com/media/1773989011828_gm8yd2_HDt6AdfbcAA6ijP.jpg', 'grok-imagine-image-pro', 'A detailed JSON prompt for Nano Banana Pro to generate a social media-style mirror selfie of Tzuyu (TWICE) in an emerald-green-and-white maid cosplay. The prompt specifies a playful, elegant pose (leaning toward the mirror, holding a phone), fair porcelain skin texture, low-light cozy atmosphere, and the inclusion of subtle background elements like a neon sign.', 7);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Mirror Selfie of Blonde Woman', 'text_to_image', 'A highly realistic full-body mirror selfie (9:16 vertical) of a young blonde woman in her early 20s with a Mediterranean/Latina appearance, smooth warm olive-tan skin, and an athletic hourglass figure with a slim waist and toned legs. She stands slightly angled to the side with her weight shifted onto one hip, making direct eye contact with the mirror.
+
+She has a soft oval face with a gentle jawline, large almond-shaped dark chocolate brown eyes with thick lashes and subtle winged eyeliner, naturally arched medium-thick dark brows, a small straight nose with a refined tip, and full symmetrical lips in a dusty-rose tone with a soft satin finish, slightly parted. Her cheeks have subtle contouring with a light peach blush, and her expression is calm, neutral, and soft-glam.
+
+Her hair is extremely long, straight blonde hair, center-parted, flowing behind her shoulders with subtle sun-kissed highlights.
+
+She is wearing a matching two-piece athletic loungewear set in a {argument name=\"outfit color\" default=\"peach-orange\"} color with a subtle lighter geometric/chevron pattern. The outfit includes a short-sleeved scoop-neck crop top and high-waisted leggings extending over the feet like hosiery, featuring a distinct open-thigh cutout on the left leg. She holds a small matte black nylon gym bag in her right hand and a smartphone with a light pink and white floral/damask patterned case.
+
+The setting is a modern, brightly lit indoor bedroom or dressing hallway with light oak wood flooring, clean white walls, and white paneled doors with brass handles. In the background, there is a partially visible bed with white linens and a navy blue throw blanket.
+
+Lighting is bright, soft, and diffused natural light from a side window, creating minimal shadows. The image is high-resolution mobile photography with sharp focus on the subject and slight background blur, featuring warm, vibrant tones and clean whites.', 'https://cms-assets.youmind.com/media/1773988990342_9uubcz_HDwXoKbawAAe2LA.jpg', 'grok-imagine-image-pro', 'A highly detailed prompt for Nano Banana Pro to generate a photorealistic, full-body mirror selfie (9:16 vertical) of a young blonde woman with a Mediterranean/Latina appearance and an athletic hourglass figure. The prompt specifies facial features, wardrobe (peach-orange athletic loungewear with a unique cutout), accessories, setting (modern bedroom), and lighting (soft, diffused natural light).', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - 1990s Portrait Prompt for Gemini Nano Banana Pro', 'text_to_image', '1990s portrait, beautiful radiant young woman, proclean skin, black eyes, glossy pink lips, long black-to-blackish-brown ombre hair. Pose: side view, leaning on weathered wood wall, looking up to sky, arm behind head. Outfit: vintage denim crop jacket, white v-neck. Lighting: strong directional sunlight, deep shadows. Aesthetic: analog film look, muted colors, retro filter, Nano Banana Pro realism, 8k photorealistic. --ar 9:16,copy my face
+Use 100% face
+Do not alter the face.
+Do not change my face', 'https://cms-assets.youmind.com/media/1773988994277_bznz74_HDv198KbQAAsNYv.jpg', 'grok-imagine-image-pro', 'A prompt for Gemini Nano Banana Pro to generate a 1990s-style portrait of a young woman, emphasizing specific aesthetic details like proclean skin, glossy lips, strong directional sunlight, and an analog film look, requiring face preservation from a reference image.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Chibi Style Mixed-Media Portrait', 'text_to_image', 'A high-quality mixed-media portrait of a trendy Surrounding the realistic main subject are several cute, 3D-style \'Chibi\' versions of the theirself. same wears and same face. These chibis are interacting playfully: one is sitting on the subject\'s shoulder, one is climbing their leg, another person is standing to the individual\'s left-standing in exactly the same pose manner as the girl and yet another is peeking out from behind person.Overlay the image with vibrant, hand-drawn doodle effects: white drawn outlines around the subject, playful scribbles, stars, heart, sparkles, electric sparks, and floating white, colourful, black and blue handwritten slogans like \'{argument name=\"slogan 1\" default=\"cutie\"}\', \'{argument name=\"slogan 2\" default=\"smile\"}\', \'fashion\', and \'happy\'. The style should seamlessly blend hyper-realistic photography with colorful, flat cartoon illustrations. Keeping face and all shape person unchanged.
+image Ratio 3:4', 'https://cms-assets.youmind.com/media/1773988999107_vxyxvu_HDvbANeasAAR8xd.jpg', 'grok-imagine-image-pro', 'A prompt for Gemini Nano Banana 2 to create a mixed-media portrait blending a hyper-realistic main subject with several cute, 3D-style \'Chibi\' versions of themselves, overlaid with vibrant, hand-drawn doodle effects and handwritten slogans.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Profile / Avatar - Cyberpunk Magical Girl Sabrina Carpenter Prompt for Nano Banana Pro', 'text_to_image', '{ \"image_generation_prompt\": { \"subject\": { \"description\": \"Young woman with a strong resemblance to Sabrina Carpenter.\", \"hair\": \"Long straight twin-tails with blunt bangs.\", \"face\": \"Soft coy expression, wide eyes, glossy lips.\", \"body\": \"Slender build, shiny skin on legs.\" }, \"attire\": { \"clothing\": \"Intricate pink and white ruffled corset dress with sheer tutu skirt and metallic tech hardware.\", \"style\": \"Cyberpunk magical girl.\" }, \"styling_and_accessories\": { \"jewelry\": [ \"Cat-ear headphones\", \"Choker with bell\", \"Wrist cuffs\", \"Thigh garters with heart gems\", \"Metallic platform heels\" ] }, \"environment\": { \"setting\": \"Grungy abandoned concrete corridor.\", \"background\": \"Peeling walls, exposed pipes, scattered debris.\", \"water\": \"Wet concrete floor with reflective puddles.\" }, \"pose\": { \"posture\": \"Standing with legs spread wide.\", \"arms\": \"Hands held delicately near the chin.\", \"angle\": \"Low-angle full body shot.\" }, \"lighting_and_mood\": { \"lighting\": \"Bright frontal flash contrasting with dark background.\", \"mood\": \"Gritty yet vibrant.\", \"colors\": \"Neon pinks, crisp whites, industrial greys.\" }, \"camera_and_technical\": { \"style\": \"Ultra Photorealistic, RAW photo.\", \"lens\": \"35mm\", \"aperture\": \"f/2.8\", \"quality_tags\": [ \"8k resolution\", \"highly detailed\", \"volumetric lighting\", \"ray tracing reflections\", \"hyper-realistic texture\", \"Hasselblad photography\" ] } } }', 'https://cms-assets.youmind.com/media/1773989015429_pvw2pb_HDvNHN0bcAA51Gt.jpg', 'grok-imagine-image-pro', 'A detailed JSON-formatted prompt for Nano Banana Pro to generate an ultra-photorealistic image of a young woman resembling Sabrina Carpenter, styled as a Cyberpunk Magical Girl in a grungy, abandoned corridor setting.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Train-ad style book advertisement image', 'text_to_image', 'Please generate an advertisement image.
+
+==== Ad specifications ===
+- Aspect ratio: 16:9 (horizontal)
+- Product to advertise: the book in the first attached image
+- Main eye-catcher: place the book from the first attached image in a three-dimensional way
+- Language: Japanese
+- Taste: advertisement for a business book
+
+# Text to include:
+- Pre-head copy: 【New print run decided about one week after release】
+
+Book “{argument name=\"book_title_en\" default=\"Designing from Zero with AI\"}” now on sale and doing well.
+
+Amazon Best Seller Ranking
+Ranked No.1 in commercial design sales (as of 10/15)
+https://t.co/QxbYpfFVj6', 'https://cms-assets.youmind.com/media/1763885539326_yao7in_G6WBYReawAAcp2x.jpg', 'grok-imagine-image-pro', 'A detailed Japanese prompt for generating a 16:9 business-book-style advertisement featuring a specific book image with Japanese copy points.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Parisian High-Fashion Editorial Triptych Prompt for Nano Banana Pro', 'text_to_image', 'A high-fashion editorial triptych featuring a young French woman with a messy brunette bob and a natural smile. She is wearing a long, form-fitting knit dress with horizontal red and white stripes, paired with classic brown leather loafers and a vintage crossbody bag. The style is effortlessly elegant with a \"je ne sais quoi\" Parisian vibe.
+​The Surreal Detail:
+The focal point is the hem of the dress, which is visibly unraveled. A single, vibrant red thread of yarn has come loose and extends outward, trailing behind her along the cobblestone street like a thin, continuous line, connecting her to an unseen point in the distance.
+​Setting & Atmosphere:
+​Location: A narrow, historic street in Paris with beige stone buildings and a traditional \"TABAC\" brasserie in the background.
+​Lighting: Soft, overcast daylight that brings out the richness of the red yarn and the texture of the cobblestones.
+​Composition: A three-panel layout showing a close-up of the frayed hem, a full-length shot of her walking, and a medium shot focusing on her expression and the dress texture.', 'https://cms-assets.youmind.com/media/1774248327496_oc96jd_HEE168fbUAACcRp.jpg', 'grok-imagine-image-pro', 'A detailed image generation prompt for Gemini Nano Banana (Nano Banana Pro) requesting a high-fashion editorial triptych featuring a Parisian woman, focusing on the surreal detail of a single unraveling red thread trailing from her dress along a cobblestone street.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Cinematic Night Taxi Portrait with Teal and Orange Grading', 'text_to_image', '\"Image from subject, medium close-up, shot from outside through a reflective car window. The subject is ({argument name=\"subject position\" default=\"seated in the rear right passenger seat\"}), leaning back against the headrest, looking directly toward the camera through the glass. A hand is visible resting on the interior window frame. Wearing a light-colored crew-neck t-shirt and dark-tinted round sunglasses. The setting is a taxi interior at night. The background is a blurred urban landscape with bright bokeh from traffic and neon signs. Rain droplets and condensation are present on the glass surface. Cinematic teal-and-orange color palette. Vibrant red and green neon reflections are projected onto the subject and the window glass. High-contrast lighting with deep, crushed shadows and warm, hazy highlights. Dense 35mm film grain, heavy glass reflections, lens flares, and soft chromatic aberration at the edges. \"', 'https://cms-assets.youmind.com/media/1774248313255_l6y14w_HEDWL3mXoAEbP_F.jpg', 'grok-imagine-image-pro', 'A detailed prompt for generating a cinematic portrait shot from outside a reflective car window at night. The subject is seated in the rear, looking directly at the camera, with rain and neon reflections on the glass, using a high-contrast teal-and-orange color palette.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Soft Watercolor Illustration Style Art Prompt for Gemini Nano Banana Pro 2.0', 'text_to_image', 'Use the uploaded image as reference, A blend of high-end illustrative realism with delicate ink lines and soft watercolor strokes. Highly detailed depictions of faces with porcelain skin texture, delicate blush, and expressive sparkling eyes. Dynamic compositions of close-up portraits. Crisp white negative space backgrounds overlaid with architectural outlines, geometric construction grids, and technical drawing elements. Flowing strands of hair and fabric edges dissolve into abstract, transparent shards of color and paint splatters. A soft pastel palette (soft blues, warm yellows, pale pinks, light grays) with controlled saturation. An elegant balance between precise sketch lines and loose, atmospheric paint effects. A cinematic editorial illustration aesthetic with a modern fashion art feel, dreamy yet sharp, minimalist yet rich in detail. High-resolution, vertical portrait, 4k quality.', 'https://cms-assets.youmind.com/media/1774248307424_ysir5t_HEC-VOQbcAAOq_T.jpg', 'grok-imagine-image-pro', 'A detailed prompt for Gemini Nano Banana Pro 2.0 to transform an uploaded image into a high-end illustrative realism portrait with soft watercolor strokes and delicate ink lines, featuring a soft pastel palette and a cinematic editorial aesthetic.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Depression expression in rough line art for nano banana 2', 'text_to_image', 'This is the internal monologue expression of a person with depression, who repeatedly says \"{argument name=\"internal monologue\" default=\"Everything is alright\"}\", and the image is presented in a {argument name=\"visual style\" default=\"rough line art\"} style.', 'https://cms-assets.youmind.com/media/1774248320805_xvnnqh_HECmahjboAAQu7T.jpg', 'grok-imagine-image-pro', 'A prompt describing the internal monologue of a person with depression, repeatedly stating \'Everything is alright,\' rendered in a rough line art style, specifically noting the result generated by nano banana 2.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Luis Miguel as K-Pop Star in Gangnam', 'text_to_image', 'Luis Miguel as a Korean pop star from Seoul, smooth fair East Asian skin tone, jet black straight hair with slight side sweep, wearing a stylish tailored dark suit, standing in Gangnam district at night, modern glass towers lit up behind him, subtle lens flare, photorealistic, cinematic portrait photography, 85mm lens', 'https://cms-assets.youmind.com/media/1774248320239_l6nccy_HECicYcWMAAPiEC.jpg', 'grok-imagine-image-pro', 'A Nano Banana 2 prompt for generating a photorealistic, cinematic portrait of Luis Miguel reimagined as a Korean pop star, standing in Seoul\'s Gangnam district at night, specifying East Asian features, tailored dark suit, and subtle lens flare effects.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Luis Miguel as a Russian Man in Red Square', 'text_to_image', 'Luis Miguel as a Russian man from Moscow, very fair cool-toned skin, light ash brown wavy hair, wearing a heavy dark wool coat with fur collar, standing in Red Square in winter, snow falling lightly, Saint Basil\'s Cathedral illuminated behind him, cold breath vapor visible, photorealistic, cinematic portrait photography, 85mm lens', 'https://cms-assets.youmind.com/media/1774248300911_mowqz4_HECiCysbIAAM3B9.jpg', 'grok-imagine-image-pro', 'A photorealistic, cinematic portrait prompt for Nano Banana 2, depicting the singer Luis Miguel as a Russian man standing in Red Square during winter, focusing on cold tones, heavy clothing, and visible breath vapor.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Photorealistic Cinematic Portrait of Luis Miguel as a Jamaican Reggae Musician', 'text_to_image', 'Luis Miguel as a Jamaican reggae musician, deep warm dark brown skin tone, long dreadlocks black hair, wearing a yellow green red reggae tank top, standing on {argument name=\"location\" default=\"Negril beach Jamaica\"}, crystal turquoise ocean behind him, swaying palm trees, golden hour sunlight, photorealistic, cinematic portrait photography, 85mm lens', 'https://cms-assets.youmind.com/media/1774248302509_m6ydc8_HECh2nSaUAAYgfr.jpg', 'grok-imagine-image-pro', 'A detailed prompt for Nano Banana 2 to generate a photorealistic, cinematic portrait of the singer Luis Miguel reimagined as a Jamaican reggae musician, emphasizing specific physical features, attire, and a Negril beach setting during the golden hour.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Macro Eye Portrait with Havana Reflection', 'text_to_image', '**Macro extreme close-up of {argument name=\"subject name\" default=\"Ana de Armas\"}\'s hazel eye, an intricate study of the human iris. The iris serves as a crystalline mirror, hosting a hyper-detailed miniature reflection of a bustling Havana street at sunset, complete with vintage 1950s American cars and pastel-colored colonial architecture. Every fiber of the iris is visible, showing unique crypts and furrows. The cornea displays a high-gloss moisture, catching a soft glint of golden hour light. Skin micro-texture is incredibly sharp, revealing fine pores and individual, delicate eyelashes with slight mascara clumps. Shot on Hasselblad X2D 100C, 120mm Macro f/4 lens. Volumetric lighting, cinematic side-lighting to emphasize depth, 8k resolution, photorealistic masterpiece. --ar 16:9 --stylize 250 --v 6.0**', 'https://cms-assets.youmind.com/media/1774248317734_y1nox1_HECTyN3XoAA3ybg.jpg', 'grok-imagine-image-pro', 'A highly specific Nano Banana Pro prompt for generating an extreme macro close-up of a hazel eye, where the iris reflects a hyper-detailed miniature Havana street scene at sunset, emphasizing photorealistic details like skin micro-texture, individual eyelashes, and professional Hasselblad camera settings.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Candid Nighttime Street Portrait with Flash Photography Aesthetic', 'text_to_image', 'A candid nighttime street portrait of a young woman sitting casually on a woven café chair outside a small urban restaurant. She has long black hair, natural makeup with a soft glow, and wears a white tank top layered over a black lace bralette, paired with relaxed denim jeans. She leans slightly to the side with one arm resting on the chair, looking off-camera with a calm, introspective expression. Subtle accessories include thin gold bracelets and a delicate necklace. The scene is lit with a direct flash, creating sharp highlights on her skin and a contrast against the dark street background. Neon signs and reflections from glass windows add pops of color, while the sidewalk and storefront create an authentic city nightlife vibe. Medium shot, shallow depth of field, film-like grain, flash photography aesthetic, raw and unfiltered mood, stylish yet natural composition', 'https://cms-assets.youmind.com/media/1774248298648_ckrjgf_HECI_lZaoAAfcAP.jpg', 'grok-imagine-image-pro', 'A detailed prompt designed to generate a candid nighttime street portrait of a young woman using a flash photography aesthetic, emphasizing high contrast, sharp highlights, and an authentic city nightlife vibe. This prompt is used to compare the output quality between Midjourney V8 and Nano Banana Pro.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Car Selfie with Three Subjects and Identity Lock', 'text_to_image', '{ \"subject\": \"three young women sitting closely together inside a car\", \"face\": \"three distinct young women with unchanged facial identity, natural proportions, realistic skin texture, Use uploaded reference image, keep identity exact for each individual\", \"hair\": \"each woman retains original hair color, length, and styling exactly as provided, including blonde, brunette, and dark tones with natural texture\", \"expression\": \"confident, relaxed, slightly posed expressions with direct and side glances, subtle attitude and casual mood\", \"pose\": \"seated closely side by side in car seats, bodies angled toward camera, one holding a phone, others leaning slightly inward for framing\", \"environment\": \"interior of a car with visible window showing outdoor greenery and road, casual travel setting\", \"lighting\": \"strong natural sunlight entering from side window, creating sharp highlights across faces and shadows, warm golden tones\", \"camera\": \"close-up selfie style, handheld smartphone perspective, slightly tilted framing, tight composition capturing all three faces\", \"clothing\": \"stylish casual outfits including black top, lace detail garment, and patterned top, accessorized with jewelry like necklaces and bracelets\", \"imperfections\": \"harsh sunlight causing overexposed highlights, shadow splits across faces, slight motion blur, natural skin details\", \"style\": \"candid lifestyle photography, social media aesthetic, warm tones, unfiltered spontaneous capture\" }', 'https://cms-assets.youmind.com/media/1774248316716_b9vof6_HEB7nJHbEAEFnLC.jpg', 'grok-imagine-image-pro', 'A Nano Banana Pro prompt designed to generate a photorealistic, candid-style car selfie featuring three young women, ensuring the exact identity of each subject is preserved using reference images, captured in strong natural sunlight.', 12);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Sparkling Cheetah Portrait Prompt for Gemini Nano Banana Pro', 'text_to_image', '{
+  \"image_prompt\": {
+    \"subject\": {
+      \"type\": \"young woman\",
+      \"features\": {
+        \"hair\": \"bright red, tied back in a loose ponytail with some face-framing strands\",
+        \"eyes\": \"blue\",
+        \"skin\": \"fair with light freckles\",
+        \"expression\": \"neutral, serious, maintaining direct eye contact with the camera\"
+      }
+    },
+    \"clothing\": {
+      \"garment\": \"long-sleeve, form-fitting top\",
+      \"pattern\": \"leopard print (tan, brown, and black spots)\",
+      \"texture\": \"subtle glittery or sparkly finish\"
+    },
+    \"pose\": {
+      \"stance\": \"standing sideways, body angled slightly away but face turned towards the viewer\",
+      \"arms\": \"right hand resting naturally on her hip\"
+    },
+    \"environment\": {
+      \"setting\": \"indoor room, likely a home office, streaming room, or bedroom\",
+      \"background_elements\": [
+        \"white desk\",
+        \"black computer monitors\",
+        \"white spherical microphone on a small tripod stand\",
+        \"black desk mat or keyboard\",
+        \"plain white walls\"
+      ]
+    },
+    \"photography_style\": {
+      \"lighting\": \"soft, bright, natural-looking indoor daylight\",
+      \"focus\": \"shallow depth of field (sharp subject, slightly blurred background)\",
+      \"aesthetic\": \"photorealistic, high-resolution portrait photography\"
+    }
+  }
+}', 'https://cms-assets.youmind.com/media/1774248308166_gjsihf_HEBrgEGaMAAX8eY.jpg', 'grok-imagine-image-pro', 'A detailed, structured JSON prompt for Gemini Nano Banana Pro to generate a photorealistic portrait of a young woman wearing a sparkly leopard print top in an indoor setting, emphasizing specific features, pose, and lighting.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Cinematic Winter Portrait with Stylized Snowman', 'text_to_image', '{ \"photo_type\": \"Cinematic winter portrait (ultra-realistic human with stylized companion)\",  \"subject\": { \"description\": \"A real human woman in a snowy outdoor environment, photographed like a high-end cinematic winter shoot\", \"gender\": \"Female\", \"pose_description\": \"Standing upright on snow, body slightly angled, left arm raised outward with palm open, right arm relaxed, confident elegant posture\", \"expression\": \"Soft calm expression with a subtle confident smile\" },  \"face\": { \"description\": \"{argument name=\"subject name\" default=\"Sadie Sink\"}, use uploaded reference image, keep face 100% identical with real human texture\", \"extra_realism\": [ \"visible pores\", \"subtle asymmetry\", \"natural lip texture\", \"cold redness on cheeks\" ] },  \"hair\": { \"color\": \"Golden blonde blended with icy white highlights\", \"style\": \"Thick voluminous side braid\", \"details\": [ \"full dense braid\", \"loose front strands\", \"flyaways\", \"natural uneven thickness\" ], \"physics\": \"natural wind interaction\" },  \"clothing\": { \"type\": \"Short flowing winter dress\", \"design\": \"upper-thigh length, softly fitted at the waist with a gently flared skirt\", \"exposure_balance\": \"tasteful and elegant reveal of legs and silhouette without explicit exposure\", \"fabric_realism\": [ \"fine textile detail\", \"slightly sheer outer layer with inner lining\", \"natural folds\", \"light scattering\" ], \"physics\": [ \"wind lifting hem slightly\", \"gravity-based draping\", \"imperfect flowing edges\" ] },  \"companion_character\": { \"type\": \"Stylized semi-real snowman\", \"style_balance\": \"70% real, 30% cartoon\",  \"structure\": [   \"three stacked snow spheres with slightly rounded proportions\",   \"textured snow surface\",   \"slightly expressive head size\" ],  \"face\": {   \"eyes\": \"coal eyes slightly larger and expressive\",   \"nose\": \"stylized carrot nose\",   \"mouth\": \"clean coal smile, slightly imperfect\" },  \"body_details\": [   \"twig arms with gentle curves\",   \"coal buttons evenly spaced\",   \"visible snow texture\" ],  \"material_behavior\": [   \"realistic snow light reflection\",   \"softened edges for character feel\" ],  \"position\": \"standing beside the woman, slightly angled toward her\"  },  \"environment\": { \"setting\": \"Real snowy outdoor location\", \"details\": [ \"uneven snow surface\", \"footprints\", \"falling snow particles\", \"light atmospheric haze\" ], \"interaction\": [ \"snow bounce light on subject\", \"light snow settling on dress and hair\" ] },  \"lighting\": { \"type\": \"Natural winter daylight\", \"setup\": [ \"overcast soft light\", \"strong snow bounce fill\", \"subtle rim separation\" ], \"effects\": [ \"soft light wrap\", \"natural highlights\" ], \"color_temperature\": \"cool daylight 6200K\" },  \"camera\": { \"type\": \"Full-frame DSLR\", \"lens\": \"85mm\", \"aperture\": \"f/2.0\", \"iso\": \"ISO 125\", \"shutter_speed\": \"1/500s\", \"focus\": \"sharp on subject and snowman, soft background falloff\" },  \"imperfections\": { \"add\": [ \"fine grain\", \"slight shadow noise\", \"natural hair movement\", \"minor asymmetry\" ] }', 'https://cms-assets.youmind.com/media/1774248319179_nstat3_HEBoNH1aQAAXtsA.jpg', 'grok-imagine-image-pro', 'A highly detailed Nano Banana 3.1 Pro prompt for generating a cinematic, ultra-realistic winter portrait of a woman (Sadie Sink likeness, requiring reference image for face lock) standing next to a stylized, semi-real snowman, specifying complex details for clothing physics, snow interaction, and cool daylight lighting.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Social Media Post - Serene Water Portrait with Celebrity Likeness Lock', 'text_to_image', '{ \"subject\": \"young woman partially submerged in clear water\", \"face\": \"side profile of a young woman with eyes closed, relaxed expression, smooth natural features, slightly flushed skin from sunlight, Use uploaded reference image, keep identity exact, explicitly based on provided reference image\", \"hair\": \"dark brown hair, wet, slicked back and clinging to head and neck, natural texture preserved\", \"expression\": \"calm, serene, eyes closed, lips slightly parted, enjoying warmth of sunlight\", \"pose\": \"upper body emerging from water, shoulders submerged, head tilted slightly upward toward light, hands loosely together beneath water surface\", \"environment\": \"clear turquoise water with visible ripples and reflections, natural outdoor setting, possibly pool or calm sea, sunlight reflecting off surface creating patterns\", \"lighting\": \"strong natural sunlight from above, warm highlights on face and shoulders, high contrast with reflective water caustics, slight overexposure on skin highlights\", \"camera\": \"close-up shot, side angle profile, eye-level perspective, shallow depth of field, focus on face and upper torso\", \"clothing\": \"minimal visible clothing, possibly dark swimsuit beneath water surface, indistinct due to refraction\", \"imperfections\": \"natural skin texture, slight shine from water and sunlight, minor overexposed highlights, water distortion around submerged areas\", \"style\": \"photorealistic, candid lifestyle photography, natural tones, high detail, no stylization\" }', 'https://cms-assets.youmind.com/media/1774248315961_b17a7i_HEBfpU9acAAsSL0.jpg', 'grok-imagine-image-pro', 'A detailed Nano Banana Pro prompt for generating a photorealistic close-up image of a young woman partially submerged in clear water, focusing on a serene expression and using a reference image to maintain exact celebrity identity.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Infographic / Edu Visual - 3x3 Grid Prompt for Lighting Cheatsheet', 'text_to_image', 'A 3x3 photo grid presented as a single image on a dark grey background. Each of the nine grid cells contains a different portrait of the same subject from the uploaded image, maintaining the perfect character consistency, outfit and pose across all panels. Below each individual portrait, a clean sans-serif text label with a number and name is clearly displayed.
+
+The grid layout and lighting setups are: 
+
+- Top row, left to right:
+
+Loop Lighting (Flattering 3/4 light with a small loop of shadow from the nose onto the cheek)
+
+Hardlight Frontal Flash (direct front facing, harsh flashlight with deep frontal shadows)
+
+Split Lighting (dramatic light on only one side of the face, leaving the other side completely dark)
+
+- Middle row, left to right:
+
+Butterfly Lighting  (classic symmetrical light from the front, slightly high, with a small shadow under the nose)
+
+Gobo Pattern (Venetian Blind)\' (light projected through Venetian blinds, creating linear shadows across the face and clothes, the shadow can also be scene on the background)
+
+Under-Lighting (Uplight)\' (light coming from below, creating reverse shadows and a moody look)
+
+- Bottom row, left to right:
+
+Golden Hour / Warm Light\' (bathed in soft, golden, warm light from a side angle)
+
+Dramatic Spotlight  (hard, narrow circular beam of light, with a deep chiascuro effect and crushed blacks)
+
+Neutral Kelvin Rim Light\' (intense backlighting with no front fill, creating a distinct glowing outline around the hair and shoulders, leaving the face in darkness, against a black background).
+
+The perspective and features remain identical in all panels, with only the specified lighting changing to match the label.', 'https://cms-assets.youmind.com/media/1774248307158_jyis07_HECyRQkbwAAPNRV.jpg', 'grok-imagine-image-pro', 'A complex prompt for Nano Banana Pro designed to generate a 3x3 grid image containing nine identical portraits of a subject, with each panel demonstrating a different, specifically named lighting technique (e.g., Loop, Split, Butterfly, Golden Hour), useful as a relighting cheatsheet.', 2);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Infographic / Edu Visual - Flat UI/Startup Style Illustration Prompt', 'text_to_image', 'Flat illustration of {argument name=\"subject\" default=\"[subject]\"}, startup-style vector art, bright colors, simple shapes, clean and professional design, white background, no text.', 'https://cms-assets.youmind.com/media/1774248298494_hmspay_HEBU7CUakAAZ7B4.jpg', 'grok-imagine-image-pro', 'A simple, reusable prompt for Nano Banana Pro to generate flat, startup-style vector illustrations of a specified subject, emphasizing bright colors, simple shapes, clean design, and a white background, with an explicit instruction to exclude text.', 10);
+
+INSERT IGNORE INTO \`showcase_items\` (\`title\`, \`type\`, \`prompt\`, \`output_url\`, \`model_used\`, \`description\`, \`category_id\`) VALUES 
+('Infographic / Edu Visual - Watercolor Map Generation Prompt', 'text_to_image', 'A detailed watercolor-style map of {argument name=\"country name\" default=\"COUNTRY\"} on lightly textured paper, soft flowing washes in distinct harmonious colors for each first-level administrative division, all federal states, provinces or regions accurately separated by clear borders and labeled directly inside their areas in neat blue ballpoint-pen handwriting, educational and infographic-friendly, clean composition, high legibility, subtle paper grain, gentle shading, refined illustrative finish, balanced negative space, no cities, no roads, no flags, no logos, no watermark, bright clean background', 'https://cms-assets.youmind.com/media/1774248304199_s1s09e_HEBK9gkWwAA5Ozo.jpg', 'grok-imagine-image-pro', 'A detailed prompt for Nano Banana 2 to create a watercolor-style map of a specified country, focusing on clean design, high legibility, and specific artistic constraints (no cities, roads, flags, logos, or watermarks).', 9);

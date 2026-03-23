@@ -252,6 +252,10 @@ require_once __DIR__ . '/auth.php';
         </div>
 
         <div class="history-pagination" id="pagination"></div>
+
+        <footer style="text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border); margin-top: 40px;">
+            <p>Special thanks to the <a href="https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts" target="_blank" style="color: var(--accent-1); text-decoration: none;">Awesome Nano Banana Pro Prompts</a> repository for curating these incredible masterpieces.</p>
+        </footer>
     </main>
 
     <!-- Detail Modal -->
