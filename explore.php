@@ -265,8 +265,14 @@ require_once __DIR__ . '/auth.php';
                 <div id="modalType" class="history-item-type">IMAGE</div>
                 <h2 id="modalTitle" class="install-title" style="margin:0;">Title</h2>
                 <div class="section">
-                    <label class="gen-label">Prompt</label>
-                    <div id="modalPrompt" class="gen-textarea" style="background:rgba(255,255,255,0.05); min-height:80px; padding:12px; border-radius:8px;"></div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <label class="gen-label" style="margin:0;">Prompt</label>
+                        <button class="btn btn-ghost btn-xs" onclick="copyPrompt()" style="font-size: 10px; padding: 4px 8px;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            Copy
+                        </button>
+                    </div>
+                    <div id="modalPrompt" class="gen-textarea" style="background:rgba(255,255,255,0.05); min-height:80px; padding:12px; border-radius:8px; cursor:pointer;" onclick="copyPrompt()" title="Click to copy"></div>
                 </div>
                 <div class="section" id="descriptionSection" style="display:none;">
                     <label class="gen-label">Description</label>
@@ -428,7 +434,16 @@ require_once __DIR__ . '/auth.php';
         function copyPrompt() {
             const prompt = document.getElementById('detailModal').dataset.currentPrompt;
             navigator.clipboard.writeText(prompt);
-            alert("Prompt copied!");
+            
+            // Temporary visual feedback
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            if (btn.tagName === 'BUTTON') {
+                btn.innerHTML = 'Copied!';
+                setTimeout(() => btn.innerHTML = originalText, 1500);
+            } else {
+                alert("Prompt copied to clipboard!");
+            }
         }
 
         function downloadModalOutput() {
