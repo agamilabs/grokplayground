@@ -358,11 +358,11 @@ require_once __DIR__ . '/auth.php';
                     </div>
                     <div class="card-footer" onclick="event.stopPropagation()">
                         <div class="vote-tools">
-                            <button class="vote-btn up" onclick="handleVote(${item.id}, 1)">
+                            <button class="vote-btn up" onclick="vote(event, ${item.id}, 1)">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
                             </button>
                             <span class="vote-count" id="votes-${item.id}">${item.votes}</span>
-                            <button class="vote-btn down" onclick="handleVote(${item.id}, -1)">
+                            <button class="vote-btn down" onclick="vote(event, ${item.id}, -1)">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
                             </button>
                         </div>
@@ -378,20 +378,47 @@ require_once __DIR__ . '/auth.php';
             return `<video src="${item.output_url}" loading="lazy" muted onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>`;
         }
 
-        async function handleVote(itemId, direction) {
+        async function vote(e, itemId, direction) {
             if (!currentUser) {
                 alert("Please log in to vote!");
                 return;
             }
-            const idToken = await currentUser.getIdToken();
-            const res = await fetch('api/showcase.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + idToken },
-                body: JSON.stringify({ item_id: itemId, vote: direction })
-            });
-            const data = await res.json();
-            if (data.success) {
-                document.getElementById(`votes-${itemId}`).textContent = data.new_votes;
+            
+            const btn = e.currentTarget;
+            const originalColor = btn.style.color;
+            btn.style.color = direction > 0 ? 'var(--success)' : 'var(--error)';
+            btn.style.transform = 'scale(1.2)';
+
+            try {
+                const idToken = await currentUser.getIdToken();
+                const res = await fetch('api/showcase.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + idToken },
+                    body: JSON.stringify({ item_id: itemId, vote: direction })
+                });
+
+                if (res.status === 401) {
+                    alert("Session expired. Please log in again.");
+                    return;
+                }
+
+                const data = await res.json();
+                if (data.success) {
+                    // Update count in UI
+                    const countSpan = document.getElementById(`votes-${itemId}`);
+                    if (countSpan) countSpan.textContent = data.new_votes;
+                    
+                    // Toggle active state
+                    btn.classList.add('active');
+                    setTimeout(() => {
+                        btn.style.transform = '';
+                        btn.style.color = '';
+                    }, 500);
+                }
+            } catch (err) {
+                console.error("Vote failed:", err);
+                btn.style.transform = '';
+                btn.style.color = originalColor;
             }
         }
 
