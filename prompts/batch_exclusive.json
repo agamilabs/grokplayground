@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Neon Cyberpunk Samurai",
+    "type": "text_to_image",
+    "prompt": "Cinematic photography of a lone samurai standing in a rain-soaked neon cyberpunk metropolis. Ultra-detailed glowing katana, reflections in puddles, dramatic cinematic lighting, volumetrics, 8k resolution, photorealistic, rule of thirds, anamorphic lens flare.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A stunning blend of traditional samurai aesthetics with futuristic Blade Runner style cyberpunk elements.",
+    "category_id": 6
+  },
+  {
+    "title": "Ethereal Glass Butterfly",
+    "type": "text_to_image",
+    "prompt": "A macro shot of a delicate butterfly made entirely of intricately carved, glowing iridescent glass resting on a dew-covered fern. Prismatic light refraction, bokeh background, hyper-detailed, award-winning macro photography, f/1.8 aperture.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Showcases extreme detail in macro photography mixed with light refraction and transparency.",
+    "category_id": 4
+  },
+  {
+    "title": "Minimalist Smart Home Dashboard UI",
+    "type": "text_to_image",
+    "prompt": "A clean, modern minimalist smart home dashboard UI design displayed on a sleek tablet. Dark mode, subtle glassmorphism elements, neon blue accents, intuitive temperature and lighting controls, elegant typography, high-fidelity UI mockup.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Perfect reference for app layout, UX design, and modern dark-mode aesthetics.",
+    "category_id": 10
+  },
+  {
+    "title": "Abandoned Astronaut on Alien World",
+    "type": "text_to_image",
+    "prompt": "An astronaut with a cracked visor sitting on a monolithic structure overlooking a vast, bioluminescent alien jungle. Giant planetary rings in the sky, melancholic mood, highly detailed matte painting, trending on ArtStation, majestic scale.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A deeply atmospheric sci-fi piece emphasizing grand scale and emotional storytelling.",
+    "category_id": 6
+  },
+  {
+    "title": "Isometric Cozy Coffee Shop",
+    "type": "text_to_image",
+    "prompt": "An isometric 3D render of a cozy, detailed corner coffee shop interior. Warm lighting, espresso machines, tiny baristas, potted plants, cute aesthetic, soft pastel colors, highly detailed, octane render, stylized.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A perfect prompt for generating isometric architecture and game assets.",
+    "category_id": 11
+  },
+  {
+    "title": "Enchanted Forest Treehouse",
+    "type": "text_to_image",
+    "prompt": "A multi-level intricate wooden treehouse built into a colossal ancient oak tree in a misty enchanted forest. Glowing lanterns, winding staircases, ethereal morning light piercing through the canopy, fantasy artwork.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886933714_5zqn1e_G6QBjQHbgAE3Yt_.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A high-fantasy environment piece with dramatic lighting and intricate architectural details.",
+    "category_id": 3
+  },
+  {
+    "title": "Premium Matte Black Watch Product Shot",
+    "type": "text_to_image",
+    "prompt": "Professional commercial product photography of a sleek, matte black luxury smartwatch hovering above a dark rippling liquid surface. Dramatic studio spotlight, crisp edges, high-end retail aesthetic, 8k resolution.",
+    "output_url": "https://cms-assets.youmind.com/media/1768962051381_l9uih4_537980579-6f29d32a-c786-40c4-bd5a-79c640737496.png",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Tests the model's ability to render sleek industrial design and studio lighting.",
+    "category_id": 8
+  },
+  {
+    "title": "Abstract Geometric Flow",
+    "type": "text_to_image",
+    "prompt": "Abstract digital art featuring flowing metallic ribbons of copper and teal weaving through geometric obsidian monoliths. Generative art style, smooth gradients, crisp 3D visualization, elegant motion.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886941069_1d9ace_G6QBii_acAIRxKd.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "A stunning non-representational composition perfect for wallpapers or brand backgrounds.",
+    "category_id": 1
+  },
+  {
+    "title": "Vibrant Anime Street Food Market",
+    "type": "text_to_image",
+    "prompt": "A bustling Japanese street food market at night in high-quality anime style (Studio Ghibli inspired). Steam rising from Takoyaki stalls, colourful hanging lanterns, expressive characters, rich detailed background, warm inviting colors.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886938314_wbcfc7_G6QBiiracAInQ8z.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Tests detailed manga/anime style illustration with complex crowds and lighting.",
+    "category_id": 5
+  },
+  {
+    "title": "Regal Lion Portrait",
+    "type": "text_to_image",
+    "prompt": "An extreme close-up portrait of a majestic lion with a dark, moody background. Golden hour rim lighting illuminating its mane, hyper-realistic fur texture, intense piercing amber eyes, wildlife photography masterpiece.",
+    "output_url": "https://cms-assets.youmind.com/media/1763886946388_nwahev_G6QBikOaEAAmYkO.jpg",
+    "model_used": "grok-imagine-image-pro",
+    "description": "Focuses on hyper-realistic animal texturing and dramatic eye-catching framing.",
+    "category_id": 4
+  }
+]
