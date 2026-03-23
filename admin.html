@@ -606,8 +606,14 @@
                 <h1 class="section-title">Gallery Management</h1>
                 <p class="section-desc">Manage public gallery items</p>
             </div>
-            <div style="margin-bottom: 24px;">
+            <div style="margin-bottom: 24px; display: flex; gap: 12px; align-items: center;">
                 <button class="btn btn-primary" onclick="showAddGalleryItem()">+ Add to Gallery</button>
+                <div style="width: 1px; height: 24px; background: var(--border);"></div>
+                <input type="file" id="bulkJsonInput" accept=".json" style="display: none;" onchange="handleBulkUpload(event)">
+                <button class="btn btn-ghost" onclick="document.getElementById('bulkJsonInput').click()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Bulk Upload JSON
+                </button>
             </div>
             <div class="card">
                 <div class="table-container">
@@ -1148,6 +1154,47 @@
             document.getElementById('galleryId').value = '';
             document.getElementById('galleryForm').reset();
             document.getElementById('galleryModal').style.display = 'flex';
+        }
+
+        async function handleBulkUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const items = JSON.parse(e.target.result);
+                    if (!Array.isArray(items)) {
+                        alert('Invalid format: JSON must be an array of objects.');
+                        return;
+                    }
+
+                    if (!confirm(`Are you sure you want to upload ${items.length} items?`)) return;
+
+                    const token = await firebase.auth().currentUser.getIdToken();
+                    const res = await fetch('api/admin-showcase.php?action=bulk_create', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify(items)
+                    });
+                    
+                    const data = await res.json();
+                    if (data.success) {
+                        alert(`Successfully imported ${data.count} items!`);
+                        loadAdminGallery();
+                    } else {
+                        alert('Failed: ' + (data.error || 'Unknown error'));
+                    }
+                } catch (err) {
+                    console.error('Bulk upload error:', err);
+                    alert('Error reading/parsing JSON file or communicating with server.');
+                }
+                event.target.value = ''; // Reset input
+            };
+            reader.readAsText(file);
         }
 
         async function loadAdminCategories() {

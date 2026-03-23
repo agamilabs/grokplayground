@@ -18,9 +18,43 @@ $db = getDB();
 
 if ($method === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-    $action = $data['action'] ?? 'create';
+    // Allow action via GET for bulk uploads where body is an array
+    $action = $_GET['action'] ?? '';
+    if (!$action && isset($data['action'])) {
+        $action = $data['action'];
+    }
+    if (!$action) $action = 'create';
 
     try {
+        if ($action === 'bulk_create') {
+            if (!is_array($data)) {
+                throw new Exception("Invalid payload: expected an array of items.");
+            }
+            
+            $db->beginTransaction();
+            $stmt = $db->prepare("INSERT INTO showcase_items (title, category_id, prompt, description, type, output_url, model_used) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $count = 0;
+            
+            foreach ($data as $item) {
+                if (empty($item['prompt']) || empty($item['output_url'])) continue;
+                
+                $title = $item['title'] ?? 'Imported Item';
+                $categoryId = !empty($item['category_id']) ? (int) $item['category_id'] : null;
+                $prompt = $item['prompt'] ?? '';
+                $description = $item['description'] ?? '';
+                $type = $item['type'] ?? 'text_to_image';
+                $outputUrl = $item['output_url'] ?? '';
+                $modelUsed = $item['model_used'] ?? 'imported';
+
+                $stmt->execute([$title, $categoryId, $prompt, $description, $type, $outputUrl, $modelUsed]);
+                $count++;
+            }
+            
+            $db->commit();
+            echo json_encode(['success' => true, 'count' => $count]);
+            exit;
+        }
+
         $title = $data['title'] ?? '';
         $categoryId = !empty($data['category_id']) ? (int) $data['category_id'] : null;
         $prompt = $data['prompt'] ?? '';
@@ -46,6 +80,9 @@ if ($method === 'POST') {
             echo json_encode(['success' => true]);
         }
     } catch (Exception $e) {
+        if ($db->inTransaction()) {
+            $db->rollBack();
+        }
         http_response_code(500);
         echo json_encode(['error' => 'Operation failed: ' . $e->getMessage()]);
     }
