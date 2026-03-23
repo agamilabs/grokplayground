@@ -26,11 +26,15 @@ if ($method === 'POST') {
     if (!$action) $action = 'create';
 
     try {
+        // Fetch valid category IDs to prevent foreign key constraint violations globally
+        $validCategoriesStmt = $db->query("SELECT id FROM showcase_categories");
+        $validCategoryIds = $validCategoriesStmt->fetchAll(PDO::FETCH_COLUMN);
+
         if ($action === 'bulk_create') {
             if (!is_array($data)) {
                 throw new Exception("Invalid payload: expected an array of items.");
             }
-            
+
             $db->beginTransaction();
             $stmt = $db->prepare("INSERT INTO showcase_items (title, category_id, prompt, description, type, output_url, model_used) VALUES (?, ?, ?, ?, ?, ?, ?)");
             $count = 0;
@@ -40,6 +44,12 @@ if ($method === 'POST') {
                 
                 $title = $item['title'] ?? 'Imported Item';
                 $categoryId = !empty($item['category_id']) ? (int) $item['category_id'] : null;
+                
+                // Validate foreign key constraint
+                if ($categoryId !== null && !in_array($categoryId, $validCategoryIds)) {
+                    $categoryId = null; // Fallback gracefully if category doesn't exist in destination DB
+                }
+
                 $prompt = $item['prompt'] ?? '';
                 $description = $item['description'] ?? '';
                 $type = $item['type'] ?? 'text_to_image';
@@ -57,6 +67,9 @@ if ($method === 'POST') {
 
         $title = $data['title'] ?? '';
         $categoryId = !empty($data['category_id']) ? (int) $data['category_id'] : null;
+        if ($categoryId !== null && !in_array($categoryId, $validCategoryIds)) {
+            $categoryId = null; // Fallback gracefully
+        }
         $prompt = $data['prompt'] ?? '';
         $description = $data['description'] ?? '';
         $type = $data['type'] ?? 'text_to_image';
