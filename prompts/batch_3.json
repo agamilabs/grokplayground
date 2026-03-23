@@ -1,0 +1,407 @@
+[
+    {
+        "title": "Infographic \/ Edu Visual - Nano Banana Pro Science Prompt Template",
+        "type": "text_to_image",
+        "prompt": "2x2 grid, do this for 4 famous PHD level science or math topics <instructions>\n Input Variable:  {argument name=\"theorem or formula\" default=\"Theorem \/ Formula\"}\nPhase 1: Schematic Decomposition\nAnalyze the Notation: Identify the primary visual language of the scientist (Chalk on blackboard? Ink on parchment? Pencil on graph paper?).\nIdentify the \"Structure\": If this theory were a building, what would it look like?\nLogic: Chaos Theory -> Fractal Spire. Thermodynamics -> Engine Block.\nPhase 2: The Dimensional Transition\nThe Base: A flat surface covered in the [Notation Medium] (e.g., a slate blackboard covered in chalk equations).\nThe Extrusion: The chalk lines physically lift off the surface. They begin as white wireframes, then gain opacity, then gain texture.\nThe Climax: At the top of the image, the wireframes have fully solidified into a photorealistic, impossible structure representing the theory.\nThe Observer: A tiny, scale-model figure of the scientist stands on the flat \"2D\" section, looking up in awe at the massive \"3D\" structure they have summoned.\nOutput: High-Angle Isometric, \"3D mod designer toy\" style, stark contrast between sketchy lines and solid mass.\n<\/instructions>",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773989007026_3chcm0_HDkaXopXYAAoGe7.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A highly structured, multi-phase prompt designed for Nano Banana Pro to visualize complex scientific or mathematical theories. It instructs the model to decompose the theory into visual language, transition from 2D notation to a 3D impossible structure, and include a scale-model observer (the scientist) in an isometric, designer toy style.",
+        "category_id": 12
+    },
+    {
+        "title": "Infographic \/ Edu Visual - Typographic Sculpture of Historical Inventions",
+        "type": "text_to_image",
+        "prompt": "2x2 grid, do this for 4 important years in history and their most important inventions  {    Anchor:   `[Letter\/Number] :: [Era\/Theme (e.g., 1980s Retro Tech \/ Victorian Steampunk)]::4`\n    Morphology:   `3D Typographic sculpture of [Letter\/Number], character shape defined by a dense pile of [Era\/Theme] objects, chaotic but legible assemblage, graphic design asset::3`\n    Material Physics:   `Textures of [Era\/Theme] objects (plastic, rust, wood), occlusion between stacked items, realistic scale of constituent parts forming the glyph::3`\n    Illumination:   `Three-point studio lighting, softbox overhead, clean background for isolation::2`\n    Render Stack:   `Cinema 4D render, isometric or front-facing, ambient occlusion, 8k, Adobe Substance material suite::1`\n    Negative:   `[Illegible, flat font, 2D, handwriting, paper, messy background, floating objects]:: -1`}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773988996010_w0nbve_HDkJT1MXoAAlP2x.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A complex, structured prompt for Nano Banana to generate a 2x2 grid of 3D typographic sculptures representing four important years in history, where the numbers are formed by objects related to the inventions of that era.",
+        "category_id": 12
+    },
+    {
+        "title": "Infographic \/ Edu Visual - Nano Banana 2 Note Illustration Prompt (Rothschild Historical Scene)",
+        "type": "text_to_image",
+        "prompt": "# Instructions\nYou are a professional illustrator and prompt engineer.\nRead the following [Blog Summary] and create an attractive illustration that intuitively conveys its content.\nDisplay the title at the top of the illustration.\n\n# Image Size\n1280px × 670px (Aspect ratio 16:9)\n\n# Output Conditions\nBrand Color: [#06c7b0]\nSimple and clean flat design.\nPlace figures and icons drawn with uniform black outlines, partially using pastel accent colors (sky blue, coral pink, etc.).\nEmphasize rounded shapes and a soft impression.\nDiagram-centric composition (e.g., Venn diagrams, bar graphs, speech bubbles) with a friendly tone suitable for materials viewed by students and young people, or for social media.\nDesign with ample white space, prioritizing visibility and balance.\nThe figures appearing should be dressed as 18th-century European nobility.\n\n# Blog Summary\nMayer Amschel Rothschild was not born into a privileged class, but a turning point arrived. He gained the opportunity to provide antique coins to Wilhelm IX, the Elector of Hesse, the regional ruler. However, that alone would make him just another antique coin dealer. What made him unusual was that he continued to provide rare antique coins to Wilhelm IX \"at prices significantly lower than the market rate, disregarding profit.\" Normally, one would try to overcharge a person in power. But he prioritized gaining favor over picking up immediate small change.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902679745_hzj4wl_HDpzz5DboAAofOu.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A comprehensive system prompt for Nano Banana 2, instructing it to act as a professional illustrator and prompt engineer to create a visually appealing, flat-design illustration for a blog post about Mayer Amschel Rothschild. The prompt specifies style, color, composition, and historical context.",
+        "category_id": 10
+    },
+    {
+        "title": "Infographic \/ Edu Visual - Modern Lifestyle Split Poster Prompt for Nano Banana Pro",
+        "type": "text_to_image",
+        "prompt": "{\n  \"Objective\": \"Create a modern lifestyle split composition poster combining a luxurious smartphone gym selfie with a healthy diet bowl and calorie infographic.\",\n  \"Composition\": {\n    \"layout\": \"vertical split\",\n    \"aspect_ratio\": \"3:4\",\n    \"top_section\": {\n      \"type\": \"smartphone selfie\",\n      \"scene\": \"luxurious modern gym interior\",\n      \"subject\": {\n        \"type\": \"fit athletic woman\",\n        \"pose\": \"mirror selfie holding a smartphone\",\n        \"outfit\": [\n          \"stylish sports bra\",\n          \"high-waisted athletic shorts or leggings\"\n        ],\n        \"appearance\": \"healthy toned physique, post-workout glow\"\n      },\n      \"environment_elements\": [\n        \"modern gym mirrors\",\n        \"minimalist gym equipment\",\n        \"soft natural window light\",\n        \"premium fitness studio interior\"\n      ],\n      \"photography_style\": {\n        \"camera\": \"smartphone\",\n        \"aesthetic\": \"casual candid social media selfie\",\n        \"lighting\": \"natural daylight mixed with indoor gym lighting\",\n        \"imperfections\": [\n          \"slight smartphone noise\",\n          \"natural reflections in mirror\",\n          \"subtle motion softness\"\n        ]\n      }\n    },\n    \"bottom_section\": {\n      \"type\": \"food photography with infographic\",\n      \"scene\": \"healthy breakfast bowl on wooden table\",\n      \"food_bowl\": {\n        \"ingredients\": [\n          \"strawberries\",\n          \"blueberries\",\n          \"banana slices\",\n          \"granola\",\n          \"yogurt base\"\n        ],\n        \"presentation\": \"clean top-down food photography\"\n      },\n      \"infographic\": {\n        \"position\": \"next to the bowl\",\n        \"style\": \"minimal clean nutrition infographic\",\n        \"elements\": [\n          {\n            \"label\": \"Banana\",\n            \"calories\": \"90 kcal\"\n          },\n          {\n            \"label\": \"Strawberries\",\n            \"calories\": \"50 kcal\"\n          },\n          {\n            \"label\": \"Blueberries\",\n            \"calories\": \"60 kcal\"\n          },\n          {\n            \"label\": \"Granola\",\n            \"calories\": \"180 kcal\"\n          },\n          {\n            \"label\": \"Yogurt\",\n            \"calories\": \"120 kcal\"\n          },\n          {\n            \"label\": \"Total\",\n            \"calories\": \"500 kcal\"\n          }\n        ]\n      },\n      \"photography_style\": {\n        \"camera_angle\": \"top-down flat lay\",\n        \"lighting\": \"soft natural kitchen light\",\n        \"style\": \"clean healthy food photography\"\n      }\n    }\n  },\n  \"Aesthetic\": {\n    \"theme\": \"modern fitness lifestyle\",\n    \"color_palette\": [\n      \"soft neutrals\",\n      \"natural wood tones\",\n      \"fresh fruit colors\",\n      \"clean white accents\"\n    ]\n  },\n  \"Rendering\": {\n    \"style_keywords\": [\n      \"fitness lifestyle collage\",\n      \"luxury gym selfie\",\n      \"healthy food photography\",\n      \"nutrition infographic\",\n      \"social media aesthetic\"\n    ],\n    \"realism\": \"photorealistic\",\n    \"detail_level\": \"high detail textures\",\n}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773643982875_l50puq_HDeQc8lXoAAMA1N.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A highly detailed structured JSON prompt for Nano Banana Pro designed to create a split composition poster. The top section features a luxurious smartphone gym selfie of a fit woman, and the bottom section displays a healthy diet bowl with a clean calorie infographic, emphasizing a modern fitness lifestyle aesthetic.",
+        "category_id": 12
+    },
+    {
+        "title": "Infographic \/ Edu Visual - Product Assembly Sequence Timeline",
+        "type": "text_to_image",
+        "prompt": "5-stage horizontal manufacturing timeline, frozen mid-assembly. deep matte black background. dramatic industrial spotlights, deep shadow falloff.  \nS1: Components scattered, floating, zero assembly. \nS2: Converging with speed lines, skeleton emerging. \nS3: Half-built, peak tension, fasteners mid-tighten. \nS4: Chassis open, full internals exposed. \nS5: Finished product + ghost wireframe overlay.  \nSame 3\/4 camera angle across all stages. Dotted trajectory arcs connect each component across stages. Each component color-coded consistently.  Title: \"PRODUCT NAME - ASSEMBLY SEQUENCE\" Footer: \"N parts parts · X hrs · KEY SPEC\"  Helvetica Neue Light labels. 4K, tack sharp. Dieter Rams precision.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773643976636_wiorx9_HDdwJpKXoAAU_He.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A complex, multi-stage prompt designed for Nano Banana 2 (used within Adobe Firefly) to generate a 5-panel horizontal timeline illustrating the assembly sequence of a product, focusing on dramatic lighting, technical precision, and consistent camera angles.",
+        "category_id": 8
+    },
+    {
+        "title": "Infographic \/ Edu Visual - Prompt for a modern villa layout",
+        "type": "text_to_image",
+        "prompt": "Create an image layout of a modern villa with sketchy analysis renders",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773556637589_3fog8t_HDYqwSUXwAAyZ4j.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt used with Google Nano Banana to create an image layout of a modern villa, including sketchy analysis renders.",
+        "category_id": 12
+    },
+    {
+        "title": "Infographic \/ Edu Visual - Visualizing Quantum Mechanics with Diorama Style",
+        "type": "text_to_image",
+        "prompt": "2x2 grid of famous quantum mechanics concepts:\n\nRender =\n( Micro_Diorama_Platform * 1.0 ) +\n( Sculpted_Miniature_Backdrop_[TOPIC] * 1.5 ) +\n( 3D_Miniature_Scene_Sculpt_[TOPIC] * 2.0 ) +\n( Resin_and_Clay_Materials * 2.0 ) +\n( Cinematic_Miniature_Lighting * 2.0 ) +\n( Tiny_Mascot_Character * 1.0 ) +\n( Clean_Studio_Void * 1.0 )\n-\n( Photorealism \/ 2.0 ) -\n( Human_Proportions )",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773469778324_ttp0no_HDKuCiJW8AII5Bt.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A complex, formulaic prompt for Nano Banana Pro designed to visualize quantum mechanics concepts using a micro-diorama style. It combines elements like sculpted miniatures, resin materials, cinematic lighting, and a tiny mascot character, while explicitly subtracting photorealism and human proportions.",
+        "category_id": 2
+    },
+    {
+        "title": "Infographic \/ Edu Visual - Evolution of Grocery Shops 3D Grid Prompt",
+        "type": "text_to_image",
+        "prompt": "A 3x3 grid of ultra-detailed 12K 3D-rendered tiny scenes depicting grocery shops through ages, scaled at 1:12. Placed on AI inferred material pedestal with engraved motifs. Warm afternoon rays from right create intimate, sharp castings. Panels cover 300 BC, 1000 AD, 1500 AD, 1700 AD, 1900 AD, 1950 AD, 2000 AD, 2100 AD, and future 2500 AD variants.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773383478935_2mwx1s_HDFrj1RaMAEqdY5.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A concise prompt for generating a 3x3 grid of ultra-detailed 12K 3D-rendered tiny scenes depicting the evolution of grocery shops through nine different historical periods, from 300 BC to 2500 AD.",
+        "category_id": 12
+    },
+    {
+        "title": "Infographic \/ Edu Visual - 3D Radial Explosion Product Visualization Prompt for Nano Banana 2",
+        "type": "text_to_image",
+        "prompt": "Hyperrealistic 3D radial exploded view of {argument name=\"product\" default=\"PRODUCT\"}  {argument name=\"number of components\" default=\"NUMBER\"} components  bursting outward from a central axis in every direction, frozen in mid-air.  True spatial explosion, not a vertical stack, depth and parallax visible.  COMPONENTS (core outward): {argument name=\"shell material\" default=\"SHELL\"} → DISPLAY → FRAME → MAINBOARD →  BATTERY → MICRO PARTS shown in 3x floating callout circles  MATERIALS: glass refracts and catches specular highlights, aluminium shows  brushed grain and machined edges, PCB traces glow faintly amber,   rubber gaskets matte with micro-texture, cables with soft bend physics.  LABELS: hairline leader to floating box. \"[COMPONENT]\" uppercase \/  \"[FUNCTION]\" italic \/ \"[KEY SPEC]\" monospace. Radiate outward, no overlaps.  LIGHTING: cool diffused overhead + warm amber underlighting on internals +  thin blue rim on outer shell. Displays emit soft UI glow. Circuits self-illuminate.  BACKGROUND: {argument name=\"background color\" default=\"COLOR\"}, deep, non-reflective. Midnight black recommended. TITLE: \"[PRODUCT NAME]\" top right. SUBTITLE: \"[TAGLINE]\".  SPEC BLOCK: \"[SPEC 1] \/ [SPEC 2] \/ [SPEC 3]\" bottom left in monospace.  Mood: iFixit teardown meets NASA manual meets WIRED cover. 4K, tack sharp, extraordinary material fidelity.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773383490311_9hkect_HDOPlsPX0AAdu1e.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A highly structured prompt for Nano Banana 2 designed to create a hyperrealistic 3D radial exploded view of a product, detailing component layers, materials, lighting, and specific labeling requirements in the style of an iFixit teardown meets a NASA manual.",
+        "category_id": 10
+    },
+    {
+        "title": "Infographic \/ Edu Visual - System Prompt for Nano Banana Pro Image Prompt Deconstruction",
+        "type": "text_to_image",
+        "prompt": "You are an expert image prompt deconstruction specialist. Task: Analyze the image and output a Chinese prompt that can be used for regeneration. Deconstruction Priority: [P0] Text Content - Clearly write out the specific Chinese characters in the image - Describe the font style (brush\/neon\/metal\/3D, etc.) - Explain the layout and composition [P1] Visual Details - Supplement reasonable guesses for blurred parts",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773383503371_wptd0o_HDM9MF0bgAA7_Bd.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "This is a system prompt designed to instruct Nano Banana Pro (an image generation model) to act as an expert image prompt deconstruction specialist. The task is to analyze an image and output a Chinese prompt that can be used to regenerate the image, prioritizing text content (P0) and visual details (P1). This is a meta-prompt used to generate other prompts, not a direct image generation prompt.",
+        "category_id": 12
+    },
+    {
+        "title": "Infographic \/ Edu Visual - Modern Home Interior Architectural Blueprint Prompt",
+        "type": "text_to_image",
+        "prompt": "Modern home interior turned into a clean 2D architectural blueprint floor plan 🗺️",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773383481459_362ag9_HDLFzMgbMAAvwsu.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for transforming a modern home interior into a clean 2D architectural blueprint floor plan.",
+        "category_id": 12
+    },
+    {
+        "title": "YouTube Thumbnail - Drake with Orbiting Glass Music Interfaces",
+        "type": "text_to_image",
+        "prompt": "Numerous 3D Spotify and Apple Music interface cards orbiting Drake at varying depths.\nMaterial: Translucent frosted glass (glassmorphism) with soft rounded edges and subtle glowing borders.\n Movement: Some cards are in the extreme foreground, partially obscuring Drake, while others drift into the distance behind him.\nVisual Accents: Dynamic motion blur on the edges of the cards to suggest a swirling, orbiting movement.\nLIGHTING & COMPOSITION\nLighting: Natural tones with enhanced professional photo quality. The soft glow from the interface cards subtly illuminates Drake’s face.\nFocus: Strong depth of field. The background and extreme foreground cards are artistically blurred, keeping the focus sharp on Drake and the closest player interfaces.\nComposition: A cinematic wide or medium shot that emphasizes the scale of the floating AR elements.\nAESTHETIC\nHigh-end editorial music photography, futuristic AR concept, clean and airy vibe. 8k resolution, sophisticated lighting, and realistic textures on the glass cards.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074523220_tvlp28_HD33QM4boAAv5bd.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for generating an image of Drake surrounded by numerous 3D Spotify and Apple Music interface cards. It specifies the material (translucent frosted glass), movement (orbiting, motion blur), lighting (soft glow from cards), and aesthetic (futuristic AR concept, high-end editorial photography).",
+        "category_id": 10
+    },
+    {
+        "title": "YouTube Thumbnail - Cinematic Food Short Video Prompt (Summary)",
+        "type": "text_to_image",
+        "prompt": "A cinematic food short video composed of 4 cuts, emphasizing warm lighting and ASMR sound. It smoothly transitions from rhythmic ingredient cuts captured with a macro lens to a slow-motion frying scene. Shallow depth of field is used to depict cute hand plating, concluding with the finished dish and the lingering feeling of the meal. Utilizing match cuts and motion blur to create an immersive experience where sight and sound seamlessly connect.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074543760_krfqhl_HD0VdVtaoAAMrXL.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A summary of a cinematic food short video prompt, which was used to generate images in Nano Banana Pro and then converted into a video using Kling 3.0 Omni. The prompt was generated by GPT-5.",
+        "category_id": 4
+    },
+    {
+        "title": "YouTube Thumbnail - Image Transformation Prompt for Nano Banana Pro (Content Creator Studio)",
+        "type": "text_to_image",
+        "prompt": "Transform this image into a modern content creator studio. Place the subject sitting at a desk with a professional podcast setup, including a mounted microphone arm and studio microphone in front of them. Add acoustic foam panels on the walls for a soundproof studio look. Include colorful LED tube lights (blue and pink tones) in the background for a cinematic YouTube aesthetic. He's wearing a nice jacket with nice apple airpods.Keep the subject’s face realistic and unchanged, with natural skin tones. Add soft, professional lighting on the face (key light + subtle rim light).\nStyle: high-quality YouTube creator setup, cinematic lighting, vibrant but clean colors, sharp focus, professional studio environment, modern and minimal.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902654437_eb5buk_HDuy3wKb0AAGQlp.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Google Nano Banana Pro that instructs the model to transform an existing image by placing the subject in a modern content creator studio setting, adding professional podcast equipment, acoustic foam, and cinematic LED lighting, while preserving the subject's face.",
+        "category_id": 10
+    },
+    {
+        "title": "YouTube Thumbnail - Cinematic 3x3 Grid Camera Angle Prompt",
+        "type": "text_to_image",
+        "prompt": "A cinematic 3×3 grid presenting multiple camera angles of the same female subject outdoors at dusk. A young woman wearing a patterned black shirt stands beside a car on a rural road, surrounded by open fields and distant hills. Each frame shows a distinct shot: extreme close-up, medium shot, over-the-shoulder, wide shot, high-angle top-down, low-angle, profile, three-quarter rear view, and full back view. Natural blue-hour lighting, soft sky gradients, realistic colors, shallow depth of field, cinematic framing. Consistent subject appearance across all frames, film-still aesthetic, professional cinematography reference sheet style, ultra-realistic photography.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773816078093_vzf9za_HDlj765bEAEC_Be.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana 2 to generate a cinematic 3x3 grid presenting nine different camera angles of the same female subject standing next to a car outdoors at dusk. It specifies various shots (close-up, wide shot, high-angle, etc.), blue-hour lighting, and a consistent subject appearance across all frames, aiming for a professional cinematography reference sheet style.",
+        "category_id": 10
+    },
+    {
+        "title": "YouTube Thumbnail - Decorative Cinematic Title Font Generation",
+        "type": "text_to_image",
+        "prompt": "Based on the word “{argument name=\"word\" default=\"[WORD]\"},” design an original decorative cinematic title font that visually evokes the meaning of the word. Use your imagination to create a unique and original design without being limited by existing typefaces. Choose the background color according to the design.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773729529792_e6vk8h_HDg46Ggb0AAA08C.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt template designed to generate an original decorative cinematic title font based on a specific word, visually evoking the meaning of that word, with the background color chosen according to the design.",
+        "category_id": 4
+    },
+    {
+        "title": "YouTube Thumbnail - Anime Style Girl in Blazer Uniform Prompt for Nano Banana 2",
+        "type": "text_to_image",
+        "prompt": "A cute anime-style girl. Brown bob hair with a round silhouette, large, gentle brown eyes. Wearing a stylish blue blazer uniform with a brown bow tie, white socks, and loafers. She is smiling gently, looking at the camera with a bashful, pleasant expression. Front view composition, showing her from the waist up over a desk. The background is a calm atmosphere, like a corner of a cafe with warm light streaming in. Expressing cuteness and healing with sparkling, shojo manga-style depiction and soft colors. As a streaming screen, a semi-transparent chat window and viewer count UI are subtly placed. Aspect ratio 16:9.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773729534161_9rww1i_HDd4e_pXUAAICue.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed prompt for Nano Banana 2 to generate an image of a cute anime-style girl in a blazer uniform, suitable for use as a streaming screen background, with specific details on appearance, setting, and composition.",
+        "category_id": 10
+    },
+    {
+        "title": "YouTube Thumbnail - Cyberpunk Science Portrait",
+        "type": "text_to_image",
+        "prompt": "Make a cinematic close-up portrait of a young woman’s face in side profile, wet hair strands on her skin, intense reflective eyes, mathematical formulas and scientific equations projected across her face and neck, glowing white handwritten symbols, physics diagrams and abstract calculations overlay, futuristic holographic projection, dark moody background, dramatic lighting, high contrast, detailed skin texture, cyberpunk science aesthetic, shallow depth of field, volumetric lighting, photorealistic, 8k, film still, sci-fi atmosphere.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773643978890_2n6bg6_HDdEWxPbkAAAmCm.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A cinematic close-up prompt for Nano Banana 2 to generate a portrait of a young woman with wet hair, featuring mathematical formulas and scientific equations projected across her face in a dark, moody, high-contrast cyberpunk aesthetic.",
+        "category_id": 2
+    },
+    {
+        "title": "YouTube Thumbnail - Cinematic Tea Time Prompt (Shared for Image and Video Generation)",
+        "type": "text_to_image",
+        "prompt": "A cinematic video depicting a woman's charm through delicate tea time actions and changes in expression. Using shallow depth of field and warm tones, capturing close-ups of her hands pouring tea, rising steam, soft gaze, and subtle breathing fluctuations. Composed of four warm, lingering cuts with a relaxed tempo and direction, including ASMR sound elements.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773644008180_615x2e_HDawuiub0AAo2uQ.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt used for image generation (Nano Banana Pro) and subsequent video generation (Kling 3.0 Omni). The prompt, generated by GPT-5, describes a cinematic video capturing a woman's charm through delicate tea time actions and facial expressions, using shallow depth of field, warm tones, close-ups, and ASMR elements.",
+        "category_id": 4
+    },
+    {
+        "title": "YouTube Thumbnail - Female Sorcerer Movie Poster",
+        "type": "text_to_image",
+        "prompt": "Make a hyper-realistic cinematic movie poster of a powerful young female sorcerer bursting through a cracked Queen of Spades playing card. The card explodes outward with stone fragments, dust, and debris frozen mid-air. SHe wears an ornate royal maroon and gold embroidered mediaeval fantasy jacket, rich fabric textures, intricate detailing, regal and Comme mystical.The sorcerer extends one hand forward toward the viewer, fingers glowing with intense magical energy, subtle golden sparks and dark arcane aura surrounding the hand. Intense piercing gaze, confident and dominant expression, cinematic hero framing. Dramatic chiaroscuro lighting, dark moody background, volumetric light rays, ultra-detailed textures, shallow cinematic depth of field. Photorealistic face, epic fantasy realism, movie poster composition, high contrast, dynamic motion, . dust particles, masterpiece quality, ultra-sharp focus, 8K resolution, cinematic color grading.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773643981276_xt5huj_HDaQx9PaMAIRCOJ.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro to generate a hyper-realistic cinematic movie poster featuring a powerful female sorcerer bursting dynamically through a cracked Queen of Spades playing card, emphasizing dramatic lighting, intricate medieval fantasy attire, and magical energy effects.",
+        "category_id": 6
+    },
+    {
+        "title": "YouTube Thumbnail - ASMR Sewing\/Crafting Video Prompt (GPT-5 Generated)",
+        "type": "text_to_image",
+        "prompt": "Using film-like and soft color tones, delicately capture the movement of fingers unraveling stitches, scissors, and needles through close-ups and macro shots of the hands. Emphasizing ASMR elements such as the sound of fabric rubbing, tools, and subtle whispers, the video depicts a feminine and approachable atmosphere, using seamless transitions and cinematic camera work to illustrate the process from focused work to the joy of completion.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773297042524_7d70vx_HDGA4XpaMAEq9-E.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt, generated by GPT-5, used to create images with Nano Banana Pro that were then sequenced into a video using Kling 3.0 Omni. The prompt focuses on a feminine, approachable atmosphere, emphasizing ASMR elements like fabric sounds, close-ups of hands and tools, and a cinematic flow from concentration to completion.",
+        "category_id": 10
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga: 2026 Solo Camping Declaration of Independence",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\n \nTitle\n2026 Solo Camping Declaration of Independence\n\nBiking (comedian duo) Mimura, who is that?\n\nIt's not garbled text, it's a pseudonym! Just kidding\n\nGovernment AI Gennai starts up and a future forecast",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248324376_zntvf3_HECdkLpa0AA6nCS.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for generating a four-panel manga titled '2026 Solo Camping Declaration of Independence' using Nano Banana Pro (Gemini 3 Pro Image). The scenario involves a reference to a comedian and a prediction about a government AI system.",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga: The Darkness of SNS (Part 2)",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\n \nTitle\nThe Darkness of SNS\n\nWas it impression zombies?\n\nIt's different from that\nImpression boosting service?\n\nI don't understand the point of the free version group\n\n(Laugh)...\n\n↓\nBreakdown Part 1",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248325743_u49fut_HEBSX4ea4AAUueG.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for generating a four-panel manga titled 'The Darkness of SNS' using Nano Banana Pro (Gemini 3 Pro Image). The theme is about 'impression zombies' or impression boosting services, questioning the point of using the free version.",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga: The Darkness of SNS (Part 1)",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\n \nTitle\nThe Darkness of SNS\n\nApparently, there's a service where you can buy YouTube views\n\nNot to brag,\n\nBut my playlist\n\nHas 0 content! (Laugh)\n\n↓\nBreakdown Part 1",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248324263_gmc7ch_HEBSHUaaMAAiBbb.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for generating a four-panel manga titled 'The Darkness of SNS' using Nano Banana Pro (Gemini 3 Pro Image). The theme is about services that sell YouTube views, contrasting with the user's zero-content playlist.",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - Makoto Shinkai Inspired Anime Cinematic Scene",
+        "type": "text_to_image",
+        "prompt": "Anime cinematic style, Makoto Shinkai inspired, soft blue hour lighting, narrow European cobblestone alley, warm shop lights, dreamy atmosphere, shallow depth of field, soft bloom, lens flare, highly detailed, consistent character: young boy with messy light brown hair, navy coat, scarf, white fluffy spirit cat with faint glow",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248309891_ltvw6u_HEA86DGasAA7us3.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Google Nano Banana Pro to generate an anime-style cinematic image inspired by Makoto Shinkai. The scene features a young boy and a fluffy spirit cat in a narrow European cobblestone alley during blue hour, emphasizing warm shop lights, soft bloom, and high detail.",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga: Labyrinth of Objection",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\n \nTitle\nLabyrinth of Objection\n\nBuying YouTube views\n\nGetting caught by the director\n\nI don't know since I haven't experienced it\n\nIt seems like a very mechanical interaction...",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248324355_lskj5m_HEAG6Kma8AAiW8y.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for generating a four-panel manga titled 'Labyrinth of Objection' using Nano Banana Pro (Gemini 3 Pro Image). The theme is about purchasing YouTube views and the mechanical nature of the interactions involved.",
+        "category_id": 3
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga: Countdown to Disappearance",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\n \nTitle\nCountdown to Disappearance\n\nApparently, there's a service where you can buy YouTube views\n\nNot to brag,\n\nBut my playlist\n\nHas 0 content! (Laugh)",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248322525_9zdffe_HEAGXV4b0AApaiI.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for generating a four-panel manga titled 'Countdown to Disappearance' using Nano Banana Pro (Gemini 3 Pro Image). The theme revolves around the concept of purchasing views for YouTube videos, contrasting it with the user's own zero-content playlist.",
+        "category_id": 10
+    },
+    {
+        "title": "Comic \/ Storyboard - Nano Banana Pro 4-Panel Comic Prompt: Bach in Heaven",
+        "type": "text_to_image",
+        "prompt": "4-panel comic\n\nTitle\n\"Bach in Heaven, Business on Earth\"\n​or\n\"The Light and Shadow of the Critical Edition (Urtext)\"",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774161444478_wq8m1w_HD9uRS0bUAEILdq.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt used with Nano Banana Pro (Gemini 3 Pro Image) to generate a 4-panel comic titled 'Bach in Heaven, Business on Earth' or 'The Light and Shadow of the Urtext'.",
+        "category_id": 12
+    },
+    {
+        "title": "Comic \/ Storyboard - Cinematic Macro Toy-Photography of Mini Beasts",
+        "type": "text_to_image",
+        "prompt": "A cinematic macro toy-photography scene of the uploaded reference character multiplied into dozens of miniature identical instances, each actively working on a giant open comic book that tells the story of the same character.\nLikeness Integrity (CRITICAL)\n\nAll miniature instances must preserve the exact identity of the reference character:\n\n• identical proportions\n\n• exact eye shape, spacing, stylization\n\n• same silhouette and material behavior\n\n• no added features, no face changes, no stylization drift\nThe comic book artwork must depict the exact same character design language, translated into printed comic style without altering anatomy or facial structure.\nScene Concept & Action\nThe giant comic book lies open like a construction site of narrative.\nMini characters are scattered across the pages, each performing a specific task:\n• some are drawing panels with tiny tools (pens, brushes, stylus-like tools)\n\n• some are painting color into panels\n\n• some are climbing panel borders like scaffolding\n\n• some are inspecting scenes, pointing, directing\n\n• some are physically interacting with the comic world ( lifting panels, stepping into frames)\nThe scene must feel like they are building their own story in real-time.\nPerspective & Composition (MANDATORY)\nCamera & Perspective (Corrected)\nLow-angle macro shot, camera positioned close to the comic page\nLens: 90–100mm macro (compression, NOT distortion)\n• Perspective compression must preserve consistent object scale\n\n• Foreground character appears larger only due to proximity to lens\n\n• No exaggerated wide-angle distortion\n\n• Spatial depth created through distance falloff + focus, not scaling\n\n• The open comic book stretches diagonally into depth\n\n• Panels form strong leading lines across the frame\n\n• Composition is intentionally off-balance, not centered\n\n• Some characters partially cropped by frame edges\nForeground includes blurred ink tools, paper edges, or panel borders creating depth layering\nDepth of Field (CRITICAL)\nExtremely shallow depth of field\n• Primary focal plane: one or two mini characters in the foreground actively working\n\n• Mid-ground characters slightly softer\n\n• Background characters and panels fall into creamy blur\nNo full-frame sharpness\nFocus must guide the viewer toward the “main worker” character\nLighting Doctrine\nHard directional cinematic light from top-left\n• sharp shadows cast across comic panels\n\n• subtle rim light separating characters from page\n\n• ink reflections create small specular highlights\n\n• shadows from panel edges create natural depth\nNo flat lighting\nEnvironment & Surface Detail\nMacro-level realism of the comic book:\n• visible paper fibers\n\n• ink texture and slight gloss\n\n• subtle imperfections in print\n\n• panel borders slightly raised or embossed\nTiny tools leave micro mar",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774161440924_igvzbo_HD8hTgkaIAAP3Mq.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A complex, multi-section prompt for generating a cinematic macro toy-photography scene. The concept involves dozens of miniature identical character instances working on a giant open comic book that tells their story. The prompt strictly enforces likeness integrity, specific camera perspective (low-angle macro, 90-100mm lens), shallow depth of field, and hard directional lighting.",
+        "category_id": 2
+    },
+    {
+        "title": "Comic \/ Storyboard - 4-Panel Manga: Anonymous and Mask",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\nTitle\n\nAnonymous and Mask\n\nDescription:\n Inside a moving car. The smartphone of the man in the back seat (center of the image) rings. The display shows 'Unknown Number'...",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774161442662_b90gww_HD6ni-ubMAAz381.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro (Gemini 3 Pro Image) to generate a 4-panel manga titled 'Anonymous and Mask.' The description specifies a scene inside a moving car where a man in the back seat receives a call from an 'Unknown Number' on his smartphone.",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - 4-Panel Manga Dialogue Prompt",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\nTitle\nThe Truth Beyond the Avatar\nMan (Center): \"Hold on, I got a call from the store. Maybe they're confirming my shift.\"\nFriend A (Left): \"Oh, what is it?\"\nFriend B (Right): \"Hope they didn't find out about your fake job, did they?\"",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774161444911_d7s13t_HD6l-taaIAA-SIB.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for generating a 4-panel manga titled 'The Truth Beyond the Avatar' with specific dialogue for three characters, generated using Nano Banana Pro (Gemini 3 Pro Image).",
+        "category_id": 2
+    },
+    {
+        "title": "Comic \/ Storyboard - Cinematic Portrait Reflection with Ghibli Effect",
+        "type": "text_to_image",
+        "prompt": "A cinematic portrait of a serious man use image for face reference looking at himself in a mirror, moody atmosphere, soft natural window light coming from the side, dust particles visible in the air, warm wooden interior background, shallow depth of field, sharp focus on the reflection while the back of the man is slightly blurred, emotional and introspective expression, realistic skin texture, short dark hair, light stubble, wearing a casual black jacket over a nike white t-shirt, dramatic lighting, high detail, 50mm lens, photorealistic, film still style. Add Ghibli art effects to this image.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773989005508_a9z53m_HDyiD23aIAEMGE9.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed text prompt for Nano Banana Pro requesting a cinematic portrait of a serious man looking at his reflection in a mirror, emphasizing moody atmosphere, soft natural light, shallow depth of field, and then applying a Ghibli art style effect to the final image.",
+        "category_id": 10
+    },
+    {
+        "title": "Comic \/ Storyboard - Static Image Generation from Anime Prompt",
+        "type": "text_to_image",
+        "prompt": "Anime prompt for \"{argument name=\"title\" default=\"Sharon, the Out-of-Control Girl!\"}\" (『ハチャメチャ暴走娘シャロン！』)",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902683048_5ygw4j_HDt_XXObUAE5ueh.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt used with DeeVid AI's Nano Banana Pro to generate nine static images suitable for a picture-story show (Kamishibai) from an anime prompt titled 'Sharon, the Out-of-Control Girl!'",
+        "category_id": 10
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga: Judgment of the Ministry of Magic",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\nTitle\n{argument name=\"title_en\" default=\"Judgment of the Ministry of Magic: Confrontation with Demaon\"}\n\nDemaon\nNobita's Great Adventure into the Underworld\n\nIt was supposed to be Demaon\nBut it didn't seem to match... lol",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902684319_5o1i4d_HDuBvyebsAA5UMb.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "An image generation prompt for Nano Banana Pro (Gemini 3 Pro Image) to create a four-panel manga titled 'Judgment of the Ministry of Magic: Confrontation with Demaon,' referencing Doraemon's 'Great Adventure into the Underworld.'",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga: Personal Universe",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\nTitle\n{argument name=\"title_en\" default=\"Personal Universe\"}\n\nIt's about an individual (pillar) and the universe...\n\nOmitted",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902683901_t6ew8i_HDt__33aUAADq9O.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "An image generation prompt for Nano Banana Pro (Gemini 3 Pro Image) to create a four-panel manga titled 'Personal Universe,' related to the concept of an individual (pillar) and the universe.",
+        "category_id": 2
+    },
+    {
+        "title": "Comic \/ Storyboard - High-Speed Cinematic Cyberpunk Scene Prompt",
+        "type": "text_to_image",
+        "prompt": "A cinematic speed-motion shot of the uploaded reference character captured mid-slide on a rain-slicked, neon-drenched cyberpunk street. The focus is equally on the reflection and the character, forming a dual-layer composition. Likeness Preservation (CRITICAL): Maintain exact proportions, eye shape, spacing, stylization, silhouette, and material identity from the reference. Do not humanize. Do not reinterpret anatomy. Do not modify facial structure. Identity must remain perfectly intact and instantly recognizable. 2D to 3D Translation (ONLY if input is 2D artwork): If the uploaded reference is 2D (illustration, anime, flat graphic, cel-shaded), convert it into a fully realized 3D cinematic form while preserving exact identity fidelity. Maintain exact head shape, eye design, spacing, and proportions. Preserve original stylization, do NOT add realism that alters design language. Translate linework into subtle surface geometry or shading transitions. Keep original colors, expressed through physically believable materials. Convert flat shading into controlled cinematic light falloff. The result must feel physically real, not redesigned. Camera & Perspective: Ultra-low angle, camera positioned just centimeters above the wet pavement. Lens: 18–20mm ultra-wide. Slight Dutch tilt (5–10 degrees) to destabilize the frame. Front three-quarter perspective. One limb or body part must be closer to the lens, creating perspective pressure. Composition (Reflection Dominance): The character slices diagonally across the upper half of the frame. The lower half is dominated by a sharp but slightly distorted reflection. Vertical neon signs in the background must mirror into the wet ground, forming strong graphic lines. The composition must feel off-balance and tension-driven, not centered or stable. Pose Enforcement (CRITICAL — OVERRIDE ALL DEFAULT STANCES): The character must NOT be upright, balanced, or casually sliding. The pose must represent loss of balance under high speed. The torso is pitched aggressively forward, close to the ground. One limb forcefully contacts the wet surface, creating splash and friction. The opposite limb extends outward or backward, fully stretched for counterbalance. Legs are asymmetrical: one trailing, one collapsing or stepping incorrectly. Spine forms a diagonal or curved line, never vertical. Head leads the motion slightly ahead of the torso. Weight Distribution: Weight is NOT centered. It collapses toward the contacting limb and forward motion. Ground Interaction (MANDATORY): Water splashes outward from impact points. Friction streaks beneath sliding limb. Surface tension visibly disturbed. Energy Read: The pose must feel like mid-fall recovery, evasive maneuver at high speed, barely controlled momentum. NOT clean skating, surfing, balanced glide, or upright slide. Perspective Amplification: At least one limb must appear larger due to proximity to the lens, enhancing speed and aggression. Motion & Blur: Directional motion blur trailing from the lowest moving limbs. Sharp focal plane on the face or upper torso. Background and trailing limbs fall into controlled blur. Lighting & Color (Cyberpunk Neon): Hard directional neon lighting from off-screen vertical sources. Color palette: deep cyan, magenta, electric yellow. Lighting behavior: sharp highlights on wet surfaces, strong rim light separating silhouette, deep shadow pockets. No flat lighting. Surface Detail (Hyper-Reflective): Wet pavement must feel physically real: mirror-like reflections with ripple distortion, micro scratches and pooling water, subtle rain impact patterns. Character materials slightly darkened from moisture. Atmosphere: Heavy rain and mist in the background. Volumetric light beams cutting through haze. Dense air perspective. Foreground may include subtle water droplets or mist near lens for depth. Emotion: Urgency. Instability. High-stakes motion. The character is either escaping or chasing. Negative Constraints: No centered composition. No upright balanced pose. No clean symmetrical stance. No dry surfaces. No flat reflections. No studio lighting. No evenly sharp full-frame clarity. No static posture. Background Pixel Wall Art (Depth-Controlled): Replace the LED sign with a weathered wall-mounted pixel-art mural or printed panel of the character. The pixel version must preserve silhouette and identity but appear faded, worn, and partially damaged. Printed or painted on a rough wall surface, not glowing like a screen. Subtle grime, scratches, peeling, or moisture distortion. Colors desaturated and affected by environment. Depth Control (CRITICAL): Must sit clearly in the background plane. Slightly obscured by haze, rain, or foreground motion. Edges softened, not crisp. Reduced contrast compared to main subject. Lighting Integration: Does NOT emit light. Only receives ambient neon spill. Partially falls into shadow. Pixel Art Identity Lock (CRITICAL): The pixel-art version must be a direct downscaled translation of the original character, not a reinterpretation. Preserve exact silhouette, head shape, and proportions. Preserve exact eye shape and spacing in simplified pixel form. Use the same facial structure logic — do NOT invent or add features. STRICT PROHIBITIONS: No added nose. No added mouth. No added facial features that do not exist in the original. No stylization drift toward generic pixel characters. If the original character has a minimal or abstract face, the pixel version must remain equally minimal. Foreground Chaos Layer (CRITICAL – DEPTH & IMMERSION): Introduce aggressive near-lens elements that partially obstruct the frame and enhance depth. Near-Lens Elements: Water droplets, splashes, or streaks crossing very close to the camera. Out-of-focus rain particles catching neon light. Small debris or mist fragments passing across the lens plane. These elements must feel physically between the viewer and the character, not part of the background. Depth Behavior (MANDATORY): Foreground elements are heavily out of focus due to proximity. Large soft bokeh shapes or streaks may partially cover edges of the frame. Some elements may briefly occlude parts of the character or reflection. The frame must feel layered: foreground chaos, main subject, background environment. Lens Interaction (IMPORTANT): Subtle water streaks or droplets may appear on the lens surface. Slight distortion or refraction through droplets is allowed. Effects must remain minimal and believable, never covering the focal subject completely. Lighting Interaction: Foreground particles catch neon light (cyan, magenta, yellow). Creates glowing streaks or soft colored flares. Adds dimensional separation between planes. Composition Impact: Frame edges may feel dirty or partially blocked. The image should NOT feel clean or perfectly framed. Slight visual interference is intentional. Emotion: The viewer feels inside the scene, not watching it. ar 16:9",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902657351_abdtvq_HDs0C91XYAAH6Jw.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A highly detailed, multi-section prompt designed to turn an uploaded character reference into a photorealistic, high-speed cinematic scene on a rain-slicked cyberpunk street, emphasizing strict identity preservation, specific camera angles, and dynamic pose enforcement, recommended for Nano Banana 2 (Thinking Mode).",
+        "category_id": 2
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga: Double Accounting",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\nTitle\n{argument name=\"title_en\" default=\"Double Accounting\"}\n\nKotoge Moto\nWig is amazing...\n\nLooks like a different person lol",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902683546_d5n4am_HDsRW3CakAAR-_v.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "An image generation prompt for Nano Banana Pro (Gemini 3 Pro Image) to create a four-panel manga titled 'Double Accounting,' featuring characters Koto-ge Moto and Katsura.",
+        "category_id": 2
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga Prompt: Judgment of the Ministry of Magic",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\nTitle: Judgment of the Ministry of Magic\n\nCache (reality)\nand\nCache (footprints)\n\nWhat is the weight of cache...",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773816088470_hbe45v_HDorYaSbEAA33ox.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro (Gemini 3 Pro Image) to generate a four-panel manga titled 'Judgment of the Ministry of Magic,' focusing on the concept of 'cache' (reality) versus 'cache' (footprints) and the weight of cache.",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - 4-Panel Manga: The Long Road to 170 Yen Gasoline Price",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\nTitle:\nThe Long Road to 170 Yen Gasoline Price\n\nReiwa Roman edition",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773816091521_1xpl3n_HDmwR5VbEAEMRlR.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro (Gemini 3 Pro Image) to generate a 4-panel manga titled 'The Long Road to 170 Yen Gasoline Price,' featuring the comedy duo Reiwa Roman, likely commenting on high gasoline prices.",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - Four-Panel Manga Prompt: Oil Rush Panic",
+        "type": "text_to_image",
+        "prompt": "4-panel manga\nTitle:\n'Oil Rush Panic'\n\nViking?\n\nOnly Eiji Kotouge\nBarely...\n\nOthers changed characters",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773816090097_a2qlj6_HDmvLPRbEAEDpXq.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro (Gemini 3 Pro Image) to generate a four-panel manga titled 'Oil Rush Panic,' mentioning the comedy duo Viking and specifically the member Eiji Kotouge.",
+        "category_id": 5
+    },
+    {
+        "title": "Comic \/ Storyboard - Pop Art comic book illustration prompt for Nano Banana Pro",
+        "type": "text_to_image",
+        "prompt": "A highly stylized, single-panel sequential art illustration, executed in the classic 1960s Pop Art comic book aesthetic (Roy Lichtenstein inspired). The scene features a startled woman seated on a plush, magenta mid-century modern couch, frozen in an act of surprise. She wears vibrant, high-contrast clothing and is conspicuously holding a single, bright yellow banana. The background shows a door dramatically flung open, revealing a towering, solid black silhouette of a man framed by deep shadows. The entire image is rendered using thick, heavy black ink outlines, exaggerated facial expressions, and pervasive Ben-Day halftone dots. A large, dynamic speech bubble, shaped like a yellow starburst, bursts from the woman's mouth, containing the bold, capitalized text: \"{argument name=\"speech bubble text\" default=\"IT'S NOT WHAT IT LOOKS LIKE!\"}\" High contrast lighting, vibrant primary color palette, cinematic comic book framing.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773816098152_7dmlw2_HDmiRxQX0AAdDHs.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed prompt for Nano Banana Pro to generate a highly stylized, single-panel sequential art illustration in the classic 1960s Pop Art comic book aesthetic (Roy Lichtenstein inspired), featuring a startled woman holding a banana and a man's silhouette in the doorway, complete with Ben-Day dots and a starburst speech bubble.",
+        "category_id": 12
+    },
+    {
+        "title": "Product Marketing - 2x2 Editorial Grid: Pink Rhinestone Lips and Dance Fashion",
+        "type": "text_to_image",
+        "prompt": "{\n  \"generation_request\": {\n    \"meta_data\": {\n      \"tool\": \"NanoBanana Pro\",\n      \"task_type\": \"glam_lips_dance_beauty_2x2_grid\",\n      \"language\": \"en\",\n      \"priority\": \"highest\",\n      \"version\": \"v1.1_PINK_SATIN_RHINESTONE_DANCE_GRID\"\n    },\n    \"input\": {\n      \"mode\": \"text_to_image\",\n      \"notes\": \"Create a photoreal 2x2 beauty-fashion editorial grid featuring one elegant adult woman across four panels. The concept should focus on glamorous soft pink lips covered in delicate rhinestone gems, while also showing a coordinated fashion look. She wears a soft pink satin dress embellished with matching rhinestone or crystal details, harmonized with the lips so the beauty styling and outfit feel like one luxury concept. Her hair is open, long, softly wavy, and polished. In all four panels, she should have graceful dance-like pose language, with fluid arms, elegant body curves, soft movement, and refined expressive posture. Keep the mood feminine, polished, playful, luxurious, and high-end, like a premium beauty and fashion campaign. Vary the framing between near and far compositions: one extreme close-up of the lips, one close beauty portrait with the face visible, one medium beauty-fashion crop with a dance-like hand gesture near the face or shoulder, and one slightly wider portrait showing the woman in a flowing dance-inspired pose. Do not include rings on the hands.\"\n    },\n    \"output_settings\": {\n      \"aspect_ratio\": \"1:1\",\n      \"orientation\": \"square\",\n      \"resolution_target\": \"ultra_high_res\",\n      \"num_images\": 1,\n      \"layout\": {\n        \"type\": \"grid\",\n        \"rows\": 2,\n        \"cols\": 2,\n        \"gutter\": \"thin\",\n        \"outer_border\": \"none\",\n        \"panel_consistency\": \"very_high\"\n      },\n      \"render_style\": \"luxury_beauty_editorial_realism\",\n      \"sharpness\": \"editorial_crisp\",\n      \"grain\": \"soft_glam_film\",\n      \"dynamic_range\": \"clean_beauty\",\n      \"color_grade\": \"soft_pink_glow\"\n    },\n    \"subject\": {\n      \"identity\": \"one adult woman with highly consistent facial features across all four panels\",\n      \"hair\": \"long open softly wavy hair with polished texture\",\n      \"beauty\": \"luminous skin, soft glam makeup, refined lashes, smooth complexion, glossy pink lips with rhinestone gems\",\n      \"lip_detail\": \"soft pink glossy lips fully embellished with tiny sparkling rhinestones, dimensional shine, premium beauty finish\",\n      \"outfit\": \"soft pink satin dress embellished with matching rhinestone or crystal details, elegant fitted couture-inspired finish\",\n      \"expression\": \"kiss-ready pout, soft glamorous expression, refined dance-editorial attitude\"\n    },\n    \"scene\": {\n      \"environment\": \"minimal clean beauty studio background in a soft neutral or blush tone\",\n      \"mood\": \"feminine, polished, playful, glamorous, luxurious\"\n    },\n    \"panel_direction\": {\n      \"panel_1\": \"extreme close-up of glossy pink rhinestone lips with sparkling highlights\",\n      \"pan",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248309290_riv056_HECinoVbgAA6rqv.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A highly structured prompt for Nano Banana Pro to generate a 2x2 photorealistic beauty-fashion editorial grid. The focus is on glamorous soft pink lips covered in rhinestones, coordinated with a soft pink satin dress, featuring one consistent female model in various graceful, dance-inspired poses.",
+        "category_id": 8
+    },
+    {
+        "title": "Product Marketing - Editorial Surrealism Portrait (Amber Trance)",
+        "type": "text_to_image",
+        "prompt": "{\n  \"vibe_title_en\": \"The Amber Trance\",\n  \"master_prompt\": \"A hyper-realistic, tight head-and-shoulders beauty portrait of The Protagonist in a state of pure 'Ecstatic Dreamer' release. The subject's head is thrown back, neck exposed, eyes closed in a euphoric trance, with wind gently sweeping hair back. The surreal twist: The subject is emerging through a floating, rectangular pane of semi-liquid, optical yellow glass, creating subtle refractive distortions around the jawline and shoulders. The environment is a void of 'Signal Yellow' studio seamless paper. Lighting is high-voltage commercial hard light from a Fresnel source, casting razor-sharp shadows and highlighting individual skin pores and beads of sweat. Shot on a Hasselblad H6D-100c with a 100mm Macro lens at f\/2.8. The texture is hyper-tactile, blending the smoothness of the surreal glass with the gritty realism of human skin. Film look: Kodak Ektar 100 simulation for punchy, saturated colors.\",\n  \"meta\": {\n    \"intent\": \"Editorial Surrealism\",\n    \"priorities\": \"Skin Texture, Color Saturation, Optical Distortion\",\n    \"device_profile\": \"High-End Medium Format Digital\"\n  },\n  \"frame\": {\n    \"aspect\": \"4:5\",\n    \"composition\": \"Central symmetry, breaking the frame\",\n    \"layout\": \"Tight Portrait\",\n    \"camera_angle\": \"Eye level, slightly low angle to accentuate the backward tilt of the head\",\n    \"tilt_roll_degrees\": \"0\"\n  },\n  \"subject\": {\n    \"gender\": \"Female\",\n    \"identity\": \"The Ecstatic Muse\",\n    \"demographics\": \"Adult, Universal Ethnicity\",\n    \"face\": \"Symmetrical features, natural skin texture with visible pores, no heavy makeup\",\n    \"hair\": \"Swept back by wind\/movement, dynamic flow\",\n    \"body\": \"Neck and shoulders visible, tense muscles showing the passion of the pose\",\n    \"expression\": \"Head thrown back, mouth slightly open, eyes closed in pleasure\/trance\",\n    \"pose\": \"Dynamic head tilt, breaking through a surreal plane\"\n  },\n  \"wardrobe_accessories\": {\n    \"garments\": [\n      {\n        \"item\": \"Turtleneck (Partial view)\",\n        \"material\": \"Ribbed Knit\",\n        \"color\": \"Vibrant Mustard Yellow\",\n        \"fit\": \"Tight, form-fitting\"\n      }\n    ],\n    \"accessories\": [\n      {\n        \"item\": \"Surreal Visor (Optional)\",\n        \"color\": \"Translucent Amber\",\n        \"material\": \"Acrylic\/Glass\",\n        \"brand_style\": \"Avant-Garde Constructivist\"\n      }\n    ]\n  },\n  \"environment\": {\n    \"setting\": \"Infinite Yellow Studio Void\",\n    \"surfaces\": \"Liquid Glass, Seamless Paper, High-Gloss Acrylic\",\n    \"depth\": \"Shallow depth of field due to macro lens\",\n    \"atmosphere\": \"Hot, bright, studio-controlled vacuum\",\n    \"lens_interaction\": \"Refraction through the yellow glass element, slight chromatic aberration on edges\"\n  },\n  \"lighting\": {\n    \"key\": \"Hard Fresnel Light (Top Right)\",\n    \"fill\": \"Golden Reflector (Bottom Left)\",\n    \"rim\": \"Sharp white rim light to separate hair from yellow background\",\n    \"shadows\": \"Deep, \"\n  }\n}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248318595_20ih9i_HECe2gqXUAAAOzM.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A complex Nano Banana Pro prompt for generating a hyper-realistic, surreal beauty portrait of a subject in a euphoric trance, emerging through a floating pane of optical yellow glass, emphasizing high-voltage hard lighting, extreme texture realism, and a Kodak Ektar 100 film look.",
+        "category_id": 2
+    },
+    {
+        "title": "Product Marketing - 3x3 Minimalist Dance Editorial Grid",
+        "type": "text_to_image",
+        "prompt": "{\n  \"generation_request\": {\n    \"meta_data\": {\n      \"tool\": \"NanoBanana Pro\",\n      \"task_type\": \"minimal_dance_editorial_9panel_grid\",\n      \"language\": \"en\",\n      \"priority\": \"highest\",\n      \"version\": \"v1.0_WHITE_BLACK_DANCE_GRID\"\n    },\n    \"input\": {\n      \"mode\": \"text_to_image\",\n      \"notes\": \"Create a photoreal 3x3 minimalist dance-fashion editorial grid featuring one adult woman across nine panels. The visual style should feel modern, clean, intimate, and movement-driven, like a contemporary studio dance editorial. She wears a white fitted sports bra or minimal cropped top, oversized black low-rise pants with loose volume, and black harness or suspender-style straps hanging naturally from the waist. Her hair is a short tousled black bob with soft motion and natural texture. Every panel should show a different expressive dance-inspired pose with fluid arm lines, curved torso movement, seated floor poses, kneeling poses, stretched overhead arms, playful body angles, and fashion-led gesture work. The mood should feel free, modern, sensual, and artistic, with strong body awareness and soft emotional range. Keep the setting minimal with a white studio wall and floor, letting pose, styling, and movement carry the composition.\"\n    },\n    \"output_settings\": {\n      \"aspect_ratio\": \"4:5\",\n      \"orientation\": \"portrait\",\n      \"resolution_target\": \"ultra_high_res\",\n      \"num_images\": 1,\n      \"layout\": {\n        \"type\": \"grid\",\n        \"rows\": 3,\n        \"cols\": 3,\n        \"gutter\": \"thin\",\n        \"outer_border\": \"none\",\n        \"panel_consistency\": \"very_high\"\n      },\n      \"render_style\": \"minimal_editorial_realism\",\n      \"sharpness\": \"editorial_crisp\",\n      \"grain\": \"subtle_film\",\n      \"dynamic_range\": \"soft_clean_natural\",\n      \"color_grade\": \"muted_white_black_editorial\"\n    },\n    \"subject\": {\n      \"identity\": \"one woman with highly consistent facial features across all nine panels\",\n      \"hair\": \"short tousled black bob with soft movement\",\n      \"outfit\": \"white fitted sports bra or minimal crop top, oversized black loose pants, black suspender or harness-style straps\",\n      \"beauty\": \"clean editorial makeup, softly defined eyes, natural skin texture, modern understated finish\"\n    },\n    \"scene\": {\n      \"environment\": \"minimal white studio wall and floor with no visual clutter\",\n      \"mood\": \"modern, expressive, intimate, movement-led, artistic\",\n      \"panel_direction\": {\n        \"panel_1\": \"wide-legged seated pose with both hands in the hair, direct gaze\",\n        \"panel_2\": \"upright pose with elbows lifted and hands framing the neck and jaw\",\n        \"panel_3\": \"three-quarter standing pose with one knee bent and soft body curve\",\n        \"panel_4\": \"floor pose with one arm extended upward and the other bent across the body\",\n        \"panel_5\": \"close editorial seated crop with one hand touching the shoulder and calm gaze\",\n        \"panel_6\": \"standing pose with both arms exten",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248309898_d0ihzv_HECZZW3bcAAyJTQ.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A structured prompt for Nano Banana Pro to generate a 3x3 photorealistic minimalist dance-fashion editorial grid. The image features one consistent female model with a short black bob, wearing a white crop top and oversized black pants, performing nine different expressive, fluid dance poses in a clean white studio environment.",
+        "category_id": 10
+    },
+    {
+        "title": "Product Marketing - Eco-Luxury Skincare Product Photography",
+        "type": "text_to_image",
+        "prompt": "High-end commercial skincare product photography of a hydrating gel cream jar with minimal clean label, placed on natural moss-covered tree branches, surrounded by delicate small flowers and leaves, fresh dewy water droplets on the jar, soft diffused lighting, bright minimal background (white\/neutral), organic aesthetic, eco-luxury branding style, shallow depth of field, ultra-detailed textures (glass, moss, bark, petals), calm and refreshing mood, studio + nature hybrid setup, 8K.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248310819_hya8s3_HEBmHGUaAAACTmZ.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro to generate high-end commercial product photography of a hydrating gel cream jar. The setup is a studio\/nature hybrid, featuring the jar on moss-covered tree branches, surrounded by delicate flowers, emphasizing fresh water droplets, soft diffused lighting, and an organic, eco-luxury aesthetic.",
+        "category_id": 3
+    }
+]
