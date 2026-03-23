@@ -77,40 +77,46 @@ function getOrCreateUser($tokenData)
 }
 
 /**
+ * Soft authenticate the current request.
+ * Returns user row or null if not authenticated.
+ */
+function getAuthenticatedUser()
+{
+    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+    if (empty($authHeader) && function_exists('getallheaders')) {
+        $headers = getallheaders();
+        $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+    }
+
+    if (!preg_match('/Bearer\s+(.+)$/i', $authHeader, $matches)) {
+        return null;
+    }
+
+    $idToken = $matches[1];
+    if (!defined('FIREBASE_PROJECT_ID') || empty(FIREBASE_PROJECT_ID)) {
+        return null;
+    }
+
+    $tokenData = verifyFirebaseToken($idToken);
+    if (!$tokenData || !$tokenData['uid']) {
+        return null;
+    }
+
+    return getOrCreateUser($tokenData);
+}
+
+/**
  * Authenticate the current request.
  * Reads Bearer token from Authorization header.
  * Returns user row or sends 401 and exits.
  */
 function authenticateRequest()
 {
-    // Try to get Authorization header from various sources
-    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
-
-    if (empty($authHeader) && function_exists('getallheaders')) {
-        $headers = getallheaders();
-        $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
-    }
-
-    if (preg_match('/Bearer\s+(.+)$/i', $authHeader, $matches)) {
-        $idToken = $matches[1];
-    } else {
+    $user = getAuthenticatedUser();
+    if (!$user) {
         http_response_code(401);
-        echo json_encode(['error' => 'No authorization token provided', 'debug_header' => substr($authHeader, 0, 10)]);
+        echo json_encode(['error' => 'Authentication required']);
         exit;
     }
-
-    if (!defined('FIREBASE_PROJECT_ID') || empty(FIREBASE_PROJECT_ID)) {
-        http_response_code(500);
-        echo json_encode(['error' => 'Firebase Project ID not configured in database']);
-        exit;
-    }
-
-    $tokenData = verifyFirebaseToken($idToken);
-    if (!$tokenData || !$tokenData['uid']) {
-        http_response_code(401);
-        echo json_encode(['error' => 'Invalid or expired token', 'project_id' => FIREBASE_PROJECT_ID]);
-        exit;
-    }
-
-    return getOrCreateUser($tokenData);
+    return $user;
 }

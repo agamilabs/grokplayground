@@ -131,8 +131,8 @@ require_once __DIR__ . '/auth.php';
             transition: color 0.2s;
         }
         .vote-btn:hover { color: var(--text-primary); }
-        .vote-btn.active.up { color: var(--success); }
-        .vote-btn.active.down { color: var(--error); }
+        .vote-btn.active.up { color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .vote-btn.active.down { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
         .vote-count { font-size: 13px; font-weight: 600; min-width: 20px; text-align: center; }
 
         .gen-textarea, .gen-balance {
@@ -329,7 +329,15 @@ require_once __DIR__ . '/auth.php';
             const sort = document.getElementById('sortOrder').value;
             
             const grid = document.getElementById('galleryGrid');
-            const res = await fetch(`api/showcase.php?page=${page}&type=${type}&category_id=${categoryId}&q=${encodeURIComponent(q)}&sort=${sort}`);
+            const headers = { 'Content-Type': 'application/json' };
+            if (currentUser) {
+                const token = await currentUser.getIdToken();
+                headers['Authorization'] = 'Bearer ' + token;
+            }
+            
+            const res = await fetch(`api/showcase.php?page=${page}&type=${type}&category_id=${categoryId}&q=${encodeURIComponent(q)}&sort=${sort}`, {
+                headers: headers
+            });
             const data = await res.json();
             
             if (data.success) {
@@ -358,11 +366,11 @@ require_once __DIR__ . '/auth.php';
                     </div>
                     <div class="card-footer" onclick="event.stopPropagation()">
                         <div class="vote-tools">
-                            <button class="vote-btn up" onclick="vote(event, ${item.id}, 1)">
+                            <button class="vote-btn up ${item.user_vote == 1 ? 'active' : ''}" onclick="vote(event, ${item.id}, 1)">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
                             </button>
                             <span class="vote-count" id="votes-${item.id}">${item.votes}</span>
-                            <button class="vote-btn down" onclick="vote(event, ${item.id}, -1)">
+                            <button class="vote-btn down ${item.user_vote == -1 ? 'active' : ''}" onclick="vote(event, ${item.id}, -1)">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
                             </button>
                         </div>
@@ -408,8 +416,22 @@ require_once __DIR__ . '/auth.php';
                     const countSpan = document.getElementById(`votes-${itemId}`);
                     if (countSpan) countSpan.textContent = data.new_votes;
                     
-                    // Toggle active state
-                    btn.classList.add('active');
+                    // Toggle active state locally
+                    const parent = btn.parentElement;
+                    parent.querySelectorAll('.vote-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // The API handles toggling. If it returns success but the vote was removed (handled by the value in DB),
+                    // we might need to know if the vote was added or removed to toggle classes properly.
+                    // For now, let's just refresh the count and clear active if it was a toggle-off.
+                    // But if it's a new vote, mark it active.
+                    
+                    // Re-calling loadGallery is expensive. Let's just toggle the class based on logic.
+                    // Actually, let's keep it simple: the API should probably return the current vote state.
+                    // I will update the API to return 'current_vote'.
+                    if (data.current_vote == direction) {
+                        btn.classList.add('active');
+                    }
+                    
                     setTimeout(() => {
                         btn.style.transform = '';
                         btn.style.color = '';

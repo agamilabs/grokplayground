@@ -48,11 +48,17 @@ if ($method === 'GET') {
     $totalPages = ceil($totalItems / $limit);
 
     // Fetch items
-    $stmt = $db->prepare("SELECT i.*, c.name as category_name 
+    $user = getAuthenticatedUser();
+    $userId = $user ? $user['id'] : 0;
+    
+    $stmt = $db->prepare("SELECT i.*, c.name as category_name, v.vote as user_vote
                           FROM showcase_items i 
                           LEFT JOIN showcase_categories c ON i.category_id = c.id
+                          LEFT JOIN showcase_votes v ON (i.id = v.item_id AND v.user_id = ?)
                           $whereSql $orderSql LIMIT $limit OFFSET $offset");
-    $stmt->execute($params);
+    
+    $fetchParams = array_merge([$userId], $params);
+    $stmt->execute($fetchParams);
     $items = $stmt->fetchAll();
 
     echo json_encode([
@@ -110,12 +116,20 @@ if ($method === 'GET') {
 
         $db->commit();
         
-        // Return new vote count
+        // Return new vote count and current user's vote state
         $stmt = $db->prepare("SELECT votes FROM showcase_items WHERE id = ?");
         $stmt->execute([$itemId]);
         $newVotes = $stmt->fetchColumn();
 
-        echo json_encode(['success' => true, 'new_votes' => $newVotes]);
+        $stmt = $db->prepare("SELECT vote FROM showcase_votes WHERE user_id = ? AND item_id = ?");
+        $stmt->execute([$user['id'], $itemId]);
+        $currentVote = $stmt->fetchColumn() ?: 0;
+
+        echo json_encode([
+            'success' => true, 
+            'new_votes' => $newVotes,
+            'current_vote' => $currentVote
+        ]);
     } catch (Exception $e) {
         $db->rollBack();
         http_response_code(500);
