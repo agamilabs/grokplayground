@@ -21,38 +21,26 @@ if ($method === 'POST') {
     $action = $data['action'] ?? 'create';
 
     try {
+        $title = $data['title'] ?? '';
+        $categoryId = !empty($data['category_id']) ? (int) $data['category_id'] : null;
+        $prompt = $data['prompt'] ?? '';
+        $description = $data['description'] ?? '';
+        $type = $data['type'] ?? 'text_to_image';
+        $outputUrl = $data['output_url'] ?? '';
+
         if ($action === 'create') {
-            $stmt = $db->prepare("INSERT INTO showcase_items (category_id, title, prompt, description, type, model_used, settings_json, output_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([
-                $data['category_id'] ?? null,
-                $data['title'],
-                $data['prompt'],
-                $data['description'] ?? '',
-                $data['type'],
-                $data['model'] ?? 'grok-imagine-image',
-                json_encode($data['settings'] ?? []),
-                $data['output_url']
-            ]);
+            $stmt = $db->prepare("INSERT INTO showcase_items (title, category_id, prompt, description, type, output_url) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$title, $categoryId, $prompt, $description, $type, $outputUrl]);
             echo json_encode(['success' => true, 'id' => $db->lastInsertId()]);
 
         } elseif ($action === 'update') {
-            $id = (int) $data['id'];
-            $stmt = $db->prepare("UPDATE showcase_items SET category_id=?, title=?, prompt=?, description=?, type=?, model_used=?, settings_json=?, output_url=? WHERE id=?");
-            $stmt->execute([
-                $data['category_id'] ?? null,
-                $data['title'],
-                $data['prompt'],
-                $data['description'] ?? '',
-                $data['type'],
-                $data['model'] ?? 'grok-imagine-image',
-                json_encode($data['settings'] ?? []),
-                $data['output_url'],
-                $id
-            ]);
+            $id = (int) ($data['id'] ?? 0);
+            $stmt = $db->prepare("UPDATE showcase_items SET title=?, category_id=?, prompt=?, description=?, type=?, output_url=? WHERE id=?");
+            $stmt->execute([$title, $categoryId, $prompt, $description, $type, $outputUrl, $id]);
             echo json_encode(['success' => true]);
 
         } elseif ($action === 'delete') {
-            $id = (int) $data['id'];
+            $id = (int) ($data['id'] ?? 0);
             $stmt = $db->prepare("DELETE FROM showcase_items WHERE id = ?");
             $stmt->execute([$id]);
             echo json_encode(['success' => true]);

@@ -135,7 +135,11 @@ require_once __DIR__ . '/auth.php';
         .vote-btn.active.down { color: var(--error); }
         .vote-count { font-size: 13px; font-weight: 600; min-width: 20px; text-align: center; }
 
-        /* Modal */
+        .gen-textarea, .gen-balance {
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.6;
+        }
         .modal {
             position: fixed;
             inset: 0;
@@ -262,7 +266,11 @@ require_once __DIR__ . '/auth.php';
                 <h2 id="modalTitle" class="install-title" style="margin:0;">Title</h2>
                 <div class="section">
                     <label class="gen-label">Prompt</label>
-                    <div id="modalPrompt" class="gen-textarea" style="background:rgba(255,255,255,0.05); min-height:80px;"></div>
+                    <div id="modalPrompt" class="gen-textarea" style="background:rgba(255,255,255,0.05); min-height:80px; padding:12px; border-radius:8px;"></div>
+                </div>
+                <div class="section" id="descriptionSection" style="display:none;">
+                    <label class="gen-label">Description</label>
+                    <div id="modalDescription" class="gen-textarea" style="background:rgba(255,255,255,0.03); min-height:40px; padding:12px; border-radius:8px; font-size:13px; color:var(--text-secondary);"></div>
                 </div>
                 <div class="section" id="settingsInfo">
                     <label class="gen-label">Technical Details</label>
@@ -387,6 +395,13 @@ require_once __DIR__ . '/auth.php';
             document.getElementById('modalPrompt').textContent = item.prompt;
             document.getElementById('modalType').textContent = item.type.toUpperCase().replace(/_/g, ' ');
             
+            const descSec = document.getElementById('descriptionSection');
+            if (item.description && item.description.trim() !== '') {
+                document.getElementById('modalDescription').textContent = item.description;
+                descSec.style.display = 'block';
+            } else {
+                descSec.style.display = 'none';
+            }
             let mediaHtml = '';
             if (item.type === 'text_to_image') mediaHtml = `<img src="${item.output_url}">`;
             else if (item.type === 'text_to_audio') mediaHtml = `<audio src="${item.output_url}" controls autoplay></audio>`;

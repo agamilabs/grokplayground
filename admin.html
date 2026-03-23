@@ -778,6 +778,10 @@
                     <label>Prompt</label>
                     <textarea id="gPrompt" class="gen-textarea" required></textarea>
                 </div>
+                <div class="field">
+                    <label>Description</label>
+                    <textarea id="gDescription" class="gen-textarea" placeholder="Optional context or instructions..."></textarea>
+                </div>
                 <div class="gen-options">
                     <div class="gen-option">
                         <label class="option-label">Modality</label>
@@ -1169,6 +1173,7 @@
                 document.getElementById('gTitle').value = item.title;
                 document.getElementById('gCategory').value = item.category_id || '';
                 document.getElementById('gPrompt').value = item.prompt;
+                document.getElementById('gDescription').value = item.description || '';
                 document.getElementById('gType').value = item.type;
                 document.getElementById('gUrl').value = item.output_url;
                 document.getElementById('galleryModal').style.display = 'flex';
@@ -1184,6 +1189,7 @@
                 title: document.getElementById('gTitle').value,
                 category_id: document.getElementById('gCategory').value,
                 prompt: document.getElementById('gPrompt').value,
+                description: document.getElementById('gDescription').value,
                 type: document.getElementById('gType').value,
                 output_url: document.getElementById('gUrl').value
             };
