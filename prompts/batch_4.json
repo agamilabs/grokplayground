@@ -1,0 +1,353 @@
+[
+    {
+        "title": "Product Marketing - Vintage Car Lifestyle Portrait with Identity Lock",
+        "type": "text_to_image",
+        "prompt": "{\n  \"photo_type\": \"outdoor lifestyle portrait, cinematic natural shot\",\n\n  \"subject\": {\n    \"count\": 1,\n    \"use_reference_face\": true,\n    \"preserve_identity\": true,\n    \"appearance\": \"young woman, natural beauty, soft features, minimal makeup, long slightly messy hair\"\n  },\n\n  \"pose\": {\n    \"description\": \"leaning forward on the hood of a vintage car, one arm supporting body, other hand resting near face\",\n    \"expression\": \"eyes closed, relaxed, dreamy mood\",\n    \"body_language\": \"casual, effortless, slightly arched posture\"\n  },\n\n  \"outfit\": {\n    \"top\": \"white cropped tank top\",\n    \"bottom\": \"blue denim jeans\",\n    \"accessories\": \"minimal gold jewelry, rings, bracelet\"\n  },\n\n  \"environment\": {\n    \"location\": \"countryside driveway with wooden house\",\n    \"elements\": [\n      \"vintage red car with white racing stripes\",\n      \"green trees in background\",\n      \"soft natural surroundings\"\n    ]\n  },\n\n  \"lighting\": {\n    \"type\": \"natural daylight\",\n    \"time\": \"overcast or soft afternoon light\",\n    \"direction\": \"diffused top and side light\",\n    \"effect\": [\n      \"soft shadows\",\n      \"even skin tones\",\n      \"natural highlights without harsh contrast\"\n    ]\n  },\n\n  \"camera\": {\n    \"lens\": \"50mm\",\n    \"aperture\": \"f\/2.8\",\n    \"angle\": \"slightly low angle from front of car\",\n    \"focus\": \"sharp on subject, slight background blur\"\n  },\n\n  \"color_grading\": {\n    \"style\": \"warm cinematic natural tones\",\n    \"contrast\": \"medium-low\",\n    \"saturation\": \"slightly muted\",\n    \"temperature\": \"slightly warm\"\n  },\n\n  \"details\": {\n    \"skin_texture\": \"realistic, soft but detailed\",\n    \"hair\": \"natural flow, slightly wind-blown\",\n    \"finish\": \"film-like softness, subtle grain\"\n  },\n\n  \"rules\": {\n    \"avoid\": [\n      \"over-sharpening\",\n      \"plastic skin\",\n      \"harsh shadows\",\n      \"over-saturation\",\n      \"unnatural body proportions\"\n    ]\n  }\n}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248316908_zrc0e7_HEBZQbTawAA1zgb.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A structured Nano Banana Pro prompt for generating a cinematic, outdoor lifestyle portrait of a young woman leaning on a vintage car, requiring the use of a reference face to preserve identity and specifying detailed camera, lighting, and color grading parameters for a warm, film-like aesthetic.",
+        "category_id": 10
+    },
+    {
+        "title": "Product Marketing - JSON Prompt for High-Fashion Orange Portrait with Reference Image",
+        "type": "text_to_image",
+        "prompt": "{\n  \"character\": {\n    \"identity\": \"custom person based on reference image\",\n    \"reference_image\": \"use provided reference image for facial features, proportions, and identity\",\n    \"skin_tone\": \"match reference image exactly\",\n    \"face\": \"replicate facial structure, symmetry, and defining features from reference image\",\n    \"eyes\": \"match eye shape, color, and expression from reference image\",\n    \"lips\": \"match lip shape, fullness, and natural color from reference image\"\n  },\n  \"hair\": {\n    \"style\": \"messy updo, loosely tied back\",\n    \"texture\": \"slightly damp with soft wispy strands framing the face\",\n    \"color\": \"match reference image\"\n  },\n  \"accessories\": {\n    \"earrings\": \"medium-sized hoop earrings, glossy bright orange\",\n    \"sunglasses\": \"narrow oval sunglasses, black frame with vivid orange tinted lenses, worn low on the nose below the eyes\"\n  },\n  \"makeup\": {\n    \"style\": \"soft natural glam adapted to subject\",\n    \"skin_finish\": \"radiant natural glow\",\n    \"eyes\": \"light mascara, subtle definition enhancing natural eye shape\",\n    \"lips\": \"natural tinted gloss matching subject\"\n  },\n  \"outfit\": {\n    \"top\": \"sleeveless textured knit top, vivid saturated orange\",\n    \"material\": \"slightly glossy, modern fabric with subtle texture\",\n    \"color_emphasis\": \"high saturation orange tones, bright and vibrant\"\n  },\n  \"pose\": {\n    \"hand_position\": \"one hand raised to mouth, index finger lightly touching lower lip\",\n    \"expression\": \"playful, slightly teasing smile adapted to subject\",\n    \"shoulders\": \"relaxed, facing forward\"\n  },\n  \"gaze\": {\n    \"direction\": \"direct eye contact over the lowered sunglasses\",\n    \"emotion\": \"confident, playful, engaging\"\n  },\n  \"mood\": {\n    \"overall\": \"playful, modern, stylish\",\n    \"energy\": \"light, fresh, confident\"\n  },\n  \"lighting\": {\n    \"type\": \"bright soft studio lighting\",\n    \"style\": \"even illumination, minimal shadows\",\n    \"highlight\": \"soft highlights on skin and glossy elements\",\n    \"contrast\": \"low to medium contrast, clean look\"\n  },\n  \"camera\": {\n    \"type\": \"DSLR, high resolution\",\n    \"settings\": \"85mm lens, f\/2.8 aperture, ISO 100, sharp focus on eyes\",\n    \"quality\": \"ultra-detailed, crisp, high fashion editorial\"\n  },\n  \"angle\": {\n    \"view\": \"front-facing\",\n    \"crop\": \"tight close-up portrait, head and upper shoulders\",\n    \"framing\": \"centered composition\"\n  },\n  \"background\": {\n    \"type\": \"plain studio background\",\n    \"color\": \"light gray \/ off-white\",\n    \"style\": \"clean, minimal, no distractions\"\n  },\n  \"color_style\": {\n    \"palette\": \"dominant bright orange accents contrasted with neutral tones\",\n    \"saturation\": \"high saturation on orange elements\",\n    \"center_emphasis\": \"central subject and orange elements extra vibrant and luminous\"\n  },\n  \"rendering\": {\n    \"style\": \"modern fashion editorial photography\",\n    \"detail\": \"reali",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248304456_1ws39j_HEBS89ta0AAQNRm.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A structured JSON prompt for Nano Banana focused on generating a high-fashion editorial close-up portrait with a dominant orange color palette, explicitly requiring a reference image for character identity and facial features.",
+        "category_id": 10
+    },
+    {
+        "title": "Product Marketing - Cinematic Editorial of a Young Man Leaving a Café",
+        "type": "text_to_image",
+        "prompt": "Ultra-realistic, full-body portrait of the same young man (ensure strict facial consistency with prior reference), captured mid-step as he walks out through the glass doors of a modern café. His body is slightly angled forward, with one leg stepping ahead naturally, conveying motion.\nHe holds a takeaway coffee cup in his left hand close to his chest, while his right hand rests casually inside his pocket. A black backpack hangs effortlessly over one shoulder. His head is turned slightly to the side, gaze directed away from the camera, with a calm, confident, and composed expression.\nHe is dressed in an oversized red t-shirt, black cargo pants, black-and-white sneakers, and a minimal thin chain necklace, styled in a contemporary urban fashion aesthetic.\nThe background features glass doors with visible Starbucks signage and logo, with warm indoor lighting spilling outward. The café interior appears softly blurred, creating depth, while natural daylight illuminates the subject from outside.\nShot with a 50mm lens, shallow depth of field, cinematic composition, realistic lighting and shadows, high dynamic range, and ultra-detailed textures.\nAspect ratio: 4:5\nResolution: 8K\nStyle: photorealistic, cinematic, editorial fashion photography",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248306645_sju58o_HEBHE4vbIAAZfMR.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed photorealistic prompt for Nano Banana Pro to generate a cinematic, full-body editorial portrait of a young man walking out of a modern café, emphasizing motion, attire, background details (Starbucks signage), and technical camera specifications.",
+        "category_id": 2
+    },
+    {
+        "title": "Product Marketing - Sydney Sweeney Luxury Closet Mirror Selfie",
+        "type": "text_to_image",
+        "prompt": "{\n“quality”: “ultra_photorealistic, raw style, 8k”,\n“camera”: “iPhone 15 Pro Max”,\n“lighting”: “bright natural daylight, clear sunlit room”,\n“style”: “ultra-realistic mirror selfie, high-fashion editorial”,\n“aspect_ratio”: “9:16”\n},\n“scene”: {\n“location”: “A custom-built, ultra-luxury walk-in closet\/dressing room, with extensive multi-tiered shoe shelving on the left wall, filled with curated luxury footwear. Two rolling garment racks with high-fashion clothing are to the right. A large mirror reflects the room, creating the selfie. Light-wood plank flooring. Large windows are in the distance, partially visible.”,\n“atmosphere”: “Sophisticated, exclusive, personal.”\n},\n“subject”: {\n“gender”: “female”,\n“name”: “{argument name=\"subject name\" default=\"Sydney Sweeney\"}”,\n“body”: {\n“type”: “Slender, natural figure, in a kneeling pose.”\n},\n“face”: {\n“features”: “Distinctive Sydney Sweeney features, blue-green eyes, long, flowing blonde hair with loose waves, a subtle, direct expression focused on the mirror reflection.”,\n“expression”: “Poised, confident, alluding to her signature charm.”\n},\n“outfit”: {\n“description”: “An ornate, vibrant hot-pink lace mini-dress. The bodice features intricate lace paneling and drapes, with a cluster of large, detailed 3D fabric rose blooms at the bust. The skirt is short with a lace overlay. The shoes are dramatic hot-pink platform sandals, with multiple straps coiling around her ankles and feet, covered in small, detailed 3D roseappliqués. A phone is held in her left hand, with a distinct rabbit-ear-shaped case.”,\n“fit”: “Tailored, bold, elegant.”,\n“accessory”: “Her distinct phone with the rabbit-ear case is being used for the selfie.”\n},\n“pose”: “Sitting confidently on the polished wood floor, kneeling with her legs folded to the side. Her right leg is angled, her left knee on the floor. She holds the phone in her left hand, framing the mirror selfie, with her gaze directed at the camera reflection.”\n},\n“composition”: “A full-body mirror selfie shot, angled slightly low from the perspective of the subject’s own reflection in the mirror, capturing her entire pose and the rich environment. Sharp focus on Sydney Sweeney and the textures of the dress and rose-detailed shoes. The entire luxury closet is reflected, with sharp details on the shoes in the background and the garment racks.”\n}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248315368_zzg931_HEAbmIYbAAEGgTi.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A structured JSON prompt for generating an ultra-photorealistic mirror selfie of Sydney Sweeney in a high-fashion, ornate hot-pink lace mini-dress, kneeling in a custom-built, luxury walk-in closet, captured with an iPhone 15 Pro Max aesthetic.",
+        "category_id": 10
+    },
+    {
+        "title": "Product Marketing - Dramatic High-Contrast Portrait with Window Lighting",
+        "type": "text_to_image",
+        "prompt": "{\n\"metadata\": {\n\"image_type\": \"photograph\",\n\"primary_purpose\": \"portrait\/editorial\"\n},\n\"composition\": {\n\"rule_applied\": \"center composition\",\n\"aspect_ratio\": \"3:4\",\n\"layout\": \"single subject\",\n\"focal_points\": [\n\"Subject's face and tortoiseshell sunglasses\",\n\"The white sash windows in the background brick building\"\n],\n\"visual_hierarchy\": \"Eye starts at the subject's brightly lit face and sunglasses, moves down the strong lapel lines of the dark coat, then out to the textured background building and yellow autumn tree.\",\n\"balance\": \"asymmetric - subject is centered, but heavy architectural elements on the right are balanced by the brightly lit yellow tree on the left\"\n},\n\"color_profile\": {\n\"dominant_colors\": [\n{\n\"color\": \"Dark Navy\/Black\",\n\"hex\": \"#0D1117\",\n\"percentage\": \"45%\",\n\"role\": \"primary subject\"\n},\n{\n\"color\": \"Warm Brown\/Grey\",\n\"hex\": \"#73655D\",\n\"percentage\": \"35%\",\n\"role\": \"background\"\n},\n{\n\"color\": \"Golden Yellow\",\n\"hex\": \"#D19C4C\",\n\"percentage\": \"10%\",\n\"role\": \"accent\"\n}\n],\n\"color_palette\": \"complementary\",\n\"temperature\": \"warm\",\n\"saturation\": \"moderate\",\n\"contrast\": \"high contrast\"\n},\n\"lighting\": {\n\"type\": \"natural window\",\n\"source_count\": \"single source\",\n\"direction\": \"45-degree side\",\n\"directionality\": \"highly directional\",\n\"quality\": \"hard light\",\n\"intensity\": \"bright\",\n\"contrast_ratio\": \"high contrast (dramatic shadows)\",\n\"mood\": \"dramatic\",\n\"shadows\": {\n\"type\": \"harsh defined edges\",\n\"density\": \"deep black\",\n\"placement\": \"heavy on the right side of the subject's face, neck, and inside the coat; cast shadows from building elements visible on the brick wall\",\n\"length\": \"medium\"\n},\n\"highlights\": {\n\"treatment\": \"preserved\",\n\"placement\": \"on left cheek, jawline, nose bridge, and the left side of the hair\"\n},\n\"ambient_fill\": \"absent\",\n\"light_temperature\": \"warm (golden)\"\n},\n\"technical_specs\": {\n\"medium\": \"digital photography\",\n\"style\": \"realistic\",\n\"texture\": \"sharp\",\n\"sharpness\": \"tack sharp\",\n\"grain\": \"none\",\n\"depth_of_field\": \"medium\",\n\"perspective\": \"straight on\"\n},\n\"artistic_elements\": {\n\"genre\": \"portrait\",\n\"influences\": [\n\"Street style fashion photography\",\n\"Menswear editorial\"\n],\n\"mood\": \"sophisticated\",\n\"atmosphere\": \"Crisp autumn golden hour with a cinematic, structured urban feel\",\n\"visual_style\": \"structured\"\n},\n\"typography\": {\n\"present\": false,\n\"fonts\": [\n{\n\"type\": \"sans-serif\",\n\"weight\": \"regular\",\n\"characteristics\": \"modern\"\n}\n],\n\"placement\": \"none\",\n\"integration\": \"subtle\"\n},\n\"subject_analysis\": {\n\"primary_subject\": \"Caucasian male in his 30s wearing a heavy dark navy wool overcoat over a dark crewneck sweater, accessorized with tortoiseshell sunglasses. Hair analysis: Length is approximately 3-4 inches on top, tapering to 1-1.5 inches on the sides, styled in a classic executive contour\/side-part. The part is located deep on the left side, about 1.5 inche",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248302370_hhpsb8_HEAA540asAAklc5.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A highly structured, JSON-formatted prompt for Gemini Nano Banana Pro detailing a dramatic, high-contrast portrait of a male subject in a dark coat, emphasizing specific composition rules, color profiles, and hard window lighting to achieve a sophisticated, cinematic autumn look.",
+        "category_id": 2
+    },
+    {
+        "title": "Product Marketing - Eco-Friendly Skincare Product Photography",
+        "type": "text_to_image",
+        "prompt": "Eco-Friendly Skincare Product “Minimalist skincare bottle made of frosted glass, placed in a serene natural setting with flowing water, green leaves, and soft sunlight rays, clean aesthetic inspired by The Body Shop, sustainability-focused branding, soft pastel tones, high-end product photography, calm and pure atmosphere”",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248298685_r8yenq_HD_XzJ-boAACphi.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Gemini Nano Banana Pro to generate high-end product photography of a minimalist frosted glass skincare bottle in a serene natural setting, emphasizing a clean aesthetic, sustainability branding, soft pastel tones, and a calm, pure atmosphere.",
+        "category_id": 9
+    },
+    {
+        "title": "Product Marketing - Cinematic Beach Portrait at Golden Hour",
+        "type": "text_to_image",
+        "prompt": "A soft, cinematic portrait of a young woman sitting on a driftwood log at a serene beach during golden hour. She wears a flowing white vintage-style dress with delicate lace details. Her hair is loosely tied back, slightly messy from the sea breeze. She looks back over her shoulder toward the camera with a calm, natural expression. Warm sunlight illuminates her face and dress, creating soft shadows and a dreamy glow. In the background, gentle ocean waves meet the sandy shore, with rocky cliffs adding texture and depth. Natural colors, high detail, shallow depth of field, realistic skin texture, 85mm lens, photorealistic, editorial fashion style.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248311681_d0qwh8_HD-0urOasAAq3Le.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Gemini Nano Banana Pro to generate a soft, cinematic, photorealistic portrait of a young woman sitting on a driftwood log at the beach during golden hour. The image emphasizes warm sunlight, a dreamy glow, realistic skin texture, and an editorial fashion style.",
+        "category_id": 2
+    },
+    {
+        "title": "Product Marketing - Editorial Food Photography of Chocolate Brownie Stack",
+        "type": "text_to_image",
+        "prompt": "\"prompt\": \"close-up food photography of a decadent chocolate brownie stack, three thick layers of moist fudgy brownies with rich crumb texture, topped with a scoop of vanilla ice cream, soft and slightly melting edges, glossy hot chocolate sauce being poured from a ceramic cup above, thick stream cascading smoothly over the ice cream and dripping down the sides, dramatic motion capture of chocolate flow, deep dark brown tones, rustic ceramic plate, warm moody lighting, dark minimal background, soft shadows, shallow depth of field, ultra realistic textures, visible crumbs and gooey interior, cinematic composition, luxury dessert styling, photorealistic, high contrast, editorial food photography, 4k, shot on Sony A1 85mm f\/1.4, sharp focus on pouring chocolate and ice cream, creamy highlights, rich chocolate gloss, warm earthy color palette\",\n  \"negative_prompt\": \"blurry, lowres, jpeg artifacts, compression, cartoon, illustration, painting, fake food, plastic texture, overexposed, harsh lighting, cold tones, oversaturated, undercooked look, burnt highlights, text, watermark, logo, bad proportions, messy composition, cgi, 3d render, artificial shine\",\n  \"aspect_ratio\": \"4:5\",\n  \"seed\": -1,\n  \"cfg_scale\": 7.5,\n  \"steps\": 40,\n  \"sampler\": \"DPM++ 2M Karras or Euler a\",\n  \"clip_skip\": 2\n}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248300956_nxfs2y_HD-qAz5aMAA8gHI.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A highly technical prompt for Google Gemini Nano Banana Pro 3.0, detailing a close-up food photograph of a decadent chocolate brownie stack with vanilla ice cream and pouring hot chocolate sauce. The prompt specifies camera settings (Sony A1 85mm f\/1.4), lighting, texture, and composition for an ultra-realistic, editorial look.",
+        "category_id": 7
+    },
+    {
+        "title": "Product Marketing - Black and White Panther and Woman Editorial Portrait",
+        "type": "text_to_image",
+        "prompt": "{\n  \"prompt\": \"Photorealistic high-fashion editorial portrait in strict black-and-white monochrome, high contrast, 8K resolution, ultra-detailed textures. Close-up composition: a majestic panther growling, expressive pose stands powerfully, next to it a young woman with long straight hair and flawless makeup stands close beside and gently touches the panther. She wears a white fishnet sleeveless deep V-neck shirt. Pure white minimalist background. Dramatic studio lighting with strong backlighting creating elegant rim light silhouettes on hair and fur, deep shadows, sharp focus, hyper-realistic fur and fabric detail. Vogue-style editorial photography, gothic chic aesthetic, surreal atmosphere, high-fashion mood, no color.\",\n  \"negative_prompt\": \"color, blurry, low resolution, deformed anatomy, extra limbs, mutated hands, poorly drawn face, bad proportions, watermark, text, logo, ugly, cartoon, anime, illustration, 3D render, plastic skin, overexposed, underexposed, child, elderly, additional people, aggressive dog expression, teeth baring, open mouth snarling, bright daylight, dull lighting, smiling too wide, cluttered background\",\n  \"parameters\": {\n    \"aspect_ratio\": \"3:4\",\n    \"style\": \"photorealistic high-contrast black and white editorial portrait\",\n    \"quality\": \"ultra detailed, 8k, razor sharp, high dynamic range\",\n    \"lighting\": \"dramatic studio lighting with strong backlighting and rim light on hair and fur, deep shadows\",\n    \"camera_angle\": \"close-up, slightly low angle for majestic presence\",\n    \"mood\": \"confident, gothic chic, surreal high-fashion elegance\"\n  }\n}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774161431848_gd187n_HD9ym7JXsAAqaJU.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A structured JSON prompt for Nano Banana 2 to create a photorealistic, high-contrast black-and-white editorial portrait featuring a majestic panther and a young woman. The prompt specifies dramatic studio lighting, gothic chic aesthetic, and detailed negative prompts to ensure high quality and focus.",
+        "category_id": 2
+    },
+    {
+        "title": "E-commerce Main Image - Commercial Perfume Photography Prompt for Nano Banana Pro",
+        "type": "text_to_image",
+        "prompt": "Ultra-realistic commercial product photography of a “{argument name=\"perfume name\" default=\"Mystic Eau De Parfum\"}” perfume bottle filled with translucent violet liquid, the round glass bottle centered and placed on a soft pastel surface with the metallic cap set beside it, surrounded by a minimal architectural setup of smooth lavender and white geometric arches and stepped platforms, delicate purple lilac flowers arranged around and above the scene adding a natural botanical touch, a subtle mist spray visible in the air near the bottle suggesting fragrance diffusion, monochromatic purple color palette with soft gradients in the background, clean studio environment with elegant symmetry, soft diffused lighting creating gentle shadows and smooth reflections on the glass surface, balanced composition with the product as the focal point and background elements slightly softened, high-end beauty advertising aesthetic emphasizing elegance and calm luxury, high detail, realistic textures, professional photography, high resolution, sharp focus.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074509909_1y38mr_HD3tOGHacAAeZQr.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed prompt for Nano Banana Pro focusing on ultra-realistic commercial product photography of a perfume bottle. The prompt specifies the color palette (monochromatic purple), geometric architectural setup, soft diffused lighting, and a high-end beauty advertising aesthetic emphasizing elegance and luxury.",
+        "category_id": 8
+    },
+    {
+        "title": "E-commerce Main Image - Nano Banana 2 Grid Photo Generation Prompt",
+        "type": "text_to_image",
+        "prompt": "Please create a 3x3 grid of product promotion photos.\nPlease maintain the product, person, style, and mood.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074543601_2j5qej_HD23SUHboAAGtNg.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana 2 to generate a 3x3 grid of product promotion photos, maintaining the product, person, style, and mood across all nine images.",
+        "category_id": 2
+    },
+    {
+        "title": "E-commerce Main Image - Hyper-Realistic Beverage Product Shot Prompts for Nano Banana Pro",
+        "type": "text_to_image",
+        "prompt": "Prompt 1:\n\nA hyper-realistic product shot of a pink dessert-themed beverage can labeled “Creamy Shake Stout”, covered in glossy dripping strawberry cream. The can is surrounded by splashing pink milk, floating chocolate sandwich cookies, fresh strawberries, and whipped cream. Soft pastel pink background, studio lighting, high-speed splash photography, ultra-detailed textures, reflections on liquid surface, cinematic depth of field, 8K, commercial advertising style.\n\nPrompt 2:\n\nA premium product advertisement of a pink can labeled “Creamy Cheesecake Shake Stout”, topped with thick dripping strawberry glaze. Dynamic splash of pink milk around the base, with floating cookies, chocolate chunks, and fresh strawberries in mid-air. Minimal pastel pink background, soft diffused lighting, high detail, glossy reflections, macro lens effect, cinematic composition, ultra-realistic, 8K, luxury food photography style.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074534296_hpavwc_HD2BkiBb0AAgkYG.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "Two separate prompts for Gemini Nano Banana Pro, both focused on generating hyper-realistic commercial product shots of a pink dessert-themed beverage can (Creamy Shake Stout). The prompts detail dynamic liquid splashes, floating ingredients, studio lighting, macro effects, and 8K resolution for advertising style imagery.",
+        "category_id": 10
+    },
+    {
+        "title": "E-commerce Main Image - Low-Key Product Photography Prompt for Gemini Nano Banana Pro",
+        "type": "text_to_image",
+        "prompt": "Use the uploaded product image as the reference. Recreate the same product in a low-key studio photography style. Low-key studio shot of the product placed on a solid surface. The product is physically resting on the surface, with a subtle contact shadow directly underneath. Single dramatic spotlight as the only light source. Dark matte background, seamless studio setup. Create strong contrast, rich blacks, and selective illumination focused on the product’s key features. Lighting is cinematic, revealing form, depth, and material through light and shadow. Mood: mysterious, premium, luxury product photography. Photorealistic result with natural grounding and realistic light falloff.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074509349_9ltcxf_HD0IrLSbwAAIZs7.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A highly specific prompt for Gemini Nano Banana Pro, instructing it to recreate an uploaded product image in a low-key studio photography style. The prompt details cinematic lighting, strong contrast, rich blacks, and selective illumination to achieve a mysterious, premium, luxury aesthetic.",
+        "category_id": 8
+    },
+    {
+        "title": "E-commerce Main Image - Luxury Skincare Still Life Prompt for Nano Banana Pro",
+        "type": "text_to_image",
+        "prompt": "A luxury skincare product still life, centered composition. A small matte green glass jar labeled “{argument name=\"product name\" default=\"NEEDLY Cicachid relief cream\"}” with a clean white lid sits in the middle on a soft beige background. Surrounding the jar are multiple transparent glass spheres of varying sizes, filled with water, air bubbles, and small green botanical leaves suspended inside.\nThe spheres create magnified distortions of the leaves and reflections. Soft natural sunlight shines from the upper left, casting warm highlights and elongated soft shadows across the surface. The lighting is bright, airy, and slightly golden, creating a premium, organic skincare aesthetic.\nThe arrangement is artistic and minimal, with overlapping circular forms and subtle reflections. The color palette is neutral beige, soft greens, and warm highlights. The surface is clean and matte, enhancing the glossy transparency of the glass spheres.\nMacro photography style, shallow depth of field, high detail, editorial beauty campaign, ultra-realistic, 4K quality.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773988992404_txqku7_HDyjWnLbIAAC42u.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed prompt for generating a high-end, ultra-realistic still life image of a luxury skincare product (NEEDLY Cicachid relief cream) using Nano Banana Pro, emphasizing soft natural lighting, glass spheres, and a minimalist aesthetic.",
+        "category_id": 8
+    },
+    {
+        "title": "E-commerce Main Image - Minimalist Food Illustration and Photorealism Blend",
+        "type": "text_to_image",
+        "prompt": "minimal studio shot on pure white background, real {argument name=\"food name\" default=\"Food Name\"} emerging from a paper packaging, the visible part outside the packaging is fully photorealistic, the continuation of the same food is drawn as a clean black line illustration printed directly on the surface of the packaging, perfectly aligned with the real food shape, the illustration stays strictly on the packaging material, not floating, not extending into the background, seamless transition between real and printed illustration, modern minimal branding, top-down composition, soft shadows.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773989000441_ef5wm6_HDyE_U_a8AA5UTu.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for generating a minimal studio shot featuring real food seamlessly transitioning into a clean black line illustration, printed directly onto paper packaging. This creates a modern minimal branding aesthetic with a top-down composition and soft shadows, ideal for product visualization or conceptual art using Nano Banana 2.",
+        "category_id": 9
+    },
+    {
+        "title": "E-commerce Main Image - High-Energy Smoothie Product Shot",
+        "type": "text_to_image",
+        "prompt": "High-energy product shot of a vibrant berry smoothie in a glass jar labeled “{argument name=\"label\" default=\"Power Berry\"},” exploding with dynamic splash, surrounded by floating raspberries, blueberries, and blackberries mid-air, thick creamy liquid bursting upward, dramatic neon lighting with purple and red tones, glossy reflections and droplets, dark cinematic background with subtle bokeh, modern fitness\/lifestyle vibe with a blurred smartphone in background, ultra-detailed textures, commercial beverage advertisement style, 8K",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773989006869_3s5jb0_HDw1OCNacAAbqhq.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro to generate a commercial-style, high-energy product shot of a 'Power Berry' smoothie. It specifies dynamic action (exploding splash), floating ingredients, dramatic neon lighting, and a modern fitness\/lifestyle aesthetic with a blurred background element.",
+        "category_id": 8
+    },
+    {
+        "title": "E-commerce Main Image - Minimalist Luxury Product Photography Prompts",
+        "type": "text_to_image",
+        "prompt": "Prompt 1:\n\nMinimalist luxury product photography of a collagen supplement jar placed on a soft pastel peach background, cylindrical pedestal base, surrounded by fresh pineapple and sliced grapefruit, a small glass cup with golden liquid in front, warm sunlight casting soft palm leaf shadows, clean aesthetic, high-end skincare branding, soft diffused lighting, realistic textures, subtle reflections, shallow depth of field, editorial style, 4k, ultra-detailed.\n\nPrompt 2:\nPremium skincare product shot of a white collagen cream jar with metallic lid on a round pedestal, tropical fruits (pineapple and grapefruit slices) arranged around, a glass cup filled with amber liquid, peach monochrome background with palm shadow overlay, soft warm lighting, minimal composition, luxury beauty advertisement style, smooth gradients, high realism, sharp focus, studio lighting, 4k resolution.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902657481_as7uto_HDrv268a4AASFat.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "Two detailed prompts for generating high-end, minimalist luxury product photography shots of a collagen supplement jar, emphasizing specific backgrounds, lighting (warm sunlight\/studio), and surrounding elements (pineapple, grapefruit, golden liquid), using Nano Banana Pro.",
+        "category_id": 10
+    },
+    {
+        "title": "E-commerce Main Image - Product Advertisement Prompts for Nano Banana Pro on Gemini",
+        "type": "text_to_image",
+        "prompt": "Protein Shake (Banana + Almond)\nPrompt:\nHyper-realistic product advertisement of a protein shake can with yellow and cream design, surrounded by floating banana slices, almonds, and peanuts, dynamic milk splash bursting around the can, glossy condensation droplets on surface, vibrant warm yellow background, high-speed splash photography, ultra-detailed textures, commercial food photography style, dramatic lighting, 8K.\n\n Grape Soda (Purple Splash)\nPrompt:\nPremium soda can in deep black and purple theme, surrounded by fresh grapes, mint leaves, and citrus slice, explosive purple liquid splash frozen mid-air, glossy reflections and water droplets on can, dark moody background with neon highlights, cinematic lighting, ultra-realistic product photography, high contrast, 8K.\n\nEnergy Drink (Pomegranate Splash)\nPrompt:\nVibrant red energy drink can bursting open with juicy pomegranate seeds and slices flying outward, dynamic red liquid splash, fresh green leaves adding contrast, glossy wet surface with condensation, bold red gradient background, high-speed action capture, commercial beverage ad style, ultra-detailed, 8K.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902665512_friijp_HDq3LuhbEAAvJ2m.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "Three separate prompts for Nano Banana Pro, designed to generate hyper-realistic commercial product advertisements for different beverages: a Protein Shake (banana\/almond), Grape Soda, and an Energy Drink (pomegranate). Each prompt specifies ingredients, liquid splash dynamics, condensation, lighting, and 8K resolution for a commercial food photography style.",
+        "category_id": 10
+    },
+    {
+        "title": "E-commerce Main Image - Cinematic Macro Photograph of a Strawberry in Syrup",
+        "type": "text_to_image",
+        "prompt": "Scene Description: A high-resolution, cinematic, macro, vertical photograph (9:16 aspect ratio). A single, large, perfect red strawberry stands perfectly upright at the center of a rich, deep red pool of viscous strawberry syrup. This central strawberry is heavily dusted with fine, powdered pink berry residue, particularly around its intact green leafy hull, and is slick with intricate, visible condensation water droplets, giving it a cool, textured appearance.\nKey Visual Effects: Delicate, intricate, wispy plumes of white steam or smoke curl and rise from the top of the strawberry, creating a dramatic, ethereal interaction with the dark, moody, textured background, suggesting a culinary or frozen process.\nEnvironment and Details: The strawberry syrup pool is set on a dark, textured slate surface. Around the pool, a natural, textured frame is created by scattered smaller fresh wild strawberries, delicate pink wild strawberry flowers, additional powdered berry dust, and small strawberry slices. All these elements form a detailed, natural setting.\nLighting and Style: The lighting is dramatic and sidelit, precisely highlighting every single texture, water droplet, powdered particle, and smoke tendril. The entire scene has a strong sense of depth and cinematic drama, tightly focused on the central strawberry.\nAspect Ratio: Vertical 9:16 (or 9 to 16).",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902665557_d1d8rl_HDqnAEVbEAEMbsW.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed, structured prompt for Gemini Nano Banana 2 to generate a high-resolution, cinematic, macro photograph of a single red strawberry standing in a pool of syrup, emphasizing dramatic lighting and texture.",
+        "category_id": 7
+    },
+    {
+        "title": "E-commerce Main Image - Hyper-realistic Fanta Product Shot Prompt",
+        "type": "text_to_image",
+        "prompt": "Hyper-realistic lifestyle product shot of a cold FANTA – {argument name=\"flavor\" default=\"Buko Pandan\"} can placed upright on a weathered wooden table on a tropical beach. The can is glistening with condensation under warm golden-hour sunlight. Surrounding elements include halved coconuts, pandan leaves, green jelly cubes, and melting ice scattered naturally. In the background, soft-focus palm trees and ocean waves create a dreamy bokeh effect. Composition is balanced and inviting, with warm highlights and soft shadows. Shot in commercial beverage style, shallow depth of field, cinematic framing, vibrant tropical tones, ultra-detailed textures, 8K resolution.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773816077326_zeytvv_HDn6bSDakAABxuf.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Gemini Nano Banana Pro to create a hyper-realistic lifestyle product shot of a cold Buko Pandan flavored FANTA can on a weathered wooden table on a tropical beach. The scene includes condensation, golden-hour sunlight, halved coconuts, pandan leaves, green jelly cubes, and melting ice, emphasizing commercial beverage style, shallow depth of field, and vibrant tropical tones in 8K resolution.",
+        "category_id": 8
+    },
+    {
+        "title": "E-commerce Main Image - Minimalist Cosmetic Product Photography Prompts for Nano Banana Pro",
+        "type": "text_to_image",
+        "prompt": "Minimalist cosmetic product photography of a berry lip sleeping mask jar (LANEIGE style), placed in the center of a soft inflated ring cushion, surrounded by fresh strawberries, raspberries, and glossy juice droplets. Pink monochrome background, circular composition, top-down view, soft studio lighting, high gloss textures, creamy and juicy aesthetic, luxury skincare advertisement, ultra-detailed, 8K, sharp focus, vibrant reds and soft pastel tones.\n\nPremium skincare product shot of a lip sleeping mask jar, centered inside a smooth white donut-shaped cushion, surrounded by sliced berries and whole strawberries. A bold red glossy smear brush stroke above the product, pink background, clean minimal layout, top view, soft diffused lighting, high-end beauty campaign style, hyper-realistic textures, fresh juicy aesthetic, cinematic lighting, ultra-detailed, 8K resolution.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773816084791_h9r34p_HDmKWvUbMAAsdFv.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "Two detailed prompts for Nano Banana Pro focusing on high-end, minimalist cosmetic product photography of a berry lip sleeping mask, emphasizing glossy textures, vibrant colors, and a clean, luxury aesthetic.",
+        "category_id": 7
+    },
+    {
+        "title": "E-commerce Main Image - 3D Floating Cosmetic Bottle Product Shots",
+        "type": "text_to_image",
+        "prompt": "Prompt1 : 3D floating cosmetic bottle, gradient from juicy strawberry red to fresh kiwi green, modern white typography, background with strawberries and kiwi slices, bright airy lighting --ar 2:3 --stylize 400\n\nPrompt 2: 3D floating cosmetic bottle, gradient from cherry blossom pink to lychee white, modern white typography, background with cherry blossoms and lychee fruits, soft airy lighting --ar 2:3 --stylize 400\n\nPrompt 3: 3D floating cosmetic bottle, gradient from creamy coconut white to pineapple yellow, modern white typography, background with coconut halves and pineapple rings, tropical airy lighting --ar 2:3 --stylize 400\n\nPrompt 4: 3D floating cosmetic bottle, gradient from deep cherry red to grape purple, modern white typography, background with cherries and grapes, glossy airy lighting --ar 2:3 --stylize 400\n\nPrompt 5: 3D floating cosmetic bottle, gradient from cherry blossom pink to lychee white, modern white typography, background with cherry blossoms and lychee fruits, soft airy lighting --ar 2:3 --stylize 400",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773729521877_t4033k_HDi3iF-a8AAXBJh.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A set of five similar prompts for Nano Banana Pro, designed to generate 3D floating cosmetic bottles with fruit-themed gradients and backgrounds, using specific aspect ratios and stylization values for professional product visualization.",
+        "category_id": 10
+    },
+    {
+        "title": "E-commerce Main Image - Commercial Cosmetic Product Photography Prompt",
+        "type": "text_to_image",
+        "prompt": "A centrally placed pink cosmetic jar labeled “LANEIGE Lip Sleeping Mask [Berry] 3 g” sits on top of a large spiral swirl of white whipped cream. The jar features a matte translucent pink container with minimalist white typography and a square shape with rounded corners. From above, a thick, glossy red berry syrup pours straight down onto the top of the jar, slowly flowing along the sides with visible droplets and shiny liquid trails.\n\nAround the whipped cream are various fresh berries, including raspberries, halved strawberries with green leaves, and dark cherries with stems. Some fruits appear slightly floating or gently resting against the whipped cream.\n\nThe composition is centered, with the jar positioned exactly in the middle of the white cream spiral, while the fruits are asymmetrically arranged around it.\n\nThe background is a soft, solid light pink studio backdrop with a minimalist aesthetic and subtle blurred red shapes in the foreground. Soft, even studio lighting creates gentle shadows and strong glossy reflections on the syrup and jar.\n\nExtremely detailed textures of whipped cream, fruit, and liquid, commercial cosmetic product photography, sharp focus, high resolution, realistic textures, professional advertising photo.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773729521460_mk3gsw_HDhRyeEaIAAW8dL.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed prompt for generating commercial cosmetic product photography featuring a pink cosmetic jar on a swirl of whipped cream, with red berry syrup pouring over it and various fresh berries arranged around the composition, emphasizing high resolution, realistic textures, and professional studio lighting.",
+        "category_id": 7
+    },
+    {
+        "title": "E-commerce Main Image - Premium Advertising Campaign Photograph",
+        "type": "text_to_image",
+        "prompt": "A premium advertising campaign photograph featuring a beautiful western woman slightly behind the KitKat sponge logo, both hands elegantly presenting the product toward camera, premium brand campaign composition.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773729515909_dimgge_HDgzPf-bAAAgZLd.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Google Gemini Nano Banana 2 to generate a premium advertising photograph featuring a beautiful Western woman elegantly presenting a KitKat sponge logo, emphasizing a high-quality brand campaign composition.",
+        "category_id": 9
+    },
+    {
+        "title": "E-commerce Main Image - Photorealistic Skincare Product Photography in Snow",
+        "type": "text_to_image",
+        "prompt": "{\n  \"type\": \"photorealistic skincare product photography\",\n  \"product\": {\n    \"name\": \"VOIS – tsunami hydration\",\n    \"container\": \"blue cosmetic cream jar\",\n    \"position\": \"diagonally placed and partially embedded in fresh white snow\",\n    \"details\": \"light hoarfrost and frozen condensation crystals on the jar surface\"\n  },\n  \"scene\": {\n    \"environment\": \"soft powdery snow with sparkling ice crystals\",\n    \"elements\": \"small blue primrose flowers with green leaves scattered around, some partially buried\",\n    \"background\": \"clean minimal snowy bokeh with cold airy atmosphere\"\n  },\n  \"lighting\": \"bright winter side sunlight creating crisp highlights and soft natural shadows\",\n  \"camera\": {\n    \"lens\": \"85mm macro\",\n    \"aperture\": \"f\/2.8\",\n    \"iso\": 100,\n    \"depth_of_field\": \"shallow\"\n  },\n  \"style\": \"premium commercial skincare advertisement, cinematic macro composition\",\n  \"quality\": \"ultra-detailed, photorealistic, 8K\",\n  \"constraints\": [\"no people\", \"no text overlays\", \"minimal background\"]\n}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773729525262_9veogi_HDfoYnIbcAAPQk4.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A structured JSON prompt for generating photorealistic macro product photography of a blue cosmetic cream jar partially embedded in fresh white snow, emphasizing winter lighting, shallow depth of field, and a premium commercial aesthetic.",
+        "category_id": 8
+    },
+    {
+        "title": "E-commerce Main Image - Hyper-realistic Product Ad Photography",
+        "type": "text_to_image",
+        "prompt": "3–4 identical units of the product floating in mid-air, surrounded by fresh {argument name=\"ingredient type\" default=\"fruit\/vegetable\"} and sliced pieces that the product is made from, ingredients suspended around the product, dynamic balanced composition, ultra-clean pure white background, no gradients, no color cast, soft studio lighting, realistic soft shadows beneath floating objects, glossy packaging reflections, juicy ingredient textures, premium skincare editorial style, hyper-realistic product photography, macro detail, sharp focus, commercial advertising quality, minimal composition, 8k, 1:1",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773643968764_iexfs2_HDc8ag1XIAASK3y.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt designed for generating hyper-realistic product photography for a skincare editorial style ad. It features floating product units and ingredients (like fruit or vegetables) against a clean white background with soft studio lighting and macro details.",
+        "category_id": 10
+    },
+    {
+        "title": "E-commerce Main Image - Macro Photograph of Luxury Watch",
+        "type": "text_to_image",
+        "prompt": "A macro photograph of an expensive, luxury wristwatch, the '{argument name=\"watch model\" default=\"WASI – W Eclipse Edition\"}'. The watch has a prominent two-tone case made of brushed titanium and polished rose gold with angular, complex lines. The crown, also in rose gold, has a micro-engraved 'W' emblem. The watch is placed in a three-quarter view, angled towards the right, on a highly reflective black marble surface with prominent white veining, which shows a partial reflection of the watch and its band.\n​The dial is deep obsidian black, radiating a subtle sunburst pattern from the center. Its defining feature is a large, sculptural, open-worked 'W' structure made of polished metallic components that arches across the center, revealing the intricate mechanical gears of the movement beneath it. The floating 'W' serves as a dominant central element. The hours are marked by applied rose gold hour markers, with Roman numerals '12', '3', and '6'. Minute markers are visible along the outer edge. The brand name 'WASI' is minimalistically engraved at the 12 o'clock position in brushed platinum lettering.\n​The hands are skeletonized and geometric, made of polished rose gold with integrated ice-blue luminous material that glows softly. There are two main hands and a central seconds hand. The strap is black matte crocodile leather with a polished rose gold deployant clasp that also has a micro-engraved 'W' insignia.\n​In the background, slightly out of focus, are luxury elements including a black velvet-lined box and a wooden panel with the text 'WASI' clearly engraved, suggesting a display. The lighting is dramatic and cinematic, with soft highlights and deep shadows that emphasize the varied textures, making it look like a high-end Swiss watch advertisement.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773643993111_kcl5as_HDasTxhaMAAfdF2.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed prompt for a macro photograph of a luxury wristwatch (WASI – W Eclipse Edition) on a reflective black marble surface, emphasizing intricate details like the two-tone case, open-worked 'W' structure revealing gears, and dramatic cinematic lighting for a high-end advertisement look.",
+        "category_id": 4
+    },
+    {
+        "title": "Game Asset - Pixelated Cartoon Animal Image",
+        "type": "text_to_image",
+        "prompt": "A cartoonish ({argument name=\"animal name\" default=\"Animal Name\"}) in pixelated image format",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248304087_ep0gnw_HEBelWzbgAAHj9M.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A simple template prompt for Nano Banana 2 to generate a pixelated image of a cartoon animal, allowing the user to specify the animal name.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - Ghibli-Inspired Character Turnaround",
+        "type": "text_to_image",
+        "prompt": "use the character turnaround format from [img1] to create {argument name=\"character description\" default=\"[character name \/ image]\"} in the same style",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774248302388_yswdlf_HEBTelTaYAAAp1j.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana 2 requesting the generation of Ghibli-inspired anime characters using a character turnaround format based on a provided reference image.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - Nano Banana Pro Prompt: 8-bit Chicken in T-Rex Costume",
+        "type": "text_to_image",
+        "prompt": "a chicken in a T-Rex costume's on the way of homecoming in the style of an 8-bits #11",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774161444356_j9reqr_HDluvD2bMAAC6B5.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt used with Nano Banana Pro (Gemini 3.1 image generator) to create an 8-bit style image of a chicken wearing a T-Rex costume on its way home.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - LMGT3-Class Car Inspired Sea Iguana",
+        "type": "text_to_image",
+        "prompt": "a sea iguana that is inspired by a LMGT3-class car",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774161441124_7hcp7r_HDlh96ebgAAHygE.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro (Gemini 3.1 image generator) to create an image of a sea iguana inspired by an LMGT3-class race car.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - Pop Surreal Kawaii Cat on Roller Skates",
+        "type": "text_to_image",
+        "prompt": "a cat wearing roller skates, pop surreal kawaii illustration style, clean vector lines, bold flat colors, ultra cute and whimsical vibe, full-body character centered in frame, dynamic skating pose with one paw lifted, oversized expressive eyes and tiny mouth, pastel city street background with floating clouds and abstract candy-shaped buildings, soft ambient lighting with subtle gradients, high resolution vector art, crisp outline, smooth minimal shading, playful and dreamy atmosphere",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074530444_lxd58t_HD2LQ58W0AEYmyq.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for nano-banana-pro to generate a whimsical, ultra-cute illustration of a cat wearing roller skates in a pop surreal kawaii style, featuring clean vector lines, bold flat colors, and a pastel city background.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - Dark Fantasy Knight Wallpaper Generation with Nano Banana 2",
+        "type": "text_to_image",
+        "prompt": "A cinematic, full-body shot of a battle-worn knight in detailed steel plate armor walking through a tall, golden grass field. The knight is draped in heavily tattered and shredded bright red robes that flow in the wind, with a longsword in hand and a secondary blade strapped to his back. A flock of black crows circles in the hazy, overcast sky above. Soft, diffused daylight creates a moody atmosphere with visible dust motes and particles. Shot on a Sony A7R IV with an 85mm f\/1.4 lens, low angle, shallow depth of field focusing on the intricate textures of the weathered armor and frayed fabric. Hyper-realistic, 8k resolution, raw photo, gritty dark fantasy aesthetic, 9 : 16.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074505986_fhk134_HD2ro1RWAAAjS2Q.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed image generation prompt for Nano Banana 2, focusing on creating a hyper-realistic, 8k dark fantasy wallpaper featuring a battle-worn knight in detailed steel armor walking through a golden grass field. The prompt specifies cinematic camera settings, lighting, and atmosphere.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - Stylized Grid of Whimsical Cat Faces",
+        "type": "text_to_image",
+        "prompt": "A grid of twelve stylized cat faces, arranged in four rows and three columns, fills the frame. Each cat face is distinct, featuring a unique color palette and decorative elements. The cats have large, round eyes, small noses, and prominent whiskers. Some wear floral accessories, bows, or other playful adornments on their heads. The overall style is whimsical and childlike, with bold outlines and flat colors, reminiscent of children's book illustrations or stickers. The background is a plain white, making the colorful cat faces stand out.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1774074529542_02dz1v_HDy1NE2WQAAgNHY.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for nano-banana-pro to generate a whimsical and childlike illustration of a grid containing twelve stylized cat faces, featuring bold outlines, flat colors, and playful accessories, reminiscent of children's book art.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - Handcrafted Stone Figurine Transformation Prompt",
+        "type": "text_to_image",
+        "prompt": "{\n  \"instruction\": \"Use the uploaded image strictly as a silhouette and pose reference.\",\n  \"transformation\": {\n    \"type\": \"handcrafted_stone_figurine\",\n    \"material\": \"multiple natural stones\",\n    \"rules\": [\n      \"Do NOT carve from a single stone\",\n      \"Construct using separate irregular rock pieces\"\n    ]\n  },\n  \"structure\": {\n    \"composition\": \"layered flat stones and uneven rock fragments\",\n    \"body_parts\": {\n      \"head\": \"individual stones\",\n      \"torso\": \"individual stones\",\n      \"arms\": \"individual stones\",\n      \"legs\": \"individual stones\",\n      \"tail\": \"individual stones\"\n    },\n    \"details\": \"visible gaps between stones\"\n  }\n}",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773989003597_k0dppe_HDz6tebboAEb42c.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A structured JSON prompt for Nano Banana Pro, instructing the model to transform an uploaded image into a figurine made of multiple, separate, irregular natural stones, strictly using the original image only for silhouette and pose reference.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - 3D Chibi Character Transformation Prompt for Nano Banana 2",
+        "type": "text_to_image",
+        "prompt": "Transform the subjects into a cute anime chibi characters rendered as a clean 3D model, while preserving the subject's original race, ethnicity, skin tone, and recognizable facial likeness, including hairstyle, hair color, and clothing colors. The character must remain clearly the same person with the same skin tone and ethnic appearance as the original input, translated into a chibi form. The character should have classic chibi proportions: a very large head, small torso, simplified cute facial features, and large expressive anime-style eyes. Translate the subject's facial features into a chibi style while keeping their recognizable likeness. Frame the character from the torso up, with the camera slightly closer and cropped in, so the upper body and head fill most of the frame. The character should be looking directly into the camera, with an energetic and expressive anime-style pose. Use a slightly dynamic camera angle, such as a subtle tilt or off-axis perspective, similar to modern anime promotional artwork. The camera can be slightly lower than the character's face, creating a playful upward Tr angle that makes the character feel lively and engaging. Render the character as a high-quality glossy 3D anime-style model, similar to a polished Blender render or premium collectible figure. The materials should be smooth, reflective, and toy-like, with strong highlights, soft reflections, and shiny surfaces. The overall look should clearly resemble a 3D rendered character, not a flat 2D illustration. Use bright anime-style shading with vibrant but polished colors, giving the character a premium anime aesthetic. Place the character in front of a colorful gradient background. Behind the character, include a small number of large, translucent decorative shapes such as bubbles, stars, or rounded forms. These shapes should appear semi-transparent, glossy, and subtle, similar to clear acrylic or glass, softly floating in the background without drawing attention away from the character. The background elements should remain light, minimal, and softly visible, acting as stylish accents rather than prominent objects. The final image should look like a dynamic, glossy 3D chibi character render, with polished materials, vibrant colors, and a premium collectible aesthetic,while clearly maintaining the subject's original race, skin tone, and recognizable identity.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902663550_hdapcp_HDuBDxWXkAAr5b_.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed prompt for Nano Banana 2 to transform a subject from a reference image into a cute 3D anime chibi character. The prompt emphasizes preserving the subject's likeness, race, and skin tone while applying classic chibi proportions, rendering it as a high-quality, glossy 3D model with vibrant colors and a premium collectible aesthetic.",
+        "category_id": 10
+    },
+    {
+        "title": "Game Asset - Image generation for Dragon Quest X: VS Calamity King",
+        "type": "text_to_image",
+        "prompt": "Dragon Quest X\nVS Calamity King\nParty\nMartial Artist, Battle Master,\nFortune Teller, Priest\nBattle Master, Mage,\nSage, Hermit",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902681610_xrdrg5_HDtEOFdbcAAH-Ro.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro (using Gemini 3 Pro Image) to generate an image depicting a battle scene from Dragon Quest X: VS Calamity King, specifying the party composition.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - Cherry Blossom Space Colony Illustration Prompt",
+        "type": "text_to_image",
+        "prompt": "High-definition, high-resolution 2.5D rendered illustration. A massive, horizontally tilted cylindrical space with a diameter of 6400 meters. The inner wall alternates between sections of green space and urban areas, and sections of glass and frames. The cherry blossoms are in full bloom in the green space, and their petals are falling. Beyond the glass, outer space is visible. White clouds drift along the inner surface of the cylinder. The innermost part of the cylinder is blocked off by a huge metal bulkhead, which is obscured by air. The distant areas appear blue and hazy due to atmospheric perspective. The image is taken from a camera angle slightly looking down toward the end of the cylinder from near its central axis.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902679589_mp5qhw_HDsAWU9bwAAokgf.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A detailed prompt for generating an illustration of the interior of a space colony where cherry blossoms are blooming, confirmed to work with Nano Banana 2, Imagen 4, and Grok.",
+        "category_id": 11
+    },
+    {
+        "title": "Game Asset - Samurai Mecha Girl Figure",
+        "type": "text_to_image",
+        "prompt": "Samurai Mecha Girl\n⠀\n1\/7 scale figure\n⠀\nThis is the first time the sword has been depicted from the blade direction.\nIt's a bit thick, but it might be realistic as a PVC figure.",
+        "output_url": "https:\/\/cms-assets.youmind.com\/media\/1773902681190_ziidpc_HDqjW6HbkAAfZPN.jpg",
+        "model_used": "grok-imagine-image-pro",
+        "description": "A prompt for Nano Banana Pro to generate a photorealistic image of a 1\/7 scale PVC figure of a Samurai Mecha Girl.",
+        "category_id": 11
+    }
+]
