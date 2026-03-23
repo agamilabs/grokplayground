@@ -41,10 +41,18 @@ $params = [];
 
 // Type filter
 $type = $_GET['type'] ?? '';
-$validTypes = ['text_to_image', 'image_to_video', 'text_to_video'];
+$validTypes = ['text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio'];
 if ($type && in_array($type, $validTypes)) {
     $conditions[] = "g.type = ?";
     $params[] = $type;
+}
+
+// Status filter
+$status = $_GET['status'] ?? '';
+$validStatuses = ['pending', 'processing', 'completed', 'failed'];
+if ($status && in_array($status, $validStatuses)) {
+    $conditions[] = "g.status = ?";
+    $params[] = $status;
 }
 
 // Date filters
