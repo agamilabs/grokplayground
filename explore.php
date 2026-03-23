@@ -140,36 +140,55 @@ require_once __DIR__ . '/auth.php';
             position: fixed;
             inset: 0;
             z-index: 1000;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 20px;
+            max-width: 100%;
         }
         .modal-content {
-            background: var(--bg-primary);
+            background: #0a0a0b;
             border: 1px solid var(--border);
             border-radius: var(--radius-xl);
-            max-width: 1000px;
+            max-width: 960px;
             width: 100%;
+            height: auto;
             max-height: 90vh;
-            overflow-y: auto;
+            overflow: hidden;
             position: relative;
             display: flex;
-            gap: 32px;
-            padding: 40px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
-        .modal-media { flex: 1; }
+        .modal-media { 
+            flex: 1.4; 
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid var(--border);
+            min-height: 400px;
+        }
         .modal-media img, .modal-media video { 
-            width: 100%; border-radius: var(--radius-lg); max-height: 70vh; object-fit: contain; 
+            max-width: 100%; max-height: 90vh; object-fit: contain; 
         }
-        .modal-details { flex: 0.8; display: flex; flex-direction: column; gap: 20px; }
+        .modal-details { 
+            flex: 1; 
+            padding: 32px;
+            display: flex; 
+            flex-direction: column; 
+            gap: 16px;
+            overflow-y: auto;
+        }
         .modal-close {
-            position: absolute; top: 20px; right: 24px; cursor: pointer; color: var(--text-muted);
+            position: absolute; top: 16px; right: 16px; cursor: pointer; color: var(--text-muted); z-index: 10;
+            background: rgba(0,0,0,0.5); border-radius: 50%; padding: 4px; display: flex;
         }
-        @media (max-width: 850px) {
-            .modal-content { flex-direction: column; padding: 24px; }
+        @media (max-width: 900px) {
+            .modal-content { flex-direction: column; max-height: 95vh; overflow-y: auto; }
+            .modal-media { border-right: none; border-bottom: 1px solid var(--border); min-height: 300px; flex: none; }
+            .modal-details { padding: 20px; flex: none; }
         }
     </style>
 </head>
