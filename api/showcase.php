@@ -16,7 +16,7 @@ if ($method === 'GET') {
     $query = $_GET['q'] ?? '';
     $sort = $_GET['sort'] ?? 'newest'; // newest, top
     $page = max(1, (int) ($_GET['page'] ?? 1));
-    $limit = 20;
+    $limit = max(1, min(100, (int) ($_GET['limit'] ?? 20)));
     $offset = ($page - 1) * $limit;
 
     $where = [];
