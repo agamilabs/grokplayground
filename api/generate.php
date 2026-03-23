@@ -59,22 +59,8 @@ if ($user['credits'] < $creditCost) {
 }
 
 try {
-    // Call xAI API based on type
-    if ($type === 'text_to_image') {
-        $result = callImageGeneration($prompt, $aspectRatio, $resolution, $model);
-    } elseif ($type === 'text_to_audio') {
-        $result = callAudioGeneration($prompt, $model, $voice, $quality);
-    } else {
-        $result = callVideoGeneration($type, $prompt, $imageData, $aspectRatio, $resolution, $duration, $model);
-    }
-
-    if (isset($result['error'])) {
-        http_response_code(500);
-        echo json_encode(['error' => $result['error']]);
-        exit;
-    }
-
-    // Deduct credits
+    // Deduct credits and save generation record BEFORE calling the API
+    // This ensures a record always exists even if the API call fails
     $db->beginTransaction();
 
     $stmt = $db->prepare("UPDATE users SET credits = credits - ? WHERE id = ? AND credits >= ?");
@@ -93,41 +79,66 @@ try {
     );
     $stmt->execute([$user['id'], -$creditCost, ucfirst(str_replace('_', ' ', $type)) . " generation"]);
 
-    // Determine status and output
-    $status = ($type === 'text_to_image') ? 'completed' : 'processing';
-    $outputUrl = $result['url'] ?? null;
-    $requestId = $result['request_id'] ?? null;
-
-    // Store generation record
+    // Store generation record with 'processing' status
     $stmt = $db->prepare(
-        "INSERT INTO generations (user_id, type, prompt, input_url, output_url, status, xai_request_id, credits_used) 
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO generations (user_id, type, prompt, input_url, status, credits_used) 
+         VALUES (?, ?, ?, ?, ?, ?)"
     );
     $stmt->execute([
         $user['id'],
         $type,
         $prompt,
         $imageData ? 'base64_upload' : null,
-        $outputUrl,
-        $status,
-        $requestId,
+        'processing',
         $creditCost
     ]);
     $generationId = $db->lastInsertId();
 
     $db->commit();
 
+    // Now call xAI API (credits and record are already saved)
+    if ($type === 'text_to_image') {
+        $result = callImageGeneration($prompt, $aspectRatio, $resolution, $model);
+    } elseif ($type === 'text_to_audio') {
+        $result = callAudioGeneration($prompt, $model, $voice, $quality);
+    } else {
+        $result = callVideoGeneration($type, $prompt, $imageData, $aspectRatio, $resolution, $duration, $model);
+    }
+
+    if (isset($result['error'])) {
+        // API failed — update generation record to 'failed' (record still exists for history)
+        $stmt = $db->prepare("UPDATE generations SET status = 'failed' WHERE id = ?");
+        $stmt->execute([$generationId]);
+
+        http_response_code(500);
+        echo json_encode([
+            'error' => $result['error'],
+            'generation_id' => (int) $generationId,
+        ]);
+        exit;
+    }
+
+    // API succeeded — update generation record with output
+    $outputUrl = $result['url'] ?? null;
+    $requestId = $result['request_id'] ?? null;
+    $finalStatus = $outputUrl ? 'completed' : 'processing';
+
+    $stmt = $db->prepare(
+        "UPDATE generations SET status = ?, output_url = ?, xai_request_id = ? WHERE id = ?"
+    );
+    $stmt->execute([$finalStatus, $outputUrl, $requestId, $generationId]);
+
     // Return response
     $response = [
         'success' => true,
         'generation_id' => (int) $generationId,
         'type' => $type,
-        'status' => $status,
+        'status' => $finalStatus,
         'credits_used' => $creditCost,
         'credits_remaining' => $user['credits'] - $creditCost,
     ];
 
-    if ($status === 'completed') {
+    if ($finalStatus === 'completed') {
         $response['output_url'] = $outputUrl;
     } else {
         $response['request_id'] = $requestId;
