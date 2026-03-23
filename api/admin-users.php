@@ -41,8 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $total = (int) $stmt->fetch()['total'];
 
     // Users
-    $stmt = $db->prepare("SELECT id, email, display_name, photo_url, credits, is_admin, created_at 
-                          FROM users WHERE $where ORDER BY created_at DESC LIMIT ? OFFSET ?");
+    $stmt = $db->prepare("
+        SELECT u.id, u.email, u.display_name, u.photo_url, u.credits, u.is_admin, u.created_at,
+               COALESCE((SELECT SUM(credits) FROM transactions WHERE user_id = u.id AND type = 'purchase'), 0) as total_purchased,
+               COALESCE((SELECT ABS(SUM(credits)) FROM transactions WHERE user_id = u.id AND type = 'spend'), 0) as total_spent
+        FROM users u 
+        WHERE $where 
+        ORDER BY u.created_at DESC 
+        LIMIT ? OFFSET ?
+    ");
     $params[] = $limit;
     $params[] = $offset;
     $stmt->execute($params);
