@@ -200,7 +200,12 @@ function callVideoGeneration($type, $prompt, $imageData = null, $aspectRatio = n
         return ['request_id' => $response['request_id']];
     }
 
-    return ['error' => $response['error']['message'] ?? 'Video generation failed'];
+    // Log unexpected response for debugging
+    $logEntry = date('Y-m-d H:i:s') . " - callVideoGeneration unexpected response: " . json_encode($response) . "\n";
+    file_put_contents(__DIR__ . '/../uploads/api_error.log', $logEntry, FILE_APPEND);
+
+    $errorMsg = $response['error']['message'] ?? ('Video generation failed: ' . substr(json_encode($response), 0, 200));
+    return ['error' => $errorMsg];
 }
 
 
