@@ -191,7 +191,7 @@ function callVideoGeneration($type, $prompt, $imageData = null, $aspectRatio = n
     ];
 
     if ($imageData && $type === 'image_to_video') {
-        $payload['image_url'] = $imageData;
+        $payload['image'] = ['url' => $imageData];
     }
 
     $response = xaiRequest('POST', '/videos/generations', $payload);
