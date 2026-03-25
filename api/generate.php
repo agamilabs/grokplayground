@@ -32,7 +32,7 @@ $voice = $input['voice'] ?? 'eve';
 $quality = $input['quality'] ?? 'standard';
 
 // Validate type
-$validTypes = ['text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio'];
+$validTypes = ['text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio'];
 if (!in_array($type, $validTypes)) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid generation type']);
@@ -45,9 +45,9 @@ if (empty($prompt)) {
     exit;
 }
 
-if ($type === 'image_to_video' && empty($imageData)) {
+if (($type === 'image_to_video' || $type === 'image_edit') && empty($imageData)) {
     http_response_code(400);
-    echo json_encode(['error' => 'Image is required for image-to-video generation']);
+    echo json_encode(['error' => 'Image is required for ' . str_replace('_', '-', $type) . ' generation']);
     exit;
 }
 
@@ -131,10 +131,17 @@ try {
     // Now call xAI API (credits and record are already saved)
     if ($type === 'text_to_image') {
         $result = callImageGeneration($prompt, $aspectRatio, $resolution, $model);
+    } elseif ($type === 'image_edit') {
+        $result = callImageEdit($prompt, $imageData, $aspectRatio, $resolution, $model);
     } elseif ($type === 'text_to_audio') {
         $result = callAudioGeneration($prompt, $model, $voice, $quality);
-    } else {
+    } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
         $result = callVideoGeneration($type, $prompt, $imageData, $aspectRatio, $resolution, $duration, $model);
+    } else {
+        // Fallback or error for unhandled types, though validation should prevent this
+        http_response_code(400);
+        echo json_encode(['error' => 'Unhandled generation type: ' . $type]);
+        exit;
     }
 
     if (isset($result['error'])) {
@@ -196,11 +203,41 @@ function callImageGeneration($prompt, $aspectRatio = null, $resolution = null, $
         'response_format' => 'url',
     ];
 
-    if ($aspectRatio) {
-        $payload['aspect_ratio'] = $aspectRatio;
-    }
-    if ($resolution) {
-        $payload['resolution'] = $resolution;
+    $isPro = ($model === 'grok-imagine-image-pro');
+    
+    if ($isPro) {
+        // Pro model supports aspect_ratio directly and is more flexible
+        if ($aspectRatio && $aspectRatio !== 'auto') {
+            $payload['aspect_ratio'] = $aspectRatio;
+        }
+        // Resolution can be passed if selected (e.g., '1k', '2k')
+        if ($resolution) {
+            $payload['resolution'] = $resolution;
+        }
+    } else {
+        // Standard model often follows OpenAI 'size' parameter format
+        $sizeMap = [
+            '1:1'    => '1024x1024',
+            '16:9'   => '1792x1024',
+            '9:16'   => '1024x1792',
+            '4:3'    => '1216x912',
+            '3:4'    => '912x1216',
+            '3:2'    => '1216x816',
+            '2:3'    => '816x1216',
+            '2:1'    => '1440x720',
+            '1:2'    => '720x1440',
+            '19.5:9' => '1792x828',
+            '9:19.5' => '828x1792',
+            '20:9'   => '1792x806',
+            '9:20'   => '806x1792'
+        ];
+
+        if ($aspectRatio && isset($sizeMap[$aspectRatio])) {
+            $payload['size'] = $sizeMap[$aspectRatio];
+        } elseif ($aspectRatio !== 'auto') {
+            $payload['size'] = '1024x1024';
+        }
+        // If 'auto', we omit size to let model decide or default to 1024x1024
     }
 
     $response = xaiRequest('POST', '/images/generations', $payload);
@@ -213,15 +250,56 @@ function callImageGeneration($prompt, $aspectRatio = null, $resolution = null, $
     return ['error' => $error ?: 'Image generation failed'];
 }
 
+function callImageEdit($prompt, $imageData, $aspectRatio = null, $resolution = null, $model = null)
+{
+    $payload = [
+        'model' => $model ?: 'grok-imagine-image',
+        'prompt' => $prompt,
+        'image' => [
+            'url' => $imageData,
+            'type' => 'image_url'
+        ],
+        'response_format' => 'url',
+    ];
+
+    $isPro = ($model === 'grok-imagine-image-pro');
+    if ($aspectRatio && $aspectRatio !== 'auto') {
+        $payload['aspect_ratio'] = $aspectRatio;
+    }
+    if ($resolution) {
+        $payload['resolution'] = $resolution;
+    }
+
+    $response = xaiRequest('POST', '/images/edits', $payload);
+
+    if (isset($response['error'])) {
+        return $response;
+    }
+
+    if (isset($response['data'][0]['url'])) {
+        return ['url' => $response['data'][0]['url']];
+    }
+
+    if (isset($response['url'])) {
+        return ['url' => $response['url']];
+    }
+
+    return ['error' => 'Unexpected API response format'];
+}
+
 function callVideoGeneration($type, $prompt, $imageData = null, $aspectRatio = null, $resolution = null, $duration = 5, $model = null)
 {
     $payload = [
         'model' => $model ?: 'grok-imagine-video',
         'prompt' => $prompt,
-        'duration' => $duration ?: 5,
-        'aspect_ratio' => $aspectRatio ?: '16:9',
-        'resolution' => $resolution ?: '720p',
+        'duration' => (int)($duration ?: 5),
+        'resolution' => $resolution ?: '480p',
     ];
+
+    if ($aspectRatio && $aspectRatio !== 'auto') {
+        $payload['aspect_ratio'] = $aspectRatio;
+    }
+    // If auto or not provided, we omit to let the API decide (matching input image or prompt)
 
     if ($imageData && $type === 'image_to_video') {
         $payload['image'] = ['url' => $imageData];
@@ -314,13 +392,25 @@ function xaiRequest($method, $endpoint, $payload = null)
 
     if ($httpCode >= 400) {
         $decoded = json_decode($response, true);
-        $errorMessage = $decoded['error']['message'] ?? "API error (HTTP $httpCode)";
+        
+        $errorMessage = "API error (HTTP $httpCode)";
+        if ($decoded) {
+            if (isset($decoded['error']['message'])) {
+                $errorMessage = $decoded['error']['message'];
+            } elseif (isset($decoded['error'])) {
+                $errorMessage = is_array($decoded['error']) ? json_encode($decoded['error']) : $decoded['error'];
+            } elseif (isset($decoded['detail'])) {
+                $errorMessage = is_array($decoded['detail']) ? json_encode($decoded['detail']) : $decoded['detail'];
+            } else {
+                $errorMessage = json_encode($decoded);
+            }
+        } elseif ($response) {
+            $errorMessage = substr($response, 0, 300);
+        }
 
         // Add more context for 403/401 errors
         if ($httpCode === 403 || $httpCode === 401) {
-            if (isset($decoded['detail'])) {
-                $errorMessage .= ": " . $decoded['detail'];
-            } elseif (!$decoded) {
+            if (!$decoded) {
                 $errorMessage .= " (Verify API key and restricted endpoints)";
             }
         }

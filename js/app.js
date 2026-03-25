@@ -7,10 +7,10 @@ let currentUser = null;
 let idToken = null;
 let activeTab = 'text_to_image';
 let uploadedImageBase64 = null;
-let creditCosts = { text_to_image: 5, image_to_video: 20, text_to_video: 25, text_to_audio: 10 };
+let creditCosts = { text_to_image: 5, image_edit: 10, image_to_video: 20, text_to_video: 25, text_to_audio: 10 };
 let bdtPerCredit = 2;
 let pollingInterval = null;
-const tabNames = ['text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio'];
+const tabNames = ['text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio'];
 let adminSettings = null;
 
 // ─── Auth State Listener ────────────────────────────────
@@ -74,12 +74,16 @@ function switchTab(tabName, pushState = true) {
 
     activeTab = tabName;
     uploadedImageBase64 = null;
-    const preview = document.getElementById('uploadPreview');
-    if (preview) preview.style.display = 'none';
-    const placeholder = document.getElementById('uploadPlaceholder');
-    if (placeholder) placeholder.style.display = 'flex';
-    const zone = document.getElementById('uploadZone');
-    if (zone) zone.classList.remove('has-image');
+    
+    // Clear all previews
+    ['upload', 'upload-edit'].forEach(prefix => {
+        const preview = document.getElementById(prefix === 'upload' ? 'uploadPreview' : 'preview-edit');
+        const placeholder = document.getElementById(prefix === 'upload' ? 'uploadPlaceholder' : 'placeholder-edit');
+        const zone = document.getElementById(prefix === 'upload' ? 'uploadZone' : 'upload-edit');
+        if (preview) preview.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'flex';
+        if (zone) zone.classList.remove('has-image');
+    });
 
     // Update tab styles
     document.querySelectorAll('.tab').forEach(t => {
@@ -140,7 +144,8 @@ window.addEventListener('popstate', () => {
 });
 
 // ─── Image Upload ───────────────────────────────────────
-function handleImageUpload(input) {
+function handleImageUpload(e, type) {
+    const input = e.target || e;
     const file = input.files[0];
     if (!file) return;
 
@@ -157,10 +162,14 @@ function handleImageUpload(input) {
     const reader = new FileReader();
     reader.onload = (e) => {
         uploadedImageBase64 = e.target.result;
-        document.getElementById('uploadPreview').src = uploadedImageBase64;
-        document.getElementById('uploadPreview').style.display = 'block';
-        document.getElementById('uploadPlaceholder').style.display = 'none';
-        document.getElementById('uploadZone').classList.add('has-image');
+        const previewId = type === 'image_edit' ? 'preview-edit' : 'uploadPreview';
+        const placeholderId = type === 'image_edit' ? 'placeholder-edit' : 'uploadPlaceholder';
+        const zoneId = type === 'image_edit' ? 'upload-edit' : 'uploadZone';
+        
+        document.getElementById(previewId).src = uploadedImageBase64;
+        document.getElementById(previewId).style.display = 'block';
+        document.getElementById(placeholderId).style.display = 'none';
+        document.getElementById(zoneId).classList.add('has-image');
     };
     reader.readAsDataURL(file);
 }
@@ -194,6 +203,7 @@ async function handleGenerate(type) {
     }
 
     const promptId = type === 'text_to_image' ? 'prompt-t2i' :
+        type === 'image_edit' ? 'prompt-edit' :
         type === 'image_to_video' ? 'prompt-i2v' :
             type === 'text_to_video' ? 'prompt-t2v' : 'prompt-t2a';
     const prompt = document.getElementById(promptId).value.trim();
@@ -203,7 +213,7 @@ async function handleGenerate(type) {
         return;
     }
 
-    if (type === 'image_to_video' && !uploadedImageBase64) {
+    if ((type === 'image_to_video' || type === 'image_edit') && !uploadedImageBase64) {
         showToast('Please upload an image first', 'error');
         return;
     }
@@ -221,7 +231,7 @@ async function handleGenerate(type) {
 
     try {
         const body = { type, prompt };
-        if (type === 'image_to_video' && uploadedImageBase64) {
+        if ((type === 'image_to_video' || type === 'image_edit') && uploadedImageBase64) {
             body.image = uploadedImageBase64;
         }
 
@@ -230,6 +240,10 @@ async function handleGenerate(type) {
             body.model = document.getElementById('opt-t2i-model').value;
             body.aspect_ratio = document.getElementById('opt-t2i-ratio').value;
             body.resolution = document.getElementById('opt-t2i-quality').value;
+        } else if (type === 'image_edit') {
+            body.model = document.getElementById('opt-edit-model').value;
+            body.aspect_ratio = document.getElementById('opt-edit-ratio').value;
+            body.resolution = document.getElementById('opt-edit-resolution').value;
         } else if (type === 'image_to_video') {
             body.model = document.getElementById('opt-i2v-model').value;
             body.aspect_ratio = document.getElementById('opt-i2v-ratio').value;
@@ -427,10 +441,12 @@ function updateCalculatedCost(type) {
     let costUsd = 0;
     let costElId = '';
 
-    if (type === 'text_to_image') {
-        const model = document.getElementById('opt-t2i-model')?.value || 'grok-imagine-image';
+    if (type === 'text_to_image' || type === 'image_edit') {
+        const modelElId = type === 'text_to_image' ? 'opt-t2i-model' : 'opt-edit-model';
+        const model = document.getElementById(modelElId)?.value || 'grok-imagine-image';
         costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
-        costElId = 'cost-t2i';
+        if (type === 'image_edit') costUsd *= 2;
+        costElId = type === 'text_to_image' ? 'cost-t2i' : 'cost-edit';
     } else if (type === 'image_to_video' || type === 'text_to_video') {
         const el = document.getElementById(type === 'image_to_video' ? 'opt-i2v-duration' : 'opt-t2v-duration');
         const duration = el ? parseInt(el.value) : 5;

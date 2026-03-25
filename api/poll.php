@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit;
 }
 
-$generationId = $_GET['generation_id'] ?? $_GET['id'] ?? null;
+$generationId = $_GET['generation_id'] ?? $_GET['generation_id'] ?? null;
 if (!$generationId) {
     http_response_code(400);
     echo json_encode(['error' => 'Generation ID is required']);
