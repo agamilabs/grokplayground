@@ -112,7 +112,7 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
 async function initChatHistory() {
     // Load exactly 2 last generations into the chat view
     try {
-        const res = await apiCall('/api/history.php?limit=2', 'GET');
+        const res = await apiCall('/api/history.php?limit=1', 'GET');
         if (res.generations && res.generations.length > 0) {
             const emptyState = document.querySelector('.empty-state');
             if (emptyState) emptyState.remove();
@@ -127,7 +127,7 @@ async function initChatHistory() {
                     startPolling(gen.xai_request_id, msgId);
                 }
             });
-            historyOffset = 2;
+            historyOffset = 1;
             document.getElementById('loadPreviousContainer').style.display = 'block';
         }
     } catch (err) {}

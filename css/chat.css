@@ -101,6 +101,20 @@
 
 .user-info {
     display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-info img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.user-details {
+    display: flex;
     flex-direction: column;
 }
 
