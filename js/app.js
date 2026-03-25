@@ -564,6 +564,11 @@ async function loadHistory(page) {
             const media = (gen.status === 'completed' && gen.output_url)
                 ? (isVideo ? `<video src="${gen.output_url}" muted></video>` : `<img src="${gen.output_url}" loading="lazy" />`)
                 : `<div class="history-item-placeholder">${gen.status}</div>`;
+            
+            if (gen.status === 'processing') {
+                startPolling(gen.id, gen.type);
+            }
+
             return `<div class="history-item" onclick="${gen.status === 'completed' ? `showOutput('${gen.output_url}', '${gen.type}')` : `showToast('Generation is ${gen.status}.', 'info')`}">
                 ${media}
                 <div class="history-item-info">
