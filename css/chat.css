@@ -580,3 +580,55 @@
 .toast {
     animation: slideIn 0.3s ease-out;
 }
+
+/* ─── Shimmer / Skeleton Loader ───────────────────────── */
+.skeleton-loader {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.shimmer {
+    background: #1a1a1b;
+    background-image: linear-gradient(
+        to right,
+        #1a1a1b 0%,
+        #2a2a2b 20%,
+        #1a1a1b 40%,
+        #1a1a1b 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 800px 100%;
+    display: inline-block;
+    position: relative;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 12px;
+}
+
+.shimmer-media {
+    height: 180px;
+    width: 100%;
+}
+
+.shimmer-text {
+    height: 14px;
+    width: 90%;
+}
+
+.shimmer-text-short {
+    height: 14px;
+    width: 60%;
+}
+
+@keyframes shimmer {
+    0% { background-position: -468px 0; }
+    100% { background-position: 468px 0; }
+}
+
+.ai-media.processing {
+    background: transparent;
+    border: none;
+    padding: 0;
+}

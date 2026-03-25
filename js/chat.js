@@ -65,7 +65,13 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
     let mediaHtml = '';
 
     if (status === 'processing') {
-        mediaHtml = `<div class="ai-media processing"><div class="loading-spinner"></div><p>Generating... please wait.</p></div>`;
+        mediaHtml = `<div class="ai-media processing">
+            <div class="skeleton-loader">
+                <div class="shimmer shimmer-media"></div>
+                <div class="shimmer shimmer-text"></div>
+                <div class="shimmer shimmer-text-short"></div>
+            </div>
+        </div>`;
     } else if (status === 'failed') {
         mediaHtml = `<div class="ai-media error"><p>${escapeHtml(content || 'Generation failed. Credits have been refunded.')}</p></div>`;
     } else if (media) {
@@ -214,7 +220,13 @@ function updateMessage(id, content, media, status) {
     let mediaHtml = '';
 
     if (status === 'processing') {
-        mediaHtml = `<div class="ai-media processing"><div class="loading-spinner"></div><p>Generating... please wait.</p></div>`;
+        mediaHtml = `<div class="ai-media processing">
+            <div class="skeleton-loader">
+                <div class="shimmer shimmer-media"></div>
+                <div class="shimmer shimmer-text"></div>
+                <div class="shimmer shimmer-text-short"></div>
+            </div>
+        </div>`;
     } else if (status === 'failed') {
         mediaHtml = `<div class="ai-media error"><p>${escapeHtml(content || 'Generation failed')}</p></div>`;
     } else if (media) {
