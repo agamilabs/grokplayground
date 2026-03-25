@@ -222,7 +222,7 @@ function updateMessage(id, content, media, status) {
 async function startPolling(requestId, msgId) {
     const pollInterval = setInterval(async () => {
         try {
-            const res = await apiCall(`/api/poll.php?request_id=${requestId}`, 'GET');
+            const res = await apiCall('/api/poll.php', 'POST', { request_id: requestId });
             if (res.status === 'completed') {
                 clearInterval(pollInterval);
                 updateMessage(msgId, '', res.output_url, 'completed');

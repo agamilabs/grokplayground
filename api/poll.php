@@ -9,18 +9,14 @@ require_once __DIR__ . '/../auth.php';
 $user = authenticateRequest();
 $db = getDB();
 
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
-    exit;
-}
-
-$generationId = $_GET['generation_id'] ?? null;
-$requestId = $_GET['request_id'] ?? null;
+// Support both POST (JSON) and GET (legacy/simple)
+$input = json_decode(file_get_contents('php://input'), true);
+$generationId = $input['generation_id'] ?? $_GET['generation_id'] ?? null;
+$requestId = $input['request_id'] ?? $_GET['request_id'] ?? null;
 
 if (!$generationId && !$requestId) {
     http_response_code(400);
-    echo json_encode(['error' => 'Generation ID or Request ID is required']);
+    echo json_encode(['error' => 'Generation ID or Request ID is required in the payload']);
     exit;
 }
 
@@ -60,36 +56,25 @@ if (!$requestId) {
 }
 
 // Poll xAI API
-$url = XAI_BASE_URL . '/videos/generations/' . $requestId;
-$ch = curl_init($url);
-curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_SSL_VERIFYPEER => true,
-    CURLOPT_HTTPHEADER => [
-        'Content-Type: application/json',
-        'Authorization: Bearer ' . XAI_API_KEY,
-    ],
-    CURLOPT_TIMEOUT => 30,
-]);
+// For video generations, the status check often requires the request_id
+$response = xaiRequest('GET', '/videos/generations/' . $requestId);
 
-$response = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-
-if ($httpCode >= 400) {
-    // Just return processing and log error, keeping it processing for now
-    $decoded = json_decode($response, true);
-    $errorMsg = $decoded['error']['message'] ?? "Polling error (HTTP $httpCode)";
+if (isset($response['error'])) {
+    $errorMsg = $response['error'];
+    $httpCode = $response['http_code'] ?? 500;
     
-    $logEntry = date('Y-m-d H:i:s') . " - poll.php HTTP $httpCode: $response\n";
-    file_put_contents(__DIR__ . '/../uploads/api_error.log', $logEntry, FILE_APPEND);
+    // If it's a 404, the request might be too new or expired
+    if ($httpCode === 404) {
+        echo json_encode(['status' => 'processing', 'info' => 'Task not yet available']);
+        exit;
+    }
 
     http_response_code(500);
     echo json_encode(['error' => $errorMsg, 'status' => 'processing']);
     exit;
 }
 
-$decoded = json_decode($response, true);
+$decoded = $response;
 if (!$decoded) {
     echo json_encode(['status' => 'processing']);
     exit;

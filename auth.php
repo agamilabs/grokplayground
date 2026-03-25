@@ -120,3 +120,52 @@ function authenticateRequest()
     }
     return $user;
 }
+
+/**
+ * Common xAI API Request Wrapper
+ */
+function xaiRequest($method, $endpoint, $payload = null)
+{
+    $url = XAI_BASE_URL . $endpoint;
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_HTTPHEADER => [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . XAI_API_KEY,
+        ],
+        CURLOPT_CUSTOMREQUEST => $method,
+        CURLOPT_TIMEOUT => 60,
+    ]);
+
+    if ($method === 'POST' && $payload) {
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    }
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+    curl_close($ch);
+
+    if ($httpCode >= 400) {
+        $decoded = json_decode($response, true);
+        $errorMessage = "API error (HTTP $httpCode)";
+        if ($decoded) {
+            $errorMessage = $decoded['error']['message'] ?? $decoded['error'] ?? $decoded['detail'] ?? json_encode($decoded);
+        } elseif ($response) {
+            $errorMessage = substr($response, 0, 300);
+        }
+
+        // Log error
+        error_log("xAI Request Failed [$httpCode] $url: $response");
+        
+        return ['error' => $errorMessage, 'http_code' => $httpCode];
+    }
+
+    if (strpos($contentType, 'application/json') !== false) {
+        return json_decode($response, true) ?: ['error' => 'Empty API response'];
+    }
+
+    return $response;
+}

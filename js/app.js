@@ -307,7 +307,7 @@ function startPolling(generationId, type) {
         }
 
         try {
-            const res = await apiCall(`/api/poll.php?generation_id=${encodeURIComponent(generationId)}`, 'GET');
+            const res = await apiCall('/api/poll.php', 'POST', { generation_id: generationId });
 
             if (res.status === 'completed' && res.output_url) {
                 clearInterval(interval);
