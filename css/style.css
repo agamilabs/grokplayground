@@ -1081,8 +1081,16 @@ body {
 
 /* ─── Responsive ──────────────────────────────────────── */
 @media (max-width: 640px) {
+    .logo span {
+        display: none;
+    }
+    
+    .header-nav {
+        gap: 8px;
+    }
+
     .hero-title {
-        font-size: 24px;
+        font-size: 26px;
     }
 
     .hero-sub {
@@ -1093,14 +1101,44 @@ body {
         padding: 12px 0 10px;
     }
 
-    .tab {
-        font-size: 12px;
-        padding: 10px 8px;
-        gap: 4px;
+    /* Scrollable Tab Bar */
+    .tabs-container {
+        margin-left: -16px;
+        margin-right: -16px;
+        position: relative;
     }
 
-    .tab svg {
+    .tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        display: flex;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        padding: 4px 16px;
+        gap: 8px;
+    }
+
+    .tabs::-webkit-scrollbar {
         display: none;
+    }
+
+    .tab {
+        flex: 0 0 auto;
+        font-size: 13px;
+        padding: 10px 14px;
+        gap: 6px;
+        width: auto;
+    }
+
+    .tab-indicator {
+        display: none;
+    }
+    
+    .tab.active {
+        background: rgba(255, 255, 255, 0.08);
     }
 
     .header-inner {
@@ -1108,21 +1146,68 @@ body {
     }
 
     .main {
-        padding: 70px 16px 32px;
+        padding: 72px 16px 32px;
     }
 
     .gen-form {
+        padding: 16px;
+    }
+
+    .gen-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .gen-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        justify-content: center;
         padding: 14px;
     }
 
     .credits-badge {
         font-size: 12px;
-        padding: 4px 10px;
+        padding: 5px 12px;
     }
 
     .btn-sm {
-        padding: 5px 10px;
+        padding: 6px 12px;
         font-size: 12px;
+    }
+    
+    .history-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .history-item-prompt {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gen-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-nav .btn span,
+    .header-nav .credits-badge span:not(#creditsCount) {
+        display: none;
+    }
+    
+    .header-nav .btn {
+        padding: 6px 10px;
+        gap: 0;
+    }
+    
+    .header-nav .btn svg {
+        margin: 0;
     }
 }
 
