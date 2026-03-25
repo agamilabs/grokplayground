@@ -365,9 +365,9 @@ function updateOptions(mode) {
     
     // Clear & Rebuild Resolution
     resSelect.innerHTML = '';
-    if (mode.includes('image')) {
-        resSelect.innerHTML = '<option value="1k" selected>1k</option><option value="2k">2k</option>';
-    } else if (mode.includes('video')) {
+    if (mode.includes('video')) {
+        resSelect.innerHTML = '<option value="480p" selected>480p</option><option value="720p">720p</option>';
+    } else if (mode.includes('image')) {
         resSelect.innerHTML = '<option value="1k" selected>1k</option><option value="2k">2k</option>';
     }
 
