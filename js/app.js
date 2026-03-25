@@ -274,10 +274,10 @@ async function handleGenerate(type) {
         await loadCredits();
 
         if (res.status === 'completed' && res.output_url) {
-            uploadedImageBase64 = null; // Clear on success
+            uploadedImageBase64 = null; 
             showOutput(res.output_url, type);
         } else if (res.generation_id) {
-            uploadedImageBase64 = null; // Clear on success
+            uploadedImageBase64 = null; 
             startPolling(res.generation_id, type);
         }
 
@@ -291,17 +291,18 @@ async function handleGenerate(type) {
 }
 
 // ─── Polling ────────────────────────────────────────────
+const activePools = new Map();
 function startPolling(generationId, type) {
-    if (pollingInterval) clearInterval(pollingInterval);
+    if (activePools.has(generationId)) return;
+    
     let attempts = 0;
-    const maxAttempts = 60; // ~5-8 minutes
+    const maxAttempts = 60; 
 
-    pollingInterval = setInterval(async () => {
+    const interval = setInterval(async () => {
         attempts++;
         if (attempts > maxAttempts) {
-            clearInterval(pollingInterval);
-            document.getElementById('loadingArea').style.display = 'none';
-            showToast('Generation is taking longer. Check "Your Creations" later.', 'warning');
+            clearInterval(interval);
+            activePools.delete(generationId);
             return;
         }
 
@@ -309,17 +310,21 @@ function startPolling(generationId, type) {
             const res = await apiCall(`/api/poll.php?generation_id=${encodeURIComponent(generationId)}`, 'GET');
 
             if (res.status === 'completed' && res.output_url) {
-                clearInterval(pollingInterval);
+                clearInterval(interval);
+                activePools.delete(generationId);
                 showOutput(res.output_url, type);
             } else if (res.status === 'failed' || res.status === 'expired') {
-                clearInterval(pollingInterval);
-                document.getElementById('loadingArea').style.display = 'none';
-                showToast(res.error || 'Generation failed', 'error');
+                clearInterval(interval);
+                activePools.delete(generationId);
+                showToast(`Generation failed: ${res.error || 'Unknown error'}`, 'error');
+                loadHistory(historyPage);
             }
         } catch (err) {
             console.error('Poll error:', err);
         }
-    }, 4500);
+    }, 5000);
+    
+    activePools.set(generationId, interval);
 }
 
 // ─── Output Display ─────────────────────────────────────
