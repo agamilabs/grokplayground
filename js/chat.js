@@ -367,43 +367,116 @@ function autoExpand(el) {
     updateCalculatedCost();
 }
 
-function usePrompt(text) {
-    document.getElementById('chatInput').value = text;
-    sendChat();
+// ─── Credits & Pricing ──────────────────────────────────
+async function loadCredits() {
+    if (!currentUser) return;
+    try {
+        const res = await apiCall('/api/credits.php', 'GET');
+        if (res.credits !== undefined) {
+            document.getElementById('sidebarCredits').textContent = res.credits;
+            document.getElementById('headerCredits').textContent = res.credits;
+        }
+    } catch (err) {}
 }
 
-function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('active');
+async function signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+        await auth.signInWithPopup(provider);
+        closeModal('authModal');
+        showToast('Successfully signed in!', 'success');
+    } catch (error) {
+        showToast(error.message, 'error');
+    }
 }
 
-function newChat() {
-    document.getElementById('messagesContainer').innerHTML = `
-        <div class="empty-state">
-            <h1>What can I create for you today?</h1>
-            <div class="suggestion-grid">
-                <button class="suggestion" onclick="usePrompt('A cozy cabin in the woods at night with aurora borealis')">
-                    <span>"A cozy cabin in the woods..."</span><small>Image Generation</small>
-                </button>
-                <button class="suggestion" onclick="usePrompt('A slow motion wave crashing on a golden beach')">
-                    <span>"A slow motion wave..."</span><small>Video Generation</small>
-                </button>
-                <button class="suggestion" onclick="usePrompt('Synthwave music with heavy bass and retro vibes')">
-                    <span>"Synthwave music..."</span><small>Audio Generation</small>
-                </button>
-            </div>
-        </div>
+// ─── Modals ─────────────────────────────────────────────
+function openModal(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+function openBuyModal() {
+    if (!currentUser) { openModal('authModal'); return; }
+    updateSlider();
+    openModal('buyModal');
+}
+
+function updateSlider() {
+    const slider = document.getElementById('creditSlider');
+    const credits = parseInt(slider.value);
+    const bdtPerCredit = parseFloat(adminSettings?.bdt_per_credit || 2);
+    document.getElementById('sliderValue').textContent = `${credits} Credits`;
+    document.getElementById('priceAmount').textContent = `৳${Math.round(credits * bdtPerCredit)}`;
+}
+
+async function buyCredits() {
+    const credits = parseInt(document.getElementById('creditSlider').value);
+    const btn = document.getElementById('btn-buy-bkash');
+    const oldHtml = btn.innerHTML;
+
+    try {
+        btn.disabled = true;
+        btn.innerHTML = '<div class="loading-spinner" style="width:20px;height:20px;"></div> Processing...';
+
+        const res = await apiCall('/api/bkash.php?action=create', 'POST', { amount: credits });
+        if (res.bkashURL) {
+            window.location.href = res.bkashURL;
+        } else {
+            throw new Error(res.error || 'Failed to initiate payment');
+        }
+    } catch (err) {
+        showToast(err.message, 'error');
+        btn.disabled = false;
+        btn.innerHTML = oldHtml;
+    }
+}
+
+function openGiftModal() {
+    if (!currentUser) { openModal('authModal'); return; }
+    openModal('giftModal');
+}
+
+async function giftCredits() {
+    const email = document.getElementById('giftEmail').value;
+    const amount = parseInt(document.getElementById('giftAmount').value);
+    if (!email || !amount) { showToast('Please fill all fields', 'warning'); return; }
+
+    try {
+        await apiCall('/api/credits.php?action=gift', 'POST', { recipient_email: email, amount: amount });
+        showToast('Credits gifted successfully!', 'success');
+        closeModal('giftModal');
+        loadCredits();
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
+}
+
+// ─── Utils ──────────────────────────────────────────────
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    // Simple inline style if not in CSS
+    toast.style.cssText = `
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#2f2f2f'};
+        color: white; padding: 12px 20px; border-radius: 8px; font-size: 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3); animation: slideIn 0.3s ease-out;
     `;
-    clearAttachment();
-}
-
-// ─── API Core ───────────────────────────────────────────
-async function apiCall(endpoint, method = 'GET', body = null) {
-    const headers = { 'Content-Type': 'application/json' };
-    if (idToken) headers['Authorization'] = `Bearer ${idToken}`;
-    const res = await fetch(endpoint, { method, headers, body: body ? JSON.stringify(body) : null });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'API Error');
-    return data;
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s';
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
 }
 
 function escapeHtml(text) {
@@ -412,6 +485,17 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-function openModal(id) {
-    if (id === 'authModal') alert('Please sign in to use Chat');
-}
+// ─── Overlays & Init ────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeModal(overlay.id);
+        });
+    });
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.show').forEach(m => closeModal(m.id));
+    }
+});
