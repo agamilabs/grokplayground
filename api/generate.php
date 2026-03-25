@@ -17,7 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 $type = $input['type'] ?? '';
-$prompt = trim($input['prompt'] ?? '');
+$prompt = trim(strip_tags($input['prompt'] ?? ''));
+if (mb_strlen($prompt) > 4000) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Prompt is too long (max 4000 characters)']);
+    exit;
+}
 $imageData = $input['image'] ?? null;
 $aspectRatio = $input['aspect_ratio'] ?? null;
 $resolution = $input['resolution'] ?? null;
@@ -43,6 +48,33 @@ if (empty($prompt)) {
 if ($type === 'image_to_video' && empty($imageData)) {
     http_response_code(400);
     echo json_encode(['error' => 'Image is required for image-to-video generation']);
+    exit;
+}
+
+// Convert base64 to File URL if it's base64
+if ($imageData && preg_match('/^data:image\/(\w+);base64,/', $imageData, $matches)) {
+    $extension = $matches[1];
+    if ($extension === 'jpeg') $extension = 'jpg';
+    $base64String = substr($imageData, strpos($imageData, ',') + 1);
+    
+    $dir = __DIR__ . '/../uploads';
+    if (!is_dir($dir)) {
+        mkdir($dir, 0777, true);
+    }
+    
+    $filename = 'img_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
+    $filePath = $dir . '/' . $filename;
+    
+    file_put_contents($filePath, base64_decode($base64String));
+    $imageData = UPLOADS_URL . $filename; // Now it's a public URL
+}
+
+// Basic Rate Limiting: Max 15 requests per minute per user
+$stmt = $db->prepare("SELECT COUNT(*) FROM generations WHERE user_id = ? AND created_at > DATE_SUB(NOW(), INTERVAL 1 MINUTE)");
+$stmt->execute([$user['id']]);
+if ($stmt->fetchColumn() >= 15) {
+    http_response_code(429);
+    echo json_encode(['error' => 'Rate limit exceeded. Please wait a minute.']);
     exit;
 }
 
@@ -173,14 +205,12 @@ function callImageGeneration($prompt, $aspectRatio = null, $resolution = null, $
 
     $response = xaiRequest('POST', '/images/generations', $payload);
 
-    if (isset($response['url'])) {
-        return ['url' => $response['url']];
+    if (isset($response['data'][0]['url'])) {
+        return ['url' => $response['data'][0]['url']];
     }
-    // if (isset($response['data'][0]['url'])) {
-    //     return ['url' => $response['data'][0]['url']];
-    // }
 
-    return ['error' => $response['error']['message'] ?? 'Image generation failed'];
+    $error = $response['error']['message'] ?? json_encode($response);
+    return ['error' => $error ?: 'Image generation failed'];
 }
 
 function callVideoGeneration($type, $prompt, $imageData = null, $aspectRatio = null, $resolution = null, $duration = 5, $model = null)
@@ -223,15 +253,8 @@ function callAudioGeneration($prompt, $model = null, $voice = 'eve', $quality = 
     $cacheKey = md5($prompt . '|' . $voice . '|' . $quality);
     $cacheFile = $dir . '/cache_' . $cacheKey . '.mp3';
 
-    // Build base URL for the output
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
-    $host = $_SERVER['HTTP_HOST'];
-    $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
-    $baseDir = dirname($scriptPath);
-    $baseUrl = rtrim($protocol . $host . $baseDir, '/');
-
     if (file_exists($cacheFile)) {
-        return ['url' => $baseUrl . '/uploads/' . basename($cacheFile), 'cached' => true];
+        return ['url' => UPLOADS_URL . basename($cacheFile), 'cached' => true];
     }
 
     $payload = [
@@ -258,7 +281,7 @@ function callAudioGeneration($prompt, $model = null, $voice = 'eve', $quality = 
     // Binary response handling
     if (is_string($response)) {
         file_put_contents($cacheFile, $response);
-        return ['url' => $baseUrl . '/uploads/' . basename($cacheFile)];
+        return ['url' => UPLOADS_URL . basename($cacheFile)];
     }
 
     return ['error' => 'Unexpected API response format'];
@@ -271,6 +294,7 @@ function xaiRequest($method, $endpoint, $payload = null)
     $ch = curl_init($url);
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_SSL_VERIFYPEER => true,
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
             'Authorization: Bearer ' . XAI_API_KEY,

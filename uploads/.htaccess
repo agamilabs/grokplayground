@@ -1,0 +1,11 @@
+# Prevent execution of scripts in uploads directory
+<FilesMatch "\.(php|php4|php5|php7|php8|phtml|pl|py|jsp|asp|htm|shtml|sh|cgi|exe)$">
+    Require all denied
+</FilesMatch>
+
+# Allow serving of media files for caching and generations
+<FilesMatch "\.(jpg|jpeg|png|gif|mp4|mp3|wav|ogg)$">
+    Require all granted
+</FilesMatch>
+
+Options -Indexes

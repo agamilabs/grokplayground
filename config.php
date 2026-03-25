@@ -47,6 +47,7 @@ define('XAI_API_KEY', trim(get_setting('xai_api_key', '')));
 define('XAI_BASE_URL', rtrim(trim(get_setting('xai_base_url', 'https://api.x.ai/v1')), '/'));
 define('FIREBASE_PROJECT_ID', get_setting('firebase_project_id', ''));
 define('SITE_URL', rtrim(get_setting('site_url', 'http://localhost/groksubscription'), '/'));
+define('UPLOADS_URL', SITE_URL . '/uploads/');
 
 // bKash Credentials
 define('BKASH_APP_KEY', get_setting('bkash_app_key', ''));
@@ -60,7 +61,7 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
 ini_set('display_errors', 0);
 
 // CORS Headers
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: ' . SITE_URL);
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
