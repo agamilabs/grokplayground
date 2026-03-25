@@ -8,6 +8,8 @@ let idToken = null;
 let uploadedImageBase64 = null;
 let bdtPerCredit = 2;
 let adminSettings = null;
+let historyOffset = 0;
+const historyLimit = 10;
 
 // ─── Auth State Listener ────────────────────────────────
 auth.onAuthStateChanged(async (user) => {
@@ -24,7 +26,8 @@ auth.onAuthStateChanged(async (user) => {
         } catch(e) {}
         
         await loadCredits();
-        loadHistory();
+        loadSidebarHistory();
+        initChatHistory(); // Load last 2 generations into chat
         onModeChange(); // Initialize options and cost
     } else {
         currentUser = null;
@@ -35,18 +38,24 @@ auth.onAuthStateChanged(async (user) => {
 });
 
 // ─── Chat Logic ─────────────────────────────────────────
-function appendMessage(role, content, media = null, status = 'completed', id = null) {
+function appendMessage(role, content, media = null, status = 'completed', id = null, position = 'append') {
     const container = document.getElementById('messagesContainer');
     const emptyState = container.querySelector('.empty-state');
-    if (emptyState) emptyState.remove();
+    if (emptyState && position === 'append') emptyState.remove();
 
     const msgDiv = document.createElement('div');
     msgDiv.className = `message msg-${role}`;
     if (id) msgDiv.id = `msg-${id}`;
 
+    // Avatars
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
-    avatar.innerHTML = role === 'ai' ? 'G' : 'U';
+    if (role === 'ai') {
+        avatar.innerHTML = `<img src="favicon.svg" alt="Grok" style="width:100%; height:100%; border-radius:inherit;">`;
+    } else {
+        const photo = currentUser?.photoURL || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+        avatar.innerHTML = `<img src="${photo}" alt="User" style="width:100%; height:100%; border-radius:inherit;">`;
+    }
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
@@ -71,10 +80,61 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
     contentDiv.innerHTML = text + mediaHtml;
     msgDiv.appendChild(avatar);
     msgDiv.appendChild(contentDiv);
-    container.appendChild(msgDiv);
-    container.scrollTop = container.scrollHeight;
+    
+    if (position === 'append') {
+        container.appendChild(msgDiv);
+        container.scrollTop = container.scrollHeight;
+    } else {
+        container.insertBefore(msgDiv, document.getElementById('loadPreviousContainer').nextSibling);
+    }
     
     return msgDiv;
+}
+
+async function initChatHistory() {
+    // Load exactly 2 last generations into the chat view
+    try {
+        const res = await apiCall('/api/history.php?limit=2', 'GET');
+        if (res.generations && res.generations.length > 0) {
+            const emptyState = document.querySelector('.empty-state');
+            if (emptyState) emptyState.remove();
+            
+            // Sort to show newest at bottom
+            res.generations.reverse().forEach(gen => {
+                if (gen.status === 'completed') {
+                    appendMessage('user', gen.prompt);
+                    appendMessage('ai', '', gen.output_url);
+                }
+            });
+            historyOffset = 2;
+            document.getElementById('loadPreviousContainer').style.display = 'block';
+        }
+    } catch (err) {}
+}
+
+async function loadMoreHistory() {
+    try {
+        const btn = document.querySelector('#loadPreviousContainer button');
+        btn.textContent = 'Loading...';
+        
+        const res = await apiCall(`/api/history.php?limit=${historyLimit}&offset=${historyOffset}`, 'GET');
+        
+        if (res.generations && res.generations.length > 0) {
+            res.generations.forEach(gen => {
+                if (gen.status === 'completed') {
+                    // Prepend AI then User (since we're moving backwards)
+                    appendMessage('ai', '', gen.output_url, 'completed', null, 'prepend');
+                    appendMessage('user', gen.prompt, null, 'completed', null, 'prepend');
+                }
+            });
+            historyOffset += res.generations.length;
+        } else {
+            document.getElementById('loadPreviousContainer').style.display = 'none';
+        }
+        btn.textContent = 'Load Previous Generations';
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 async function sendChat() {
@@ -182,7 +242,7 @@ async function loadCredits() {
     } catch (err) {}
 }
 
-async function loadHistory() {
+async function loadSidebarHistory() {
     try {
         const res = await apiCall('/api/history.php?limit=15', 'GET');
         const list = document.getElementById('chatHistory');
@@ -276,7 +336,7 @@ function updateCalculatedCost() {
 
     const settings = adminSettings || {};
     const bdtPerUsd = parseFloat(settings.bdt_per_usd || 145);
-    bdtPerCredit = parseFloat(settings.bdt_per_credit || 2);
+    const bdtPerCreditVal = parseFloat(settings.bdt_per_credit || 2);
     
     let costUsd = 0;
 
@@ -290,7 +350,7 @@ function updateCalculatedCost() {
         if (prompt.length > 0 && costUsd < 0.01) costUsd = 0.01;
     }
 
-    const credits = Math.ceil((costUsd * bdtPerUsd) / bdtPerCredit);
+    const credits = Math.ceil((costUsd * bdtPerUsd) / bdtPerCreditVal);
     document.getElementById('chatCost').textContent = credits;
 }
 
