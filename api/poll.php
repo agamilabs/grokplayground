@@ -62,8 +62,8 @@ if (!$requestId) {
 }
 
 // Poll xAI API
-// For video generations, the status check often requires the request_id
-$response = xaiRequest('GET', '/videos/generations/' . $requestId);
+// For video generations, the status check endpoint is /v1/videos/{request_id}
+$response = xaiRequest('GET', '/videos/' . $requestId);
 
 if (isset($response['error'])) {
     $errorMsg = $response['error'];
@@ -71,6 +71,7 @@ if (isset($response['error'])) {
     
     // If it's a 404, the request might be too new or expired
     if ($httpCode === 404) {
+        // According to documentation, we stay in processing while it's not yet indexed
         echo json_encode(['status' => 'processing', 'info' => 'Task not yet available']);
         exit;
     }
@@ -86,7 +87,7 @@ if (!$decoded) {
     exit;
 }
 
-// Checking status
+// Checking status (xAI uses lowercase: pending, done, failed, expired)
 $status = strtolower($decoded['status'] ?? $decoded['state'] ?? 'pending');
 
 if ($status === 'done' || $status === 'completed') {
@@ -105,7 +106,7 @@ if ($status === 'done' || $status === 'completed') {
     }
 }
 
-// If failed
+// If failed or expired
 if ($status === 'failed' || $status === 'expired' || $status === 'error') {
      $stmt = $db->prepare("UPDATE generations SET status = 'failed' WHERE id = ?");
      $stmt->execute([$generationId]);
@@ -113,13 +114,15 @@ if ($status === 'failed' || $status === 'expired' || $status === 'error') {
      echo json_encode([
          'id' => $generationId,
          'status' => 'failed',
-         'error' => $decoded['error']['message'] ?? 'Generation failed'
+         'error' => $decoded['error']['message'] ?? "Generation $status"
      ]);
      exit;
 }
 
-// Still processing
+// If pending (Still processing)
+// We stay in 'processing' state
 echo json_encode([
     'id' => $generationId,
-    'status' => 'processing'
+    'status' => 'processing',
+    'progress' => $decoded['progress'] ?? 0
 ]);
