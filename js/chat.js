@@ -367,6 +367,48 @@ function autoExpand(el) {
     updateCalculatedCost();
 }
 
+function usePrompt(text) {
+    document.getElementById('chatInput').value = text;
+    sendChat();
+}
+
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('active');
+}
+
+function newChat() {
+    document.getElementById('messagesContainer').innerHTML = `
+        <div class="empty-state">
+            <h1>What can I create for you today?</h1>
+            <div class="suggestion-grid">
+                <button class="suggestion" onclick="usePrompt('A cozy cabin in the woods at night with aurora borealis')">
+                    <span>"A cozy cabin in the woods..."</span>
+                    <small>Image Generation</small>
+                </button>
+                <button class="suggestion" onclick="usePrompt('A slow motion wave crashing on a golden beach')">
+                    <span>"A slow motion wave..."</span>
+                    <small>Video Generation</small>
+                </button>
+                <button class="suggestion" onclick="usePrompt('Synthwave music with heavy bass and retro vibes')">
+                    <span>"Synthwave music..."</span>
+                    <small>Audio Generation</small>
+                </button>
+            </div>
+        </div>
+    `;
+    clearAttachment();
+}
+
+// ─── API Core ───────────────────────────────────────────
+async function apiCall(endpoint, method = 'GET', body = null) {
+    const headers = { 'Content-Type': 'application/json' };
+    if (idToken) headers['Authorization'] = `Bearer ${idToken}`;
+    const res = await fetch(endpoint, { method, headers, body: body ? JSON.stringify(body) : null });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'API Error');
+    return data;
+}
+
 // ─── Credits & Pricing ──────────────────────────────────
 async function loadCredits() {
     if (!currentUser) return;
@@ -462,19 +504,18 @@ async function giftCredits() {
 // ─── Utils ──────────────────────────────────────────────
 function showToast(message, type = 'info') {
     const container = document.getElementById('toastContainer');
+    if (!container) return;
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    // Simple inline style if not in CSS
     toast.style.cssText = `
         background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#2f2f2f'};
         color: white; padding: 12px 20px; border-radius: 8px; font-size: 14px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3); animation: slideIn 0.3s ease-out;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 10px; transition: opacity 0.3s;
     `;
     toast.textContent = message;
     container.appendChild(toast);
     setTimeout(() => {
         toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.3s';
         setTimeout(() => toast.remove(), 300);
     }, 4000);
 }
