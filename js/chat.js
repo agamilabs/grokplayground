@@ -171,8 +171,20 @@ async function sendChat() {
     appendMessage('ai', '', null, 'processing', aiMsgId);
 
     try {
-        const body = { type, prompt, model, aspect_ratio, resolution, duration };
-        if (attachment) body.image = attachment;
+        const body = { type, prompt, model };
+        
+        if (type !== 'text_to_audio') {
+            body.aspect_ratio = aspect_ratio;
+            body.resolution = resolution;
+        }
+
+        if (type === 'text_to_video' || type === 'image_to_video') {
+            body.duration = duration;
+        }
+
+        if (attachment) {
+            body.image = attachment;
+        }
 
         const res = await apiCall('/api/generate.php', 'POST', body);
 

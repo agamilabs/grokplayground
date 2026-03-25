@@ -76,8 +76,11 @@ if (isset($response['error'])) {
         exit;
     }
 
-    http_response_code(500);
-    echo json_encode(['error' => $errorMsg, 'status' => 'processing']);
+    // For any other error (invalid_argument, etc.), mark as failed in DB
+    $stmt = $db->prepare("UPDATE generations SET status = 'failed' WHERE id = ?");
+    $stmt->execute([$generationId]);
+
+    echo json_encode(['error' => $errorMsg, 'status' => 'failed']);
     exit;
 }
 

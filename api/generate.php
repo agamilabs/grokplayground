@@ -132,11 +132,13 @@ try {
     if ($type === 'text_to_image') {
         $result = callImageGeneration($prompt, $aspectRatio, $resolution, $model);
     } elseif ($type === 'image_edit') {
-        $result = callImageEdit($prompt, $imageData, $aspectRatio, $resolution, $model);
+        // Use the original base64 for xAI if on localhost, otherwise the saved URL is fine.
+        // But xAI accepts base64 data URLs directly, so let's use that if possible.
+        $result = callImageEdit($prompt, $input['image'] ?? $imageData, $aspectRatio, $resolution, $model);
     } elseif ($type === 'text_to_audio') {
         $result = callAudioGeneration($prompt, $model, $voice, $quality);
     } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
-        $result = callVideoGeneration($type, $prompt, $imageData, $aspectRatio, $resolution, $duration, $model);
+        $result = callVideoGeneration($type, $prompt, $input['image'] ?? $imageData, $aspectRatio, $resolution, $duration, $model);
     } else {
         // Fallback or error for unhandled types, though validation should prevent this
         http_response_code(400);
@@ -203,41 +205,12 @@ function callImageGeneration($prompt, $aspectRatio = null, $resolution = null, $
         'response_format' => 'url',
     ];
 
-    $isPro = ($model === 'grok-imagine-image-pro');
-    
-    if ($isPro) {
-        // Pro model supports aspect_ratio directly and is more flexible
-        if ($aspectRatio && $aspectRatio !== 'auto') {
-            $payload['aspect_ratio'] = $aspectRatio;
-        }
-        // Resolution can be passed if selected (e.g., '1k', '2k')
-        if ($resolution) {
-            $payload['resolution'] = $resolution;
-        }
-    } else {
-        // Standard model often follows OpenAI 'size' parameter format
-        $sizeMap = [
-            '1:1'    => '1024x1024',
-            '16:9'   => '1792x1024',
-            '9:16'   => '1024x1792',
-            '4:3'    => '1216x912',
-            '3:4'    => '912x1216',
-            '3:2'    => '1216x816',
-            '2:3'    => '816x1216',
-            '2:1'    => '1440x720',
-            '1:2'    => '720x1440',
-            '19.5:9' => '1792x828',
-            '9:19.5' => '828x1792',
-            '20:9'   => '1792x806',
-            '9:20'   => '806x1792'
-        ];
+    if ($aspectRatio && $aspectRatio !== 'auto') {
+        $payload['aspect_ratio'] = $aspectRatio;
+    }
 
-        if ($aspectRatio && isset($sizeMap[$aspectRatio])) {
-            $payload['size'] = $sizeMap[$aspectRatio];
-        } elseif ($aspectRatio !== 'auto') {
-            $payload['size'] = '1024x1024';
-        }
-        // If 'auto', we omit size to let model decide or default to 1024x1024
+    if ($model === 'grok-imagine-image-pro' && $resolution) {
+        $payload['resolution'] = $resolution;
     }
 
     $response = xaiRequest('POST', '/images/generations', $payload);
