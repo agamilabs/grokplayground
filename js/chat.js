@@ -253,7 +253,7 @@ async function loadSidebarHistory() {
     try {
         const res = await apiCall('/api/history.php?limit=15', 'GET');
         const list = document.getElementById('chatHistory');
-        list.innerHTML = '<div class="history-group">Recent Generations</div>';
+        list.innerHTML = '';
         res.generations.forEach(gen => {
             const item = document.createElement('div');
             item.className = 'history-item';
