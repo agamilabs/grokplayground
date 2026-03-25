@@ -73,6 +73,13 @@ function switchTab(tabName, pushState = true) {
     if (!tabNames.includes(tabName) || tabName === activeTab) return;
 
     activeTab = tabName;
+    uploadedImageBase64 = null;
+    const preview = document.getElementById('uploadPreview');
+    if (preview) preview.style.display = 'none';
+    const placeholder = document.getElementById('uploadPlaceholder');
+    if (placeholder) placeholder.style.display = 'flex';
+    const zone = document.getElementById('uploadZone');
+    if (zone) zone.classList.remove('has-image');
 
     // Update tab styles
     document.querySelectorAll('.tab').forEach(t => {
@@ -210,7 +217,7 @@ async function handleGenerate(type) {
 
     document.getElementById('outputArea').style.display = 'none';
     document.getElementById('loadingArea').style.display = 'block';
-    document.getElementById('loadingText').textContent = 'Creating your creation...';
+    document.getElementById('loadingText').textContent = type.includes('video') ? 'Generating video... (usually 20-90 seconds)' : 'Generating your creation...';
 
     try {
         const body = { type, prompt };
@@ -253,9 +260,11 @@ async function handleGenerate(type) {
         await loadCredits();
 
         if (res.status === 'completed' && res.output_url) {
+            uploadedImageBase64 = null; // Clear on success
             showOutput(res.output_url, type);
-        } else if (res.request_id) {
-            startPolling(res.request_id, res.generation_id, type);
+        } else if (res.generation_id) {
+            uploadedImageBase64 = null; // Clear on success
+            startPolling(res.generation_id, type);
         }
 
     } catch (err) {
@@ -268,48 +277,35 @@ async function handleGenerate(type) {
 }
 
 // ─── Polling ────────────────────────────────────────────
-function startPolling(requestId, generationId, type) {
+function startPolling(generationId, type) {
     if (pollingInterval) clearInterval(pollingInterval);
     let attempts = 0;
-    let delay = 5000; // Start with 5s
-    
-    const poll = async () => {
+    const maxAttempts = 60; // ~5-8 minutes
+
+    pollingInterval = setInterval(async () => {
         attempts++;
-        if (attempts >= 40) { // Approx 5-6 mins total with backoff
+        if (attempts > maxAttempts) {
             clearInterval(pollingInterval);
             document.getElementById('loadingArea').style.display = 'none';
-            showToast('Generation taking longer than expected. Check "Your Creations" later.', 'warning');
+            showToast('Generation is taking longer. Check "Your Creations" later.', 'warning');
             return;
         }
 
-        // Gradually increase delay to avoid overwhelming API
-        if (attempts > 10 && delay < 10000) {
-            delay = 8000;
-            updatePollingInterval();
-        } else if (attempts > 20 && delay < 15000) {
-            delay = 12000;
-            updatePollingInterval();
-        }
-
         try {
-            const res = await apiCall(`/api/poll.php?request_id=${encodeURIComponent(requestId)}&generation_id=${encodeURIComponent(generationId)}`, 'GET');
+            const res = await apiCall(`/api/poll.php?generation_id=${encodeURIComponent(generationId)}`, 'GET');
+
             if (res.status === 'completed' && res.output_url) {
                 clearInterval(pollingInterval);
                 showOutput(res.output_url, type);
-            } else if (res.status === 'failed') {
+            } else if (res.status === 'failed' || res.status === 'expired') {
                 clearInterval(pollingInterval);
                 document.getElementById('loadingArea').style.display = 'none';
-                showToast('Generation failed', 'error');
+                showToast(res.error || 'Generation failed', 'error');
             }
-        } catch (err) { }
-    };
-
-    function updatePollingInterval() {
-        clearInterval(pollingInterval);
-        pollingInterval = setInterval(poll, delay);
-    }
-
-    pollingInterval = setInterval(poll, delay);
+        } catch (err) {
+            console.error('Poll error:', err);
+        }
+    }, 4500);
 }
 
 // ─── Output Display ─────────────────────────────────────
@@ -376,7 +372,8 @@ function downloadOutput() {
             const blobUrl = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = blobUrl;
-            a.download = `grok-${Date.now()}.${document.getElementById('outputArea').dataset.type === 'text_to_image' ? 'png' : 'mp4'}`;
+            const outputType = document.getElementById('outputArea').dataset.type || '';
+            a.download = `grok-${Date.now()}.${outputType.includes('image') ? 'png' : outputType.includes('audio') ? 'mp3' : 'mp4'}`;
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(blobUrl);
@@ -546,7 +543,7 @@ async function loadHistory(page) {
             const media = (gen.status === 'completed' && gen.output_url)
                 ? (isVideo ? `<video src="${gen.output_url}" muted></video>` : `<img src="${gen.output_url}" loading="lazy" />`)
                 : `<div class="history-item-placeholder">${gen.status}</div>`;
-            return `<div class="history-item" onclick="showOutput('${gen.output_url}', '${gen.type}')">
+            return `<div class="history-item" onclick="${gen.status === 'completed' ? `showOutput('${gen.output_url}', '${gen.type}')` : `showToast('Generation is ${gen.status}.', 'info')`}">
                 ${media}
                 <div class="history-item-info">
                     <span class="history-item-type">${gen.type.replace(/_/g, ' ')}</span>
