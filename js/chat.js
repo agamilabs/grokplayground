@@ -482,7 +482,8 @@ async function buyCredits() {
         btn.disabled = true;
         btn.innerHTML = '<div class="loading-spinner" style="width:20px;height:20px;"></div> Processing...';
 
-        const res = await apiCall('/api/bkash.php?action=create', 'POST', { amount: credits });
+        // Fix: Backend expects { credits: ... } not { amount: ... }
+        const res = await apiCall('/api/bkash.php?action=create', 'POST', { credits: credits });
         if (res.bkashURL) {
             window.location.href = res.bkashURL;
         } else {
@@ -501,12 +502,13 @@ function openGiftModal() {
 }
 
 async function giftCredits() {
-    const email = document.getElementById('giftEmail').value;
+    const email = document.getElementById('giftEmail').value.trim();
     const amount = parseInt(document.getElementById('giftAmount').value);
-    if (!email || !amount) { showToast('Please fill all fields', 'warning'); return; }
+    if (!email || !amount || amount < 1) { showToast('Invalid input', 'warning'); return; }
 
     try {
-        await apiCall('/api/credits.php?action=gift', 'POST', { recipient_email: email, amount: amount });
+        // Fix: Backend expects action: 'gift', email: ..., credits: ...
+        await apiCall('/api/credits.php', 'POST', { action: 'gift', email, credits: amount });
         showToast('Credits gifted successfully!', 'success');
         closeModal('giftModal');
         loadCredits();
