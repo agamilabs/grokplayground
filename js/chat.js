@@ -368,7 +368,7 @@ function updateOptions(mode) {
     if (mode.includes('image')) {
         resSelect.innerHTML = '<option value="1k" selected>1k</option><option value="2k">2k</option>';
     } else if (mode.includes('video')) {
-        resSelect.innerHTML = '<option value="480p" selected>480p</option><option value="720p">720p</option>';
+        resSelect.innerHTML = '<option value="1k" selected>1k</option><option value="2k">2k</option>';
     }
 
     // Adjust Model visibility/options if needed
