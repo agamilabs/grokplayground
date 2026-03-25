@@ -190,13 +190,15 @@ async function sendChat() {
 
         if (res.error) throw new Error(res.error);
 
-        if (res.request_id) {
+        if (res.status === 'completed' && res.output_url) {
+            // Immediate (Image/Audio)
+            updateMessage(aiMsgId, '', res.output_url, 'completed');
+            loadCredits();
+        } else if (res.request_id) {
             // Video generation - start polling
             startPolling(res.request_id, aiMsgId);
-        } else if (res.url) {
-            // Immediate (Image/Audio)
-            updateMessage(aiMsgId, '', res.url, 'completed');
-            loadCredits();
+        } else {
+            throw new Error('Unexpected API response');
         }
     } catch (err) {
         updateMessage(aiMsgId, 'Error: ' + err.message, null, 'failed');
