@@ -17,8 +17,15 @@ auth.onAuthStateChanged(async (user) => {
         document.getElementById('userProfile').style.display = 'flex';
         document.getElementById('sidebarUserPhoto').src = user.photoURL || '';
         document.getElementById('sidebarUserName').textContent = user.displayName || 'User';
+        
+        // Fetch settings then initialize UI
+        try {
+            adminSettings = await apiCall('/api/admin_settings.php', 'GET');
+        } catch(e) {}
+        
         await loadCredits();
         loadHistory();
+        onModeChange(); // Initialize options and cost
     } else {
         currentUser = null;
         idToken = null;
@@ -50,12 +57,12 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
     if (status === 'processing') {
         mediaHtml = `<div class="ai-media processing"><div class="loading-spinner"></div><p>Generating... please wait.</p></div>`;
     } else if (status === 'failed') {
-        mediaHtml = `<div class="ai-media error"><p>Generation failed. Credits have been refunded.</p></div>`;
+        mediaHtml = `<div class="ai-media error"><p>${escapeHtml(content || 'Generation failed. Credits have been refunded.')}</p></div>`;
     } else if (media) {
         if (media.includes('.mp4') || media.includes('video')) {
-            mediaHtml = `<div class="ai-media reveal-anim"><video src="${media}" controls loop></video></div>`;
+            mediaHtml = `<div class="ai-media reveal-anim"><video src="${media}" controls loop autoplay></video></div>`;
         } else if (media.includes('.mp3') || media.includes('audio')) {
-            mediaHtml = `<div class="ai-media reveal-anim"><audio src="${media}" controls></audio></div>`;
+            mediaHtml = `<div class="ai-media reveal-anim"><audio src="${media}" controls autoplay></audio></div>`;
         } else {
             mediaHtml = `<div class="ai-media reveal-anim"><img src="${media}" onclick="window.open('${media}', '_blank')"></div>`;
         }
@@ -71,7 +78,7 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
 }
 
 async function sendChat() {
-    if (!currentUser) { openModal('authModal'); return; }
+    if (!currentUser) { alert('Please sign in'); return; }
     
     const input = document.getElementById('chatInput');
     const prompt = input.value.trim();
@@ -80,6 +87,8 @@ async function sendChat() {
     const type = document.getElementById('chatMode').value;
     const model = document.getElementById('chatModel').value;
     const aspect_ratio = document.getElementById('chatAspect').value;
+    const resolution = document.getElementById('chatResolution').value;
+    const duration = parseInt(document.getElementById('chatDuration').value);
 
     // Show user message
     appendMessage('user', prompt, uploadedImageBase64);
@@ -95,7 +104,7 @@ async function sendChat() {
     appendMessage('ai', '', null, 'processing', aiMsgId);
 
     try {
-        const body = { type, prompt, model, aspect_ratio };
+        const body = { type, prompt, model, aspect_ratio, resolution, duration };
         if (attachment) body.image = attachment;
 
         const res = await apiCall('/api/generate.php', 'POST', body);
@@ -169,19 +178,20 @@ async function loadCredits() {
         const res = await apiCall('/api/credits.php', 'GET');
         document.getElementById('sidebarCredits').textContent = res.credits;
         document.getElementById('headerCredits').textContent = res.credits;
+        currentUser.credits = res.credits;
     } catch (err) {}
 }
 
 async function loadHistory() {
-    // Reusing the general history to populate sidebar for now
     try {
-        const res = await apiCall('/api/history.php?limit=10', 'GET');
+        const res = await apiCall('/api/history.php?limit=15', 'GET');
         const list = document.getElementById('chatHistory');
         list.innerHTML = '<div class="history-group">Recent Generations</div>';
         res.generations.forEach(gen => {
             const item = document.createElement('div');
             item.className = 'history-item';
             item.textContent = gen.prompt;
+            item.title = gen.prompt;
             item.onclick = () => showHistoryItem(gen);
             list.appendChild(item);
         });
@@ -205,7 +215,6 @@ function handleChatFile(e) {
         document.getElementById('previewImg').src = uploadedImageBase64;
         document.getElementById('attachmentPreview').style.display = 'block';
         
-        // Auto-switch to Image Edit if on T2I
         const mode = document.getElementById('chatMode');
         if (mode.value === 'text_to_image') {
             mode.value = 'image_edit';
@@ -223,16 +232,72 @@ function clearAttachment() {
 
 function onModeChange() {
     const mode = document.getElementById('chatMode').value;
-    const ctrlAspect = document.getElementById('ctrl-aspect');
-    const ctrlModel = document.getElementById('ctrl-model');
     
-    ctrlAspect.style.display = (mode === 'text_to_audio') ? 'none' : 'flex';
-    ctrlModel.style.display = (mode === 'text_to_audio') ? 'none' : 'flex';
+    // 1. Update Visibility
+    document.getElementById('ctrl-aspect').style.display = mode.includes('audio') ? 'none' : 'flex';
+    document.getElementById('ctrl-resolution').style.display = mode.includes('audio') ? 'none' : 'flex';
+    document.getElementById('ctrl-duration').style.display = mode.includes('video') ? 'flex' : 'none';
+    document.getElementById('ctrl-model').style.display = mode.includes('audio') ? 'none' : 'flex';
+
+    // 2. Update Options
+    updateOptions(mode);
+    
+    // 3. Update Cost
+    updateCalculatedCost();
+}
+
+function updateOptions(mode) {
+    const resSelect = document.getElementById('chatResolution');
+    const modelSelect = document.getElementById('chatModel');
+    
+    // Clear & Rebuild Resolution
+    resSelect.innerHTML = '';
+    if (mode.includes('image')) {
+        resSelect.innerHTML = '<option value="1k" selected>1k</option><option value="2k">2k</option>';
+    } else if (mode.includes('video')) {
+        resSelect.innerHTML = '<option value="480p" selected>480p</option><option value="720p">720p</option>';
+    }
+
+    // Adjust Model visibility/options if needed
+    if (mode === 'text_to_audio') {
+        modelSelect.innerHTML = '<option value="grok-imagine-audio" selected>Grok Audio</option>';
+    } else if (mode.includes('video')) {
+         modelSelect.innerHTML = '<option value="grok-imagine-video" selected>Grok Video</option>';
+    } else {
+         modelSelect.innerHTML = '<option value="grok-imagine-image" selected>Standard</option><option value="grok-imagine-image-pro">Pro</option>';
+    }
+}
+
+function updateCalculatedCost() {
+    const type = document.getElementById('chatMode').value;
+    const model = document.getElementById('chatModel').value;
+    const duration = parseInt(document.getElementById('chatDuration').value) || 5;
+    const prompt = document.getElementById('chatInput').value;
+
+    const settings = adminSettings || {};
+    const bdtPerUsd = parseFloat(settings.bdt_per_usd || 145);
+    bdtPerCredit = parseFloat(settings.bdt_per_credit || 2);
+    
+    let costUsd = 0;
+
+    if (type === 'text_to_image' || type === 'image_edit') {
+        costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
+        if (type === 'image_edit') costUsd *= 2;
+    } else if (type === 'image_to_video' || type === 'text_to_video') {
+        costUsd = duration * parseFloat(settings.video_per_sec_cost || 0.1);
+    } else if (type === 'text_to_audio') {
+        costUsd = (prompt.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 0.0084);
+        if (prompt.length > 0 && costUsd < 0.01) costUsd = 0.01;
+    }
+
+    const credits = Math.ceil((costUsd * bdtPerUsd) / bdtPerCredit);
+    document.getElementById('chatCost').textContent = credits;
 }
 
 function autoExpand(el) {
     el.style.height = 'auto';
     el.style.height = el.scrollHeight + 'px';
+    updateCalculatedCost();
 }
 
 function usePrompt(text) {
@@ -242,6 +307,26 @@ function usePrompt(text) {
 
 function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('active');
+}
+
+function newChat() {
+    document.getElementById('messagesContainer').innerHTML = `
+        <div class="empty-state">
+            <h1>What can I create for you today?</h1>
+            <div class="suggestion-grid">
+                <button class="suggestion" onclick="usePrompt('A cozy cabin in the woods at night with aurora borealis')">
+                    <span>"A cozy cabin in the woods..."</span><small>Image Generation</small>
+                </button>
+                <button class="suggestion" onclick="usePrompt('A slow motion wave crashing on a golden beach')">
+                    <span>"A slow motion wave..."</span><small>Video Generation</small>
+                </button>
+                <button class="suggestion" onclick="usePrompt('Synthwave music with heavy bass and retro vibes')">
+                    <span>"Synthwave music..."</span><small>Audio Generation</small>
+                </button>
+            </div>
+        </div>
+    `;
+    clearAttachment();
 }
 
 // ─── API Core ───────────────────────────────────────────
@@ -261,6 +346,5 @@ function escapeHtml(text) {
 }
 
 function openModal(id) {
-    // Implement or reuse from app.js
-    alert('Please sign in to use Chat');
+    if (id === 'authModal') alert('Please sign in to use Chat');
 }

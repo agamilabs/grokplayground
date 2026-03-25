@@ -98,19 +98,45 @@
                     </div>
                     <div class="control-group" id="ctrl-aspect">
                         <label>Ratio</label>
-                        <select id="chatAspect">
+                        <select id="chatAspect" onchange="updateCalculatedCost()">
                             <option value="1:1">1:1</option>
                             <option value="16:9">16:9</option>
-                            <option value="9:16">9:16 Portrait</option>
+                            <option value="9:16">9:16</option>
+                            <option value="4:3">4:3</option>
+                            <option value="3:4">3:4</option>
+                            <option value="3:2">3:2</option>
+                            <option value="2:3">2:3</option>
                             <option value="auto">Auto</option>
+                        </select>
+                    </div>
+                    <div class="control-group" id="ctrl-resolution">
+                        <label>Res</label>
+                        <select id="chatResolution" onchange="updateCalculatedCost()">
+                            <option value="1k" selected>1k</option>
+                            <option value="2k">2k</option>
+                            <option value="480p">480p</option>
+                            <option value="720p">720p</option>
+                        </select>
+                    </div>
+                    <div class="control-group" id="ctrl-duration">
+                        <label>Dur</label>
+                        <select id="chatDuration" onchange="updateCalculatedCost()">
+                            <option value="5">5s</option>
+                            <option value="10">10s</option>
+                            <option value="15">15s</option>
                         </select>
                     </div>
                     <div class="control-group" id="ctrl-model">
                         <label>Model</label>
-                        <select id="chatModel">
+                        <select id="chatModel" onchange="updateCalculatedCost()">
                             <option value="grok-imagine-image" selected>Standard</option>
                             <option value="grok-imagine-image-pro">Pro</option>
                         </select>
+                    </div>
+                    <div class="control-group">
+                        <div class="chat-cost-badge">
+                            <span id="chatCost">...</span> <span>cr</span>
+                        </div>
                     </div>
                 </div>
 
