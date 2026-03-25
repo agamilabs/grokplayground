@@ -24,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 $page = max(1, (int) ($_GET['page'] ?? 1));
 $limit = min(50, max(1, (int) ($_GET['limit'] ?? 20)));
-$offset = ($page - 1) * $limit;
+// Support explicit offset for chat pagination
+$offset = isset($_GET['offset']) ? (int) $_GET['offset'] : ($page - 1) * $limit;
 
 // Build filter conditions
 $conditions = ["user_id = ?"];
