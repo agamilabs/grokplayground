@@ -15,16 +15,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit;
 }
 
-$generationId = $_GET['generation_id'] ?? $_GET['generation_id'] ?? null;
-if (!$generationId) {
+$generationId = $_GET['generation_id'] ?? null;
+$requestId = $_GET['request_id'] ?? null;
+
+if (!$generationId && !$requestId) {
     http_response_code(400);
-    echo json_encode(['error' => 'Generation ID is required']);
+    echo json_encode(['error' => 'Generation ID or Request ID is required']);
     exit;
 }
 
 // Get the generation record
-$stmt = $db->prepare("SELECT * FROM generations WHERE id = ? AND user_id = ?");
-$stmt->execute([$generationId, $user['id']]);
+if ($generationId) {
+    $stmt = $db->prepare("SELECT * FROM generations WHERE id = ? AND user_id = ?");
+    $stmt->execute([$generationId, $user['id']]);
+} else {
+    $stmt = $db->prepare("SELECT * FROM generations WHERE xai_request_id = ? AND user_id = ?");
+    $stmt->execute([$requestId, $user['id']]);
+}
 $generation = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$generation) {
@@ -32,6 +39,7 @@ if (!$generation) {
     echo json_encode(['error' => 'Generation not found']);
     exit;
 }
+$generationId = $generation['id'];
 
 if ($generation['status'] !== 'processing') {
     // Already finished or failed
