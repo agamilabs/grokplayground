@@ -9,10 +9,16 @@ require_once __DIR__ . '/../auth.php';
 $user = authenticateRequest();
 $db = getDB();
 
-// Support both POST (JSON) and GET (legacy/simple)
-$input = json_decode(file_get_contents('php://input'), true);
-$generationId = $input['generation_id'] ?? $_GET['generation_id'] ?? null;
-$requestId = $input['request_id'] ?? $_GET['request_id'] ?? null;
+// Support both POST (JSON) and GET
+// If it's a POST, we strictly look at the JSON payload
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input = json_decode(file_get_contents('php://input'), true);
+    $generationId = $input['generation_id'] ?? $input['id'] ?? null;
+    $requestId = $input['request_id'] ?? null;
+} else {
+    $generationId = $_GET['generation_id'] ?? $_GET['id'] ?? null;
+    $requestId = $_GET['request_id'] ?? null;
+}
 
 if (!$generationId && !$requestId) {
     http_response_code(400);
