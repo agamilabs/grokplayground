@@ -22,7 +22,8 @@ auth.onAuthStateChanged(async (user) => {
         
         // Fetch settings then initialize UI
         try {
-            adminSettings = await apiCall('/api/admin_settings.php', 'GET');
+            const res = await apiCall('/api/settings.php', 'GET');
+            adminSettings = res.settings;
         } catch(e) {}
         
         await loadCredits();
