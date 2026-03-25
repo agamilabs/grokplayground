@@ -18,6 +18,7 @@ auth.onAuthStateChanged(async (user) => {
         idToken = await user.getIdToken();
         document.getElementById('userProfile').style.display = 'flex';
         document.getElementById('sidebarUserPhoto').src = user.photoURL || '';
+        document.getElementById('navUserPhoto').src = user.photoURL || '';
         document.getElementById('sidebarUserName').textContent = user.displayName || 'User';
         
         // Fetch settings then initialize UI
@@ -598,8 +599,92 @@ function downloadFile(url) {
         .catch(() => window.open(url, '_blank'));
 }
 
+// ─── Showcase Logic ────────────────────────────────────
+async function openShowcaseModal() {
+    openModal('showcaseModal');
+    loadShowcase();
+}
+
+async function loadShowcase(type = 'all') {
+    const grid = document.getElementById('showcaseGrid');
+    const loader = document.getElementById('showcaseLoading');
+    
+    grid.style.display = 'none';
+    loader.style.display = 'block';
+    
+    try {
+        const url = `/api/showcase.php?limit=20${type !== 'all' ? '&type='+type : ''}`;
+        const res = await apiCall(url, 'GET');
+        renderShowcase(res.items || []);
+    } catch (err) {
+        showToast('Failed to load showcase', 'error');
+    } finally {
+        loader.style.display = 'none';
+        grid.style.display = 'grid';
+    }
+}
+
+function renderShowcase(items) {
+    const grid = document.getElementById('showcaseGrid');
+    grid.innerHTML = '';
+    
+    if (items.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">No items found</p>';
+        return;
+    }
+    
+    items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'showcase-item';
+        div.onclick = () => useShowcaseItem(item);
+        
+        let mediaTag = `<img src="${item.url}" alt="${item.title}" loading="lazy">`;
+        if (item.type.includes('video')) {
+            mediaTag = `<video src="${item.url}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`;
+        }
+        
+        div.innerHTML = `
+            <div class="showcase-thumb">${mediaTag}</div>
+            <div class="showcase-info">
+                <div class="showcase-title">${escapeHtml(item.title || 'Untitled')}</div>
+                <div class="showcase-meta">${item.type.toUpperCase()} • ${item.category_name || 'General'}</div>
+            </div>
+        `;
+        grid.appendChild(div);
+    });
+}
+
+function filterShowcase(type, btn) {
+    document.querySelectorAll('.showcase-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadShowcase(type);
+}
+
+function useShowcaseItem(item) {
+    closeModal('showcaseModal');
+    
+    // Populate Chat
+    const input = document.getElementById('chatInput');
+    input.value = item.prompt;
+    autoExpand(input);
+    
+    // Match Mode
+    const modeSelect = document.getElementById('chatMode');
+    if (item.type === 'video') {
+        modeSelect.value = 'text_to_video';
+    } else if (item.type === 'image') {
+        modeSelect.value = 'text_to_image';
+    }
+    onModeChange();
+    
+    showToast('Item loaded! You can now customize the prompt.', 'success');
+}
+
 // ─── Overlays & Init ────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+    // Safeguard: Ensure all modals are closed on refresh
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show'));
+
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) closeModal(overlay.id);

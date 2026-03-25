@@ -666,3 +666,125 @@
     border-color: var(--accent-1);
     transform: translateY(-2px);
 }
+
+/* ─── Navbar & Sidebar Enhancements ─────────────────── */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-credits {
+    display: flex;
+    align-items: center;
+    background: var(--bg-glass);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 2px 2px 12px;
+    gap: 10px;
+}
+
+.credits-badge {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.btn-buy-nav {
+    background: var(--accent-1);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-buy-nav:hover { background: var(--accent-2); }
+
+.nav-btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.nav-btn-icon:hover {
+    background: var(--bg-surface);
+    color: white;
+}
+
+/* ─── Showcase Modal ────────────────────────────────── */
+.showcase-grid {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+.showcase-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.showcase-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-1);
+}
+
+.showcase-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    position: relative;
+}
+
+.showcase-thumb img, .showcase-thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.showcase-info {
+    padding: 12px;
+}
+
+.showcase-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.showcase-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    color: var(--accent-1);
+    border-bottom-color: var(--accent-1);
+}
