@@ -173,9 +173,12 @@ function callImageGeneration($prompt, $aspectRatio = null, $resolution = null, $
 
     $response = xaiRequest('POST', '/images/generations', $payload);
 
-    if (isset($response['data'][0]['url'])) {
-        return ['url' => $response['data'][0]['url']];
+    if (isset($response['url'])) {
+        return ['url' => $response['url']];
     }
+    // if (isset($response['data'][0]['url'])) {
+    //     return ['url' => $response['data'][0]['url']];
+    // }
 
     return ['error' => $response['error']['message'] ?? 'Image generation failed'];
 }
