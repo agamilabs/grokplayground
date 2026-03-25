@@ -60,7 +60,7 @@ $total = (int) $stmt->fetch()['total'];
 
 // Get generations
 $stmt = $db->prepare(
-    "SELECT id, type, prompt, output_url, status, credits_used, created_at 
+    "SELECT id, type, prompt, output_url, status, credits_used, created_at, xai_request_id 
      FROM generations WHERE $where ORDER BY created_at DESC LIMIT ? OFFSET ?"
 );
 $params[] = $limit;

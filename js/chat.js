@@ -101,9 +101,12 @@ async function initChatHistory() {
             
             // Sort to show newest at bottom
             res.generations.reverse().forEach(gen => {
-                if (gen.status === 'completed') {
-                    appendMessage('user', gen.prompt);
-                    appendMessage('ai', '', gen.output_url);
+                const msgId = gen.status === 'processing' ? 'gen_' + gen.id : null;
+                appendMessage('user', gen.prompt);
+                appendMessage('ai', '', gen.output_url, gen.status, msgId);
+                
+                if (gen.status === 'processing' && gen.xai_request_id) {
+                    startPolling(gen.xai_request_id, msgId);
                 }
             });
             historyOffset = 2;
@@ -121,10 +124,13 @@ async function loadMoreHistory() {
         
         if (res.generations && res.generations.length > 0) {
             res.generations.forEach(gen => {
-                if (gen.status === 'completed') {
-                    // Prepend AI then User (since we're moving backwards)
-                    appendMessage('ai', '', gen.output_url, 'completed', null, 'prepend');
-                    appendMessage('user', gen.prompt, null, 'completed', null, 'prepend');
+                const msgId = gen.status === 'processing' ? 'gen_' + gen.id : null;
+                // Prepend AI then User (since we're moving backwards)
+                appendMessage('ai', '', gen.output_url, gen.status, msgId, 'prepend');
+                appendMessage('user', gen.prompt, null, 'completed', null, 'prepend');
+                
+                if (gen.status === 'processing' && gen.xai_request_id) {
+                    startPolling(gen.xai_request_id, msgId);
                 }
             });
             historyOffset += res.generations.length;
