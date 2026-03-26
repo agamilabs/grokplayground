@@ -140,7 +140,7 @@ if ($stmt->fetchColumn() >= 15) {
 }
 
 // Check credits
-$creditCost = getCreditCost($type, $duration, strlen($prompt), $model);
+$creditCost = getCreditCost($type, $duration, mb_strlen($prompt), $model, $resolution);
 if ($user['credits'] < $creditCost) {
     http_response_code(402);
     echo json_encode([
@@ -174,8 +174,8 @@ try {
 
     // Store generation record with 'processing' status
     $stmt = $db->prepare(
-        "INSERT INTO generations (user_id, type, prompt, input_url, input_size, input_thumbnail, status, credits_used) 
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO generations (user_id, type, prompt, input_url, input_size, input_thumbnail, resolution, status, credits_used) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
     $stmt->execute([
         $user['id'],
@@ -184,6 +184,7 @@ try {
         $imageData,
         $inputSize ?? 0,
         $inputThumbnail ?? null,
+        $resolution ?: '480p',
         'processing',
         $creditCost
     ]);
