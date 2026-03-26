@@ -264,6 +264,30 @@ try {
     echo json_encode(['error' => 'Generation failed: ' . $e->getMessage()]);
 }
 
+/**
+ * Prepares an image payload for xAI.
+ * If the URL is not HTTPS (e.g. localhost), it converts it to base64.
+ */
+function prepareXaiImage($url) {
+    if (empty($url)) return null;
+    if (strpos($url, 'https://') === 0) {
+        return ['url' => $url];
+    }
+    
+    // Convert local/HTTP URL to base64
+    $filename = basename($url);
+    $filePath = __DIR__ . '/../uploads/' . $filename;
+    
+    if (file_exists($filePath)) {
+        $bin = file_get_contents($filePath);
+        $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+        $mime = ($ext === 'jpg' || $ext === 'jpeg') ? 'image/jpeg' : 'image/' . $ext;
+        return ['url' => 'data:' . $mime . ';base64,' . base64_encode($bin)];
+    }
+    
+    return ['url' => $url];
+}
+
 // ─── xAI API Calls ────────────────────────────────────────
 
 function callImageGeneration($prompt, $aspectRatio = null, $resolution = null, $model = null)
@@ -298,9 +322,7 @@ function callImageEdit($prompt, $imageData, $aspectRatio = null, $resolution = n
     $payload = [
         'model' => $model ?: 'grok-imagine-image',
         'prompt' => $prompt,
-        'image' => [
-            'url' => $imageData
-        ],
+        'image' => prepareXaiImage($imageData),
         'response_format' => 'url',
     ];
 
@@ -344,7 +366,7 @@ function callVideoGeneration($type, $prompt, $imageData = null, $aspectRatio = n
     // If auto or not provided, we omit to let the API decide (matching input image or prompt)
 
     if ($imageData && $type === 'image_to_video') {
-        $payload['image'] = ['url' => $imageData];
+        $payload['image'] = prepareXaiImage($imageData);
     }
 
     $response = xaiRequest('POST', '/videos/generations', $payload);
