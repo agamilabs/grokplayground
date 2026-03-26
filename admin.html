@@ -409,6 +409,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M9 10a2 2 0 100-4 2 2 0 000 4z"/><path d="M21 15l-5-5L5 21"/></svg>
                 Gallery
             </button>
+            <button class="nav-item" onclick="switchView('calculator', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                Price Calculator
+            </button>
             <button class="nav-item" onclick="switchView('settings', this)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 Hub Settings
@@ -764,6 +768,109 @@
                 <button class="btn btn-ghost" onclick="loadSettings()">Discard Changes</button>
             </div>
         </section>
+
+        <!-- Calculator View -->
+        <section id="view-calculator" class="view-section">
+            <div class="section-header">
+                <h1 class="section-title">Price Profit Calculator</h1>
+                <p class="section-desc">Simulate new pricing models before saving them. This tool calculates profit dynamically per generation.</p>
+                <div style="margin-top:20px; display: flex; gap: 16px;">
+                    <button class="btn btn-ghost btn-sm" onclick="populateCalculator()">📥 Load Current Active Settings</button>
+                    <div style="color: var(--text-muted); font-size: 13px; display: flex; align-items: center;">
+                        <span>Exchange Rate (BDT/USD):</span>
+                        <input type="number" id="calc-bdt-usd" value="145" class="setting-input" style="width: 80px; margin-left:8px; padding: 4px; font-size: 13px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <!-- Text-to-Image Calculator -->
+                <div class="stat-card" style="grid-column: span 2;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="stat-label">Text to Image (Standard)</span>
+                        <span id="calc-t2i-profit" style="font-weight: 600; font-size: 18px; color: var(--success);">৳0.00</span>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px;">
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">xAI Cost ($)</label>
+                            <input type="number" id="calc-t2i-api" class="setting-input calc-input" step="0.001" value="0.04">
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">Overhead Markup (x)</label>
+                            <input type="number" id="calc-t2i-markup" class="setting-input calc-input" step="0.1" value="1.5">
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">Sell Price/Credit (৳)</label>
+                            <input type="number" id="calc-t2i-credit" class="setting-input calc-input" step="0.1" value="2">
+                        </div>
+                    </div>
+                    <div class="stat-sub" style="margin-top:12px;" id="calc-t2i-details">User charged 0 credits -> ৳0 revenue. Cost: ৳0.</div>
+                </div>
+
+                <!-- Video Calculator -->
+                <div class="stat-card" style="grid-column: span 2;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="stat-label">Video Generation</span>
+                        <span id="calc-video-profit" style="font-weight: 600; font-size: 18px; color: var(--success);">৳0.00</span>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px;">
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">Duration</label>
+                            <select id="calc-video-sec" class="setting-input calc-input">
+                                <option value="5" selected>5 seconds</option>
+                                <option value="8">8 seconds</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">Resolution</label>
+                            <select id="calc-video-res" class="setting-input calc-input">
+                                <option value="480p" selected>480p</option>
+                                <option value="720p">720p (HD)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">Base $/sec</label>
+                            <input type="number" id="calc-video-api" class="setting-input calc-input" step="0.01" value="0.1">
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">HD Multiplier (x)</label>
+                            <input type="number" id="calc-video-hd-mult" class="setting-input calc-input" step="0.1" value="1.8">
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">Markup (x)</label>
+                            <input type="number" id="calc-video-markup" class="setting-input calc-input" step="0.1" value="1.5">
+                        </div>
+                    </div>
+                    <div class="stat-sub" style="margin-top:12px;" id="calc-video-details">User charged 0 credits -> ৳0 revenue. Cost: ৳0.</div>
+                </div>
+
+                 <!-- Audio Calculator -->
+                 <div class="stat-card" style="grid-column: span 2;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="stat-label">Audio Generation (500 chars limit)</span>
+                        <span id="calc-audio-profit" style="font-weight: 600; font-size: 18px; color: var(--success);">৳0.00</span>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px;">
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">xAI Cost ($ per 1k)</label>
+                            <input type="number" id="calc-audio-api" class="setting-input calc-input" step="0.001" value="0.0084">
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">Overhead Markup (x)</label>
+                            <input type="number" id="calc-audio-markup" class="setting-input calc-input" step="0.1" value="1.5">
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">Average Chars</label>
+                            <input type="number" id="calc-audio-chars" class="setting-input calc-input" step="10" value="200">
+                        </div>
+                    </div>
+                    <div class="stat-sub" style="margin-top:12px;" id="calc-audio-details">User charged 0 credits -> ৳0 revenue. Cost: ৳0.</div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Modals -->
@@ -1079,6 +1186,7 @@
             try {
                 const res = await apiCall('api/admin.php');
                 if (res.settings) {
+                    window.globalSettingsData = res.settings; // Cache for Calculator
                     for (const [key, value] of Object.entries(res.settings)) {
                         const input = document.getElementById(`set-${key}`);
                         if (input) input.value = value;
@@ -1346,6 +1454,97 @@
                 showToast(result.error || 'Operation failed', 'error');
             }
         }
+
+        // --- Price Calculator Logic ---
+        function populateCalculator() {
+            if(!window.globalSettingsData) {
+                showToast("Please load dashboard settings first.", "warning");
+                return;
+            }
+            const s = window.globalSettingsData;
+            document.getElementById('calc-bdt-usd').value = s.bdt_per_usd || 145;
+            document.getElementById('calc-t2i-api').value = s.text_to_image_cost || 0.04;
+            document.getElementById('calc-t2i-markup').value = s.global_markup || 1.5;
+            document.getElementById('calc-t2i-credit').value = s.bdt_per_credit || 2;
+            
+            document.getElementById('calc-video-api').value = s.video_per_sec_cost || 0.1;
+            document.getElementById('calc-video-hd-mult').value = s.video_hd_multiplier || 1.8;
+            document.getElementById('calc-video-markup').value = s.global_markup || 1.5;
+
+            document.getElementById('calc-audio-api').value = s.audio_per_1k_chars_cost || 0.0084;
+            document.getElementById('calc-audio-markup').value = s.global_markup || 1.5;
+
+            runCalculations();
+            showToast("Calculator loaded with live settings.", "info");
+        }
+
+        function runCalculations() {
+            const bdtUsd = parseFloat(document.getElementById('calc-bdt-usd').value) || 145;
+            const bdtCr = parseFloat(document.getElementById('calc-t2i-credit').value) || 2;
+
+            function updateCard(type, costUsd, markup, elProfit, elDetails) {
+                // Formula from db.php: Math.ceil((costUsd * markup * bdtUsd) / bdtCr)
+                // Enforce minimum $0.01 equivalent rule for audio
+                if(type === 'audio' && costUsd < 0.01 && costUsd > 0) costUsd = 0.01;
+
+                const userCredits = Math.ceil((costUsd * markup * bdtUsd) / bdtCr) || 0;
+                const revenueBdt = userCredits * bdtCr;
+                const apiCostBdt = costUsd * bdtUsd;
+                const profitBdt = revenueBdt - apiCostBdt; // ignoring 2.5k hosting as it's monthly
+                
+                const elP = document.getElementById(elProfit);
+                elP.textContent = `৳${profitBdt.toFixed(2)}`;
+                elP.style.color = profitBdt > 0 ? 'var(--success)' : 'var(--error)';
+
+                const marginPct = revenueBdt > 0 ? ((profitBdt / revenueBdt) * 100).toFixed(1) : 0;
+
+                document.getElementById(elDetails).innerHTML = `
+                    <strong style="color:var(--text-primary)">${userCredits}</strong> credits charged. 
+                    Revenue: <strong>৳${revenueBdt.toFixed(2)}</strong>. 
+                    API Cost: <strong>৳${apiCostBdt.toFixed(2)}</strong>. 
+                    Margin: ${marginPct}%
+                `;
+            }
+
+            // T2I
+            updateCard(
+                't2i',
+                parseFloat(document.getElementById('calc-t2i-api').value) || 0,
+                parseFloat(document.getElementById('calc-t2i-markup').value) || 1,
+                'calc-t2i-profit',
+                'calc-t2i-details'
+            );
+
+            // Video
+            const vSec = parseFloat(document.getElementById('calc-video-sec').value) || 5;
+            const vRes = document.getElementById('calc-video-res').value;
+            const vBase = parseFloat(document.getElementById('calc-video-api').value) || 0;
+            const vHdMult = parseFloat(document.getElementById('calc-video-hd-mult').value) || 1;
+            const vMarkup = parseFloat(document.getElementById('calc-video-markup').value) || 1;
+            
+            const vCostUsd = vSec * vBase * (vRes === '720p' ? vHdMult : 1.0);
+            updateCard('video', vCostUsd, vMarkup, 'calc-video-profit', 'calc-video-details');
+
+            // Audio
+            const aChars = parseFloat(document.getElementById('calc-audio-chars').value) || 200;
+            const aBase1k = parseFloat(document.getElementById('calc-audio-api').value) || 0;
+            const aMarkup = parseFloat(document.getElementById('calc-audio-markup').value) || 1;
+            
+            const aCostUsd = (aChars / 1000) * aBase1k;
+            updateCard('audio', aCostUsd, aMarkup, 'calc-audio-profit', 'calc-audio-details');
+        }
+
+        // Attach listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.calc-input').forEach(el => {
+                el.addEventListener('input', runCalculations);
+                el.addEventListener('change', runCalculations);
+            });
+            document.getElementById('calc-bdt-usd').addEventListener('input', runCalculations);
+            
+            // Initial calc
+            runCalculations();
+        });
     </script>
 </body>
 </html>
