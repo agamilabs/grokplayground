@@ -55,15 +55,28 @@
 }
 
 .history-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding: 10px 12px;
     border-radius: var(--radius-sm);
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-secondary);
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.history-icon {
+    flex-shrink: 0;
+    opacity: 0.6;
+    color: var(--accent-3);
+}
+
+.history-text {
+    flex: 1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: background 0.2s;
 }
 
 .history-item:hover {

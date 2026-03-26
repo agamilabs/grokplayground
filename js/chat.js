@@ -300,15 +300,29 @@ async function loadCredits() {
     } catch (err) {}
 }
 
+function getModeIcon(type) {
+    const icons = {
+        'text_to_image': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" /></svg>`,
+        'image_edit': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>`,
+        'image_to_video': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" /><path d="M10 8l6 4-6 4V8z" /></svg>`,
+        'text_to_video': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" /></svg>`,
+        'text_to_audio': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" /></svg>`
+    };
+    return icons[type] || icons['text_to_image'];
+}
+
 async function loadSidebarHistory() {
     try {
-        const res = await apiCall('/api/history.php?limit=15', 'GET');
+        const res = await apiCall('/api/history.php?limit=25', 'GET');
         const list = document.getElementById('chatHistory');
         list.innerHTML = '';
         res.generations.forEach(gen => {
             const item = document.createElement('div');
             item.className = 'history-item';
-            item.textContent = gen.prompt;
+            item.innerHTML = `
+                <div class="history-icon">${getModeIcon(gen.type)}</div>
+                <div class="history-text">${escapeHtml(gen.prompt)}</div>
+            `;
             item.title = gen.prompt;
             item.onclick = () => showHistoryItem(gen);
             list.appendChild(item);
