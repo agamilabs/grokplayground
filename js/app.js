@@ -144,6 +144,41 @@ window.addEventListener('popstate', () => {
 });
 
 // ─── Image Upload ───────────────────────────────────────
+/**
+ * Compresses an image file using Canvas.
+ */
+function compressImage(file, maxDim = 1536, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                let width = img.width;
+                let height = img.height;
+                if (width > maxDim || height > maxDim) {
+                    const ratio = width / height;
+                    if (ratio > 1) {
+                        width = maxDim;
+                        height = Math.round(maxDim / ratio);
+                    } else {
+                        height = maxDim;
+                        width = Math.round(maxDim * ratio);
+                    }
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            };
+            img.onerror = (err) => reject(err);
+            img.src = e.target.result;
+        };
+        reader.onerror = (err) => reject(err);
+    });
+}
 function handleImageUpload(e, type) {
     const input = e.target || e;
     const file = input.files[0];
@@ -159,19 +194,21 @@ function handleImageUpload(e, type) {
         return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        uploadedImageBase64 = e.target.result;
-        const previewId = type === 'image_edit' ? 'preview-edit' : 'uploadPreview';
-        const placeholderId = type === 'image_edit' ? 'placeholder-edit' : 'uploadPlaceholder';
-        const zoneId = type === 'image_edit' ? 'upload-edit' : 'uploadZone';
-        
-        document.getElementById(previewId).src = uploadedImageBase64;
-        document.getElementById(previewId).style.display = 'block';
-        document.getElementById(placeholderId).style.display = 'none';
-        document.getElementById(zoneId).classList.add('has-image');
-    };
-    reader.readAsDataURL(file);
+    (async () => {
+        try {
+            uploadedImageBase64 = await compressImage(file);
+            const previewId = type === 'image_edit' ? 'preview-edit' : 'uploadPreview';
+            const placeholderId = type === 'image_edit' ? 'placeholder-edit' : 'uploadPlaceholder';
+            const zoneId = type === 'image_edit' ? 'upload-edit' : 'uploadZone';
+            
+            document.getElementById(previewId).src = uploadedImageBase64;
+            document.getElementById(previewId).style.display = 'block';
+            document.getElementById(placeholderId).style.display = 'none';
+            document.getElementById(zoneId).classList.add('has-image');
+        } catch (err) {
+            showToast('Image processing failed: ' + err.message, 'error');
+        }
+    })();
 }
 
 // Drag and drop

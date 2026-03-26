@@ -319,13 +319,54 @@ function showHistoryItem(gen) {
     }
 }
 
+// ─── Compression Utility ────────────────────────────────
+/**
+ * Compresses an image file using Canvas.
+ * @param {File} file The original file
+ * @param {number} maxDim Maximum width/height
+ * @param {number} quality JPEG quality (0 to 1)
+ */
+function compressImage(file, maxDim = 1536, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                let width = img.width;
+                let height = img.height;
+                if (width > maxDim || height > maxDim) {
+                    const ratio = width / height;
+                    if (ratio > 1) {
+                        width = maxDim;
+                        height = Math.round(maxDim / ratio);
+                    } else {
+                        height = maxDim;
+                        width = Math.round(maxDim * ratio);
+                    }
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            };
+            img.onerror = (err) => reject(err);
+            img.src = e.target.result;
+        };
+        reader.onerror = (err) => reject(err);
+    });
+}
+
 // ─── UI Utils ───────────────────────────────────────────
-function handleChatFile(e) {
+async function handleChatFile(e) {
     const file = e.target.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-        uploadedImageBase64 = ev.target.result;
+
+    try {
+        // Show immediate loading if needed, but compression is usually fast
+        uploadedImageBase64 = await compressImage(file);
         document.getElementById('previewImg').src = uploadedImageBase64;
         document.getElementById('attachmentPreview').style.display = 'block';
         
@@ -334,8 +375,9 @@ function handleChatFile(e) {
             mode.value = 'image_edit';
             onModeChange();
         }
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+        showToast('Image processing failed: ' + err.message, 'error');
+    }
 }
 
 function clearAttachment() {
