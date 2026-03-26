@@ -603,12 +603,33 @@ async function loadHistory(page) {
             return;
         }
         grid.innerHTML = res.generations.map(gen => {
-            const isVideo = gen.type !== 'text_to_image';
-            const media = (gen.status === 'completed' && gen.output_url)
-                ? (isVideo ? `<video src="${gen.output_url}" muted></video>` : `<img src="${gen.output_url}" loading="lazy" />`)
-                : `<div class="history-item-placeholder">${gen.status}</div>`;
+            const isVideo = gen.type === 'image_to_video' || gen.type === 'text_to_video';
+            const isAudio = gen.type === 'text_to_audio';
             
-            if (gen.status === 'processing') {
+            let media = '';
+            const thumb = gen.input_thumbnail || gen.output_url;
+
+            if (gen.status === 'completed' && gen.output_url) {
+                if (isVideo) {
+                    media = `<video src="${gen.output_url}" poster="${gen.input_thumbnail || ''}" muted></video>`;
+                } else if (isAudio) {
+                    media = `<div class="history-item-placeholder audio-bg">🎵 Audio</div>`;
+                } else {
+                    media = `<img src="${gen.output_url}" loading="lazy" />`;
+                }
+            } else {
+                // Show thumbnail even if not completed (for video/edit)
+                if (thumb && !isAudio) {
+                    media = `<div class="history-item-preview">
+                                <img src="${thumb}" loading="lazy" style="opacity: 0.6;">
+                                <div class="status-overlay">${gen.status}</div>
+                             </div>`;
+                } else {
+                    media = `<div class="history-item-placeholder">${gen.status}</div>`;
+                }
+            }
+            
+            if (gen.status === 'processing' || gen.status === 'pending') {
                 startPolling(gen.id, gen.type);
             }
 
