@@ -9,13 +9,13 @@ require_once __DIR__ . '/../db.php';
 $settings = getAllSettings();
 
 // Fallback values for safety (matching existing hardcoded ones)
-$apiKey = $settings['firebase_api_key'] ?? 'AIzaSyBZn5av7P66y7VBpR2wgVb7DtOtnsfMYFA';
-$authDomain = $settings['firebase_auth_domain'] ?? 'coursepool-488520.firebaseapp.com';
-$projectId = $settings['firebase_project_id'] ?? 'coursepool-488520';
-$storageBucket = $settings['firebase_storage_bucket'] ?? 'coursepool-488520.firebasestorage.app';
-$messagingSenderId = $settings['firebase_messaging_sender_id'] ?? '1084097792660';
-$appId = $settings['firebase_app_id'] ?? '1:1084097792660:web:da5979d939420326598281';
-$measurementId = $settings['firebase_measurement_id'] ?? 'G-1FM4Z5WDPV';
+$apiKey = ($settings['firebase_api_key'] ?: 'AIzaSyBZn5av7P66y7VBpR2wgVb7DtOtnsfMYFA');
+$authDomain = ($settings['firebase_auth_domain'] ?: 'coursepool-488520.firebaseapp.com');
+$projectId = ($settings['firebase_project_id'] ?: 'coursepool-488520');
+$storageBucket = ($settings['firebase_storage_bucket'] ?: 'coursepool-488520.firebasestorage.app');
+$messagingSenderId = ($settings['firebase_messaging_sender_id'] ?: '1084097792660');
+$appId = ($settings['firebase_app_id'] ?: '1:1084097792660:web:da5979d939420326598281');
+$measurementId = ($settings['firebase_measurement_id'] ?: 'G-1FM4Z5WDPV');
 
 ?>
 const firebaseConfig = {
