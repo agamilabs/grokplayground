@@ -342,7 +342,8 @@
                         </div>
                         <div class="gen-option">
                             <label class="option-label">Resolution</label>
-                            <select class="option-select" id="opt-i2v-resolution">
+                            <select class="option-select" id="opt-i2v-resolution"
+                                onchange="updateCalculatedCost('image_to_video')">
                                 <option value="480p" selected>480p (Fast)</option>
                                 <option value="720p">720p (HD)</option>
                             </select>
@@ -416,7 +417,8 @@
                         </div>
                         <div class="gen-option">
                             <label class="option-label">Resolution</label>
-                            <select class="option-select" id="opt-t2v-resolution">
+                            <select class="option-select" id="opt-t2v-resolution"
+                                onchange="updateCalculatedCost('text_to_video')">
                                 <option value="480p" selected>480p (Fast)</option>
                                 <option value="720p">720p (HD)</option>
                             </select>

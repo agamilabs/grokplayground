@@ -492,7 +492,7 @@ function updateCalculatedCost(type) {
     } else if (type === 'image_to_video' || type === 'text_to_video') {
         const dEl = document.getElementById(type === 'image_to_video' ? 'opt-i2v-duration' : 'opt-t2v-duration');
         const duration = dEl ? parseInt(dEl.value) : 5;
-        const resEl = document.getElementById(type === 'image_to_video' ? 'opt-i2v-res' : 'opt-t2v-res');
+        const resEl = document.getElementById(type === 'image_to_video' ? 'opt-i2v-resolution' : 'opt-t2v-resolution');
         const resolution = resEl ? resEl.value : '480p';
         
         const videoBase = parseFloat(settings.video_per_sec_cost || 0.1);

@@ -461,8 +461,8 @@ function updateCalculatedCost() {
             costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
         }
     } else if (type === 'image_to_video' || type === 'text_to_video') {
-        const duration = document.getElementById('setting-duration')?.value || 5;
-        const resolution = document.getElementById('setting-resolution')?.value || '480p';
+        const duration = parseInt(document.getElementById('chatDuration')?.value) || 5;
+        const resolution = document.getElementById('chatResolution')?.value || '480p';
         const videoBase = parseFloat(settings.video_per_sec_cost || 0.1);
         const resMultiplier = (resolution === '720p') ? parseFloat(settings.video_hd_multiplier || 1.8) : 1.0;
         costUsd = duration * videoBase * resMultiplier;
