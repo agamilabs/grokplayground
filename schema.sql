@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS generations (
     input_thumbnail VARCHAR(1024) DEFAULT NULL,
     output_url VARCHAR(1024) DEFAULT NULL,
     output_size INT DEFAULT 0,
+    resolution VARCHAR(20) DEFAULT '480p',
     status ENUM('pending', 'processing', 'completed', 'failed') DEFAULT 'pending',
     xai_request_id VARCHAR(255) DEFAULT NULL,
     credits_used INT NOT NULL DEFAULT 0,

@@ -477,11 +477,7 @@ async function fetchAdminSettings() {
 }
 
 function updateCalculatedCost(type) {
-    const settings = adminSettings || {};
-    const bdtPerUsd = parseFloat(settings.bdt_per_usd || 145);
-    bdtPerCredit = parseFloat(settings.bdt_per_credit || 2); // Update global variable directly
-    let costUsd = 0;
-    let costElId = '';
+    const markup = parseFloat(settings.global_markup || 1.5);
 
     if (type === 'text_to_image' || type === 'image_edit') {
         const modelElId = type === 'text_to_image' ? 'opt-t2i-model' : 'opt-edit-model';
@@ -494,9 +490,15 @@ function updateCalculatedCost(type) {
         }
         costElId = type === 'text_to_image' ? 'cost-t2i' : 'cost-edit';
     } else if (type === 'image_to_video' || type === 'text_to_video') {
-        const el = document.getElementById(type === 'image_to_video' ? 'opt-i2v-duration' : 'opt-t2v-duration');
-        const duration = el ? parseInt(el.value) : 5;
-        costUsd = duration * parseFloat(settings.video_per_sec_cost || 0.1);
+        const dEl = document.getElementById(type === 'image_to_video' ? 'opt-i2v-duration' : 'opt-t2v-duration');
+        const duration = dEl ? parseInt(dEl.value) : 5;
+        const resEl = document.getElementById(type === 'image_to_video' ? 'opt-i2v-res' : 'opt-t2v-res');
+        const resolution = resEl ? resEl.value : '480p';
+        
+        const videoBase = parseFloat(settings.video_per_sec_cost || 0.1);
+        const resMultiplier = (resolution === '720p') ? parseFloat(settings.video_hd_multiplier || 1.8) : 1.0;
+        
+        costUsd = duration * videoBase * resMultiplier;
         costElId = type === 'image_to_video' ? 'cost-i2v' : 'cost-t2v';
     } else if (type === 'text_to_audio') {
         const text = document.getElementById('prompt-t2a')?.value || '';
@@ -505,7 +507,7 @@ function updateCalculatedCost(type) {
         costElId = 'cost-t2a';
     }
 
-    const credits = Math.ceil((costUsd * bdtPerUsd) / bdtPerCredit);
+    const credits = Math.ceil((costUsd * markup * bdtPerUsd) / bdtPerCredit);
     const el = document.getElementById(costElId);
     if (el) el.innerHTML = `Cost: <strong>${credits}</strong> credits`;
 }

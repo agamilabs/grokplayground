@@ -438,7 +438,7 @@ function updateCalculatedCost() {
     const bdtPerUsd = parseFloat(settings.bdt_per_usd || 145);
     const bdtPerCreditVal = parseFloat(settings.bdt_per_credit || 2);
     
-    let costUsd = 0;
+    const markup = parseFloat(settings.global_markup || 1.5);
 
     if (type === 'text_to_image' || type === 'image_edit') {
         if (type === 'image_edit') {
@@ -448,13 +448,16 @@ function updateCalculatedCost() {
         }
     } else if (type === 'image_to_video' || type === 'text_to_video') {
         const duration = document.getElementById('setting-duration')?.value || 5;
-        costUsd = duration * parseFloat(settings.video_per_sec_cost || 0.1);
+        const resolution = document.getElementById('setting-resolution')?.value || '480p';
+        const videoBase = parseFloat(settings.video_per_sec_cost || 0.1);
+        const resMultiplier = (resolution === '720p') ? parseFloat(settings.video_hd_multiplier || 1.8) : 1.0;
+        costUsd = duration * videoBase * resMultiplier;
     } else if (type === 'text_to_audio') {
         costUsd = (prompt.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 0.0084);
         if (prompt.length > 0 && costUsd < 0.01) costUsd = 0.01;
     }
 
-    const credits = Math.ceil((costUsd * bdtPerUsd) / bdtPerCreditVal);
+    const credits = Math.ceil((costUsd * markup * bdtPerUsd) / bdtPerCreditVal);
     document.getElementById('chatCost').textContent = credits;
 }
 

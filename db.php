@@ -58,28 +58,31 @@ function getAllSettings()
 /**
  * Get credit cost for a generation type matching frontend formula
  */
-function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-imagine-image')
+function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-imagine-image', $resolution = '480p')
 {
     $settings = getAllSettings();
     $bdtPerUsd = (float) ($settings['bdt_per_usd'] ?? 145);
     $bdtPerCredit = (float) ($settings['bdt_per_credit'] ?? 2);
+    $markup = (float) ($settings['global_markup'] ?? 1.5); // Additional multiplier for overheads
 
     $costUsd = 0;
 
     if ($type === 'text_to_image' || $type === 'image_edit') {
         if ($type === 'image_edit') {
-            $costUsd = (float) ($settings['image_edit_cost'] ?? 0.08); // Default to double standard
+            $costUsd = (float) ($settings['image_edit_cost'] ?? 0.08); 
         } else {
             $costUsd = ($model === 'grok-imagine-image-pro') ? (float) ($settings['image_pro_cost'] ?? 0.14) : (float) ($settings['text_to_image_cost'] ?? 0.04);
         }
     } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
-        $costUsd = $duration * (float) ($settings['video_per_sec_cost'] ?? 0.1);
+        $baseVideoCost = (float) ($settings['video_per_sec_cost'] ?? 0.1);
+        $resMultiplier = ($resolution === '720p') ? (float) ($settings['video_hd_multiplier'] ?? 1.8) : 1.0;
+        $costUsd = $duration * $baseVideoCost * $resMultiplier;
     } elseif ($type === 'text_to_audio') {
         $costUsd = ($textLength / 1000) * (float) ($settings['audio_per_1k_chars_cost'] ?? 0.0084);
         if ($textLength > 0 && $costUsd < 0.01)
             $costUsd = 0.01;
     }
 
-    $credits = ceil(($costUsd * $bdtPerUsd) / $bdtPerCredit);
+    $credits = ceil(($costUsd * $markup * $bdtPerUsd) / $bdtPerCredit);
     return (int) $credits;
 }
