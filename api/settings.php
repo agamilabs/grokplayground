@@ -15,7 +15,6 @@ $publicKeys = [
     'image_pro_cost',
     'video_480p_cost',
     'video_720p_cost',
-    'video_1080p_cost',
     'audio_per_1k_chars_cost',
     'global_markup',
     'bdt_per_credit',

@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'image_pro_cost',
         'video_480p_cost',
         'video_720p_cost',
-        'video_1080p_cost',
         'global_markup',
         'audio_per_1k_chars_cost',
         'bdt_per_credit',
