@@ -40,7 +40,7 @@ auth.onAuthStateChanged(async (user) => {
 });
 
 // ─── Chat Logic ─────────────────────────────────────────
-function appendMessage(role, content, media = null, status = 'completed', id = null, position = 'append') {
+function appendMessage(role, content, media = null, status = 'completed', id = null, position = 'append', thumbnail = null) {
     const container = document.getElementById('messagesContainer');
     const emptyState = container.querySelector('.empty-state');
     if (emptyState && position === 'append') emptyState.remove();
@@ -65,7 +65,11 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
     let text = (content && status !== 'failed') ? `<p>${escapeHtml(content)}</p>` : '';
     let mediaHtml = '';
 
-    if (status === 'processing') {
+    if (role === 'user' && media) {
+        // Show input image for user
+        const thumbSrc = thumbnail || media;
+        mediaHtml = `<div class="user-media reveal-anim"><img src="${thumbSrc}" onclick="window.open('${media}', '_blank')" title="Click to view original"></div>`;
+    } else if (status === 'processing') {
         mediaHtml = `<div class="ai-media processing">
             <div class="skeleton-loader">
                 <div class="shimmer shimmer-media"></div>
@@ -120,7 +124,7 @@ async function initChatHistory() {
             // Sort to show newest at bottom
             res.generations.reverse().forEach(gen => {
                 const msgId = gen.status === 'processing' ? 'gen_' + gen.id : null;
-                appendMessage('user', gen.prompt);
+                appendMessage('user', gen.prompt, gen.input_url, 'completed', null, gen.input_thumbnail);
                 appendMessage('ai', '', gen.output_url, gen.status, msgId);
                 
                 if (gen.status === 'processing' && gen.xai_request_id) {
@@ -145,7 +149,7 @@ async function loadMoreHistory() {
                 const msgId = gen.status === 'processing' ? 'gen_' + gen.id : null;
                 // Prepend AI then User (since we're moving backwards)
                 appendMessage('ai', '', gen.output_url, gen.status, msgId, 'prepend');
-                appendMessage('user', gen.prompt, null, 'completed', null, 'prepend');
+                appendMessage('user', gen.prompt, gen.input_url, 'completed', null, 'prepend', gen.input_thumbnail);
                 
                 if (gen.status === 'processing' && gen.xai_request_id) {
                     startPolling(gen.xai_request_id, msgId);

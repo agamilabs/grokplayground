@@ -833,3 +833,27 @@
     color: var(--accent-1);
     border-bottom-color: var(--accent-1);
 }
+
+/* User Input Media (Thumbnail) */
+.user-media {
+    margin-top: 8px;
+    max-width: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.user-media:hover {
+    transform: scale(1.05);
+    border-color: var(--primary);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.user-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
