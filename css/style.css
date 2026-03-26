@@ -286,6 +286,30 @@ body {
     width: auto;
 }
 
+/* Price Display Unified */
+.price-display {
+    text-align: center;
+    margin: 24px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.price-amount {
+    display: block;
+    font-size: 36px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -1px;
+}
+
+.price-label {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
 /* ─── Main ────────────────────────────────────────────── */
 .main {
     max-width: 800px;
@@ -319,10 +343,11 @@ body {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    background: linear-gradient(135deg, white 20%, var(--accent-1), var(--accent-3));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.15));
 }
 
 .hero-sub {
