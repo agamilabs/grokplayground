@@ -296,8 +296,9 @@ function prepareXaiImage($url) {
 
 function callImageGeneration($prompt, $aspectRatio = null, $resolution = null, $model = null)
 {
+    $finalModel = $model ?: get_setting('xai_image_model', 'grok-imagine-image');
     $payload = [
-        'model' => $model ?: 'grok-imagine-image',
+        'model' => $finalModel,
         'prompt' => $prompt,
         'n' => 1,
         'response_format' => 'url',
@@ -323,8 +324,9 @@ function callImageGeneration($prompt, $aspectRatio = null, $resolution = null, $
 
 function callImageEdit($prompt, $imageData, $aspectRatio = null, $resolution = null, $model = null)
 {
+    $finalModel = $model ?: get_setting('xai_image_model', 'grok-imagine-image');
     $payload = [
-        'model' => $model ?: 'grok-imagine-image',
+        'model' => $finalModel,
         'prompt' => $prompt,
         'image' => prepareXaiImage($imageData),
         'response_format' => 'url',
@@ -357,8 +359,9 @@ function callImageEdit($prompt, $imageData, $aspectRatio = null, $resolution = n
 
 function callVideoGeneration($type, $prompt, $imageData = null, $aspectRatio = null, $resolution = null, $duration = 5, $model = null)
 {
+    $finalModel = $model ?: get_setting('xai_video_model', 'grok-imagine-video');
     $payload = [
-        'model' => $model ?: 'grok-imagine-video',
+        'model' => $finalModel,
         'prompt' => $prompt,
         'duration' => (int)($duration ?: 5),
         'resolution' => $resolution ?: '480p',

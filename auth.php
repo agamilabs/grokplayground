@@ -56,15 +56,16 @@ function getOrCreateUser($tokenData)
     $user = $stmt->fetch();
 
     if (!$user) {
-        // Create new user
+        $signupCredits = (int)get_setting('signup_gift_credits', 10);
         $stmt = $db->prepare(
-            "INSERT INTO users (firebase_uid, email, display_name, photo_url, credits) VALUES (?, ?, ?, ?, 0)"
+            "INSERT INTO users (firebase_uid, email, display_name, photo_url, credits) VALUES (?, ?, ?, ?, ?)"
         );
         $stmt->execute([
             $tokenData['uid'],
             $tokenData['email'],
             $tokenData['name'],
             $tokenData['picture'],
+            $signupCredits
         ]);
         $userId = $db->lastInsertId();
 

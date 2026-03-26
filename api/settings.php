@@ -15,9 +15,17 @@ $publicKeys = [
     'image_pro_cost',
     'video_480p_cost',
     'video_720p_cost',
+    'video_1080p_cost',
     'audio_per_1k_chars_cost',
     'global_markup',
     'bdt_per_credit',
+    'firebase_api_key',
+    'firebase_auth_domain',
+    'firebase_project_id',
+    'firebase_storage_bucket',
+    'firebase_messaging_sender_id',
+    'firebase_app_id',
+    'firebase_measurement_id',
     'site_name'
 ];
 

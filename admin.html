@@ -684,6 +684,13 @@
                         <input type="number" class="setting-input" id="set-bdt_per_credit" step="0.1">
                         <div class="setting-hint">Selling price (e.g. ৳2 per credit)</div>
                     </div>
+                        <div class="setting-hint">Credits given to users daily</div>
+                    </div>
+                    <div class="setting-field">
+                        <label class="setting-label">New User Welcome Credits</label>
+                        <input type="number" class="setting-input" id="set-signup_gift_credits" step="1">
+                        <div class="setting-hint">Credits given on first sign-in</div>
+                    </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                         <div class="setting-field">
                             <label class="setting-label">Image Cost ($)</label>
@@ -700,7 +707,7 @@
                             <input type="number" class="setting-input" id="set-global_markup" step="0.1" title="Multiplier to cover hosting and marketing">
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
                         <div class="setting-field">
                             <label class="setting-label">Video 480p ($/sec)</label>
                             <input type="number" class="setting-input" id="set-video_480p_cost" step="0.01">
@@ -708,6 +715,10 @@
                         <div class="setting-field">
                             <label class="setting-label">Video 720p ($/sec)</label>
                             <input type="number" class="setting-input" id="set-video_720p_cost" step="0.01">
+                        </div>
+                        <div class="setting-field">
+                            <label class="setting-label">Video 1080p ($/sec)</label>
+                            <input type="number" class="setting-input" id="set-video_1080p_cost" step="0.01">
                         </div>
                         <div class="setting-field">
                             <label class="setting-label">Audio ($/1k char)</label>
@@ -725,11 +736,69 @@
                     </div>
                     <div class="setting-field">
                         <label class="setting-label">Base URL</label>
-                        <input type="text" class="setting-input" id="set-xai_base_url">
+                        <input type="text" class="setting-input" id="set-xai_base_url" placeholder="https://api.x.ai/v1">
+                    </div>
+                </div>
+
+                <!-- Firebase Config -->
+                <div class="settings-group">
+                    <h2 class="settings-group-title">Firebase Web Configuration</h2>
+                    <div class="setting-field">
+                        <label class="setting-label">Project ID</label>
+                        <input type="text" class="setting-input" id="set-firebase_project_id">
                     </div>
                     <div class="setting-field">
-                        <label class="setting-label">Firebase Project ID</label>
-                        <input type="text" class="setting-input" id="set-firebase_project_id">
+                        <label class="setting-label">API Key</label>
+                        <input type="text" class="setting-input" id="set-firebase_api_key">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="setting-field">
+                            <label class="setting-label">Auth Domain</label>
+                            <input type="text" class="setting-input" id="set-firebase_auth_domain">
+                        </div>
+                        <div class="setting-field">
+                            <label class="setting-label">Storage Bucket</label>
+                            <input type="text" class="setting-input" id="set-firebase_storage_bucket">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="setting-field">
+                            <label class="setting-label">Messaging Sender ID</label>
+                            <input type="text" class="setting-input" id="set-firebase_messaging_sender_id">
+                        </div>
+                        <div class="setting-field">
+                            <label class="setting-label">App ID</label>
+                            <input type="text" class="setting-input" id="set-firebase_app_id">
+                        </div>
+                    </div>
+                    <div class="setting-field">
+                        <label class="setting-label">Measurement ID (Optional)</label>
+                        <input type="text" class="setting-input" id="set-firebase_measurement_id">
+                    </div>
+                </div>
+
+                <!-- Models Config -->
+                <div class="settings-group">
+                    <h2 class="settings-group-title">xAI Model Selection</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="setting-field">
+                            <label class="setting-label">Image Standard Model</label>
+                            <input type="text" class="setting-input" id="set-xai_image_model">
+                        </div>
+                        <div class="setting-field">
+                            <label class="setting-label">Image Pro Model</label>
+                            <input type="text" class="setting-input" id="set-xai_image_pro_model">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="setting-field">
+                            <label class="setting-label">Video Standard Model</label>
+                            <input type="text" class="setting-input" id="set-xai_video_model">
+                        </div>
+                        <div class="setting-field">
+                            <label class="setting-label">Video Pro Model</label>
+                            <input type="text" class="setting-input" id="set-xai_video_pro_model">
+                        </div>
                     </div>
                 </div>
 
@@ -833,17 +902,22 @@
                             <select id="calc-video-res" class="setting-input calc-input">
                                 <option value="480p" selected>480p</option>
                                 <option value="720p">720p</option>
+                                <option value="1080p">1080p</option>
                             </select>
                         </div>
                     </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">480p Cost/sec ($)</label>
+                            <label class="setting-label" style="font-size: 12px;">480p/sec ($)</label>
                             <input type="number" id="calc-video-480" class="setting-input calc-input" step="0.01" value="0.10">
                         </div>
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">720p Cost/sec ($)</label>
+                            <label class="setting-label" style="font-size: 12px;">720p/sec ($)</label>
                             <input type="number" id="calc-video-720" class="setting-input calc-input" step="0.01" value="0.18">
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 12px;">1080p/sec ($)</label>
+                            <input type="number" id="calc-video-1080" class="setting-input calc-input" step="0.01" value="0.30">
                         </div>
                     </div>
                     <div class="stat-sub" style="margin-top:14px; padding: 10px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 13px;" id="calc-video-details">—</div>
@@ -1470,6 +1544,7 @@
                     document.getElementById('calc-pro-api').value = s.image_pro_cost || 0.08;
                     document.getElementById('calc-video-480').value = s.video_480p_cost || 0.10;
                     document.getElementById('calc-video-720').value = s.video_720p_cost || 0.18;
+                    document.getElementById('calc-video-1080').value = s.video_1080p_cost || 0.30;
                     document.getElementById('calc-audio-api').value = s.audio_per_1k_chars_cost || 0.0045;
                 }
                 runCalculations();
@@ -1513,9 +1588,10 @@
             // Video
             const vSec = parseFloat(document.getElementById('calc-video-sec').value) || 5;
             const vRes = document.getElementById('calc-video-res').value;
-            const perSec = (vRes === '720p')
-                ? parseFloat(document.getElementById('calc-video-720').value) || 0
-                : parseFloat(document.getElementById('calc-video-480').value) || 0;
+            let perSec = 0;
+            if (vRes === '1080p') perSec = parseFloat(document.getElementById('calc-video-1080').value) || 0;
+            else if (vRes === '720p') perSec = parseFloat(document.getElementById('calc-video-720').value) || 0;
+            else perSec = parseFloat(document.getElementById('calc-video-480').value) || 0;
             calcCard(vSec * perSec, 'calc-video-profit', 'calc-video-details');
 
             // Audio

@@ -81,11 +81,11 @@ CREATE TABLE IF NOT EXISTS bkash_payments (
 INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('bdt_per_usd', '145'),
     ('bdt_per_credit', '2'),
-    ('text_to_image_cost', '0.04'),
-    ('image_pro_cost', '0.08'),
-    ('video_480p_cost', '0.10'),
-    ('video_720p_cost', '0.18'),
-    ('audio_per_1k_chars_cost', '0.0045'),
+    ('text_to_image_cost', '0.025'),
+    ('image_pro_cost', '0.075'),
+    ('video_480p_cost', '0.075'),
+    ('video_720p_cost', '0.095'),
+    ('audio_per_1k_chars_cost', '0.005'),
     ('site_name', 'Grok Playground'),
     ('xai_api_key', ''),
     ('xai_base_url', 'https://api.x.ai/v1'),
@@ -96,7 +96,14 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('bkash_username', ''),
     ('bkash_password', ''),
     ('bkash_base_url', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta'),
-    ('global_markup', '1.5')
+    ('global_markup', '1.5'),
+    ('signup_gift_credits', '10'),
+    ('firebase_api_key', 'AIzaSyBZn5av7P66y7VBpR2wgVb7DtOtnsfMYFA'),
+    ('firebase_auth_domain', 'coursepool-488520.firebaseapp.com'),
+    ('firebase_storage_bucket', 'coursepool-488520.firebasestorage.app'),
+    ('firebase_messaging_sender_id', '1084097792660'),
+    ('firebase_app_id', '1:1084097792660:web:da5979d939420326598281'),
+    ('firebase_measurement_id', 'G-1FM4Z5WDPV')
 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value);
 
 -- Showcase categories table

@@ -506,7 +506,10 @@ function updateCalculatedCost(tabType) {
         const resEl = document.getElementById('opt-video-resolution');
         const resolution = resEl ? resEl.value : '480p';
         
-        const perSec = (resolution === '720p') ? parseFloat(s.video_720p_cost || 0.18) : parseFloat(s.video_480p_cost || 0.10);
+        let perSec = 0;
+        if (resolution === '1080p') perSec = parseFloat(s.video_1080p_cost || 0.30);
+        else if (resolution === '720p') perSec = parseFloat(s.video_720p_cost || 0.18);
+        else perSec = parseFloat(s.video_480p_cost || 0.10);
         costUsd = duration * perSec;
         costElId = 'cost-video';
     } else if (tabType === 'text_to_audio') {

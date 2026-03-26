@@ -136,6 +136,7 @@
                         <select id="chatResolution" onchange="updateCalculatedCost()">
                             <option value="480p">480p (Standard)</option>
                             <option value="720p">720p (HD)</option>
+                            <option value="1080p">1080p (Full HD)</option>
                         </select>
                     </div>
                     <div class="control-group" id="ctrl-duration">
@@ -294,7 +295,8 @@
     <!-- Firebase & App Logic -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-    <script src="js/firebase-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+    <script src="api/config-js.php"></script>
     <script src="js/chat.js"></script>
 </body>
 </html>
