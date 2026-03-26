@@ -486,8 +486,12 @@ function updateCalculatedCost(type) {
     if (type === 'text_to_image' || type === 'image_edit') {
         const modelElId = type === 'text_to_image' ? 'opt-t2i-model' : 'opt-edit-model';
         const model = document.getElementById(modelElId)?.value || 'grok-imagine-image';
-        costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
-        if (type === 'image_edit') costUsd *= 2;
+        
+        if (type === 'image_edit') {
+            costUsd = parseFloat(settings.image_edit_cost || 0.08); 
+        } else {
+            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
+        }
         costElId = type === 'text_to_image' ? 'cost-t2i' : 'cost-edit';
     } else if (type === 'image_to_video' || type === 'text_to_video') {
         const el = document.getElementById(type === 'image_to_video' ? 'opt-i2v-duration' : 'opt-t2v-duration');

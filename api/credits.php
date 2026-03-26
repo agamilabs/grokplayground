@@ -17,11 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo json_encode([
         'credits' => (int) $user['credits'],
         'costs' => [
-            'text_to_image' => (int) ($settings['text_to_image_cost'] ?? 5),
-            'image_to_video' => (int) ($settings['image_to_video_cost'] ?? 20),
-            'text_to_video' => (int) ($settings['text_to_video_cost'] ?? 25),
+            'text_to_image' => getCreditCost('text_to_image'),
+            'image_edit' => getCreditCost('image_edit'),
+            'image_to_video' => getCreditCost('image_to_video'), // 5s default
+            'text_to_video' => getCreditCost('text_to_video'), // 5s default
+            'text_to_audio' => getCreditCost('text_to_audio', 5, 200), // ~200 chars estimation
         ],
-        'bdt_per_credit' => (float) ($settings['bdt_per_credit'] ?? 1),
+        'bdt_per_credit' => (float) ($settings['bdt_per_credit'] ?? 2),
     ]);
     exit;
 }
