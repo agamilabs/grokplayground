@@ -689,6 +689,10 @@
                             <label class="setting-label">Image Pro ($)</label>
                             <input type="number" class="setting-input" id="set-image_pro_cost" step="0.01">
                         </div>
+                        <div class="setting-field">
+                            <label class="setting-label">Image Edit ($)</label>
+                            <input type="number" class="setting-input" id="set-image_edit_cost" step="0.01">
+                        </div>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                         <div class="setting-field">
@@ -1134,12 +1138,13 @@
         }
 
         function formatBytes(bytes, decimals = 2) {
-            if (bytes === 0) return '0 Bytes';
+            const b = parseInt(bytes) || 0;
+            if (b === 0) return '0 Bytes';
             const k = 1024;
             const dm = decimals < 0 ? 0 : decimals;
             const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            const i = Math.floor(Math.log(b) / Math.log(k));
+            return parseFloat((b / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         }
         // ─── Gallery Management ────────────────────────────────────
         async function loadAdminGallery(page = 1) {
