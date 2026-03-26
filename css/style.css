@@ -258,20 +258,32 @@ body {
 }
 
 .btn-bkash {
-    background: linear-gradient(135deg, var(--bkash), #c9115e);
+    background: linear-gradient(135deg, #e2136e, #c9115e);
     color: white;
     width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding: 14px;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    font-size: 15px;
-    box-shadow: 0 4px 16px rgba(226, 19, 110, 0.3);
+    gap: 10px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(226, 19, 110, 0.25);
 }
 
 .btn-bkash:hover:not(:disabled) {
-    box-shadow: 0 6px 24px rgba(226, 19, 110, 0.45);
-    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(226, 19, 110, 0.4);
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.bkash-logo {
+    height: 22px;
+    width: auto;
 }
 
 /* ─── Main ────────────────────────────────────────────── */

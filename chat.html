@@ -236,8 +236,12 @@
                 <span class="price-amount" id="priceAmount" style="display:block; font-size:32px; font-weight:800; color:white;">৳100</span>
                 <span class="price-label" style="font-size:14px; color:var(--text-muted);">BDT via bKash</span>
             </div>
-            <button class="btn btn-bkash" id="btn-buy-bkash" onclick="buyCredits()" style="width:100%; height:50px; background:#e2136e; color:white; font-weight:700; border-radius:12px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
-                <img src="https://searchvectorlogo.com/wp-content/uploads/2020/02/bkash-logo-vector.png" alt="bKash" style="height:20px; filter:brightness(0) invert(1);">
+            <button class="btn-bkash" id="btn-buy-bkash" onclick="buyCredits()">
+                <svg class="bkash-logo" viewBox="0 0 100 100" fill="white">
+                    <path d="M15 45c0-10 15-20 35-20s35 10 35 20-15 20-35 20-35-10-35-20zM50 75c-15 0-25-10-25-20h50c0 10-10 20-25 20z" opacity=".2"/>
+                    <path d="M50 15L25 45h50L50 15z" fill="#fff"/>
+                    <circle cx="50" cy="55" r="15" fill="#fff"/>
+                </svg>
                 <span>Pay with bKash</span>
             </button>
         </div>
