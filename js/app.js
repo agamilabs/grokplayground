@@ -489,7 +489,7 @@ function updateCalculatedCost(type) {
         const model = document.getElementById(modelElId)?.value || 'grok-imagine-image';
         
         if (type === 'image_edit') {
-            costUsd = parseFloat(s.image_edit_cost || 0.08); 
+            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.image_edit_cost || 0.08);
         } else {
             costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.text_to_image_cost || 0.04);
         }

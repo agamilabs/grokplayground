@@ -69,7 +69,7 @@ function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-ima
 
     if ($type === 'text_to_image' || $type === 'image_edit') {
         if ($type === 'image_edit') {
-            $costUsd = (float) ($settings['image_edit_cost'] ?? 0.08); 
+            $costUsd = ($model === 'grok-imagine-image-pro') ? (float) ($settings['image_pro_cost'] ?? 0.14) : (float) ($settings['image_edit_cost'] ?? 0.08); 
         } else {
             $costUsd = ($model === 'grok-imagine-image-pro') ? (float) ($settings['image_pro_cost'] ?? 0.14) : (float) ($settings['text_to_image_cost'] ?? 0.04);
         }
