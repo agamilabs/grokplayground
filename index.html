@@ -113,40 +113,26 @@
         <!-- Tabs -->
         <div class="tabs-container">
             <div class="tabs" role="tablist">
-                <button class="tab active" data-tab="text_to_image" role="tab" aria-selected="true" id="tab-t2i">
+                <button class="tab active" data-tab="image" role="tab" aria-selected="true" id="tab-image">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="3" width="18" height="18" rx="2" />
                         <circle cx="8.5" cy="8.5" r="1.5" />
                         <path d="M21 15l-5-5L5 21" />
                     </svg>
-                    Text to Image
+                    Image Generation
                 </button>
-                <button class="tab" data-tab="image_edit" role="tab" aria-selected="false" id="tab-edit">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                        <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg>
-                    Edit Image
-                </button>
-                <button class="tab" data-tab="image_to_video" role="tab" aria-selected="false" id="tab-i2v">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="2" width="20" height="20" rx="2.18" />
-                        <path d="M10 8l6 4-6 4V8z" />
-                    </svg>
-                    Image to Video
-                </button>
-                <button class="tab" data-tab="text_to_video" role="tab" aria-selected="false" id="tab-t2v">
+                <button class="tab" data-tab="video" role="tab" aria-selected="false" id="tab-video">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polygon points="23 7 16 12 23 17 23 7" />
                         <rect x="1" y="5" width="15" height="14" rx="2" />
                     </svg>
-                    Text to Video
+                    Video Generation
                 </button>
                 <button class="tab" data-tab="text_to_audio" role="tab" aria-selected="false" id="tab-t2a">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
                     </svg>
-                    Text to Audio
+                    Audio Generation
                 </button>
             </div>
             <div class="tab-indicator" id="tabIndicator"></div>
@@ -154,80 +140,14 @@
 
         <!-- Generation Form Area -->
         <div class="gen-container">
-            <!-- Text to Image Panel -->
-            <div class="gen-panel active" id="panel-text_to_image">
+            <!-- Image Generation Panel -->
+            <div class="gen-panel active" id="panel-image">
                 <div class="gen-form">
-                    <div class="label-with-hint">
-                        <label class="gen-label" style="margin-bottom:0;">Describe your image</label>
-                        <div class="tooltip">
-                            <span class="hint-icon">?</span>
-                            <span class="tooltip-text">Be descriptive! Mention style (e.g., "digital art", "oil painting"), lighting, and composition for better results.</span>
-                        </div>
-                    </div>
-                    <textarea class="gen-textarea" id="prompt-t2i"
-                        placeholder="A futuristic cityscape at sunset with flying cars and neon lights..."
-                        rows="3"></textarea>
-                    <div class="gen-options">
-                        <div class="gen-option">
-                            <label class="option-label">Model</label>
-                            <select class="option-select" id="opt-t2i-model"
-                                onchange="updateCalculatedCost('text_to_image')">
-                                <option value="grok-imagine-image" selected>Grok Imagine (Standard)</option>
-                                <option value="grok-imagine-image-pro">Grok Imagine Pro</option>
-                            </select>
-                        </div>
-                        <div class="gen-option">
-                            <label class="option-label">Aspect Ratio</label>
-                            <select class="option-select" id="opt-t2i-ratio">
-                                <option value="1:1">1:1 Square</option>
-                                <option value="16:9">16:9 Wide</option>
-                                <option value="9:16">9:16 Portrait</option>
-                                <option value="4:3">4:3 Presentations</option>
-                                <option value="3:4">3:4 Portraits</option>
-                                <option value="3:2">3:2 Photography</option>
-                                <option value="2:3">2:3 Photography</option>
-                                <option value="2:1">2:1 Banners</option>
-                                <option value="1:2">1:2 Headers</option>
-                                <option value="19.5:9">19.5:9 iPhone</option>
-                                <option value="9:19.5">9:19.5 Stories</option>
-                                <option value="20:9">20:9 Ultra-wide</option>
-                                <option value="9:20">9:20 Mobile</option>
-                                <option value="auto" selected>Auto Model Choice</option>
-                            </select>
-                        </div>
-                        <div class="gen-option">
-                            <label class="option-label">Quality</label>
-                            <select class="option-select" id="opt-t2i-quality">
-                                <option value="1k" selected>1K (Standard)</option>
-                                <option value="2k">2K (High)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="gen-footer">
-                        <div class="gen-meta">
-                            <span class="gen-cost" id="cost-t2i">Cost: <strong>...</strong> credits</span>
-                            <span class="gen-balance" id="balance-t2i" style="display:none;">Available:
-                                <strong>...</strong></span>
-                        </div>
-                        <button class="btn btn-primary" id="genBtn-t2i" onclick="handleGenerate('text_to_image')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M6.34 6.34L3.51 3.51" />
-                            </svg>
-                            Generate
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Edit Image Panel -->
-            <div class="gen-panel" id="panel-image_edit">
-                <div class="gen-form">
-                    <div class="upload-section">
-                        <label class="gen-label">Source Image</label>
-                        <div class="upload-zone" id="upload-edit" onclick="document.getElementById('file-edit').click()">
-                            <div class="upload-placeholder" id="placeholder-edit">
+                    <!-- Optional Image Upload -->
+                    <div class="upload-section" style="margin-bottom: 20px;">
+                        <label class="gen-label">Source Image (Optional for Editing)</label>
+                        <div class="upload-zone" id="upload-image" onclick="document.getElementById('file-image').click()">
+                            <div class="upload-placeholder" id="placeholder-image">
                                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                     <polyline points="17 8 12 3 7 8" />
@@ -235,32 +155,35 @@
                                 </svg>
                                 <span>Upload an image to edit</span>
                             </div>
-                            <img src="" class="upload-preview" id="preview-edit" style="display:none;">
-                            <input type="file" id="file-edit" accept="image/*" style="display:none;" onchange="handleImageUpload(event, 'image_edit')">
+                            <div style="position:relative; display:none;" id="preview-container-image">
+                                <img src="" class="upload-preview" id="preview-image" style="display:block;">
+                                <button type="button" class="btn btn-ghost btn-sm" style="position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.5); color:#fff; border-radius:50%; padding:4px;" onclick="clearImage(event, 'image')" title="Remove Image">✖</button>
+                            </div>
+                            <input type="file" id="file-image" accept="image/*" style="display:none;" onchange="handleImageUpload(event, 'image')">
                         </div>
                     </div>
+
                     <div class="label-with-hint">
-                        <label class="gen-label" style="margin-bottom:0;">Describe the changes</label>
+                        <label class="gen-label" style="margin-bottom:0;">Describe your image</label>
                         <div class="tooltip">
                             <span class="hint-icon">?</span>
-                            <span class="tooltip-text">Tell the AI what to add, remove, or change. E.g., "Add a futuristic sword to the character's hand".</span>
+                            <span class="tooltip-text">Be descriptive! Mention style, lighting, or if editing, what to change.</span>
                         </div>
                     </div>
-                    <textarea class="gen-textarea" id="prompt-edit"
-                        placeholder="Make the background a snowy mountain at night..."
-                        rows="3"></textarea>
+                    <textarea class="gen-textarea" id="prompt-image" placeholder="A futuristic cityscape at sunset..." rows="3"></textarea>
+                    
                     <div class="gen-options">
                         <div class="gen-option">
                             <label class="option-label">Model</label>
-                            <select class="option-select" id="opt-edit-model" onchange="updateCalculatedCost('image_edit')">
+                            <select class="option-select" id="opt-image-model" onchange="updateCalculatedCost('image')">
                                 <option value="grok-imagine-image" selected>Grok Imagine (Standard)</option>
                                 <option value="grok-imagine-image-pro">Grok Imagine Pro</option>
                             </select>
                         </div>
                         <div class="gen-option">
                             <label class="option-label">Aspect Ratio</label>
-                            <select class="option-select" id="opt-edit-ratio">
-                                <option value="auto" selected>Auto (Original)</option>
+                            <select class="option-select" id="opt-image-ratio">
+                                <option value="auto" selected>Auto / Original</option>
                                 <option value="1:1">1:1 Square</option>
                                 <option value="16:9">16:9 Wide</option>
                                 <option value="9:16">9:16 Portrait</option>
@@ -271,165 +194,87 @@
                             </select>
                         </div>
                         <div class="gen-option">
-                            <label class="option-label">Resolution</label>
-                            <select class="option-select" id="opt-edit-resolution">
-                                <option value="1k" selected>1k</option>
-                                <option value="2k">2k</option>
+                            <label class="option-label">Resolution / Quality</label>
+                            <select class="option-select" id="opt-image-quality">
+                                <option value="1k" selected>1K (Standard)</option>
+                                <option value="2k">2K (High)</option>
                             </select>
                         </div>
                     </div>
+                    
                     <div class="gen-footer">
                         <div class="gen-meta">
-                            <span class="gen-cost" id="cost-edit">Cost: <strong>...</strong> credits</span>
-                            <span class="gen-balance" id="balance-edit" style="display:none;">Available: <strong>...</strong></span>
+                            <span class="gen-cost" id="cost-image">Cost: <strong>...</strong> credits</span>
+                            <span class="gen-balance" id="balance-image" style="display:none;">Available: <strong>...</strong></span>
                         </div>
-                        <button class="btn btn-primary" id="genBtn-edit" onclick="handleGenerate('image_edit')">
+                        <button class="btn btn-primary" id="genBtn-image" onclick="handleGenerate('image')">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M6.34 6.34L3.51 3.51" />
                             </svg>
-                            Apply Edit
+                            Generate Image
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Image to Video Panel -->
-            <div class="gen-panel" id="panel-image_to_video">
+            <!-- Video Generation Panel -->
+            <div class="gen-panel" id="panel-video">
                 <div class="gen-form">
-                    <label class="gen-label">Upload an image to animate</label>
-                    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imageUpload').click()">
-                        <input type="file" id="imageUpload" accept="image/*" style="display:none"
-                            onchange="handleImageUpload(this)">
-                        <div class="upload-placeholder" id="uploadPlaceholder">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.5">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                                <polyline points="17 8 12 3 7 8" />
-                                <line x1="12" y1="3" x2="12" y2="15" />
-                            </svg>
-                            <span>Click or drag to upload</span>
-                        </div>
-                        <img id="uploadPreview" class="upload-preview" style="display:none" />
-                    </div>
-                    <div class="label-with-hint" style="margin-top:16px;">
-                        <label class="gen-label" style="margin-bottom:0;">Describe the motion</label>
-                        <div class="tooltip">
-                            <span class="hint-icon">?</span>
-                            <span class="tooltip-text">Describe how you want the image to move (e.g., "gentle zoom in", "camera pans right", "wind blowing through hair").</span>
+                    <!-- Optional Image Upload -->
+                    <div class="upload-section" style="margin-bottom: 20px;">
+                        <label class="gen-label">Source Image (Optional for Animation)</label>
+                        <div class="upload-zone" id="upload-video" onclick="document.getElementById('file-video').click()">
+                            <div class="upload-placeholder" id="placeholder-video">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="17 8 12 3 7 8" />
+                                    <line x1="12" y1="3" x2="12" y2="15" />
+                                </svg>
+                                <span>Upload an image to animate</span>
+                            </div>
+                            <div style="position:relative; display:none;" id="preview-container-video">
+                                <img src="" class="upload-preview" id="preview-video" style="display:block;">
+                                <button type="button" class="btn btn-ghost btn-sm" style="position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.5); color:#fff; border-radius:50%; padding:4px;" onclick="clearImage(event, 'video')" title="Remove Image">✖</button>
+                            </div>
+                            <input type="file" id="file-video" accept="image/*" style="display:none;" onchange="handleImageUpload(event, 'video')">
                         </div>
                     </div>
-                    <textarea class="gen-textarea" id="prompt-i2v"
-                        placeholder="Camera slowly zooms in while particles float upward..." rows="2"></textarea>
-                    <div class="gen-options">
-                        <div class="gen-option">
-                            <label class="option-label">Model</label>
-                            <select class="option-select" id="opt-i2v-model">
-                                <option value="grok-imagine-video" selected>Grok Imagine Video</option>
-                            </select>
-                        </div>
-                        <div class="gen-option">
-                            <label class="option-label">Aspect Ratio</label>
-                            <select class="option-select" id="opt-i2v-ratio">
-                                <option value="16:9">16:9 Wide</option>
-                                <option value="9:16">9:16 Portrait</option>
-                                <option value="1:1">1:1 Square</option>
-                                <option value="4:3">4:3</option>
-                                <option value="3:4">3:4</option>
-                                <option value="3:2">3:2</option>
-                                <option value="2:3">2:3</option>
-                                <option value="auto" selected>Auto (Match Image)</option>
-                            </select>
-                        </div>
-                        <div class="gen-option">
-                            <label class="option-label">Resolution</label>
-                            <select class="option-select" id="opt-i2v-resolution"
-                                onchange="updateCalculatedCost('image_to_video')">
-                                <option value="480p" selected>480p (Fast)</option>
-                                <option value="720p">720p (HD)</option>
-                            </select>
-                        </div>
-                        <div class="gen-option">
-                            <label class="option-label">Duration</label>
-                            <select class="option-select" id="opt-i2v-duration"
-                                onchange="updateCalculatedCost('image_to_video')">
-                                <option value="1">1 second</option>
-                                <option value="2">2 seconds</option>
-                                <option value="3">3 seconds</option>
-                                <option value="5" selected>5 seconds</option>
-                                <option value="8">8 seconds</option>
-                                <option value="10">10 seconds</option>
-                                <option value="12">12 seconds</option>
-                                <option value="15">15 seconds</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="gen-footer">
-                        <div class="gen-meta">
-                            <span class="gen-cost" id="cost-i2v">Cost: <strong>...</strong> credits</span>
-                            <span class="gen-balance" id="balance-i2v" style="display:none;">Available:
-                                <strong>...</strong></span>
-                        </div>
-                        <button class="btn btn-primary" id="genBtn-i2v" onclick="handleGenerate('image_to_video')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M6.34 6.34L3.51 3.51" />
-                            </svg>
-                            Generate
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Text to Video Panel -->
-            <div class="gen-panel" id="panel-text_to_video">
-                <div class="gen-form">
                     <div class="label-with-hint">
-                        <label class="gen-label" style="margin-bottom:0;">Describe your video</label>
+                        <label class="gen-label" style="margin-bottom:0;">Describe the motion / video</label>
                         <div class="tooltip">
                             <span class="hint-icon">?</span>
-                            <span class="tooltip-text">Define the setting, characters, and action. Mention atmosphere details like weather or time of day.</span>
+                            <span class="tooltip-text">Describe the setting, characters, action, and camera movement.</span>
                         </div>
                     </div>
-                    <textarea class="gen-textarea" id="prompt-t2v"
-                        placeholder="A majestic eagle soaring over snow-capped mountains at golden hour..."
-                        rows="3"></textarea>
+                    <textarea class="gen-textarea" id="prompt-video" placeholder="A majestic eagle soaring over snow-capped mountains..." rows="3"></textarea>
+                    
                     <div class="gen-options">
                         <div class="gen-option">
                             <label class="option-label">Model</label>
-                            <select class="option-select" id="opt-t2v-model"
-                                onchange="updateCalculatedCost('text_to_video')">
+                            <select class="option-select" id="opt-video-model" onchange="updateCalculatedCost('video')">
                                 <option value="grok-imagine-video" selected>Grok Imagine Video</option>
                             </select>
                         </div>
                         <div class="gen-option">
                             <label class="option-label">Aspect Ratio</label>
-                            <select class="option-select" id="opt-t2v-ratio">
+                            <select class="option-select" id="opt-video-ratio">
                                 <option value="16:9">16:9 Wide</option>
                                 <option value="9:16">9:16 Portrait</option>
                                 <option value="1:1">1:1 Square</option>
-                                <option value="4:3">4:3</option>
-                                <option value="3:4">3:4</option>
-                                <option value="3:2">3:2</option>
-                                <option value="2:3">2:3</option>
                                 <option value="auto" selected>Auto</option>
                             </select>
                         </div>
                         <div class="gen-option">
                             <label class="option-label">Resolution</label>
-                            <select class="option-select" id="opt-t2v-resolution"
-                                onchange="updateCalculatedCost('text_to_video')">
+                            <select class="option-select" id="opt-video-resolution" onchange="updateCalculatedCost('video')">
                                 <option value="480p" selected>480p (Fast)</option>
                                 <option value="720p">720p (HD)</option>
                             </select>
                         </div>
                         <div class="gen-option">
                             <label class="option-label">Duration</label>
-                            <select class="option-select" id="opt-t2v-duration"
-                                onchange="updateCalculatedCost('text_to_video')">
-                                <option value="1">1 second</option>
-                                <option value="2">2 seconds</option>
-                                <option value="3">3 seconds</option>
+                            <select class="option-select" id="opt-video-duration" onchange="updateCalculatedCost('video')">
                                 <option value="5" selected>5 seconds</option>
                                 <option value="8">8 seconds</option>
                                 <option value="10">10 seconds</option>
@@ -438,19 +283,17 @@
                             </select>
                         </div>
                     </div>
+                    
                     <div class="gen-footer">
                         <div class="gen-meta">
-                            <span class="gen-cost" id="cost-t2v">Cost: <strong>...</strong> credits</span>
-                            <span class="gen-balance" id="balance-t2v" style="display:none;">Available:
-                                <strong>...</strong></span>
+                            <span class="gen-cost" id="cost-video">Cost: <strong>...</strong> credits</span>
+                            <span class="gen-balance" id="balance-video" style="display:none;">Available: <strong>...</strong></span>
                         </div>
-                        <button class="btn btn-primary" id="genBtn-t2v" onclick="handleGenerate('text_to_video')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M6.34 6.34L3.51 3.51" />
+                        <button class="btn btn-primary" id="genBtn-video" onclick="handleGenerate('video')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M6.34 6.34L3.51 3.51" />
                             </svg>
-                            Generate
+                            Generate Video
                         </button>
                     </div>
                 </div>

@@ -5,12 +5,12 @@
 // ─── State ──────────────────────────────────────────────
 let currentUser = null;
 let idToken = null;
-let activeTab = 'text_to_image';
+let activeTab = 'image';
 let uploadedImageBase64 = null;
 let creditCosts = { text_to_image: 5, image_edit: 10, image_to_video: 20, text_to_video: 25, text_to_audio: 10 };
 let bdtPerCredit = 2;
 let pollingInterval = null;
-const tabNames = ['text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio'];
+const tabNames = ['image', 'video', 'text_to_audio'];
 let adminSettings = null;
 
 // ─── Auth State Listener ────────────────────────────────
@@ -76,11 +76,13 @@ function switchTab(tabName, pushState = true) {
     uploadedImageBase64 = null;
     
     // Clear all previews
-    ['upload', 'upload-edit'].forEach(prefix => {
-        const preview = document.getElementById(prefix === 'upload' ? 'uploadPreview' : 'preview-edit');
-        const placeholder = document.getElementById(prefix === 'upload' ? 'uploadPlaceholder' : 'placeholder-edit');
-        const zone = document.getElementById(prefix === 'upload' ? 'uploadZone' : 'upload-edit');
-        if (preview) preview.style.display = 'none';
+    ['image', 'video'].forEach(prefix => {
+        const preview = document.getElementById(`preview-${prefix}`);
+        const placeholder = document.getElementById(`placeholder-${prefix}`);
+        const zone = document.getElementById(`upload-${prefix}`);
+        const container = document.getElementById(`preview-container-${prefix}`);
+        if (preview) preview.src = '';
+        if (container) container.style.display = 'none';
         if (placeholder) placeholder.style.display = 'flex';
         if (zone) zone.classList.remove('has-image');
     });
@@ -197,70 +199,87 @@ function handleImageUpload(e, type) {
     (async () => {
         try {
             uploadedImageBase64 = await compressImage(file);
-            const previewId = type === 'image_edit' ? 'preview-edit' : 'uploadPreview';
-            const placeholderId = type === 'image_edit' ? 'placeholder-edit' : 'uploadPlaceholder';
-            const zoneId = type === 'image_edit' ? 'upload-edit' : 'uploadZone';
+            const preview = document.getElementById(`preview-${type}`);
+            const placeholder = document.getElementById(`placeholder-${type}`);
+            const zone = document.getElementById(`upload-${type}`);
+            const container = document.getElementById(`preview-container-${type}`);
             
-            document.getElementById(previewId).src = uploadedImageBase64;
-            document.getElementById(previewId).style.display = 'block';
-            document.getElementById(placeholderId).style.display = 'none';
-            document.getElementById(zoneId).classList.add('has-image');
+            preview.src = uploadedImageBase64;
+            container.style.display = 'block';
+            placeholder.style.display = 'none';
+            zone.classList.add('has-image');
+            updateCalculatedCost(type);
         } catch (err) {
             showToast('Image processing failed: ' + err.message, 'error');
         }
     })();
 }
 
-// Drag and drop
-const uploadZone = document.getElementById('uploadZone');
-if (uploadZone) {
-    uploadZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadZone.style.borderColor = 'var(--accent-1)';
-    });
-    uploadZone.addEventListener('dragleave', () => {
-        uploadZone.style.borderColor = '';
-    });
-    uploadZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadZone.style.borderColor = '';
-        const file = e.dataTransfer.files[0];
-        if (file) {
-            document.getElementById('imageUpload').files = e.dataTransfer.files;
-            handleImageUpload(document.getElementById('imageUpload'));
-        }
-    });
+function clearImage(e, type) {
+    if (e) e.stopPropagation();
+    uploadedImageBase64 = null;
+    document.getElementById(`file-${type}`).value = '';
+    
+    document.getElementById(`preview-container-${type}`).style.display = 'none';
+    document.getElementById(`preview-${type}`).src = '';
+    document.getElementById(`placeholder-${type}`).style.display = 'flex';
+    document.getElementById(`upload-${type}`).classList.remove('has-image');
+    updateCalculatedCost(type);
 }
 
+// Drag and drop
+['image', 'video'].forEach(type => {
+    const zone = document.getElementById(`upload-${type}`);
+    if (zone) {
+        zone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            zone.style.borderColor = 'var(--accent-1)';
+        });
+        zone.addEventListener('dragleave', () => {
+            zone.style.borderColor = '';
+        });
+        zone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            zone.style.borderColor = '';
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                const input = document.getElementById(`file-${type}`);
+                input.files = e.dataTransfer.files;
+                handleImageUpload(input, type);
+            }
+        });
+    }
+});
+
 // ─── Generation ─────────────────────────────────────────
-async function handleGenerate(type) {
+async function handleGenerate(tabType) {
     if (!currentUser) {
         openModal('authModal');
         return;
     }
 
-    const promptId = type === 'text_to_image' ? 'prompt-t2i' :
-        type === 'image_edit' ? 'prompt-edit' :
-        type === 'image_to_video' ? 'prompt-i2v' :
-            type === 'text_to_video' ? 'prompt-t2v' : 'prompt-t2a';
-    const prompt = document.getElementById(promptId).value.trim();
+    const promptId = tabType === 'text_to_audio' ? 'prompt-t2a' : `prompt-${tabType}`;
+    const prompt = document.getElementById(promptId)?.value.trim() || '';
+
+    // Map UI tab to backend type
+    let type = tabType;
+    if (tabType === 'image') {
+        type = uploadedImageBase64 ? 'image_edit' : 'text_to_image';
+    } else if (tabType === 'video') {
+        type = uploadedImageBase64 ? 'image_to_video' : 'text_to_video';
+    }
 
     if (!prompt) {
         showToast('Please enter a prompt', 'error');
         return;
     }
 
-    if ((type === 'image_to_video' || type === 'image_edit') && !uploadedImageBase64) {
-        showToast('Please upload an image first', 'error');
-        return;
-    }
-
     // Show loading
-    const btnId = `genBtn-${type === 'text_to_image' ? 't2i' : type === 'image_edit' ? 'edit' : type === 'image_to_video' ? 'i2v' : type === 'text_to_video' ? 't2v' : 't2a'}`;
+    const btnId = tabType === 'text_to_audio' ? 'genBtn-t2a' : `genBtn-${tabType}`;
     const btn = document.getElementById(btnId);
-    btn.disabled = true;
-    const oldHtml = btn.innerHTML;
-    btn.innerHTML = '<span class="btn-loading"></span> Generating...';
+    if(btn) btn.disabled = true;
+    const oldHtml = btn ? btn.innerHTML : '';
+    if(btn) btn.innerHTML = '<span class="btn-loading"></span> Generating...';
 
     document.getElementById('outputArea').style.display = 'none';
     document.getElementById('loadingArea').style.display = 'block';
@@ -268,30 +287,21 @@ async function handleGenerate(type) {
 
     try {
         const body = { type, prompt };
-        if ((type === 'image_to_video' || type === 'image_edit') && uploadedImageBase64) {
+        if (uploadedImageBase64 && (type === 'image_edit' || type === 'image_to_video')) {
             body.image = uploadedImageBase64;
         }
 
         // Gather customization options
-        if (type === 'text_to_image') {
-            body.model = document.getElementById('opt-t2i-model').value;
-            body.aspect_ratio = document.getElementById('opt-t2i-ratio').value;
-            body.resolution = document.getElementById('opt-t2i-quality').value;
-        } else if (type === 'image_edit') {
-            body.model = document.getElementById('opt-edit-model').value;
-            body.aspect_ratio = document.getElementById('opt-edit-ratio').value;
-            body.resolution = document.getElementById('opt-edit-resolution').value;
-        } else if (type === 'image_to_video') {
-            body.model = document.getElementById('opt-i2v-model').value;
-            body.aspect_ratio = document.getElementById('opt-i2v-ratio').value;
-            body.resolution = document.getElementById('opt-i2v-resolution').value;
-            body.duration = parseInt(document.getElementById('opt-i2v-duration').value);
-        } else if (type === 'text_to_video') {
-            body.model = document.getElementById('opt-t2v-model').value;
-            body.aspect_ratio = document.getElementById('opt-t2v-ratio').value;
-            body.resolution = document.getElementById('opt-t2v-resolution').value;
-            body.duration = parseInt(document.getElementById('opt-t2v-duration').value);
-        } else if (type === 'text_to_audio') {
+        if (tabType === 'image') {
+            body.model = document.getElementById('opt-image-model').value;
+            body.aspect_ratio = document.getElementById('opt-image-ratio').value;
+            body.resolution = document.getElementById('opt-image-quality').value;
+        } else if (tabType === 'video') {
+            body.model = document.getElementById('opt-video-model').value;
+            body.aspect_ratio = document.getElementById('opt-video-ratio').value;
+            body.resolution = document.getElementById('opt-video-resolution').value;
+            body.duration = parseInt(document.getElementById('opt-video-duration').value);
+        } else if (tabType === 'text_to_audio') {
             if (prompt.length > 15000) {
                 showToast('Text is too long. Please keep it under 15,000 characters.', 'error');
                 return;
@@ -311,10 +321,10 @@ async function handleGenerate(type) {
         await loadCredits();
 
         if (res.status === 'completed' && res.output_url) {
-            uploadedImageBase64 = null; 
+            if(tabType !== 'text_to_audio') clearImage(null, tabType); 
             showOutput(res.output_url, type);
         } else if (res.generation_id) {
-            uploadedImageBase64 = null; 
+            if(tabType !== 'text_to_audio') clearImage(null, tabType); 
             startPolling(res.generation_id, type);
         }
 
@@ -322,8 +332,10 @@ async function handleGenerate(type) {
         showToast(err.message || 'Generation failed', 'error');
         document.getElementById('loadingArea').style.display = 'none';
     } finally {
-        btn.disabled = false;
-        btn.innerHTML = oldHtml;
+        if(btn) {
+            btn.disabled = false;
+            btn.innerHTML = oldHtml;
+        }
     }
 }
 
@@ -476,7 +488,7 @@ async function fetchAdminSettings() {
     } catch (err) { }
 }
 
-function updateCalculatedCost(type) {
+function updateCalculatedCost(tabType) {
     const s = adminSettings || {};
     const markup = parseFloat(s.global_markup || 1.5);
     const bdtUsd = parseFloat(s.bdt_per_usd || 145);
@@ -484,28 +496,28 @@ function updateCalculatedCost(type) {
     let costUsd = 0;
     let costElId = '';
 
-    if (type === 'text_to_image' || type === 'image_edit') {
-        const modelElId = type === 'text_to_image' ? 'opt-t2i-model' : 'opt-edit-model';
-        const model = document.getElementById(modelElId)?.value || 'grok-imagine-image';
+    if (tabType === 'image') {
+        const isEdit = uploadedImageBase64 !== null;
+        const model = document.getElementById('opt-image-model')?.value || 'grok-imagine-image';
         
-        if (type === 'image_edit') {
+        if (isEdit) {
             costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.image_edit_cost || 0.08);
         } else {
             costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.text_to_image_cost || 0.04);
         }
-        costElId = type === 'text_to_image' ? 'cost-t2i' : 'cost-edit';
-    } else if (type === 'image_to_video' || type === 'text_to_video') {
-        const dEl = document.getElementById(type === 'image_to_video' ? 'opt-i2v-duration' : 'opt-t2v-duration');
+        costElId = 'cost-image';
+    } else if (tabType === 'video') {
+        const dEl = document.getElementById('opt-video-duration');
         const duration = dEl ? parseInt(dEl.value) : 5;
-        const resEl = document.getElementById(type === 'image_to_video' ? 'opt-i2v-resolution' : 'opt-t2v-resolution');
+        const resEl = document.getElementById('opt-video-resolution');
         const resolution = resEl ? resEl.value : '480p';
         
         const videoBase = parseFloat(s.video_per_sec_cost || 0.1);
         const resMultiplier = (resolution === '720p') ? parseFloat(s.video_hd_multiplier || 1.8) : 1.0;
         
         costUsd = duration * videoBase * resMultiplier;
-        costElId = type === 'image_to_video' ? 'cost-i2v' : 'cost-t2v';
-    } else if (type === 'text_to_audio') {
+        costElId = 'cost-video';
+    } else if (tabType === 'text_to_audio') {
         const text = document.getElementById('prompt-t2a')?.value || '';
         costUsd = (text.length / 1000) * parseFloat(s.audio_per_1k_chars_cost || 0.0084);
         if (text.length > 0 && costUsd < 0.01) costUsd = 0.01;

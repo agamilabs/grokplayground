@@ -172,7 +172,7 @@ async function sendChat() {
     const prompt = input.value.trim();
     if (!prompt) return;
 
-    const type = document.getElementById('chatMode').value;
+    const tabType = document.getElementById('chatMode').value;
     const model = document.getElementById('chatModel').value;
     const aspect_ratio = document.getElementById('chatAspect').value;
     const resolution = document.getElementById('chatResolution').value;
@@ -190,6 +190,14 @@ async function sendChat() {
     // Show AI loading
     const aiMsgId = 'gen_' + Date.now();
     appendMessage('ai', '', null, 'processing', aiMsgId);
+
+    // Map UI mode to backend type based on image upload status
+    let type = tabType;
+    if (tabType === 'image') {
+        type = attachment ? 'image_edit' : 'text_to_image';
+    } else if (tabType === 'video') {
+        type = attachment ? 'image_to_video' : 'text_to_video';
+    }
 
     try {
         const body = { type, prompt, model };
@@ -392,9 +400,8 @@ async function handleChatFile(e) {
         document.getElementById('attachmentPreview').style.display = 'block';
         
         const mode = document.getElementById('chatMode');
-        if (mode.value === 'text_to_image') {
-            mode.value = 'image_edit';
-            onModeChange();
+        if (mode.value === 'image' || mode.value === 'video') {
+            updateCalculatedCost();
         }
     } catch (err) {
         showToast('Image processing failed: ' + err.message, 'error');
@@ -405,6 +412,7 @@ function clearAttachment() {
     uploadedImageBase64 = null;
     document.getElementById('attachmentPreview').style.display = 'none';
     document.getElementById('chatFile').value = '';
+    updateCalculatedCost();
 }
 
 function onModeChange() {
@@ -429,16 +437,16 @@ function updateOptions(mode) {
     
     // Clear & Rebuild Resolution
     resSelect.innerHTML = '';
-    if (mode.includes('video')) {
+    if (mode === 'video') {
         resSelect.innerHTML = '<option value="480p" selected>480p</option><option value="720p">720p</option>';
-    } else if (mode.includes('image')) {
+    } else if (mode === 'image') {
         resSelect.innerHTML = '<option value="1k" selected>1k</option><option value="2k">2k</option>';
     }
 
     // Adjust Model visibility/options if needed
     if (mode === 'text_to_audio') {
         modelSelect.innerHTML = '<option value="grok-imagine-audio" selected>Grok Audio</option>';
-    } else if (mode.includes('video')) {
+    } else if (mode === 'video') {
          modelSelect.innerHTML = '<option value="grok-imagine-video" selected>Grok Video</option>';
     } else {
          modelSelect.innerHTML = '<option value="grok-imagine-image" selected>Standard</option><option value="grok-imagine-image-pro">Pro</option>';
@@ -446,7 +454,7 @@ function updateOptions(mode) {
 }
 
 function updateCalculatedCost() {
-    const type = document.getElementById('chatMode').value;
+    const tabType = document.getElementById('chatMode').value;
     const model = document.getElementById('chatModel').value;
     const duration = parseInt(document.getElementById('chatDuration').value) || 5;
     const prompt = document.getElementById('chatInput').value;
@@ -457,19 +465,21 @@ function updateCalculatedCost() {
     
     const markup = parseFloat(settings.global_markup || 1.5);
 
-    if (type === 'text_to_image' || type === 'image_edit') {
-        if (type === 'image_edit') {
-            costUsd = parseFloat(settings.image_edit_cost || 0.08);
+    let costUsd = 0;
+
+    if (tabType === 'image') {
+        const isEdit = uploadedImageBase64 !== null;
+        if (isEdit) {
+            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.image_edit_cost || 0.08);
         } else {
             costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
         }
-    } else if (type === 'image_to_video' || type === 'text_to_video') {
-        const duration = parseInt(document.getElementById('chatDuration')?.value) || 5;
+    } else if (tabType === 'video') {
         const resolution = document.getElementById('chatResolution')?.value || '480p';
         const videoBase = parseFloat(settings.video_per_sec_cost || 0.1);
         const resMultiplier = (resolution === '720p') ? parseFloat(settings.video_hd_multiplier || 1.8) : 1.0;
         costUsd = duration * videoBase * resMultiplier;
-    } else if (type === 'text_to_audio') {
+    } else if (tabType === 'text_to_audio') {
         costUsd = (prompt.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 0.0084);
         if (prompt.length > 0 && costUsd < 0.01) costUsd = 0.01;
     }
