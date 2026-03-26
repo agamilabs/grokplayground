@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt = $db->prepare("
         SELECT u.id, u.email, u.display_name, u.photo_url, u.credits, u.is_admin, u.created_at,
                COALESCE((SELECT SUM(credits) FROM transactions WHERE user_id = u.id AND type = 'purchase'), 0) as total_purchased,
-               COALESCE((SELECT ABS(SUM(credits)) FROM transactions WHERE user_id = u.id AND type = 'spend'), 0) as total_spent
+               COALESCE((SELECT ABS(SUM(credits)) FROM transactions WHERE user_id = u.id AND type = 'spend'), 0) as total_spent,
+               COALESCE((SELECT SUM(input_size + output_size) FROM generations WHERE user_id = u.id), 0) as used_storage
         FROM users u 
         WHERE $where 
         ORDER BY u.created_at DESC 

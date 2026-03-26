@@ -493,6 +493,7 @@
                                 <th>Balance</th>
                                 <th>Purchased</th>
                                 <th>Spent</th>
+                                <th>Storage</th>
                                 <th>Joined</th>
                                 <th>Role</th>
                                 <th>Action</th>
@@ -924,6 +925,7 @@
                         </td>
                         <td style="color: var(--success); font-weight: 500;">+${u.total_purchased}</td>
                         <td style="color: var(--error); font-weight: 500;">-${u.total_spent}</td>
+                        <td style="color: var(--accent-1); font-weight: 500;">${formatBytes(u.used_storage || 0)}</td>
                         <td style="color: var(--text-muted); font-size: 12px;">${new Date(u.created_at).toLocaleDateString()}</td>
                         <td>
                             <span class="status-badge" style="${u.is_admin ? 'background: rgba(99,102,241,0.1); color: var(--accent-3)' : 'background: rgba(255,255,255,0.05); color: var(--text-muted)'}">
@@ -1119,6 +1121,15 @@
             const div = document.createElement('div');
             div.textContent = text || '';
             return div.innerHTML;
+        }
+
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         }
         // ─── Gallery Management ────────────────────────────────────
         async function loadAdminGallery(page = 1) {
