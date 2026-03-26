@@ -786,36 +786,44 @@
             <div class="stats-grid">
                 <!-- Text-to-Image Calculator -->
                 <div class="stat-card" style="grid-column: span 2;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span class="stat-label">Text to Image (Standard)</span>
-                        <span id="calc-t2i-profit" style="font-weight: 600; font-size: 18px; color: var(--success);">৳0.00</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;">
+                        <span class="stat-label" style="font-size: 16px; color: var(--text-primary);">🖼️ Image Generation (Standard)</span>
+                        <div style="text-align: right;">
+                            <div style="font-size: 12px; color: var(--text-muted);">Net Profit per Image</div>
+                            <span id="calc-t2i-profit" style="font-weight: 700; font-size: 24px; color: var(--success);">৳0.00</span>
+                        </div>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">xAI Cost ($)</label>
-                            <input type="number" id="calc-t2i-api" class="setting-input calc-input" step="0.001" value="0.04">
+                            <label class="setting-label" style="font-size: 13px;">API Cost per Image ($)</label>
+                            <input type="number" id="calc-t2i-api" class="setting-input calc-input" step="0.001" value="0.04" title="How much xAI charges for 1 image">
                         </div>
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">Overhead Markup (x)</label>
-                            <input type="number" id="calc-t2i-markup" class="setting-input calc-input" step="0.1" value="1.5">
+                            <label class="setting-label" style="font-size: 13px;">Profit Multiplier (x)</label>
+                            <input type="number" id="calc-t2i-markup" class="setting-input calc-input" step="0.1" value="1.5" title="Multiply the cost to ensure profit (e.g. 1.5x = 50% markup)">
                         </div>
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">Sell Price/Credit (৳)</label>
-                            <input type="number" id="calc-t2i-credit" class="setting-input calc-input" step="0.1" value="2">
+                            <label class="setting-label" style="font-size: 13px;">Credit Price (৳)</label>
+                            <input type="number" id="calc-t2i-credit" class="setting-input calc-input" step="0.1" value="2" title="How much you sell 1 Credit for in BDT">
                         </div>
                     </div>
-                    <div class="stat-sub" style="margin-top:12px;" id="calc-t2i-details">User charged 0 credits -> ৳0 revenue. Cost: ৳0.</div>
+                    <div class="stat-sub" style="margin-top:20px; padding: 12px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 14px;" id="calc-t2i-details">
+                        Breakdown loading...
+                    </div>
                 </div>
 
                 <!-- Video Calculator -->
                 <div class="stat-card" style="grid-column: span 2;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span class="stat-label">Video Generation</span>
-                        <span id="calc-video-profit" style="font-weight: 600; font-size: 18px; color: var(--success);">৳0.00</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;">
+                        <span class="stat-label" style="font-size: 16px; color: var(--text-primary);">🎥 Video Generation</span>
+                        <div style="text-align: right;">
+                            <div style="font-size: 12px; color: var(--text-muted);">Net Profit per Video</div>
+                            <span id="calc-video-profit" style="font-weight: 700; font-size: 24px; color: var(--success);">৳0.00</span>
+                        </div>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px;">
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
                         <div>
                             <label class="setting-label" style="font-size: 12px;">Duration</label>
                             <select id="calc-video-sec" class="setting-input calc-input">
@@ -826,48 +834,55 @@
                         <div>
                             <label class="setting-label" style="font-size: 12px;">Resolution</label>
                             <select id="calc-video-res" class="setting-input calc-input">
-                                <option value="480p" selected>480p</option>
+                                <option value="480p" selected>480p (Standard)</option>
                                 <option value="720p">720p (HD)</option>
                             </select>
                         </div>
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">Base $/sec</label>
+                            <label class="setting-label" style="font-size: 12px;">API Cost / sec ($)</label>
                             <input type="number" id="calc-video-api" class="setting-input calc-input" step="0.01" value="0.1">
                         </div>
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">HD Multiplier (x)</label>
-                            <input type="number" id="calc-video-hd-mult" class="setting-input calc-input" step="0.1" value="1.8">
+                            <label class="setting-label" style="font-size: 12px;">HD Extra Cost (x)</label>
+                            <input type="number" id="calc-video-hd-mult" class="setting-input calc-input" step="0.1" value="1.8" title="Multiplier for 720p costs">
                         </div>
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">Markup (x)</label>
+                            <label class="setting-label" style="font-size: 12px;">Profit Multiplier</label>
                             <input type="number" id="calc-video-markup" class="setting-input calc-input" step="0.1" value="1.5">
                         </div>
                     </div>
-                    <div class="stat-sub" style="margin-top:12px;" id="calc-video-details">User charged 0 credits -> ৳0 revenue. Cost: ৳0.</div>
+                    <div class="stat-sub" style="margin-top:20px; padding: 12px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 14px;" id="calc-video-details">
+                        Breakdown loading...
+                    </div>
                 </div>
 
                  <!-- Audio Calculator -->
                  <div class="stat-card" style="grid-column: span 2;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span class="stat-label">Audio Generation (500 chars limit)</span>
-                        <span id="calc-audio-profit" style="font-weight: 600; font-size: 18px; color: var(--success);">৳0.00</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;">
+                        <span class="stat-label" style="font-size: 16px; color: var(--text-primary);">🎵 Audio Generation (TTS)</span>
+                        <div style="text-align: right;">
+                            <div style="font-size: 12px; color: var(--text-muted);">Net Profit per Audio</div>
+                            <span id="calc-audio-profit" style="font-weight: 700; font-size: 24px; color: var(--success);">৳0.00</span>
+                        </div>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">xAI Cost ($ per 1k)</label>
+                            <label class="setting-label" style="font-size: 13px;">Text Length (Chars)</label>
+                            <input type="number" id="calc-audio-chars" class="setting-input calc-input" step="10" value="200" title="Average length of a user prompt">
+                        </div>
+                        <div>
+                            <label class="setting-label" style="font-size: 13px;">API Cost / 1k chars ($)</label>
                             <input type="number" id="calc-audio-api" class="setting-input calc-input" step="0.001" value="0.0084">
                         </div>
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">Overhead Markup (x)</label>
+                            <label class="setting-label" style="font-size: 13px;">Profit Multiplier (x)</label>
                             <input type="number" id="calc-audio-markup" class="setting-input calc-input" step="0.1" value="1.5">
                         </div>
-                        <div>
-                            <label class="setting-label" style="font-size: 12px;">Average Chars</label>
-                            <input type="number" id="calc-audio-chars" class="setting-input calc-input" step="10" value="200">
-                        </div>
                     </div>
-                    <div class="stat-sub" style="margin-top:12px;" id="calc-audio-details">User charged 0 credits -> ৳0 revenue. Cost: ৳0.</div>
+                    <div class="stat-sub" style="margin-top:20px; padding: 12px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 14px;" id="calc-audio-details">
+                        Breakdown loading...
+                    </div>
                 </div>
             </div>
         </section>
@@ -1493,16 +1508,27 @@
                 const profitBdt = revenueBdt - apiCostBdt; // ignoring 2.5k hosting as it's monthly
                 
                 const elP = document.getElementById(elProfit);
-                elP.textContent = `৳${profitBdt.toFixed(2)}`;
+                elP.textContent = `+ ৳${profitBdt.toFixed(2)}`;
                 elP.style.color = profitBdt > 0 ? 'var(--success)' : 'var(--error)';
+                if (profitBdt < 0) elP.textContent = `- ৳${Math.abs(profitBdt).toFixed(2)}`;
 
                 const marginPct = revenueBdt > 0 ? ((profitBdt / revenueBdt) * 100).toFixed(1) : 0;
 
                 document.getElementById(elDetails).innerHTML = `
-                    <strong style="color:var(--text-primary)">${userCredits}</strong> credits charged. 
-                    Revenue: <strong>৳${revenueBdt.toFixed(2)}</strong>. 
-                    API Cost: <strong>৳${apiCostBdt.toFixed(2)}</strong>. 
-                    Margin: ${marginPct}%
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex:1;">
+                            <div style="color: var(--text-muted); font-size: 12px;">xAI API Toll</div>
+                            <strong style="color: var(--error); font-size: 15px;">-$${costUsd.toFixed(4)}</strong> <span style="color: var(--text-muted); font-size: 12px;">(৳${apiCostBdt.toFixed(2)})</span>
+                        </div>
+                        <div style="flex:1; text-align: center; border-left: 1px solid var(--border); border-right: 1px solid var(--border);">
+                            <div style="color: var(--text-muted); font-size: 12px;">System Charges</div>
+                            <strong style="color: var(--accent-3); font-size: 15px;">${userCredits} Credits</strong>
+                        </div>
+                        <div style="flex:1; text-align: right;">
+                            <div style="color: var(--text-muted); font-size: 12px;">Your Revenue</div>
+                            <strong style="color: var(--success); font-size: 15px;">৳${revenueBdt.toFixed(2)}</strong> <span style="color: var(--text-muted); font-size: 12px;">(${marginPct}% Margin)</span>
+                        </div>
+                    </div>
                 `;
             }
 
