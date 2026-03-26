@@ -62,11 +62,46 @@ if ($imageData && preg_match('/^data:image\/(\w+);base64,/', $imageData, $matche
         mkdir($dir, 0777, true);
     }
     
-    $filename = 'img_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
-    $filePath = $dir . '/' . $filename;
+    // Save and optimize the image using GD
+    $binaryData = base64_decode($base64String);
+    $imgRes = imagecreatefromstring($binaryData);
     
-    file_put_contents($filePath, base64_decode($base64String));
-    $imageData = UPLOADS_URL . $filename; // Now it's a public URL
+    if ($imgRes) {
+        // Resize if too large (max 2048px)
+        $w = imagesx($imgRes);
+        $h = imagesy($imgRes);
+        $maxDim = 2048;
+        if ($w > $maxDim || $h > $maxDim) {
+            $ratio = $w / $h;
+            if ($ratio > 1) {
+                $newW = $maxDim;
+                $newH = round($maxDim / $ratio);
+            } else {
+                $newH = $maxDim;
+                $newW = round($maxDim * $ratio);
+            }
+            $resized = imagecreatetruecolor($newW, $newH);
+            // Handle transparency for non-JPG sources if needed
+            imagealphablending($resized, false);
+            imagesavealpha($resized, true);
+            imagecopyresampled($resized, $imgRes, 0, 0, 0, 0, $newW, $newH, $w, $h);
+            imagedestroy($imgRes);
+            $imgRes = $resized;
+        }
+
+        // Save as high-quality JPEG (perceptually lossless but much smaller)
+        $filename = 'img_opt_' . time() . '_' . bin2hex(random_bytes(4)) . '.jpg';
+        $filePath = $dir . '/' . $filename;
+        imagejpeg($imgRes, $filePath, 85);
+        imagedestroy($imgRes);
+        $imageData = UPLOADS_URL . $filename;
+    } else {
+        // Fallback for non-standard formats
+        $filename = 'img_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
+        $filePath = $dir . '/' . $filename;
+        file_put_contents($filePath, $binaryData);
+        $imageData = UPLOADS_URL . $filename;
+    }
 }
 
 // Basic Rate Limiting: Max 15 requests per minute per user
