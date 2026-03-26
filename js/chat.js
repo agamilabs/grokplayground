@@ -468,12 +468,7 @@ function updateCalculatedCost() {
     let costUsd = 0;
 
     if (tabType === 'image') {
-        const isEdit = uploadedImageBase64 !== null;
-        if (isEdit) {
-            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.image_edit_cost || 0.08);
-        } else {
-            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
-        }
+        costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
     } else if (tabType === 'video') {
         const resolution = document.getElementById('chatResolution')?.value || '480p';
         const videoBase = parseFloat(settings.video_per_sec_cost || 0.1);

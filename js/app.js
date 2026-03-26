@@ -497,14 +497,8 @@ function updateCalculatedCost(tabType) {
     let costElId = '';
 
     if (tabType === 'image') {
-        const isEdit = uploadedImageBase64 !== null;
         const model = document.getElementById('opt-image-model')?.value || 'grok-imagine-image';
-        
-        if (isEdit) {
-            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.image_edit_cost || 0.08);
-        } else {
-            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.text_to_image_cost || 0.04);
-        }
+        costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.text_to_image_cost || 0.04);
         costElId = 'cost-image';
     } else if (tabType === 'video') {
         const dEl = document.getElementById('opt-video-duration');

@@ -693,11 +693,6 @@
                             <label class="setting-label">Image Pro ($)</label>
                             <input type="number" class="setting-input" id="set-image_pro_cost" step="0.01">
                         </div>
-                        <div class="setting-field">
-                            <label class="setting-label">Image Edit ($)</label>
-                            <input type="number" class="setting-input" id="set-image_edit_cost" step="0.01">
-                        </div>
-                    </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                         <div class="setting-field">
                             <label class="setting-label">Global Markup (x)</label>
@@ -816,17 +811,6 @@
                     <label class="setting-label" style="font-size: 12px;">API Cost ($)</label>
                     <input type="number" id="calc-pro-api" class="setting-input calc-input" step="0.001" value="0.14">
                     <div class="stat-sub" style="margin-top:14px; padding: 10px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 13px;" id="calc-pro-details">—</div>
-                </div>
-
-                <!-- Image Edit -->
-                <div class="stat-card">
-                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 14px;">
-                        <span class="stat-label" style="font-size: 15px; color: var(--text-primary);">✏️ Image Edit</span>
-                        <span id="calc-edit-profit" style="font-weight: 700; font-size: 22px; color: var(--success);">৳0.00</span>
-                    </div>
-                    <label class="setting-label" style="font-size: 12px;">API Cost ($)</label>
-                    <input type="number" id="calc-edit-api" class="setting-input calc-input" step="0.001" value="0.08">
-                    <div class="stat-sub" style="margin-top:14px; padding: 10px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 13px;" id="calc-edit-details">—</div>
                 </div>
 
                 <!-- Video -->
@@ -1483,7 +1467,6 @@
                     document.getElementById('calc-credit').value = s.bdt_per_credit || 2;
                     document.getElementById('calc-t2i-api').value = s.text_to_image_cost || 0.04;
                     document.getElementById('calc-pro-api').value = s.image_pro_cost || 0.14;
-                    document.getElementById('calc-edit-api').value = s.image_edit_cost || 0.08;
                     document.getElementById('calc-video-api').value = s.video_per_sec_cost || 0.1;
                     document.getElementById('calc-video-hd-mult').value = s.video_hd_multiplier || 1.8;
                     document.getElementById('calc-audio-api').value = s.audio_per_1k_chars_cost || 0.0084;
@@ -1525,8 +1508,6 @@
             calcCard(parseFloat(document.getElementById('calc-t2i-api').value) || 0, 'calc-t2i-profit', 'calc-t2i-details');
             // Image Pro
             calcCard(parseFloat(document.getElementById('calc-pro-api').value) || 0, 'calc-pro-profit', 'calc-pro-details');
-            // Image Edit
-            calcCard(parseFloat(document.getElementById('calc-edit-api').value) || 0, 'calc-edit-profit', 'calc-edit-details');
 
             // Video
             const vSec = parseFloat(document.getElementById('calc-video-sec').value) || 5;

@@ -82,7 +82,6 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('bdt_per_usd', '145'),
     ('bdt_per_credit', '2'),
     ('text_to_image_cost', '0.04'),
-    ('image_edit_cost', '0.08'),
     ('image_pro_cost', '0.14'),
     ('video_per_sec_cost', '0.1'),
     ('audio_per_1k_chars_cost', '0.0084'),

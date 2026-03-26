@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'bdt_per_usd',
         'text_to_image_cost',
         'image_pro_cost',
-        'image_edit_cost',
         'video_per_sec_cost',
         'video_hd_multiplier',
         'global_markup',
