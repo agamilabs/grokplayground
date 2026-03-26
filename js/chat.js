@@ -326,7 +326,7 @@ function showHistoryItem(gen) {
  * @param {number} maxDim Maximum width/height
  * @param {number} quality JPEG quality (0 to 1)
  */
-function compressImage(file, maxDim = 1536, quality = 0.8) {
+function compressImage(file, maxDim = 2048, quality = 0.8) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);

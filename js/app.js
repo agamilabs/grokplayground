@@ -147,7 +147,7 @@ window.addEventListener('popstate', () => {
 /**
  * Compresses an image file using Canvas.
  */
-function compressImage(file, maxDim = 1536, quality = 0.8) {
+function compressImage(file, maxDim = 2048, quality = 0.8) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
