@@ -120,7 +120,7 @@ try {
         $user['id'],
         $type,
         $prompt,
-        $imageData ? 'base64_upload' : null,
+        $imageData,
         'processing',
         $creditCost
     ]);
@@ -132,13 +132,11 @@ try {
     if ($type === 'text_to_image') {
         $result = callImageGeneration($prompt, $aspectRatio, $resolution, $model);
     } elseif ($type === 'image_edit') {
-        // Use the original base64 for xAI if on localhost, otherwise the saved URL is fine.
-        // But xAI accepts base64 data URLs directly, so let's use that if possible.
-        $result = callImageEdit($prompt, $input['image'] ?? $imageData, $aspectRatio, $resolution, $model);
+        $result = callImageEdit($prompt, $imageData, $aspectRatio, $resolution, $model);
     } elseif ($type === 'text_to_audio') {
         $result = callAudioGeneration($prompt, $model, $voice, $quality);
     } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
-        $result = callVideoGeneration($type, $prompt, $input['image'] ?? $imageData, $aspectRatio, $resolution, $duration, $model);
+        $result = callVideoGeneration($type, $prompt, $imageData, $aspectRatio, $resolution, $duration, $model);
     } else {
         // Fallback or error for unhandled types, though validation should prevent this
         http_response_code(400);
@@ -229,8 +227,7 @@ function callImageEdit($prompt, $imageData, $aspectRatio = null, $resolution = n
         'model' => $model ?: 'grok-imagine-image',
         'prompt' => $prompt,
         'image' => [
-            'url' => $imageData,
-            'type' => 'image_url'
+            'url' => $imageData
         ],
         'response_format' => 'url',
     ];
