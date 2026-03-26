@@ -498,7 +498,7 @@ function updateCalculatedCost(tabType) {
 
     if (tabType === 'image') {
         const model = document.getElementById('opt-image-model')?.value || 'grok-imagine-image';
-        costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.text_to_image_cost || 0.04);
+        costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.08) : parseFloat(s.text_to_image_cost || 0.04);
         costElId = 'cost-image';
     } else if (tabType === 'video') {
         const dEl = document.getElementById('opt-video-duration');
@@ -511,7 +511,7 @@ function updateCalculatedCost(tabType) {
         costElId = 'cost-video';
     } else if (tabType === 'text_to_audio') {
         const text = document.getElementById('prompt-t2a')?.value || '';
-        costUsd = (text.length / 1000) * parseFloat(s.audio_per_1k_chars_cost || 0.0084);
+        costUsd = (text.length / 1000) * parseFloat(s.audio_per_1k_chars_cost || 0.0045);
         if (text.length > 0 && costUsd < 0.01) costUsd = 0.01;
         costElId = 'cost-t2a';
     }

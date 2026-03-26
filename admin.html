@@ -693,6 +693,7 @@
                             <label class="setting-label">Image Pro ($)</label>
                             <input type="number" class="setting-input" id="set-image_pro_cost" step="0.01">
                         </div>
+                    </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                         <div class="setting-field">
                             <label class="setting-label">Global Markup (x)</label>
@@ -809,7 +810,7 @@
                         <span id="calc-pro-profit" style="font-weight: 700; font-size: 22px; color: var(--success);">৳0.00</span>
                     </div>
                     <label class="setting-label" style="font-size: 12px;">API Cost ($)</label>
-                    <input type="number" id="calc-pro-api" class="setting-input calc-input" step="0.001" value="0.14">
+                    <input type="number" id="calc-pro-api" class="setting-input calc-input" step="0.001" value="0.08">
                     <div class="stat-sub" style="margin-top:14px; padding: 10px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 13px;" id="calc-pro-details">—</div>
                 </div>
 
@@ -861,7 +862,7 @@
                         </div>
                         <div>
                             <label class="setting-label" style="font-size: 12px;">API Cost/1k chars ($)</label>
-                            <input type="number" id="calc-audio-api" class="setting-input calc-input" step="0.001" value="0.0084">
+                            <input type="number" id="calc-audio-api" class="setting-input calc-input" step="0.001" value="0.0045">
                         </div>
                     </div>
                     <div class="stat-sub" style="margin-top:14px; padding: 10px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 13px;" id="calc-audio-details">—</div>
@@ -1466,10 +1467,10 @@
                     document.getElementById('calc-markup').value = s.global_markup || 1.5;
                     document.getElementById('calc-credit').value = s.bdt_per_credit || 2;
                     document.getElementById('calc-t2i-api').value = s.text_to_image_cost || 0.04;
-                    document.getElementById('calc-pro-api').value = s.image_pro_cost || 0.14;
+                    document.getElementById('calc-pro-api').value = s.image_pro_cost || 0.08;
                     document.getElementById('calc-video-480').value = s.video_480p_cost || 0.10;
                     document.getElementById('calc-video-720').value = s.video_720p_cost || 0.18;
-                    document.getElementById('calc-audio-api').value = s.audio_per_1k_chars_cost || 0.0084;
+                    document.getElementById('calc-audio-api').value = s.audio_per_1k_chars_cost || 0.0045;
                 }
                 runCalculations();
             } catch (err) {

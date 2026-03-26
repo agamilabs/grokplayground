@@ -69,7 +69,7 @@ function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-ima
 
     if ($type === 'text_to_image' || $type === 'image_edit') {
         $costUsd = ($model === 'grok-imagine-image-pro')
-            ? (float) ($settings['image_pro_cost'] ?? 0.14)
+            ? (float) ($settings['image_pro_cost'] ?? 0.08)
             : (float) ($settings['text_to_image_cost'] ?? 0.04);
     } elseif ($type === 'image_to_video' || $type === 'text_to_video') {
         $perSec = ($resolution === '720p')
@@ -77,7 +77,7 @@ function getCreditCost($type, $duration = 5, $textLength = 0, $model = 'grok-ima
             : (float) ($settings['video_480p_cost'] ?? 0.10);
         $costUsd = $duration * $perSec;
     } elseif ($type === 'text_to_audio') {
-        $costUsd = ($textLength / 1000) * (float) ($settings['audio_per_1k_chars_cost'] ?? 0.0084);
+        $costUsd = ($textLength / 1000) * (float) ($settings['audio_per_1k_chars_cost'] ?? 0.0045);
         if ($textLength > 0 && $costUsd < 0.01)
             $costUsd = 0.01;
     }
