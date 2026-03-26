@@ -41,7 +41,7 @@ $params = [];
 
 // Type filter
 $type = $_GET['type'] ?? '';
-$validTypes = ['text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio'];
+$validTypes = ['text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio'];
 if ($type && in_array($type, $validTypes)) {
     $conditions[] = "g.type = ?";
     $params[] = $type;
@@ -92,7 +92,7 @@ $total = (int) $stmt->fetch()['total'];
 
 // Generations with user info
 $stmt = $db->prepare(
-    "SELECT g.id, g.type, g.prompt, g.output_url, g.status, g.credits_used, g.created_at,
+    "SELECT g.id, g.type, g.prompt, g.output_url, g.status, g.credits_used, g.created_at, g.input_size, g.output_size,
             u.email, u.display_name, u.id as uid
      FROM generations g
      JOIN users u ON g.user_id = u.id

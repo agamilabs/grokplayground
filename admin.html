@@ -455,6 +455,12 @@
                     <div class="stat-sub">Held in user balances</div>
                     <svg class="stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
                 </div>
+                <div class="stat-card">
+                    <span class="stat-label">Total Storage</span>
+                    <div class="stat-value" id="stat-storage">0 Bytes</div>
+                    <div class="stat-sub">Inputs + AI Assets</div>
+                    <svg class="stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                </div>
             </div>
 
             <div class="card">
@@ -523,6 +529,7 @@
                 <select class="option-select" id="genTypeFilter" onchange="loadAdminHistory(1)">
                     <option value="">All Types</option>
                     <option value="text_to_image">Image</option>
+                    <option value="image_edit">Edit</option>
                     <option value="image_to_video">I2V</option>
                     <option value="text_to_video">T2V</option>
                     <option value="text_to_audio">Audio</option>
@@ -545,6 +552,7 @@
                                 <th>Type</th>
                                 <th>Prompt</th>
                                 <th>Status</th>
+                                <th>Size</th>
                                 <th>Cost</th>
                                 <th>Date</th>
                             </tr>
@@ -880,6 +888,7 @@
                 document.getElementById('stat-gens-sub').textContent = `${s.generations.success_rate}% success rate`;
                 
                 document.getElementById('stat-credits').textContent = s.credits.in_circulation.toLocaleString();
+                document.getElementById('stat-storage').textContent = formatBytes(s.storage.total);
 
                 // Breakdown list
                 const list = document.getElementById('gen-breakdown-list');
@@ -993,6 +1002,7 @@
                         <td>
                             <span class="status-badge status-${gen.status}">${gen.status}</span>
                         </td>
+                        <td style="color: var(--accent-1); font-weight: 500;">${formatBytes((parseInt(gen.input_size)||0) + (parseInt(gen.output_size)||0))}</td>
                         <td>${gen.credits_used} cr</td>
                         <td style="color: var(--text-muted); font-size: 12px;">${new Date(gen.created_at).toLocaleString()}</td>
                     </tr>

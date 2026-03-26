@@ -50,6 +50,10 @@ try {
                         WHERE status = 'completed' AND created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)");
     $revenue30d = (float) ($stmt->fetch()['total'] ?? 0);
 
+    // 7. Total Storage Used
+    $stmt = $db->query("SELECT SUM(input_size + output_size) as total FROM generations");
+    $totalStorage = (int) ($stmt->fetch()['total'] ?? 0);
+
     echo json_encode([
         'success' => true,
         'stats' => [
@@ -69,6 +73,9 @@ try {
             ],
             'credits' => [
                 'in_circulation' => $totalCredits
+            ],
+            'storage' => [
+                'total' => $totalStorage
             ]
         ]
     ]);
