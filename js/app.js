@@ -256,7 +256,7 @@ async function handleGenerate(type) {
     }
 
     // Show loading
-    const btnId = `genBtn-${type === 'text_to_image' ? 't2i' : type === 'image_to_video' ? 'i2v' : type === 'text_to_video' ? 't2v' : 't2a'}`;
+    const btnId = `genBtn-${type === 'text_to_image' ? 't2i' : type === 'image_edit' ? 'edit' : type === 'image_to_video' ? 'i2v' : type === 'text_to_video' ? 't2v' : 't2a'}`;
     const btn = document.getElementById(btnId);
     btn.disabled = true;
     const oldHtml = btn.innerHTML;
@@ -375,7 +375,7 @@ function showOutput(url, type) {
     outputArea.style.display = 'block';
     
     let html = '';
-    if (type === 'text_to_image') {
+    if (type === 'text_to_image' || type === 'image_edit') {
         html = `<div class="output-wrapper">
                     <img src="${url}" alt="Generated image" id="outputMedia" class="reveal-anim" />
                 </div>`;
@@ -448,7 +448,7 @@ async function loadCredits() {
         const res = await apiCall('/api/credits.php', 'GET');
         if (res.credits !== undefined) {
             document.getElementById('creditsCount').textContent = res.credits;
-            ['t2i', 'i2v', 't2v', 't2a'].forEach(id => {
+            ['t2i', 'edit', 'i2v', 't2v', 't2a'].forEach(id => {
                 const el = document.getElementById(`balance-${id}`);
                 if (el) {
                     el.style.display = 'block';
@@ -477,16 +477,21 @@ async function fetchAdminSettings() {
 }
 
 function updateCalculatedCost(type) {
-    const markup = parseFloat(settings.global_markup || 1.5);
+    const s = adminSettings || {};
+    const markup = parseFloat(s.global_markup || 1.5);
+    const bdtUsd = parseFloat(s.bdt_per_usd || 145);
+    const bdtCr = parseFloat(s.bdt_per_credit || 2);
+    let costUsd = 0;
+    let costElId = '';
 
     if (type === 'text_to_image' || type === 'image_edit') {
         const modelElId = type === 'text_to_image' ? 'opt-t2i-model' : 'opt-edit-model';
         const model = document.getElementById(modelElId)?.value || 'grok-imagine-image';
         
         if (type === 'image_edit') {
-            costUsd = parseFloat(settings.image_edit_cost || 0.08); 
+            costUsd = parseFloat(s.image_edit_cost || 0.08); 
         } else {
-            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(settings.image_pro_cost || 0.14) : parseFloat(settings.text_to_image_cost || 0.04);
+            costUsd = model === 'grok-imagine-image-pro' ? parseFloat(s.image_pro_cost || 0.14) : parseFloat(s.text_to_image_cost || 0.04);
         }
         costElId = type === 'text_to_image' ? 'cost-t2i' : 'cost-edit';
     } else if (type === 'image_to_video' || type === 'text_to_video') {
@@ -495,19 +500,19 @@ function updateCalculatedCost(type) {
         const resEl = document.getElementById(type === 'image_to_video' ? 'opt-i2v-resolution' : 'opt-t2v-resolution');
         const resolution = resEl ? resEl.value : '480p';
         
-        const videoBase = parseFloat(settings.video_per_sec_cost || 0.1);
-        const resMultiplier = (resolution === '720p') ? parseFloat(settings.video_hd_multiplier || 1.8) : 1.0;
+        const videoBase = parseFloat(s.video_per_sec_cost || 0.1);
+        const resMultiplier = (resolution === '720p') ? parseFloat(s.video_hd_multiplier || 1.8) : 1.0;
         
         costUsd = duration * videoBase * resMultiplier;
         costElId = type === 'image_to_video' ? 'cost-i2v' : 'cost-t2v';
     } else if (type === 'text_to_audio') {
         const text = document.getElementById('prompt-t2a')?.value || '';
-        costUsd = (text.length / 1000) * parseFloat(settings.audio_per_1k_chars_cost || 0.0084);
+        costUsd = (text.length / 1000) * parseFloat(s.audio_per_1k_chars_cost || 0.0084);
         if (text.length > 0 && costUsd < 0.01) costUsd = 0.01;
         costElId = 'cost-t2a';
     }
 
-    const credits = Math.ceil((costUsd * markup * bdtPerUsd) / bdtPerCredit);
+    const credits = Math.ceil((costUsd * markup * bdtUsd) / bdtCr);
     const el = document.getElementById(costElId);
     if (el) el.innerHTML = `Cost: <strong>${credits}</strong> credits`;
 }

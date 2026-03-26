@@ -216,8 +216,11 @@ async function sendChat() {
             updateMessage(aiMsgId, '', res.output_url, 'completed');
             loadCredits();
         } else if (res.request_id) {
-            // Video generation - start polling
+            // Video generation - start polling with xAI request_id
             startPolling(res.request_id, aiMsgId);
+        } else if (res.generation_id) {
+            // Fallback: poll by generation_id
+            startPolling(null, aiMsgId, res.generation_id);
         } else {
             throw new Error('Unexpected API response');
         }

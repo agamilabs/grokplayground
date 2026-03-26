@@ -95,7 +95,9 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('bkash_app_secret', ''),
     ('bkash_username', ''),
     ('bkash_password', ''),
-    ('bkash_base_url', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta')
+    ('bkash_base_url', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta'),
+    ('global_markup', '1.5'),
+    ('video_hd_multiplier', '1.8')
 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value);
 
 -- Showcase categories table

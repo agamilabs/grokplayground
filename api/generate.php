@@ -98,10 +98,13 @@ if ($imageData && preg_match('/^data:image\/(\w+);base64,/', $imageData, $matche
 
         // Generate Thumbnail (256px)
         $thumbDim = 256;
-        $thumbW = $w;
-        $thumbH = $h;
-        if ($w > $thumbDim || $h > $thumbDim) {
-            $ratio = $w / $h;
+        $currW = imagesx($imgRes);
+        $currH = imagesy($imgRes);
+        $thumbW = $currW;
+        $thumbH = $currH;
+        
+        if ($currW > $thumbDim || $currH > $thumbDim) {
+            $ratio = $currW / $currH;
             if ($ratio > 1) {
                 $thumbW = $thumbDim;
                 $thumbH = round($thumbDim / $ratio);
@@ -111,7 +114,7 @@ if ($imageData && preg_match('/^data:image\/(\w+);base64,/', $imageData, $matche
             }
         }
         $thumbRes = imagecreatetruecolor($thumbW, $thumbH);
-        imagecopyresampled($thumbRes, $imgRes, 0, 0, 0, 0, $thumbW, $thumbH, $w, $h);
+        imagecopyresampled($thumbRes, $imgRes, 0, 0, 0, 0, $thumbW, $thumbH, $currW, $currH);
         $thumbFilename = 'thumb_' . $filename;
         $thumbPath = $dir . '/' . $thumbFilename;
         imagejpeg($thumbRes, $thumbPath, 70); // Lower quality for thumbnails is fine
