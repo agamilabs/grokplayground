@@ -62,7 +62,7 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
     
-    let text = content ? `<p>${escapeHtml(content)}</p>` : '';
+    let text = (content && status !== 'failed') ? `<p>${escapeHtml(content)}</p>` : '';
     let mediaHtml = '';
 
     if (status === 'processing') {
@@ -227,7 +227,7 @@ function updateMessage(id, content, media, status) {
     if (!msgDiv) return;
     
     const contentDiv = msgDiv.querySelector('.message-content');
-    let text = content ? `<p>${escapeHtml(content)}</p>` : '';
+    let text = (content && status !== 'failed') ? `<p>${escapeHtml(content)}</p>` : '';
     let mediaHtml = '';
 
     if (status === 'processing') {
