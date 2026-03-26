@@ -93,14 +93,40 @@ if ($imageData && preg_match('/^data:image\/(\w+);base64,/', $imageData, $matche
         $filename = 'img_opt_' . time() . '_' . bin2hex(random_bytes(4)) . '.jpg';
         $filePath = $dir . '/' . $filename;
         imagejpeg($imgRes, $filePath, 85);
-        imagedestroy($imgRes);
+        $inputSize = filesize($filePath);
         $imageData = UPLOADS_URL . $filename;
+
+        // Generate Thumbnail (256px)
+        $thumbDim = 256;
+        $thumbW = $w;
+        $thumbH = $h;
+        if ($w > $thumbDim || $h > $thumbDim) {
+            $ratio = $w / $h;
+            if ($ratio > 1) {
+                $thumbW = $thumbDim;
+                $thumbH = round($thumbDim / $ratio);
+            } else {
+                $thumbH = $thumbDim;
+                $thumbW = round($thumbDim * $ratio);
+            }
+        }
+        $thumbRes = imagecreatetruecolor($thumbW, $thumbH);
+        imagecopyresampled($thumbRes, $imgRes, 0, 0, 0, 0, $thumbW, $thumbH, $w, $h);
+        $thumbFilename = 'thumb_' . $filename;
+        $thumbPath = $dir . '/' . $thumbFilename;
+        imagejpeg($thumbRes, $thumbPath, 70); // Lower quality for thumbnails is fine
+        $inputThumbnail = UPLOADS_URL . $thumbFilename;
+        
+        imagedestroy($imgRes);
+        imagedestroy($thumbRes);
     } else {
         // Fallback for non-standard formats
         $filename = 'img_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
         $filePath = $dir . '/' . $filename;
         file_put_contents($filePath, $binaryData);
         $imageData = UPLOADS_URL . $filename;
+        $inputSize = strlen($binaryData);
+        $inputThumbnail = null;
     }
 }
 
@@ -148,14 +174,16 @@ try {
 
     // Store generation record with 'processing' status
     $stmt = $db->prepare(
-        "INSERT INTO generations (user_id, type, prompt, input_url, status, credits_used) 
-         VALUES (?, ?, ?, ?, ?, ?)"
+        "INSERT INTO generations (user_id, type, prompt, input_url, input_size, input_thumbnail, status, credits_used) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
     );
     $stmt->execute([
         $user['id'],
         $type,
         $prompt,
         $imageData,
+        $inputSize ?? 0,
+        $inputThumbnail ?? null,
         'processing',
         $creditCost
     ]);
@@ -196,11 +224,20 @@ try {
     $outputUrl = $result['url'] ?? null;
     $requestId = $result['request_id'] ?? null;
     $finalStatus = $outputUrl ? 'completed' : 'processing';
+    $outputSize = 0;
+
+    if ($finalStatus === 'completed' && $outputUrl) {
+        $localFile = downloadToLocal($outputUrl);
+        if ($localFile) {
+            $outputUrl = $localFile['url'];
+            $outputSize = $localFile['size'];
+        }
+    }
 
     $stmt = $db->prepare(
-        "UPDATE generations SET status = ?, output_url = ?, xai_request_id = ? WHERE id = ?"
+        "UPDATE generations SET status = ?, output_url = ?, output_size = ?, xai_request_id = ? WHERE id = ?"
     );
-    $stmt->execute([$finalStatus, $outputUrl, $requestId, $generationId]);
+    $stmt->execute([$finalStatus, $outputUrl, $outputSize, $requestId, $generationId]);
 
     // Return response
     $response = [

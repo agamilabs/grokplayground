@@ -97,13 +97,18 @@ if ($status === 'done' || $status === 'completed') {
     $outputUrl = $decoded['video']['url'] ?? $decoded['url'] ?? $decoded['video_url'] ?? null;
 
     if ($outputUrl) {
-        $stmt = $db->prepare("UPDATE generations SET status = 'completed', output_url = ? WHERE id = ?");
-        $stmt->execute([$outputUrl, $generationId]);
+        $localFile = downloadToLocal($outputUrl);
+        $finalUrl = $localFile ? $localFile['url'] : $outputUrl;
+        $outputSize = $localFile ? $localFile['size'] : 0;
+
+        $stmt = $db->prepare("UPDATE generations SET status = 'completed', output_url = ?, output_size = ? WHERE id = ?");
+        $stmt->execute([$finalUrl, $outputSize, $generationId]);
 
         echo json_encode([
             'id' => $generationId,
             'status' => 'completed',
-            'output_url' => $outputUrl
+            'output_url' => $finalUrl,
+            'output_size' => $outputSize
         ]);
         exit;
     }

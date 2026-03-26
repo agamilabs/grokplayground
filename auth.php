@@ -169,3 +169,53 @@ function xaiRequest($method, $endpoint, $payload = null)
 
     return $response;
 }
+
+/**
+ * Download a remote file and save it to the uploads directory.
+ * Returns ['url' => ..., 'size' => ...] or null on failure.
+ */
+function downloadToLocal($url)
+{
+    if (empty($url) || strpos($url, 'http') === false) return null;
+
+    $dir = __DIR__ . '/uploads';
+    if (!is_dir($dir)) {
+        mkdir($dir, 0777, true);
+    }
+
+    // Determine extension
+    $path = parse_url($url, PHP_URL_PATH);
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
+    
+    if (!$ext) {
+        if (strpos($url, 'imgen') !== false) $ext = 'jpg';
+        else if (strpos($url, 'video') !== false) $ext = 'mp4';
+        else if (strpos($url, 'tts') !== false) $ext = 'mp3';
+        else $ext = 'bin';
+    }
+
+    $filename = 'out_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+    $filePath = $dir . '/' . $filename;
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_TIMEOUT => 240,
+    ]);
+
+    $data = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpCode === 200 && $data) {
+        file_put_contents($filePath, $data);
+        return [
+            'url' => UPLOADS_URL . $filename,
+            'size' => filesize($filePath)
+        ];
+    }
+
+    return null;
+}
