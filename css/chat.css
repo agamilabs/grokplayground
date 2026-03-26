@@ -623,11 +623,11 @@
 }
 
 .shimmer {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.08);
     background-image: linear-gradient(
         90deg,
         rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.18) 50%,
         rgba(255, 255, 255, 0) 100%
     );
     background-repeat: no-repeat;
@@ -662,6 +662,7 @@
     background: transparent;
     border: none;
     padding: 0;
+    min-height: 200px;
 }
 
 /* ─── Message Actions ────────────────────────────────── */
