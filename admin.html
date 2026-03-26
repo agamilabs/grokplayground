@@ -696,17 +696,17 @@
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                         <div class="setting-field">
                             <label class="setting-label">Global Markup (x)</label>
-                            <input type="number" class="setting-input" id="set-global_markup" step="0.1" title="Multiplier to cover hosting (2.5k) and marketing">
-                        </div>
-                        <div class="setting-field">
-                            <label class="setting-label">Video HD Multiplier (x)</label>
-                            <input type="number" class="setting-input" id="set-video_hd_multiplier" step="0.1" title="Cost multiplier for 720p vs 480p">
+                            <input type="number" class="setting-input" id="set-global_markup" step="0.1" title="Multiplier to cover hosting and marketing">
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
                         <div class="setting-field">
-                            <label class="setting-label">Video ($/sec)</label>
-                            <input type="number" class="setting-input" id="set-video_per_sec_cost" step="0.01">
+                            <label class="setting-label">Video 480p ($/sec)</label>
+                            <input type="number" class="setting-input" id="set-video_480p_cost" step="0.01">
+                        </div>
+                        <div class="setting-field">
+                            <label class="setting-label">Video 720p ($/sec)</label>
+                            <input type="number" class="setting-input" id="set-video_720p_cost" step="0.01">
                         </div>
                         <div class="setting-field">
                             <label class="setting-label">Audio ($/1k char)</label>
@@ -837,12 +837,12 @@
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">API Cost/sec ($)</label>
-                            <input type="number" id="calc-video-api" class="setting-input calc-input" step="0.01" value="0.1">
+                            <label class="setting-label" style="font-size: 12px;">480p Cost/sec ($)</label>
+                            <input type="number" id="calc-video-480" class="setting-input calc-input" step="0.01" value="0.10">
                         </div>
                         <div>
-                            <label class="setting-label" style="font-size: 12px;">HD Multiplier (x)</label>
-                            <input type="number" id="calc-video-hd-mult" class="setting-input calc-input" step="0.1" value="1.8">
+                            <label class="setting-label" style="font-size: 12px;">720p Cost/sec ($)</label>
+                            <input type="number" id="calc-video-720" class="setting-input calc-input" step="0.01" value="0.18">
                         </div>
                     </div>
                     <div class="stat-sub" style="margin-top:14px; padding: 10px; background: var(--bg-card-hover); border-radius: var(--radius-md); font-size: 13px;" id="calc-video-details">—</div>
@@ -1467,8 +1467,8 @@
                     document.getElementById('calc-credit').value = s.bdt_per_credit || 2;
                     document.getElementById('calc-t2i-api').value = s.text_to_image_cost || 0.04;
                     document.getElementById('calc-pro-api').value = s.image_pro_cost || 0.14;
-                    document.getElementById('calc-video-api').value = s.video_per_sec_cost || 0.1;
-                    document.getElementById('calc-video-hd-mult').value = s.video_hd_multiplier || 1.8;
+                    document.getElementById('calc-video-480').value = s.video_480p_cost || 0.10;
+                    document.getElementById('calc-video-720').value = s.video_720p_cost || 0.18;
                     document.getElementById('calc-audio-api').value = s.audio_per_1k_chars_cost || 0.0084;
                 }
                 runCalculations();
@@ -1512,10 +1512,10 @@
             // Video
             const vSec = parseFloat(document.getElementById('calc-video-sec').value) || 5;
             const vRes = document.getElementById('calc-video-res').value;
-            const vBase = parseFloat(document.getElementById('calc-video-api').value) || 0;
-            const vHdMult = parseFloat(document.getElementById('calc-video-hd-mult').value) || 1;
-            const vCostUsd = vSec * vBase * (vRes === '720p' ? vHdMult : 1);
-            calcCard(vCostUsd, 'calc-video-profit', 'calc-video-details');
+            const perSec = (vRes === '720p')
+                ? parseFloat(document.getElementById('calc-video-720').value) || 0
+                : parseFloat(document.getElementById('calc-video-480').value) || 0;
+            calcCard(vSec * perSec, 'calc-video-profit', 'calc-video-details');
 
             // Audio
             const aChars = parseFloat(document.getElementById('calc-audio-chars').value) || 200;

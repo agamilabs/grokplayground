@@ -83,7 +83,8 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('bdt_per_credit', '2'),
     ('text_to_image_cost', '0.04'),
     ('image_pro_cost', '0.14'),
-    ('video_per_sec_cost', '0.1'),
+    ('video_480p_cost', '0.10'),
+    ('video_720p_cost', '0.18'),
     ('audio_per_1k_chars_cost', '0.0084'),
     ('site_name', 'Grok Playground'),
     ('xai_api_key', ''),
@@ -95,8 +96,7 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('bkash_username', ''),
     ('bkash_password', ''),
     ('bkash_base_url', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta'),
-    ('global_markup', '1.5'),
-    ('video_hd_multiplier', '1.8')
+    ('global_markup', '1.5')
 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value);
 
 -- Showcase categories table

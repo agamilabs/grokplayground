@@ -13,9 +13,9 @@ $publicKeys = [
     'bdt_per_usd',
     'text_to_image_cost',
     'image_pro_cost',
-    'video_per_sec_cost',
+    'video_480p_cost',
+    'video_720p_cost',
     'audio_per_1k_chars_cost',
-    'video_hd_multiplier',
     'global_markup',
     'bdt_per_credit',
     'site_name'
