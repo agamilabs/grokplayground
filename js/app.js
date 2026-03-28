@@ -25,6 +25,7 @@ auth.onAuthStateChanged(async (user) => {
         document.getElementById('userPhoto').src = user.photoURL || '';
         document.getElementById('creditsDisplay').style.display = 'flex';
         document.getElementById('buyCreditsBtn').style.display = 'inline-flex';
+        document.getElementById('earnCreditsBtn').style.display = 'inline-flex';
         document.getElementById('historySection').style.display = 'block';
 
         // Refresh token periodically
@@ -43,6 +44,7 @@ auth.onAuthStateChanged(async (user) => {
         document.getElementById('userAvatar').style.display = 'none';
         document.getElementById('creditsDisplay').style.display = 'none';
         document.getElementById('buyCreditsBtn').style.display = 'none';
+        document.getElementById('earnCreditsBtn').style.display = 'none';
         document.getElementById('historySection').style.display = 'none';
     }
 });
@@ -598,6 +600,60 @@ async function giftCredits() {
     } catch (err) { showToast(err.message, 'error'); }
 }
 
+// ─── Referral System ────────────────────────────────────
+function openReferralModal() {
+    if (!currentUser) { openModal('authModal'); return; }
+    
+    const refLink = `${window.location.origin}${window.location.pathname}?ref=${currentUser.uid}`;
+    document.getElementById('refLinkInput').value = refLink;
+    
+    // Referral rewards display
+    const referrerReward = adminSettings?.referral_reward_referrer || 10;
+    const inviteeReward = adminSettings?.referral_reward_invitee || 5;
+    document.getElementById('refReferrerReward').textContent = referrerReward;
+    document.getElementById('refInviteeReward').textContent = inviteeReward;
+
+    loadReferralStats();
+    openModal('referralModal');
+}
+
+async function loadReferralStats() {
+    try {
+        const res = await apiCall('/api/referrals.php', 'GET');
+        if (res.count !== undefined) {
+            document.getElementById('refCount').textContent = res.count;
+            document.getElementById('refEarned').textContent = res.earned;
+        }
+    } catch (err) { }
+}
+
+function copyReferralLink() {
+    const input = document.getElementById('refLinkInput');
+    input.select();
+    navigator.clipboard.writeText(input.value);
+    showToast('Referral link copied!', 'success');
+}
+
+function shareReferral(platform) {
+    const link = document.getElementById('refLinkInput').value;
+    const text = `Join Grok Playground and get bonus AI credits! 🚀\n\n${link}`;
+    let url = '';
+
+    switch(platform) {
+        case 'twitter':
+            url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            break;
+        case 'whatsapp':
+            url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            break;
+        case 'facebook':
+            url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
+            break;
+    }
+
+    if (url) window.open(url, '_blank');
+}
+
 // ─── History ────────────────────────────────────────────
 let historyPage = 1;
 async function loadHistory(page) {
@@ -665,6 +721,13 @@ async function loadHistory(page) {
 async function apiCall(endpoint, method = 'GET', body = null) {
     const headers = { 'Content-Type': 'application/json' };
     if (idToken) headers['Authorization'] = `Bearer ${idToken}`;
+    
+    // Add referral code if present in localStorage
+    const refCode = localStorage.getItem('grok_ref_code');
+    if (refCode) {
+        headers['X-Referral-Code'] = refCode;
+    }
+
     const res = await fetch(endpoint, { method, headers, body: body ? JSON.stringify(body) : null });
     const data = await res.json();
     if (!res.ok) {
@@ -708,5 +771,16 @@ document.addEventListener('keydown', (e) => {
 // ─── Initialization ───────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     fetchAdminSettings();
+
+    // Referral Tracking: Check for ?ref= in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get('ref');
+    if (ref) {
+        localStorage.setItem('grok_ref_code', ref);
+        // Clean URL without reloading
+        const newUrl = window.location.origin + window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+        showToast('Referral code applied!', 'success');
+    }
 });
 

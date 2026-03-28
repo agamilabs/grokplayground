@@ -46,7 +46,7 @@ function verifyFirebaseToken($idToken)
  * Get or create user from Firebase token data.
  * Returns the user row from DB.
  */
-function getOrCreateUser($tokenData)
+function getOrCreateUser($tokenData, $referredByUid = null)
 {
     $db = getDB();
 
@@ -57,17 +57,50 @@ function getOrCreateUser($tokenData)
 
     if (!$user) {
         $signupCredits = (int)get_setting('signup_gift_credits', 10);
+        $referredById = null;
+        $inviteeBonus = 0;
+
+        // Process referral if provided
+        if ($referredByUid && $referredByUid !== $tokenData['uid']) {
+            $refStmt = $db->prepare("SELECT id, credits FROM users WHERE firebase_uid = ?");
+            $refStmt->execute([$referredByUid]);
+            $referrer = $refStmt->fetch();
+
+            if ($referrer) {
+                $referredById = $referrer['id'];
+                $referrerReward = (int)get_setting('referral_reward_referrer', 10);
+                $inviteeBonus = (int)get_setting('referral_reward_invitee', 5);
+
+                // Add credits to Referrer
+                $db->prepare("UPDATE users SET credits = credits + ? WHERE id = ?")
+                   ->execute([$referrerReward, $referredById]);
+
+                // Log Referrer Transaction
+                $db->prepare("INSERT INTO transactions (user_id, type, credits, description) VALUES (?, 'referral_reward', ?, ?)")
+                   ->execute([$referredById, $referrerReward, "Referral reward for inviting " . $tokenData['email']]);
+            }
+        }
+
+        $totalCredits = $signupCredits + $inviteeBonus;
+
         $stmt = $db->prepare(
-            "INSERT INTO users (firebase_uid, email, display_name, photo_url, credits) VALUES (?, ?, ?, ?, ?)"
+            "INSERT INTO users (firebase_uid, email, display_name, photo_url, credits, referred_by) VALUES (?, ?, ?, ?, ?, ?)"
         );
         $stmt->execute([
             $tokenData['uid'],
             $tokenData['email'],
             $tokenData['name'],
             $tokenData['picture'],
-            $signupCredits
+            $totalCredits,
+            $referredById
         ]);
         $userId = $db->lastInsertId();
+
+        // Log Invitee Transaction
+        if ($inviteeBonus > 0) {
+            $db->prepare("INSERT INTO transactions (user_id, type, credits, description) VALUES (?, 'referral_reward', ?, ?)")
+               ->execute([$userId, $inviteeBonus, "Bonus credits for signing up via referral"]);
+        }
 
         $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
         $stmt->execute([$userId]);
@@ -84,9 +117,12 @@ function getOrCreateUser($tokenData)
 function getAuthenticatedUser()
 {
     $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+    $refCode = $_SERVER['HTTP_X_REFERRAL_CODE'] ?? null;
+
     if (empty($authHeader) && function_exists('getallheaders')) {
         $headers = getallheaders();
         $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+        $refCode = $headers['X-Referral-Code'] ?? $headers['x-referral-code'] ?? $refCode;
     }
 
     if (!preg_match('/Bearer\s+(.+)$/i', $authHeader, $matches)) {
@@ -103,7 +139,7 @@ function getAuthenticatedUser()
         return null;
     }
 
-    return getOrCreateUser($tokenData);
+    return getOrCreateUser($tokenData, $refCode);
 }
 
 /**
