@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 CREATE TABLE IF NOT EXISTS generations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    type ENUM('text', 'video', 'text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio') NOT NULL,
+    type ENUM('text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio') NOT NULL,
     prompt TEXT,
     input_url VARCHAR(1024) DEFAULT NULL,
     input_size INT DEFAULT 0,
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS showcase_items (
     title VARCHAR(255) NOT NULL,
     prompt TEXT NOT NULL,
     description TEXT,
-    type ENUM('text', 'video', 'text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio') NOT NULL,
+    type ENUM('text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio') NOT NULL,
     model_used VARCHAR(100),
     settings_json TEXT,
     output_url TEXT,
