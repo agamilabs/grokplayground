@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Users
     $stmt = $db->prepare("
-        SELECT u.id, u.email, u.display_name, u.photo_url, u.credits, u.is_admin, u.created_at,
+        SELECT u.id, u.email, u.display_name, u.photo_url, u.credits, u.is_admin, u.created_at, u.referral_code,
                COALESCE((SELECT SUM(credits) FROM transactions WHERE user_id = u.id AND type = 'purchase'), 0) as total_purchased,
                COALESCE((SELECT ABS(SUM(credits)) FROM transactions WHERE user_id = u.id AND type = 'spend'), 0) as total_spent,
                COALESCE((SELECT SUM(input_size + output_size) FROM generations WHERE user_id = u.id), 0) as used_storage
@@ -108,6 +108,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $db->rollBack();
             http_response_code(500);
             echo json_encode(['error' => $e->getMessage()]);
+        }
+        exit;
+    }
+
+    if ($action === 'update_referral_code') {
+        $targetUserId = (int) ($input['user_id'] ?? 0);
+        $newCode = trim($input['referral_code'] ?? '');
+
+        if (!$targetUserId || !$newCode) {
+            http_response_code(400);
+            echo json_encode(['error' => 'User ID and Referral Code are required']);
+            exit;
+        }
+
+        // Basic validation: Alphanumeric and underscores
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $newCode)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Referral code must be alphanumeric (underscores/dashes allowed)']);
+            exit;
+        }
+
+        try {
+            $stmt = $db->prepare("UPDATE users SET referral_code = ? WHERE id = ?");
+            $stmt->execute([$newCode, $targetUserId]);
+            echo json_encode(['success' => true]);
+        } catch (PDOException $e) {
+            if ($e->getCode() == '23000') {
+                http_response_code(400);
+                echo json_encode(['error' => 'This referral code is already in use']);
+            } else {
+                http_response_code(500);
+                echo json_encode(['error' => $e->getMessage()]);
+            }
         }
         exit;
     }

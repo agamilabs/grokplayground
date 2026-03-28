@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
     display_name VARCHAR(255) DEFAULT '',
     photo_url VARCHAR(512) DEFAULT '',
     credits INT NOT NULL DEFAULT 0,
+    referral_code VARCHAR(50) UNIQUE DEFAULT NULL,
     referred_by INT DEFAULT NULL,
     is_admin TINYINT(1) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

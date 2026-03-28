@@ -601,11 +601,27 @@ async function giftCredits() {
 }
 
 // ─── Referral System ────────────────────────────────────
-function openReferralModal() {
-    if (!currentUser) { openModal('authModal'); return; }
+async function openReferralModal() {
+    openModal('referralModal');
     
-    const refLink = `${window.location.origin}${window.location.pathname}?ref=${currentUser.uid}`;
-    document.getElementById('refLinkInput').value = refLink;
+    // Load fresh stats and code
+    try {
+        const res = await apiCall('api/referrals.php');
+        if (res.success) {
+            document.getElementById('refCount').textContent = res.total_referrals || 0;
+            document.getElementById('refEarned').textContent = res.total_earned || 0;
+            
+            // Use custom referral code if set, otherwise fallback to UID
+            const code = res.referral_code || currentUser.uid;
+            const refLink = `${window.location.origin}${window.location.pathname}?ref=${code}`;
+            document.getElementById('referralLinkInput').value = refLink;
+        }
+    } catch (err) {
+        console.error('Failed to load referral stats:', err);
+        // Fallback to UID if API fails
+        const refLink = `${window.location.origin}${window.location.pathname}?ref=${currentUser.uid}`;
+        document.getElementById('referralLinkInput').value = refLink;
+    }
     
     // Referral rewards display
     const referrerReward = adminSettings?.referral_reward_referrer || 10;

@@ -62,8 +62,9 @@ function getOrCreateUser($tokenData, $referredByUid = null)
 
         // Process referral if provided
         if ($referredByUid && $referredByUid !== $tokenData['uid']) {
-            $refStmt = $db->prepare("SELECT id, credits FROM users WHERE firebase_uid = ?");
-            $refStmt->execute([$referredByUid]);
+            // Check both firebase_uid (fallback) and referral_code
+            $refStmt = $db->prepare("SELECT id, credits FROM users WHERE firebase_uid = ? OR referral_code = ?");
+            $refStmt->execute([$referredByUid, $referredByUid]);
             $referrer = $refStmt->fetch();
 
             if ($referrer) {
@@ -82,9 +83,19 @@ function getOrCreateUser($tokenData, $referredByUid = null)
         }
 
         $totalCredits = $signupCredits + $inviteeBonus;
+        
+        // Generate random unique referral code
+        $chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $referralCode = '';
+        while (true) {
+            $referralCode = strtoupper(substr(str_shuffle($chars), 0, 8));
+            $check = $db->prepare("SELECT id FROM users WHERE referral_code = ?");
+            $check->execute([$referralCode]);
+            if (!$check->fetch()) break;
+        }
 
         $stmt = $db->prepare(
-            "INSERT INTO users (firebase_uid, email, display_name, photo_url, credits, referred_by) VALUES (?, ?, ?, ?, ?, ?)"
+            "INSERT INTO users (firebase_uid, email, display_name, photo_url, credits, referred_by, referral_code) VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
         $stmt->execute([
             $tokenData['uid'],
@@ -92,7 +103,8 @@ function getOrCreateUser($tokenData, $referredByUid = null)
             $tokenData['name'],
             $tokenData['picture'],
             $totalCredits,
-            $referredById
+            $referredById,
+            $referralCode
         ]);
         $userId = $db->lastInsertId();
 
