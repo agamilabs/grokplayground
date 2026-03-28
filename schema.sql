@@ -12,18 +12,21 @@ CREATE TABLE IF NOT EXISTS users (
     display_name VARCHAR(255) DEFAULT '',
     photo_url VARCHAR(512) DEFAULT '',
     credits INT NOT NULL DEFAULT 0,
+    referred_by INT DEFAULT NULL,
     is_admin TINYINT(1) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_firebase_uid (firebase_uid),
-    INDEX idx_email (email)
+    INDEX idx_email (email),
+    INDEX idx_referred_by (referred_by),
+    FOREIGN KEY (referred_by) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 -- Transactions table
 CREATE TABLE IF NOT EXISTS transactions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    type ENUM('purchase', 'spend', 'gift_sent', 'gift_received') NOT NULL,
+    type ENUM('purchase', 'spend', 'gift_sent', 'gift_received', 'referral_reward') NOT NULL,
     amount DECIMAL(10,2) DEFAULT 0.00,
     credits INT NOT NULL,
     description VARCHAR(500) DEFAULT '',
@@ -103,7 +106,9 @@ INSERT INTO admin_settings (setting_key, setting_value) VALUES
     ('firebase_storage_bucket', 'coursepool-488520.firebasestorage.app'),
     ('firebase_messaging_sender_id', '1084097792660'),
     ('firebase_app_id', '1:1084097792660:web:da5979d939420326598281'),
-    ('firebase_measurement_id', 'G-1FM4Z5WDPV')
+    ('firebase_measurement_id', 'G-1FM4Z5WDPV'),
+    ('referral_reward_referrer', '10'),
+    ('referral_reward_invitee', '5')
 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value);
 
 -- Showcase categories table
