@@ -870,3 +870,88 @@
     height: auto;
     display: block;
 }
+
+/* ─── Referral Modal ──────────────────────────────────── */
+.referral-modal {
+    text-align: center;
+}
+
+.modal-icon {
+    margin: 0 auto 20px;
+    width: 64px;
+    height: 64px;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.referral-box {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0 24px;
+}
+
+.referral-box input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.referral-box input:focus {
+    border-color: var(--accent-1);
+}
+
+.social-share {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.share-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+    border: none;
+}
+
+.share-btn:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.1);
+}
+
+.referral-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.ref-stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.ref-stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
