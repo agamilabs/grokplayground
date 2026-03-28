@@ -1151,8 +1151,8 @@
                             <div class="user-info">
                                 <img src="${u.photo_url || 'https://ui-avatars.com/api/?name='+u.display_name+'&background=random'}" class="user-img">
                                 <div>
-                                    <div style="font-weight: 500;">${u.display_name || 'No Name'}</div>
-                                    <div style="font-size: 12px; color: var(--text-muted);">${u.email}</div>
+                                    <div style="font-weight: 500; word-break: break-word; max-width: 200px;">${u.display_name || 'No Name'}</div>
+                                    <div style="font-size: 11px; color: var(--text-muted); word-break: break-all; max-width: 200px;">${u.email}</div>
                                 </div>
                             </div>
                         </td>
@@ -1211,6 +1211,29 @@
                 if (res.success) {
                     showToast('Credits updated successfully', 'success');
                     closeModal('creditModal');
+                    loadUsers();
+                }
+            } catch (err) { showToast(err.message, 'error'); }
+        }
+
+        function openReferralEditModal(id, email, current) {
+            selectedUserId = id;
+            document.getElementById('refModalUser').textContent = `Updating code for ${email}`;
+            document.getElementById('modal-ref-input').value = current;
+            openModal('refEditModal');
+        }
+
+        async function updateReferralCodeAction() {
+            const code = document.getElementById('modal-ref-input').value;
+            try {
+                const res = await apiCall('api/admin-users.php', 'POST', {
+                    action: 'update_referral_code',
+                    user_id: selectedUserId,
+                    referral_code: code
+                });
+                if (res.success) {
+                    showToast('Referral code updated', 'success');
+                    closeModal('refEditModal');
                     loadUsers();
                 }
             } catch (err) { showToast(err.message, 'error'); }
