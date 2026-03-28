@@ -612,15 +612,17 @@ async function openReferralModal() {
             document.getElementById('refEarned').textContent = res.total_earned || 0;
             
             // Use custom referral code if set, otherwise fallback to UID
-            const code = res.referral_code || currentUser.uid;
+            const code = res.referral_code || (currentUser ? currentUser.uid : '');
             const refLink = `${window.location.origin}${window.location.pathname}?ref=${code}`;
-            document.getElementById('referralLinkInput').value = refLink;
+            document.getElementById('refLinkInput').value = refLink;
         }
     } catch (err) {
         console.error('Failed to load referral stats:', err);
         // Fallback to UID if API fails
-        const refLink = `${window.location.origin}${window.location.pathname}?ref=${currentUser.uid}`;
-        document.getElementById('referralLinkInput').value = refLink;
+        if (currentUser) {
+            const refLink = `${window.location.origin}${window.location.pathname}?ref=${currentUser.uid}`;
+            document.getElementById('refLinkInput').value = refLink;
+        }
     }
     
     // Referral rewards display
