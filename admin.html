@@ -525,7 +525,7 @@
                         <thead>
                             <tr>
                                 <th>User</th>
-                                <th>Credits (P/S/B)</th>
+                                <th>Credits (P/G/S/B)</th>
                                 <th>Ref Code</th>
                                 <th>Storage</th>
                                 <th>Joined</th>
@@ -1186,8 +1186,9 @@
                         <td>
                             <div style="font-size: 12px; line-height: 1.5;">
                                 <div><span style="color: var(--text-muted);">Purchased:</span> <span style="color: var(--success); font-weight: 500;">+${u.total_purchased}</span></div>
+                                <div><span style="color: var(--text-muted);">Gifts:</span> <span style="color: var(--accent-3); font-weight: 500;">+${u.total_gifts || 0}</span></div>
                                 <div><span style="color: var(--text-muted);">Spent:</span> <span style="color: var(--error); font-weight: 500;">-${u.total_spent}</span></div>
-                                <div><span style="color: var(--text-muted);">Balance:</span> <span style="font-weight: 600; color: var(--accent-3);">${u.credits}</span></div>
+                                <div><span style="color: var(--text-muted);">Balance:</span> <span style="font-weight: 600; color: var(--accent-1);">${u.credits}</span></div>
                             </div>
                         </td>
                         <td>
