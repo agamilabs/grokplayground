@@ -1269,18 +1269,37 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .logo span {
+        display: none;
+    }
+    
+    .header-nav {
+        gap: 6px;
+    }
+    
     .header-nav .btn span,
     .header-nav .credits-badge span:not(#creditsCount) {
         display: none;
     }
     
     .header-nav .btn {
-        padding: 6px 10px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        justify-content: center;
         gap: 0;
     }
     
     .header-nav .btn svg {
         margin: 0;
+        width: 18px;
+        height: 18px;
+    }
+    
+    .credits-badge {
+        font-size: 11px;
+        padding: 4px 10px;
+        gap: 4px;
     }
 }
 

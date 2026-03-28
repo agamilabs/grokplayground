@@ -89,9 +89,20 @@
                     </svg>
                     <span id="creditsCount">0</span> <span>Credits</span>
                 </div>
-                <button id="buyCreditsBtn" class="btn btn-accent btn-sm" style="display:none;"
-                    onclick="openBuyModal()"><span>Buy Credits</span></button>
+                <button id="buyCreditsBtn" class="btn btn-accent btn-sm" style="display:none;" onclick="openBuyModal()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                    <span>Buy Credits</span>
+                </button>
                 <button id="authBtn" class="btn btn-ghost btn-sm" onclick="handleAuth()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                        <polyline points="10 17 15 12 10 7" />
+                        <line x1="15" y1="12" x2="3" y2="12" />
+                    </svg>
                     <span id="authBtnText">Sign In</span>
                 </button>
                 <div id="userAvatar" class="user-avatar" style="display:none;">
