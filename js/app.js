@@ -87,6 +87,13 @@ function switchTab(tabName, pushState = true) {
         if (zone) zone.classList.remove('has-image');
     });
 
+    // CRITICAL: Clear global state for upload when switching mode
+    uploadedImageBase64 = null;
+    tabNames.forEach(t => {
+        const input = document.getElementById(`file-${t}`);
+        if(input) input.value = '';
+    });
+
     // Update tab styles
     document.querySelectorAll('.tab').forEach(t => {
         t.classList.remove('active');
@@ -321,10 +328,10 @@ async function handleGenerate(tabType) {
         await loadCredits();
 
         if (res.status === 'completed' && res.output_url) {
-            if(tabType !== 'text_to_audio') clearImage(null, tabType); 
+            clearImage(null, tabType); 
             showOutput(res.output_url, type);
         } else if (res.generation_id) {
-            if(tabType !== 'text_to_audio') clearImage(null, tabType); 
+            clearImage(null, tabType); 
             startPolling(res.generation_id, type);
         }
 

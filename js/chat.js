@@ -418,6 +418,9 @@ function clearAttachment() {
 function onModeChange() {
     const mode = document.getElementById('chatMode').value;
     
+    // CRITICAL: Clear attachment when switching mode to avoid leaks
+    clearAttachment();
+
     // 1. Update Visibility
     document.getElementById('ctrl-aspect').style.display = mode.includes('audio') ? 'none' : 'flex';
     document.getElementById('ctrl-resolution').style.display = mode.includes('audio') ? 'none' : 'flex';
