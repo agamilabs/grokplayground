@@ -33,10 +33,15 @@ $params = [$user['id']];
 
 // Type filter
 $type = $_GET['type'] ?? '';
-$validTypes = ['text_to_image', 'image_to_video', 'text_to_video', 'text_to_audio'];
+$validTypes = ['text_to_image', 'image_edit', 'image_to_video', 'text_to_video', 'text_to_audio'];
 if ($type && in_array($type, $validTypes)) {
-    $conditions[] = "type = ?";
-    $params[] = $type;
+    if ($type === 'text_to_image') {
+        // When filtering for images, show both original image and edits
+        $conditions[] = "(type = 'text_to_image' OR type = 'image_edit')";
+    } else {
+        $conditions[] = "type = ?";
+        $params[] = $type;
+    }
 }
 
 // Date filters

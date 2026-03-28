@@ -39,6 +39,11 @@ if (!in_array($type, $validTypes)) {
     exit;
 }
 
+// Defensive: Update type to 'image_edit' if image is present but type is 'text_to_image'
+if ($type === 'text_to_image' && !empty($imageData)) {
+    $type = 'image_edit';
+}
+
 if (empty($prompt)) {
     http_response_code(400);
     echo json_encode(['error' => 'Prompt is required']);
