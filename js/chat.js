@@ -608,9 +608,63 @@ async function buyCredits() {
     }
 }
 
-function openGiftModal() {
+async function openGiftModal() {
     if (!currentUser) { openModal('authModal'); return; }
     openModal('giftModal');
+}
+
+// ─── Referral System ────────────────────────────────────
+async function openReferralModal() {
+    openModal('referralModal');
+    
+    // Load fresh stats and code
+    try {
+        const res = await apiCall('/api/referrals.php');
+        if (res.success) {
+            document.getElementById('refCount').textContent = res.total_referrals || 0;
+            document.getElementById('refEarned').textContent = res.total_earned || 0;
+            
+            // Use custom referral code if set, otherwise fallback to UID
+            const code = res.referral_code || (currentUser ? currentUser.uid : '');
+            const refLink = `${window.location.origin}/?ref=${code}`; // Always point to landing page
+            document.getElementById('refLinkInput').value = refLink;
+        }
+    } catch (err) {
+        console.error('Failed to load referral stats:', err);
+        if (currentUser) {
+            const refLink = `${window.location.origin}/?ref=${currentUser.uid}`;
+            document.getElementById('refLinkInput').value = refLink;
+        }
+    }
+    
+    // Referral rewards display
+    const referrerReward = adminSettings?.referral_reward_referrer || 10;
+    const inviteeReward = adminSettings?.referral_reward_invitee || 5;
+    document.getElementById('refReferrerReward').textContent = referrerReward;
+    document.getElementById('refInviteeReward').textContent = inviteeReward;
+}
+
+function copyReferralLink() {
+    const input = document.getElementById('refLinkInput');
+    input.select();
+    input.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(input.value).then(() => {
+        showToast('Referral link copied!', 'success');
+    });
+}
+
+function shareReferral(platform) {
+    const link = document.getElementById('refLinkInput').value;
+    const text = "Join me on Grok Imagine and get bonus AI credits!";
+    const url = encodeURIComponent(link);
+    const msg = encodeURIComponent(text);
+    
+    let shareUrl = '';
+    if (platform === 'twitter') shareUrl = `https://twitter.com/intent/tweet?text=${msg}&url=${url}`;
+    else if (platform === 'whatsapp') shareUrl = `https://api.whatsapp.com/send?text=${msg}%20${url}`;
+    else if (platform === 'facebook') shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    
+    if (shareUrl) window.open(shareUrl, '_blank');
 }
 
 async function giftCredits() {
