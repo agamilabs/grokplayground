@@ -212,6 +212,7 @@ function handleImageUpload(e, type) {
             const container = document.getElementById(`preview-container-${type}`);
             
             preview.src = uploadedImageBase64;
+            preview.style.display = 'block'; // Ensure it's visible even if it was hidden by a previous onerror
             container.style.display = 'block';
             placeholder.style.display = 'none';
             zone.classList.add('has-image');

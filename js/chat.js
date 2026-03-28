@@ -396,7 +396,9 @@ async function handleChatFile(e) {
     try {
         // Show immediate loading if needed, but compression is usually fast
         uploadedImageBase64 = await compressImage(file);
-        document.getElementById('previewImg').src = uploadedImageBase64;
+        const previewImg = document.getElementById('previewImg');
+        previewImg.src = uploadedImageBase64;
+        previewImg.style.display = 'block'; // Ensure it's visible even if it was hidden by a previous onerror
         document.getElementById('attachmentPreview').style.display = 'block';
         
         const mode = document.getElementById('chatMode');
