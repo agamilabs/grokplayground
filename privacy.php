@@ -123,7 +123,7 @@ require_once 'config.php';
                         address, name, and profile picture.</li>
                     <li><strong>Usage Data:</strong> We collect information about the prompts you enter and the AI
                         content generated (images, videos, audio).</li>
-                    <li><strong>Payment Information:</strong> Payments are processed securely via bKash. We do not store
+                    <li><strong>Payment Information:</strong> Payments are processed securely via bKash/EPS. We do not store
                         your wallet details or PIN. we only receive transaction IDs and status updates to credit your
                         account.</li>
                 </ul>
@@ -143,7 +143,7 @@ require_once 'config.php';
                 <ul>
                     <li><strong>AI Providers:</strong> Your prompts are sent to our AI partners (such as xAI or Fal.ai)
                         to generate content.</li>
-                    <li><strong>Payment Gateways:</strong> Transaction details are shared with bKash to process your
+                    <li><strong>Payment Gateways:</strong> Transaction details are shared with bKash/EPS to process your
                         credit purchases.</li>
                     <li><strong>Legal Requirements:</strong> We may disclose information if required by law or to
                         protect our rights.</li>

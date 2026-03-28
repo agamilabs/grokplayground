@@ -139,9 +139,9 @@ require_once 'config.php';
                     </li>
                 </ul>
 
-                <h2>4. Payments via bKash</h2>
-                <p>As we initially target Bangladeshi customers, we partner with <strong>bKash</strong> for seamless and
-                    secure payment collection. You are responsible for ensuring your bKash account has sufficient funds
+                <h2>4. Payments via bKash/EPS</h2>
+                <p>As we initially target Bangladeshi customers, we partner with <strong>bKash</strong>, <strong>EPS</strong> for seamless and
+                    secure payment collection. You are responsible for ensuring your bKash/EPS account has sufficient funds
                     for credit purchases.</p>
 
                 <h2>5. User Responsibilities & Prohibited Use</h2>

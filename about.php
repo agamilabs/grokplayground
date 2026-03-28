@@ -118,7 +118,7 @@ require_once 'config.php';
                     more accessible and affordable for a broader audience.</p>
 
                 <p>As the platform initially targets customers in Bangladesh, partnering with a trusted payment gateway
-                    like <span class="highlight">bKash</span> is essential for smooth and reliable payment collection.
+                    like <span class="highlight">bKash</span>, <span class="highlight">EPS</span> is essential for smooth and reliable payment collection.
                     Integrating a widely used local payment solution will simplify the process of purchasing AI Credits,
                     improve user convenience, and help build trust within the local market.</p>
             </div>
