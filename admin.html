@@ -238,6 +238,31 @@
             border: 1px solid var(--border);
         }
 
+        .user-avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+        }
+
+        .admin-badge-icon {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            font-size: 10px;
+            background: var(--accent-1);
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #050505;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
         .status-badge {
             padding: 4px 10px;
             border-radius: 20px;
@@ -504,7 +529,6 @@
                                 <th>Ref Code</th>
                                 <th>Storage</th>
                                 <th>Joined</th>
-                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -1149,7 +1173,10 @@
                     <tr>
                         <td>
                             <div class="user-info">
-                                <img src="${u.photo_url || 'https://ui-avatars.com/api/?name='+u.display_name+'&background=random'}" class="user-img">
+                                <div class="user-avatar-wrapper">
+                                    <img src="${u.photo_url || 'https://ui-avatars.com/api/?name='+u.display_name+'&background=random'}" class="user-img">
+                                    ${(u.is_admin) ? '<span class="admin-badge-icon" title="Administrator">🛡️</span>' : ''}
+                                </div>
                                 <div>
                                     <div style="font-weight: 500; word-break: break-word; max-width: 200px;">${u.display_name || 'No Name'}</div>
                                     <div style="font-size: 11px; color: var(--text-muted); word-break: break-all; max-width: 200px;">${u.email}</div>
@@ -1168,11 +1195,6 @@
                         </td>
                         <td style="color: var(--accent-1); font-weight: 500;">${formatBytes(u.used_storage || 0)}</td>
                         <td style="color: var(--text-muted); font-size: 12px;">${new Date(u.created_at).toLocaleDateString()}</td>
-                        <td>
-                            <span class="status-badge" style="${u.is_admin ? 'background: rgba(99,102,241,0.1); color: var(--accent-3)' : 'background: rgba(255,255,255,0.05); color: var(--text-muted)'}">
-                                ${u.is_admin ? 'Admin' : 'User'}
-                            </span>
-                        </td>
                         <td>
                             <div style="display: flex; gap: 4px;">
                                 <button class="btn btn-sm btn-ghost" onclick="openCreditModal(${u.id}, '${u.email}', ${u.credits})">
