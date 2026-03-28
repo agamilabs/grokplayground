@@ -526,7 +526,7 @@
                             <tr>
                                 <th>User</th>
                                 <th>Credits (P/G/S/B)</th>
-                                <th>Ref Code</th>
+                                <th>Referrals</th>
                                 <th>Storage</th>
                                 <th>Joined</th>
                                 <th>Action</th>
@@ -1192,7 +1192,10 @@
                             </div>
                         </td>
                         <td>
-                            <code style="background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; font-size: 12px;">${u.referral_code || '—'}</code>
+                            <div style="font-size: 13px;">
+                                <div><span style="color: var(--text-muted);">Code:</span> <code>${u.referral_code || '—'}</code></div>
+                                <div><span style="color: var(--text-muted);">Joins:</span> <span style="font-weight: 500; color: var(--accent-3);">${u.referral_count || 0}</span></div>
+                            </div>
                         </td>
                         <td style="color: var(--accent-1); font-weight: 500;">${formatBytes(u.used_storage || 0)}</td>
                         <td style="color: var(--text-muted); font-size: 12px;">${new Date(u.created_at).toLocaleDateString()}</td>

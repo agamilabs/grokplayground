@@ -46,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                COALESCE((SELECT SUM(credits) FROM transactions WHERE user_id = u.id AND type = 'purchase'), 0) as total_purchased,
                COALESCE((SELECT SUM(credits) FROM transactions WHERE user_id = u.id AND type = 'gift_received'), 0) as total_gifts,
                COALESCE((SELECT ABS(SUM(credits)) FROM transactions WHERE user_id = u.id AND type = 'spend'), 0) as total_spent,
-               COALESCE((SELECT SUM(input_size + output_size) FROM generations WHERE user_id = u.id), 0) as used_storage
+               COALESCE((SELECT SUM(input_size + output_size) FROM generations WHERE user_id = u.id), 0) as used_storage,
+               COALESCE((SELECT COUNT(*) FROM users WHERE referred_by = u.id), 0) as referral_count
         FROM users u 
         WHERE $where 
         ORDER BY u.created_at DESC 
