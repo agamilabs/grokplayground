@@ -444,7 +444,7 @@
                 <div class="stat-card">
                     <span class="stat-label">Total Users</span>
                     <div class="stat-value" id="stat-users">0</div>
-                    <div class="stat-sub">Registered across all roles</div>
+                    <div class="stat-sub" id="stat-referrals">0 referrals found</div>
                     <svg class="stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
                 </div>
                 <div class="stat-card">
@@ -801,6 +801,23 @@
                     </div>
                 </div>
 
+                <!-- Referral Program -->
+                <div class="settings-group">
+                    <h2 class="settings-group-title">Viral Growth & Referral</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="setting-field">
+                            <label class="setting-label">Referrer Reward (Credits)</label>
+                            <input type="number" class="setting-input" id="set-referral_reward_referrer" step="1">
+                            <div class="setting-hint">Credits given to the inviter</div>
+                        </div>
+                        <div class="setting-field">
+                            <label class="setting-label">Invitee Bonus (Credits)</label>
+                            <input type="number" class="setting-input" id="set-referral_reward_invitee" step="1">
+                            <div class="setting-hint">Extra credits for the new user</div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- bKash -->
                 <div class="settings-group">
                     <h2 class="settings-group-title">bKash Integration</h2>
@@ -1074,6 +1091,7 @@
                 document.getElementById('stat-revenue-sub').textContent = `৳${s.revenue.last_30d.toLocaleString()} in last 30 days`;
                 
                 document.getElementById('stat-users').textContent = s.users.total.toLocaleString();
+                document.getElementById('stat-referrals').textContent = `${(s.users.total_referrals || 0).toLocaleString()} referrals found`;
                 
                 document.getElementById('stat-gens').textContent = s.generations.total.toLocaleString();
                 document.getElementById('stat-gens-sub').textContent = `${s.generations.success_rate}% success rate`;

@@ -54,6 +54,10 @@ try {
     $stmt = $db->query("SELECT SUM(input_size + output_size) as total FROM generations");
     $totalStorage = (int) ($stmt->fetch()['total'] ?? 0);
 
+    // 8. Total Referrals
+    $stmt = $db->query("SELECT COUNT(*) as total FROM users WHERE referred_by IS NOT NULL");
+    $totalReferrals = (int) ($stmt->fetch()['total'] ?? 0);
+
     echo json_encode([
         'success' => true,
         'stats' => [
@@ -62,7 +66,8 @@ try {
                 'last_30d' => $revenue30d
             ],
             'users' => [
-                'total' => $userCount
+                'total' => $userCount,
+                'total_referrals' => $totalReferrals
             ],
             'generations' => [
                 'total' => $totalGens,
