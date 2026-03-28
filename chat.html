@@ -53,7 +53,7 @@
                     </button>
                 </div>
                 <div class="user-profile" id="userProfile" style="display: none;">
-                    <img id="sidebarUserPhoto" src="" alt="" loading="lazy">
+                    <img id="sidebarUserPhoto" src="" alt="" loading="lazy" onerror="this.src='https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'">
                     <div class="user-details">
                         <span id="sidebarUserName">...</span>
                         <small><span id="sidebarCredits">...</span> Credits</small>
@@ -94,7 +94,7 @@
                 </button>
             </div>
             <div class="user-avatar" style="margin-left: 12px; height:32px;">
-                <img id="navUserPhoto" src="" alt="" loading="lazy" style="width:32px; height:32px; border-radius:50%; border:2px solid var(--border);">
+                <img id="navUserPhoto" src="" alt="" loading="lazy" style="width:32px; height:32px; border-radius:50%; border:2px solid var(--border);" onerror="this.src='https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'">
             </div>
         </div>
             </header>
@@ -179,7 +179,7 @@
 
                 <div class="input-area">
                     <div class="attachment-preview" id="attachmentPreview" style="display:none;">
-                        <img src="" id="previewImg">
+                        <img src="" id="previewImg" onerror="this.style.display='none'">
                         <button class="remove-attachment" onclick="clearAttachment()">&times;</button>
                     </div>
                     <div class="input-container">

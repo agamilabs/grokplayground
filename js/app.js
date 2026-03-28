@@ -389,7 +389,7 @@ function showOutput(url, type) {
     let html = '';
     if (type === 'text_to_image' || type === 'image_edit') {
         html = `<div class="output-wrapper">
-                    <img src="${url}" alt="Generated image" id="outputMedia" class="reveal-anim" />
+                    <img src="${url}" alt="Generated image" id="outputMedia" class="reveal-anim" onerror="this.style.display='none'" />
                 </div>`;
     } else if (type === 'text_to_audio') {
         html = `<div class="output-wrapper audio-player">
@@ -397,7 +397,7 @@ function showOutput(url, type) {
                 </div>`;
     } else {
         html = `<div class="output-wrapper">
-                    <video src="${url}" controls autoplay loop playsinline id="outputMedia" class="reveal-anim"></video>
+                    <video src="${url}" controls autoplay loop playsinline id="outputMedia" class="reveal-anim" onerror="this.parentElement.innerHTML='<p class=\'error\'>Failed to load video</p>'"></video>
                 </div>`;
     }
 
@@ -620,17 +620,17 @@ async function loadHistory(page) {
 
             if (gen.status === 'completed' && gen.output_url) {
                 if (isVideo) {
-                    media = `<video src="${gen.output_url}" poster="${gen.input_thumbnail || ''}" muted></video>`;
+                    media = `<video src="${gen.output_url}" poster="${gen.input_thumbnail || ''}" muted onerror="this.style.display='none'"></video>`;
                 } else if (isAudio) {
                     media = `<div class="history-item-placeholder audio-bg">🎵 Audio</div>`;
                 } else {
-                    media = `<img src="${gen.output_url}" loading="lazy" />`;
+                    media = `<img src="${gen.output_url}" loading="lazy" onerror="this.style.display='none'" />`;
                 }
             } else {
                 // Show thumbnail even if not completed (for video/edit)
                 if (thumb && !isAudio) {
                     media = `<div class="history-item-preview">
-                                <img src="${thumb}" loading="lazy" style="opacity: 0.6;">
+                                <img src="${thumb}" loading="lazy" style="opacity: 0.6;" onerror="this.style.display='none'">
                                 <div class="status-overlay">${gen.status}</div>
                              </div>`;
                 } else {

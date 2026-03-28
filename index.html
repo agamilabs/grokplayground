@@ -64,7 +64,7 @@
     <header class="header">
         <div class="header-inner">
             <a href="/" class="logo">
-                <img src="images/logo.svg" alt="Grok Playground Logo" class="logo-icon" width="28" height="28">
+                <img src="images/logo.svg" alt="Grok Playground Logo" class="description-icon" width="28" height="28" onerror="this.style.display='none'">
                 <span>Grok Playground</span>
             </a>
             <nav class="header-nav">
@@ -95,7 +95,7 @@
                     <span id="authBtnText">Sign In</span>
                 </button>
                 <div id="userAvatar" class="user-avatar" style="display:none;">
-                    <img id="userPhoto" src="" alt="User" loading="lazy" />
+                    <img id="userPhoto" src="" alt="User" loading="lazy" onerror="this.src='https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'" />
                 </div>
             </nav>
         </div>
@@ -156,7 +156,7 @@
                                 <span>Upload an image to edit</span>
                             </div>
                             <div style="position:relative; display:none;" id="preview-container-image">
-                                <img src="" class="upload-preview" id="preview-image" style="display:block;">
+                                <img src="" class="upload-preview" id="preview-image" style="display:block;" onerror="this.style.display='none'">
                                 <button type="button" class="btn btn-ghost btn-sm" style="position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.5); color:#fff; border-radius:50%; padding:4px;" onclick="clearImage(event, 'image')" title="Remove Image">✖</button>
                             </div>
                             <input type="file" id="file-image" accept="image/*" style="display:none;" onchange="handleImageUpload(event, 'image')">
@@ -233,7 +233,7 @@
                                 <span>Upload an image to animate</span>
                             </div>
                             <div style="position:relative; display:none;" id="preview-container-video">
-                                <img src="" class="upload-preview" id="preview-video" style="display:block;">
+                                <img src="" class="upload-preview" id="preview-video" style="display:block;" onerror="this.style.display='none'">
                                 <button type="button" class="btn btn-ghost btn-sm" style="position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.5); color:#fff; border-radius:50%; padding:4px;" onclick="clearImage(event, 'video')" title="Remove Image">✖</button>
                             </div>
                             <input type="file" id="file-video" accept="image/*" style="display:none;" onchange="handleImageUpload(event, 'video')">

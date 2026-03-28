@@ -53,10 +53,10 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
     if (role === 'ai') {
-        avatar.innerHTML = `<img src="favicon.svg" alt="Grok" style="width:100%; height:100%; border-radius:inherit;">`;
+        avatar.innerHTML = `<img src="favicon.svg" alt="Grok" style="width:100%; height:100%; border-radius:inherit;" onerror="this.src='https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'">`;
     } else {
         const photo = currentUser?.photoURL || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
-        avatar.innerHTML = `<img src="${photo}" alt="User" style="width:100%; height:100%; border-radius:inherit;">`;
+        avatar.innerHTML = `<img src="${photo}" alt="User" style="width:100%; height:100%; border-radius:inherit;" onerror="this.src='https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'">`;
     }
 
     const contentDiv = document.createElement('div');
@@ -68,7 +68,7 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
     if (role === 'user' && media) {
         // Show input image for user
         const thumbSrc = thumbnail || media;
-        mediaHtml = `<div class="user-media reveal-anim"><img src="${thumbSrc}" onclick="window.open('${media}', '_blank')" title="Click to view original"></div>`;
+        mediaHtml = `<div class="user-media reveal-anim"><img src="${thumbSrc}" onclick="window.open('${media}', '_blank')" title="Click to view original" onerror="this.style.display='none'"></div>`;
     } else if (status === 'processing') {
         mediaHtml = `<div class="ai-media processing">
             <div class="skeleton-loader">
@@ -81,11 +81,11 @@ function appendMessage(role, content, media = null, status = 'completed', id = n
         mediaHtml = `<div class="ai-media error"><p>${escapeHtml(content || 'Generation failed. Credits have been refunded.')}</p></div>`;
     } else if (media) {
         if (media.includes('.mp4') || media.includes('video')) {
-            mediaHtml = `<div class="ai-media reveal-anim"><video src="${media}" controls loop autoplay></video></div>`;
+            mediaHtml = `<div class="ai-media reveal-anim"><video src="${media}" controls loop autoplay onerror="this.style.display='none'"></video></div>`;
         } else if (media.includes('.mp3') || media.includes('audio')) {
             mediaHtml = `<div class="ai-media reveal-anim"><audio src="${media}" controls autoplay></audio></div>`;
         } else {
-            mediaHtml = `<div class="ai-media reveal-anim"><img src="${media}" onclick="window.open('${media}', '_blank')"></div>`;
+            mediaHtml = `<div class="ai-media reveal-anim"><img src="${media}" onclick="window.open('${media}', '_blank')" onerror="this.style.display='none'"></div>`;
         }
         
         mediaHtml += `
@@ -259,11 +259,11 @@ function updateMessage(id, content, media, status) {
         const isVideo = media.includes('.mp4') || media.includes('video');
         const isAudio = media.includes('.mp3') || media.includes('audio');
         if (isVideo) {
-            mediaHtml = `<div class="ai-media reveal-anim"><video src="${media}" controls loop autoplay></video></div>`;
+            mediaHtml = `<div class="ai-media reveal-anim"><video src="${media}" controls loop autoplay onerror="this.style.display='none'"></video></div>`;
         } else if (isAudio) {
             mediaHtml = `<div class="ai-media reveal-anim"><audio src="${media}" controls autoplay></audio></div>`;
         } else {
-            mediaHtml = `<div class="ai-media reveal-anim"><img src="${media}" onclick="window.open('${media}', '_blank')"></div>`;
+            mediaHtml = `<div class="ai-media reveal-anim"><img src="${media}" onclick="window.open('${media}', '_blank')" onerror="this.style.display='none'"></div>`;
         }
 
         mediaHtml += `
@@ -712,9 +712,9 @@ function renderShowcase(items) {
         div.className = 'showcase-item';
         div.onclick = () => useShowcaseItem(item);
         
-        let mediaTag = `<img src="${item.url}" alt="${item.title}" loading="lazy">`;
+        let mediaTag = `<img src="${item.url}" alt="${item.title}" loading="lazy" onerror="this.style.display='none'">`;
         if (item.type.includes('video')) {
-            mediaTag = `<video src="${item.url}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`;
+            mediaTag = `<video src="${item.url}" muted loop onmouseover="this.play()" onmouseout="this.pause()" onerror="this.style.display='none'"></video>`;
         }
         
         div.innerHTML = `
