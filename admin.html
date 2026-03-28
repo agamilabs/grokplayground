@@ -500,10 +500,8 @@
                         <thead>
                             <tr>
                                 <th>User</th>
-                                <th>Balance</th>
+                                <th>Credits (P/S/B)</th>
                                 <th>Ref Code</th>
-                                <th>Purchased</th>
-                                <th>Spent</th>
                                 <th>Storage</th>
                                 <th>Joined</th>
                                 <th>Role</th>
@@ -1159,13 +1157,15 @@
                             </div>
                         </td>
                         <td>
-                            <span style="font-weight: 600; color: var(--accent-3);">${u.credits}</span>
+                            <div style="font-size: 12px; line-height: 1.5;">
+                                <div><span style="color: var(--text-muted);">Purchased:</span> <span style="color: var(--success); font-weight: 500;">+${u.total_purchased}</span></div>
+                                <div><span style="color: var(--text-muted);">Spent:</span> <span style="color: var(--error); font-weight: 500;">-${u.total_spent}</span></div>
+                                <div><span style="color: var(--text-muted);">Balance:</span> <span style="font-weight: 600; color: var(--accent-3);">${u.credits}</span></div>
+                            </div>
                         </td>
                         <td>
                             <code style="background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; font-size: 12px;">${u.referral_code || '—'}</code>
                         </td>
-                        <td style="color: var(--success); font-weight: 500;">+${u.total_purchased}</td>
-                        <td style="color: var(--error); font-weight: 500;">-${u.total_spent}</td>
                         <td style="color: var(--accent-1); font-weight: 500;">${formatBytes(u.used_storage || 0)}</td>
                         <td style="color: var(--text-muted); font-size: 12px;">${new Date(u.created_at).toLocaleDateString()}</td>
                         <td>
